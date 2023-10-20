@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TestSAE</string>
+    <string name="titreMain">Ricochet Robot</string>
+    <string name="boutonTest">Commencer</string>
+    <string name="boutonSetting">Ouvre les paramètres</string>
+    <string name="boutonExit">Fermer l\'application</string>
+    <string name="boutonReturn">Revient en arrière</string>
+
+    <!--Page Photo-->
+    <string name="titrePhoto">Prendre une photo</string>
+
+    <!--Page Parametre-->
+    <string name="titreSetting">Paramètres</string>
+
+</resources>
