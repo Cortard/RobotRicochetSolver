@@ -6,20 +6,20 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SettingActivity extends AppCompatActivity {
+public class HelpActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_help);
 
-        ImageButton bSetting = findViewById(R.id.boutonSetting);
+        ImageButton bHelp = findViewById(R.id.boutonHelp);
         ImageButton bReturn = findViewById(R.id.boutonReturn);
 
 
-        bSetting.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SettingActivity.class);
+        bHelp.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
             finish();
         });

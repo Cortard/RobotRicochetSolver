@@ -18,6 +18,13 @@ public class MainActivity extends AppCompatActivity {
 
         Button bStart = findViewById(R.id.button);
         ImageButton bExit = findViewById(R.id.boutonExit);
+        ImageButton bHelp = findViewById(R.id.boutonHelp);
+
+        bHelp.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HelpActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         bStart.setOnClickListener(v -> {
             Intent intent = new Intent(this, PictureActivity.class);

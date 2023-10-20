@@ -1,15 +1,25 @@
 <resources>
     <string name="app_name">TestSAE</string>
-    <string name="titreMain">Ricochet Robot</string>
-    <string name="boutonTest">Commencer</string>
-    <string name="boutonSetting">Ouvre les paramètres</string>
+    <string name="boutonHelp">Ouvre les paramètres</string>
     <string name="boutonExit">Fermer l\'application</string>
     <string name="boutonReturn">Revient en arrière</string>
+
+    <!--Page Main-->
+    <string name="titreMain">Ricochet Robot</string>
+    <string name="boutonTest">Commencer</string>
+    <string name="ip"><u>Entrer l\'IP</u></string>
+    <string name="ipInput">IP...</string>
 
     <!--Page Photo-->
     <string name="titrePhoto">Prendre une photo</string>
 
-    <!--Page Parametre-->
-    <string name="titreSetting">Paramètres</string>
+    <!--Page Help-->
+    <string name="titreHelp">Aide</string>
+    <string name="textHelp"><b>1</b> - Faite ça .........
+                                \n<b>2</b> - ça ..............
+                                \n<b>3</b> - ça .....
+                                \n<b>4</b> - ça ..........
+                                \n<b>5</b> - ça ...........
+                                \n<b>6</b> - ça .........</string>
 
 </resources>

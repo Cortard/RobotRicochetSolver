@@ -2,7 +2,6 @@ package com.sae.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,12 +14,12 @@ public class PictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
 
-        ImageButton bSetting = findViewById(R.id.boutonSetting);
+        ImageButton bHelp = findViewById(R.id.boutonHelp);
         ImageButton bReturn = findViewById(R.id.boutonReturn);
 
 
-        bSetting.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SettingActivity.class);
+        bHelp.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
             finish();
         });

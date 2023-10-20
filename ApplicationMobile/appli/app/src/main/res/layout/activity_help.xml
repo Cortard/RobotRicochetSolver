@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:autoSizeTextType="uniform"
-        android:text="@string/titrePhoto"
+        android:text="@string/titreHelp"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/white"
@@ -117,5 +117,38 @@
         app:layout_constraintStart_toStartOf="@+id/footerbox2"
         app:layout_constraintTop_toTopOf="@+id/footerbox2"
         app:layout_constraintVertical_bias="0.0" />
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="340dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="#C8DEEF"
+        android:backgroundTint="#C8DEEF"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textMultiLine"
+        android:layout_width="293dp"
+        android:layout_height="348dp"
+        android:autoSizeTextType="uniform"
+        android:autofillHints=""
+        android:fontFamily="sans-serif-smallcaps"
+        android:inputType="text|textMultiLine"
+        android:text="@string/textHelp"
+        app:layout_constraintBottom_toBottomOf="@+id/surfaceView"
+        app:layout_constraintEnd_toEndOf="@+id/surfaceView"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="@+id/surfaceView"
+        app:layout_constraintTop_toTopOf="@+id/surfaceView"
+        app:layout_constraintVertical_bias="0.505" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
