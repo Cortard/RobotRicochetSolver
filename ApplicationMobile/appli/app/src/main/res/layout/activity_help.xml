@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D5F6EF"
-    tools:context=".MainActivity">
+    tools:context=".HelpActivity">
 
 
     <SurfaceView
@@ -23,16 +23,20 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/titrePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="casual"
+        android:id="@+id/titreHelp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="24sp"
+        android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center"
+        android:padding="10sp"
         android:text="@string/titreHelp"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/header2"
         app:layout_constraintEnd_toEndOf="parent"
