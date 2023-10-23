@@ -47,6 +47,9 @@ public:
 private:
     static bool game_over(Game *game);
     static void precompute_minimum_moves(Game *game);
+
+    unsigned int nodes, hits, inner;
+    unsigned int _search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, Set *set);
 };
 
 #endif //TRADUCTIONCPP_SOLVER_H

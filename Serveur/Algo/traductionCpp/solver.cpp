@@ -3,13 +3,19 @@
 unsigned int Solver::search(Game *game,
                             unsigned char *path,
                             void (*callback)(unsigned int, unsigned int, unsigned int, unsigned int)) {
-    if(game_over(game)) return 0;
+    if(game_over(game)) return 0;//si le jeu est fini
 
     unsigned int result = 0;
-    Set *set = new Set();
+    Set *set = new Set();//initialise le set
 
-    precompute_minimum_moves(game);
+    precompute_minimum_moves(game);//calcul des distances minimales
 
+    for (unsigned int max_depth = 1; max_depth < MAX_DEPTH; max_depth++) {
+        nodes = 0;//itialise les stats
+        hits = 0;
+        inner = 0;
+        result = _search(game, 0, max_depth, path, set);//lance la recherche avec max_depth
+    }
 
     return 0;
 }
@@ -51,4 +57,13 @@ void Solver::precompute_minimum_moves(Game *game) {
             }
         }
     }
+}
+
+unsigned int Solver::_search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, Set *set) {
+    nodes++;
+    if(game_over(game)) return depth;//si le jeu est fini
+    if (depth == max_depth) return 0;//si la profondeur max est atteinte
+    unsigned int height = max_depth - depth;//hauteur de l'arbre
+    if(game->moves[game->robots[0]] > height) return 0;//si le goal est trop loin
+
 }
