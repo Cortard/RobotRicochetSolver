@@ -1,6 +1,8 @@
 #ifndef TRADUCTIONCPP_SOLVER_H
 #define TRADUCTIONCPP_SOLVER_H
 
+#include "Game.h"
+
 #define MAX_DEPTH 32
 
 #define NORTH 0x01 // 0b00000001
@@ -21,11 +23,30 @@
 #define UNPACK_LAST(undo) (undo & 0xff) // 0b[0000 0000]a [0000 0000]b [0000 0000]c -> 0b[0000 0000]c (recupere bit de last)
 #define MAKE_KEY(x) (x[0] | (x[1] << 8) | (x[2] << 16) | (x[3] << 24)) // -> 0b[0000 0000] [0000 0000] [0000 0000] [0000 0000] [robot 0 (goal)] [robot 1] [robot 2] [robot 3]
 
+/* retiré en attendant le but
+#define bool unsigned int
+#define true 1
+#define false 0
+*/
 
-
-class solver {
-
+const unsigned int REVERSE[] = { //Inverse les directions
+        //          N           E               S                               W
+        0, SOUTH, WEST, 0, NORTH, 0, 0, 0, EAST
 };
 
+const int OFFSET[] = { //Décalage pour aller dans une direction
+        //          N       E              S                            W
+        0, -16, 1, 0, 16, 0, 0, 0, -1
+};
+
+#include "Set.h"
+
+class Solver {
+public:
+    unsigned int search(Game* game, unsigned char *path, void (*callback)(unsigned int, unsigned int, unsigned int, unsigned int));
+private:
+    static bool game_over(Game *game);
+    static void precompute_minimum_moves(Game *game);
+};
 
 #endif //TRADUCTIONCPP_SOLVER_H
