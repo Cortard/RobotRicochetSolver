@@ -1,4 +1,6 @@
 # ninja log v5
-2	220	7197562015950737	build.ninja	972efb1d020e66ca
+2	220	7197563290939618	build.ninja	972efb1d020e66ca
 0	455	7197562021686699	CMakeFiles/traductionCpp.dir/main.cpp.obj	90dad854305a7522
 457	575	7197562022819193	traductionCpp.exe	36be1e2e1bf2cd3f
+3	424	7197563298147979	CMakeFiles/traductionCpp.dir/main.cpp.obj	90dad854305a7522
+424	519	7197563299087007	traductionCpp.exe	36be1e2e1bf2cd3f

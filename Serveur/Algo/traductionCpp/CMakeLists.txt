@@ -7,4 +7,5 @@ add_executable(traductionCpp main.cpp
         Game.h
         Entry.h
         Set.h
-        solver.h)
+        solver.h
+        solver.cpp)
