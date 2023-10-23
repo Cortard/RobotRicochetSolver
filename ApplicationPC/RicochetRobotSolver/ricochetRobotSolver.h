@@ -2,6 +2,7 @@
 #define RICOCHETROBOTSOLVER_H
 
 #include <QMainWindow>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class RicochetRobotSolver; }
@@ -12,9 +13,13 @@ class RicochetRobotSolver : public QMainWindow {
 
 private:
     Ui::RicochetRobotSolver *ui;
+    QWidget* currentPage;
 
 public:
     RicochetRobotSolver(QWidget *parent = nullptr);
+
+    void setCurrentPage(QWidget* newPage);
+
     ~RicochetRobotSolver();
 };
 
