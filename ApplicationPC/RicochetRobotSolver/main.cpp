@@ -1,11 +1,10 @@
-#include "clientWindow.h"
+#include "ricochetRobotSolver.h"
 
 #include <QApplication>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    ClientWindow w;
+    RicochetRobotSolver w;
     w.show();
     return a.exec();
 }

@@ -10,13 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    clientWindow.cpp
+    ricochetRobotSolver.cpp
 
 HEADERS += \
-    clientWindow.h
+    ricochetRobotSolver.h
 
 FORMS += \
-    clientWindow.ui
+    ricochetRobotSolver.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
