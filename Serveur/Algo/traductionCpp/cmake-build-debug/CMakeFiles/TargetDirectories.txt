@@ -1,3 +1,0 @@
-C:/Users/Petit Corto/Documents/2y/sae/RobotRicochetSolver/Serveur/Algo/traductionCpp/cmake-build-debug/CMakeFiles/traductionCpp.dir
-C:/Users/Petit Corto/Documents/2y/sae/RobotRicochetSolver/Serveur/Algo/traductionCpp/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Petit Corto/Documents/2y/sae/RobotRicochetSolver/Serveur/Algo/traductionCpp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
