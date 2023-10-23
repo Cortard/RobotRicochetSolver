@@ -4,8 +4,7 @@ project(traductionCpp)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(traductionCpp main.cpp
-        solver.h
         Game.h
         Entry.h
         Set.h
-        solver.cpp)
+        solver.h)
