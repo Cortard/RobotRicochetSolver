@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         bExit.setOnClickListener(v -> {
-            finish();
             System.exit(0);
         });
     }

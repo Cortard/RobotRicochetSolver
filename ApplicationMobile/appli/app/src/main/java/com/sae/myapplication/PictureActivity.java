@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+
 import android.Manifest;
 
 
@@ -27,12 +29,12 @@ public class PictureActivity extends AppCompatActivity {
     ImageView imageView;
     Uri image_uri;
 
+    boolean galery = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
-
-        imageView = findViewById(R.id.imageView);
 
         ImageButton bHelp = findViewById(R.id.boutonHelp);
         bHelp.setOnClickListener(v -> {
@@ -52,7 +54,7 @@ public class PictureActivity extends AppCompatActivity {
         bOpen.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 3);
-
+            galery = true;
         });
 
         Button bTake = findViewById(R.id.btnTakePicture);
@@ -102,13 +104,19 @@ public class PictureActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK ){
-            imageView.setImageURI(image_uri);
+        if (resultCode == RESULT_OK && !galery){
+            Intent intent = new Intent(this, PictureVerifyActivity.class);
+            intent.setData(image_uri);
+            startActivity(intent);
+            finish();
         }
 
-        if (resultCode == RESULT_OK && data != null){
-            Uri selectedImage = data.getData();
-            imageView.setImageURI(selectedImage);
+        if (resultCode == RESULT_OK && data != null && galery){
+            image_uri = data.getData();
+            Intent intent = new Intent(this, PictureVerifyActivity.class);
+            intent.setData(image_uri);
+            startActivity(intent);
+            finish();
         }
     }
 }

@@ -21,5 +21,8 @@
                                 \n<b>4</b> - ça ..........
                                 \n<b>5</b> - ça ...........
                                 \n<b>6</b> - ça .........</string>
+    <string name="recomencer">Recomencer</string>
+    <string name="valider">Valider</string>
+    <string name="imagefin">imagefin</string>
 
 </resources>

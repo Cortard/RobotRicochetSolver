@@ -1,35 +1,34 @@
 package com.sae.myapplication;
 
-import android.Manifest;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-public class PictureVerifyActivity extends AppCompatActivity{
+public class PictureVerifyActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1234;
     private static final int CAPTURE_CODE = 1001;
 
     ImageView imageView;
 
+    Uri image_uri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_picture);
+        setContentView(R.layout.activity_picture_verify);
 
-        imageView = findViewById(R.id.imageView);
-        imageView.setImageURI(image_uri);
+        imageView = findViewById(R.id.imageVerif);
+
+        image_uri = getIntent().getData();
+        if (image_uri != null) {
+            imageView.setImageURI(image_uri);
+        }
 
         ImageButton bHelp = findViewById(R.id.boutonHelp);
         bHelp.setOnClickListener(v -> {
@@ -45,19 +44,18 @@ public class PictureVerifyActivity extends AppCompatActivity{
             finish();
         });
 
-        Button bOpen = findViewById(R.id.btnCancelPic);
-        bOpen.setOnClickListener(v -> {
+        Button bCancel = findViewById(R.id.btnCancel);
+        bCancel.setOnClickListener(v -> {
             Intent intent = new Intent(this, PictureActivity.class);
             startActivity(intent);
             finish();
         });
 
-        Button bTake = findViewById(R.id.btnValidePic);
-        bTake.setOnClickListener(v -> {
+        Button bVld = findViewById(R.id.btnValide);
+        bVld.setOnClickListener(v -> {
             //--------code server----------
         });
 
     }
-
 
 }
