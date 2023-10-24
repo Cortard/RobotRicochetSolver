@@ -34,13 +34,10 @@ public class PictureVerifyActivity extends AppCompatActivity {
         bHelp.setOnClickListener(v -> {
             Intent intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
-            finish();
         });
 
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         bReturn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
             finish();
         });
 

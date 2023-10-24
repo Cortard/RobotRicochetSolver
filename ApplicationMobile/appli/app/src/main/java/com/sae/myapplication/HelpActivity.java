@@ -21,12 +21,9 @@ public class HelpActivity extends AppCompatActivity {
         bHelp.setOnClickListener(v -> {
             Intent intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
-            finish();
         });
 
         bReturn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
             finish();
         });
     }
