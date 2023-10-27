@@ -1,9 +1,10 @@
 #ifndef TRADUCTIONCPP_SOLVER_H
 #define TRADUCTIONCPP_SOLVER_H
 
+#include <iostream>
 #include "Game.h"
 
-#define MAX_DEPTH 32
+#define MAX_DEPTH 20
 
 #define NORTH 0x01 // 0b00000001
 #define EAST  0x02 // 0b00000010
@@ -23,12 +24,6 @@
 #define UNPACK_LAST(undo) (undo & 0xff) // 0b[0000 0000]a [0000 0000]b [0000 0000]c -> 0b[0000 0000]c (recupere bit de last)
 #define MAKE_KEY(x) (x[0] | (x[1] << 8) | (x[2] << 16) | (x[3] << 24)) // -> 0b[0000 0000] [0000 0000] [0000 0000] [0000 0000] [robot 0 (goal)] [robot 1] [robot 2] [robot 3]
 
-/* retiré en attendant le but
-#define bool unsigned int
-#define true 1
-#define false 0
-*/
-
 const unsigned int REVERSE[] = { //Inverse les directions
         //          N           E               S                               W
         0, SOUTH, WEST, 0, NORTH, 0, 0, 0, EAST
@@ -39,17 +34,28 @@ const int OFFSET[] = { //Décalage pour aller dans une direction
         0, -16, 1, 0, 16, 0, 0, 0, -1
 };
 
-#include "Set.h"
-
 class Solver {
 public:
-    unsigned int search(Game* game, unsigned char *path, void (*callback)(unsigned int, unsigned int, unsigned int, unsigned int));
+    Solver(){nodes=0; hits=0; inner=0;};
+    unsigned int search(Game* game, unsigned char *path);
 private:
     static bool game_over(Game *game);
     static void precompute_minimum_moves(Game *game);
 
+    //hasmap
+    static void swap(unsigned int *array, unsigned int a, unsigned int b);
+    static unsigned int make_key(Game *game);
+    static bool set_add(std::map<int,int>* set, unsigned int key, unsigned int depth);
+
+    //move
+    static bool can_move(Game *game, unsigned int robot, unsigned int direction);
+    static unsigned int do_move(Game *game, unsigned int robot, unsigned int direction);
+    static void undo_move(Game *game, unsigned int undo);
+    static unsigned int compute_move(Game *game, unsigned int robot, unsigned int direction);
+
     unsigned int nodes, hits, inner;
-    unsigned int _search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, Set *set);
+    unsigned int _search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<int, int>* set);
+    void callback(unsigned int max_depth, unsigned int nodes, unsigned int inner, unsigned int hits);
 };
 
 #endif //TRADUCTIONCPP_SOLVER_H
