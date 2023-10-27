@@ -9,4 +9,5 @@ add_executable(traductionCpp main.cpp
         Set.h
         solver.h
         solver.cpp
-        solver.cpp)
+        solver.cpp
+        Set.cpp)

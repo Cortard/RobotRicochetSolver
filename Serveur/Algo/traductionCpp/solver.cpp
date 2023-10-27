@@ -66,4 +66,6 @@ unsigned int Solver::_search(Game *game, unsigned int depth, unsigned int max_de
     unsigned int height = max_depth - depth;//hauteur de l'arbre
     if(game->moves[game->robots[0]] > height) return 0;//si le goal est trop loin
 
+    // $prepare dans le set l
+    //
 }
