@@ -55,6 +55,12 @@
         </activity>
 
         <activity
+            android:name=".PictureAnswerActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
             android:name=".HelpActivity"
             android:exported="true">
 

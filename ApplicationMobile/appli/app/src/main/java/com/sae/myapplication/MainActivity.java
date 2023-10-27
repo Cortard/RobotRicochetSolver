@@ -32,8 +32,12 @@ public class MainActivity extends AppCompatActivity {
             String ipAddress = ipEditText.getText().toString();
 
             if (isValidIpAddress(ipAddress)) {
-                Intent intent = new Intent(this, PictureActivity.class);
-                startActivity(intent);
+                if (ipAddress.equals(getString(R.string.IP))){
+                    Intent intent = new Intent(this, PictureActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "Adresse IP invalide. Mauvaise adresse IP.", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, "Adresse IP invalide. Veuillez entrer une adresse IP valide.", Toast.LENGTH_SHORT).show();
             }
