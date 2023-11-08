@@ -2,15 +2,16 @@
 #define TRADUCTIONCPP_SOLVER_H
 
 #include <iostream>
+#include <chrono>
 #include "Game.h"
 
-#define MAX_DEPTH 20
+#define MAX_DEPTH 32
 
-#define NORTH 0x01 // 0b00000001
-#define EAST  0x02 // 0b00000010
-#define SOUTH 0x04 // 0b00000100
-#define WEST  0x08 // 0b00001000
-#define ROBOT 0x10 // 0b00010000
+#define NORTH 0x01 // 0b00000001 1
+#define EAST  0x02 // 0b00000010 2
+#define SOUTH 0x04 // 0b00000100 4
+#define WEST  0x08 // 0b00001000 8
+#define ROBOT 0x10 // 0b00010000 16
 
 #define HAS_WALL(x, wall) (x & wall) // x & wall = 1 si x contient wall (et bit à bit)
 #define HAS_ROBOT(x) (x & ROBOT) // x & ROBOT = 1 si x contient ROBOT (0b0001 0000) (et bit à bit)
@@ -45,7 +46,7 @@ private:
     //hasmap
     static void swap(unsigned int *array, unsigned int a, unsigned int b);
     static unsigned int make_key(Game *game);
-    static bool set_add(std::map<int,int>* set, unsigned int key, unsigned int depth);
+    static bool set_add(std::map<unsigned int,unsigned int>* set, unsigned int key, unsigned int depth);
 
     //move
     static bool can_move(Game *game, unsigned int robot, unsigned int direction);
@@ -54,8 +55,8 @@ private:
     static unsigned int compute_move(Game *game, unsigned int robot, unsigned int direction);
 
     unsigned int nodes, hits, inner;
-    unsigned int _search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<int, int>* set);
-    void callback(unsigned int max_depth, unsigned int nodes, unsigned int inner, unsigned int hits);
+    unsigned int _search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<unsigned int,unsigned int>* set);
+    static void callback(unsigned int max_depth, unsigned int nodes, unsigned int inner, unsigned int hits, std::chrono::milliseconds duration);
 };
 
 #endif //TRADUCTIONCPP_SOLVER_H

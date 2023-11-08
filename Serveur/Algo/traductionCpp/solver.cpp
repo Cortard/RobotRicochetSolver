@@ -6,20 +6,23 @@ unsigned int Solver::search(Game *game, unsigned char *path) {
     if(game_over(game)) return 0;//si le jeu est fini
 
     unsigned int result = 0;
-    std::map<int,int> set= {};//initialise le set
+    std::map<unsigned int,unsigned int> set= {};//initialise le set
 
     precompute_minimum_moves(game);//calcul des distances minimales
+    //Done
 
-    for (unsigned int max_depth = 1; max_depth < MAX_DEPTH; max_depth++) {
+    for (unsigned int max_depth = 1; max_depth < MAX_DEPTH; ++max_depth) {
         nodes = 0;//itialise les stats
         hits = 0;
         inner = 0;
+        auto start = std::chrono::high_resolution_clock::now();//début du chrono
         result = _search(game, 0, max_depth, path, &set);//lance la recherche avec max_depth
-        callback(max_depth, nodes, inner, hits);//appel le callback
+        callback(max_depth, nodes, inner, hits, std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start));//appel le callback
         if (result) {
             break;
         }
     }
+    std::destroy(set.begin(), set.end());
     return result;
 }
 
@@ -62,7 +65,7 @@ void Solver::precompute_minimum_moves(Game *game) {
     }
 }
 
-unsigned int Solver::_search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<int, int> *set) {
+unsigned int Solver::_search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<unsigned int,unsigned int> *set) {
     nodes++;
     if(game_over(game)) return depth;//si le jeu est fini
     if (depth == max_depth) return 0;//si la profondeur max est atteinte
@@ -110,8 +113,8 @@ unsigned int Solver::make_key(Game *game) {
     return MAKE_KEY(robots);
 }
 
-bool Solver::set_add(std::map<int,int>* set, unsigned int key, unsigned int depth){
-    std::map<int,int>::iterator it = set->find(key);//on cherche la clé dans le set
+bool Solver::set_add(std::map<unsigned int,unsigned int>* set, unsigned int key, unsigned int depth){
+    auto it = set->find(key);//on cherche la clé dans le set
     if(it == set->end()){//si la clé n'est pas dans le set
         set->insert(std::pair<int,int>(key, depth));//on l'ajoute
         return true;
@@ -144,7 +147,14 @@ unsigned int Solver::do_move(Game *game, unsigned int robot, unsigned int direct
 }
 
 void Solver::undo_move(Game *game, unsigned int undo){
-
+    unsigned int robot = UNPACK_ROBOT(undo); //recupere le robot
+    unsigned int start = UNPACK_START(undo); //recupere la case de départ du mouvement
+    unsigned int last = UNPACK_LAST(undo); //recupere le dernier mouvement
+    unsigned int end = game->robots[robot]; //recupere la case d'arrivée du mouvement
+    game->robots[robot] = start; //on remet le robot sur la case de départ
+    game->last = last; //on remet le dernier mouvement
+    SET_ROBOT(game->grid[start]); //on remet le robot sur la case de départ
+    UNSET_ROBOT(game->grid[end]); //on enlève le robot de la case d'arrivée
 }
 
 unsigned int Solver::compute_move(Game *game, unsigned int robot, unsigned int direction){
@@ -158,6 +168,6 @@ unsigned int Solver::compute_move(Game *game, unsigned int robot, unsigned int d
     return index;//on retourne la case d'arrivée
 }
 
-void Solver::callback(unsigned int max_depth, unsigned int nodes, unsigned int inner, unsigned int hits) {
-    std::cout<<max_depth<<' '<<nodes<<' '<<inner<<' '<<hits<<std::endl;
+void Solver::callback(unsigned int max_depth, unsigned int nodes, unsigned int inner, unsigned int hits, std::chrono::milliseconds duration) {
+    std::cout<<max_depth<<' '<<nodes<<' '<<inner<<' '<<hits<<" in "<<duration.count()/1000<<'.'<<duration.count()%1000<<'s'<<std::endl;
 }
