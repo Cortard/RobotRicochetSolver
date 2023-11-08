@@ -2,9 +2,11 @@ package com.sae.myapplication;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -32,27 +34,48 @@ public class PictureAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture_answer);
 
         imageView = findViewById(R.id.imageRep);
+        ImageView box = findViewById(R.id.footerbox1);
+        ImageView box2 = findViewById(R.id.footerbox2);
+        ImageButton bHelp = findViewById(R.id.boutonHelp);
+        ImageButton bReturn = findViewById(R.id.boutonReturn);
+        Button bCancel = findViewById(R.id.btnCancel);
+        Button bSave = findViewById(R.id.btnSave);
+
 
         getImageFromServer();
 
 
-        ImageButton bHelp = findViewById(R.id.boutonHelp);
         bHelp.setOnClickListener(v -> {
+            box.setBackgroundColor(Color.parseColor("#4288BF"));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    box.setBackgroundColor(Color.parseColor("#1C5F93"));
+                }
+            }, 50);
             Intent intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
         });
 
-        ImageButton bReturn = findViewById(R.id.boutonReturn);
-        bReturn.setOnClickListener(v -> finish());
+        bReturn.setOnClickListener(v -> {
+            box2.setBackgroundColor(Color.parseColor("#4288BF"));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    box2.setBackgroundColor(Color.parseColor("#1C5F93"));
+                }
+            }, 50);
+            Intent intent = new Intent(this, PictureActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
-        Button bCancel = findViewById(R.id.btnCancel);
         bCancel.setOnClickListener(v -> {
             Intent intent = new Intent(this, PictureActivity.class);
             startActivity(intent);
             finish();
         });
 
-        Button bSave = findViewById(R.id.btnSave);
         bSave.setOnClickListener(v -> {
             // Assurez-vous que l'imageView a été initialisé avec l'image du serveur au préalable.
 

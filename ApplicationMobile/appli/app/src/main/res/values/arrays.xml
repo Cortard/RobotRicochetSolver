@@ -1,9 +1,0 @@
-<resources>
-    <array name="autosize_text_sizes">
-        <item>10dp</item>
-        <item>12dp</item>
-        <item>20dp</item>
-        <item>40dp</item>
-        <item>100dp</item>
-    </array>
-</resources>

@@ -3,9 +3,11 @@ package com.sae.myapplication;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
@@ -36,14 +38,34 @@ public class PictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
 
+        ImageView box = findViewById(R.id.footerbox1);
+        ImageView box2 = findViewById(R.id.footerbox2);
+        ImageButton bReturn = findViewById(R.id.boutonReturn);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
+
+
         bHelp.setOnClickListener(v -> {
+
+            box.setBackgroundColor(Color.parseColor("#4288BF"));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    box.setBackgroundColor(Color.parseColor("#1C5F93"));
+                }
+            }, 50);
+
             Intent intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
         });
 
-        ImageButton bReturn = findViewById(R.id.boutonReturn);
         bReturn.setOnClickListener(v -> {
+            box2.setBackgroundColor(Color.parseColor("#4288BF"));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    box2.setBackgroundColor(Color.parseColor("#1C5F93"));
+                }
+            }, 50);
             finish();
         });
 

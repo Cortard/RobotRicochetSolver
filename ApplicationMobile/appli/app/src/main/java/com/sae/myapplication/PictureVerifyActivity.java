@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -36,20 +38,39 @@ public class PictureVerifyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture_verify);
 
         imageView = findViewById(R.id.imageVerif);
+        ImageButton bReturn = findViewById(R.id.boutonReturn);
+        Button bVld = findViewById(R.id.btnValide);
+        ImageButton bHelp = findViewById(R.id.boutonHelp);
+        ImageView box = findViewById(R.id.footerbox1);
+        ImageView box2 = findViewById(R.id.footerbox2);
 
         image_uri = getIntent().getData();
         if (image_uri != null) {
             imageView.setImageURI(image_uri);
         }
 
-        ImageButton bHelp = findViewById(R.id.boutonHelp);
         bHelp.setOnClickListener(v -> {
+            box.setBackgroundColor(Color.parseColor("#4288BF"));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    box.setBackgroundColor(Color.parseColor("#1C5F93"));
+                }
+            }, 50);
             Intent intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
         });
 
-        ImageButton bReturn = findViewById(R.id.boutonReturn);
-        bReturn.setOnClickListener(v -> finish());
+        bReturn.setOnClickListener(v -> {
+            box2.setBackgroundColor(Color.parseColor("#4288BF"));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    box2.setBackgroundColor(Color.parseColor("#1C5F93"));
+                }
+            }, 50);
+            finish();
+        });
 
         Button bCancel = findViewById(R.id.btnCancel);
         bCancel.setOnClickListener(v -> {
@@ -58,7 +79,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
             finish();
         });
 
-        Button bVld = findViewById(R.id.btnValide);
         bVld.setOnClickListener(v -> {
             sendImageToServer(image_uri, getString(R.string.IP), 8080);
             Intent intent = new Intent(this, PictureAnswerActivity.class);

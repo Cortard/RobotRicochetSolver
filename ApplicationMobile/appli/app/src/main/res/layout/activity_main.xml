@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
 
-    <SurfaceView
+    <ImageView
         android:id="@+id/header2"
         android:layout_width="0dp"
         android:layout_height="100dp"
@@ -23,31 +23,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <SurfaceView
+    <ImageView
         android:id="@+id/footer"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:accessibilityHeading="false"
         android:background="#347FBA"
-        android:backgroundTint="#347FBA"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="1:0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <SurfaceView
+    <ImageView
         android:id="@+id/footerbox"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#1C5F93"
-        android:backgroundTint="#1C5F93"
         android:outlineAmbientShadowColor="@color/black"
         android:outlineSpotShadowColor="#191616"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/footer"
@@ -56,18 +54,18 @@
 
     <ImageButton
         android:id="@+id/boutonHelp"
-        style="@android:style/Widget.DeviceDefault.ImageButton"
+        style="@android:style/Widget.ImageButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="#00FFFFFF"
         android:contentDescription="@string/boutonHelp"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@+id/footer"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/footer"
         app:layout_constraintTop_toTopOf="@+id/footer"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/_11758_help_icon" />
 
     <TextView
@@ -91,7 +89,7 @@
         app:layout_constraintStart_toStartOf="@+id/header2"
         app:layout_constraintTop_toTopOf="@+id/header2" />
 
-    <SurfaceView
+    <ImageView
         android:id="@+id/footerbox2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -107,7 +105,7 @@
         app:layout_constraintTop_toTopOf="@+id/footer"
         app:layout_constraintVertical_bias="1.0" />
 
-    <SurfaceView
+    <ImageView
         android:id="@+id/surfaceView5"
         android:layout_width="340dp"
         android:layout_height="0dp"
@@ -130,8 +128,8 @@
         android:backgroundTint="#00FFFFFF"
         android:contentDescription="@string/boutonExit"
         android:src="@drawable/_931185_door_enter_exit_leave_out_icon"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="@+id/footerbox2"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@+id/footer"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/footerbox2"

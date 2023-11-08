@@ -11,16 +11,16 @@
     <string name="ipInput">IP...</string>
 
     <!--Page Photo-->
-    <string name="titrePhoto">Prendre une photo</string>
+    <string name="titrePhoto">Valider la photo</string>
 
     <!--Page Help-->
     <string name="titreHelp">Aide</string>
-    <string name="textHelp"><b>1</b> - Faite ça .........
-                                \n<b>2</b> - ça ..............
-                                \n<b>3</b> - ça .....
-                                \n<b>4</b> - ça ..........
-                                \n<b>5</b> - ça ...........
-                                \n<b>6</b> - ça .........</string>
+    <string name="textHelp"><b>1</b> - Entrez l\'addresse IP du serveur
+                                \n<b>2</b> - Placez l\'objectif au centre du plateau
+                                \n<b>3</b> - Prennez en photo le plateau de manière à ce que l\'on voit la totalité du plateau
+                                \n<b>4</b> - Assurez vous que touts les pions et l\'objectif soit visible sur l\'image
+                                \n<b>5</b> - Si tout est bon vous pouvez envoyer la photo
+                                \n<b>6</b> - Et voilà votre reponse</string>
     <string name="recomencer">Recomencer</string>
     <string name="valider">Valider</string>
     <string name="imagefin">imagefin</string>
