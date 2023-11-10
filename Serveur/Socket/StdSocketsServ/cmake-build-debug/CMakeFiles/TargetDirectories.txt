@@ -1,0 +1,3 @@
+C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir
+C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/CMakeFiles/rebuild_cache.dir
