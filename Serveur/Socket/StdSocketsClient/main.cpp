@@ -19,7 +19,7 @@ typedef int socklen_t;
     typedef struct sockaddr SOCKADDR;
 #endif
 
-#define IP "127.0.0.1"//195.201.205.255
+#define IP "195.201.205.241"//195.201.205.241 127.0.0.1
 #define PORT 49152
 
 int main() {
