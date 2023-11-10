@@ -65,7 +65,7 @@ int main() {
 
         std::cout << "Connect done" << std::endl;
         std::cout << "Client IP: " << inet_ntoa(sockAddrInter.sin_addr) << std::endl;
-        
+
         std::string msg = "Hello world";
         size_t msgSize[] = {msg.size()};
         if(send(clientSock, (char*)msgSize, sizeof(size_t), 0)==SOCKET_ERROR){
