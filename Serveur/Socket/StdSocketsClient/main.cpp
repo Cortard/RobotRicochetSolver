@@ -4,7 +4,7 @@
 #include <winsock2.h>
 typedef int socklen_t;
 #elif defined (linux)
-#include <sys/types.h>
+    #include <sys/types.h>
     #include <sys/socket.h>
     #include <netinet/in.h>
     #include <arpa/inet.h>
@@ -20,7 +20,7 @@ typedef int socklen_t;
 #endif
 
 #define IP "195.201.205.255"
-#define PORT 23
+#define PORT 49152
 
 int main() {
     #if defined (WIN32)

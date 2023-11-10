@@ -19,8 +19,8 @@
     typedef struct sockaddr SOCKADDR;
 #endif
 
-#define IP "195.201.205.255"
-#define PORT 23
+#define IP "127.0.0.1"
+#define PORT 49152
 
 int main() {
     #if defined (WIN32)
@@ -43,9 +43,15 @@ int main() {
 
     if( bind(sockServ,(SOCKADDR*)&sockAddrInter,sizeof(sockAddrInter)) != 0  ) {
         std::cout << "Bind error" << std::endl;
+        return -1;
     }
+    std::cout << "Bind Done" << std::endl;
 
-    listen(sockServ, 5);
+    if(listen(sockServ, 5) != 0){
+        std::cout << "Listen error" << std::endl;
+        return -1;
+    }
+    std::cout << "Listen Done" << std::endl;
 
 
     while(true){
