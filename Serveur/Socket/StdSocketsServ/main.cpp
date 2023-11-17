@@ -116,10 +116,14 @@ int main() {
     }
 
     closesocket(sockServ);
+    log(logs,"Close socket");
 
     #if defined (WIN32)
         WSACleanup();
     #endif
+
+    
+    log(logs,"serve shutdown");
 
     return 0;
 }
