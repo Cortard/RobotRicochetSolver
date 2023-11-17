@@ -20,7 +20,7 @@
 #endif
 
 #define IP "195.201.205.241"//195.201.205.241 127.0.0.1
-#define PORT 8000
+#define PORT 80
 
 int main() {
     #if defined (WIN32)
