@@ -1,0 +1,172 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.joliBox {
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.joliBox input::placeholder {
+    text-align: center;
+}
+
+.joliBox input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.joliButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.joliButton:hover {
+    background-color: #45a049;
+}
+
+.boxFullWidth {
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: auto;
+}
+
+.parentSplit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.parentSplit div{
+    width: 46%;
+}
+
+.result{
+    margin: 2%;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.alignLabelInput{
+    display: flex;
+    flex-direction: row;
+}
+
+#mainAdminPanel{
+    margin-top: 100px;
+}
+
+#headerAdminPanel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+#titreAdminPanel {
+    width: 30%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+#navAdminPanel {
+    width: 70%;
+    padding-left: 5%;
+    padding-right: 1%;
+}
+
+#navAdminPanel ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+#navAdminPanel ul li {
+    margin-top: 16px;
+    height: 40px;
+}
+
+#navAdminPanel ul li:nth-child(-n+3) {
+    margin-right: 2%;
+}
+#navAdminPanel ul li:nth-child(4) {
+    margin-right: 5%;
+}
+#navAdminPanel ul li:nth-child(5) {
+    margin-right: 6%;
+}
+
+.checkboxAdminPanel {
+    width: 16px;
+    height: 12px;
+    border: 2px solid #fff;
+    background-color: #7cd27f;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#divCheckboxAdminPanel{
+    transform: translate(0, -10px);
+}
+
+.result{
+    color: #ffffff;
+    background-color: #000000;
+    word-wrap: break-word;
+    counter-reset: line-number;
+}
+
+.resultPart p:before{
+    color: #ffffff;
+    content: counter(line-number);
+    counter-increment: line-number;
+    display: inline-block;
+    width: 10px;
+}
+.resultPart p{
+    margin-left: 50px;
+    text-indent: -10px;
+}
+
+#top-arrow {
+    position: fixed;
+    right: 30px;
+    bottom: 20px;
+    width: 0;
+    height: 0;
+    border: 40px solid transparent;
+    border-top: 0;
+    border-bottom: solid 80px #7cd27f ;
+    z-index: 1;
+    content: "";
+}
