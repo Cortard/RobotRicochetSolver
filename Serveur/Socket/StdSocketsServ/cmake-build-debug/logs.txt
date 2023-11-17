@@ -1,0 +1,2 @@
+Fri Nov 17 22:39:49 2023: ouverture logs
+Fri Nov 17 22:39:49 2023: Bind error

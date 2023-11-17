@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <ctime>
 
 #if defined (WIN32)
     #include <winsock2.h>
@@ -22,6 +24,30 @@
 #define IP "195.201.205.241"//195.201.205.241 127.0.0.1
 #define PORT 9090
 
+int openLogs(std::ofstream& file)
+{
+    file = std::ofstream("/home/ricochet/logs.txt");
+
+    if (file.is_open())
+    {
+        return 1;
+    }
+    return 0;
+}
+void log(std::ofstream& file,const std::string& msg)
+{
+    time_t now = time(nullptr);
+    std::string dt = ctime(&now);
+    dt = dt.substr(0, dt.length() - 1);
+    file<<dt<<": ";
+    file<<msg;
+    file<<std::endl;
+}
+void closeLogs(std::ofstream& file)
+{
+    file.close();
+}
+
 int main() {
     #if defined (WIN32)
         WSADATA WSAData;
@@ -31,6 +57,10 @@ int main() {
     #endif
 
     if(erreur) return -1;
+
+    std::ofstream logs;
+    if(!openLogs(logs)) return -1;
+    log(logs,"ouverture logs");
 
     SOCKET sockServ;
     sockServ = socket(AF_INET, SOCK_STREAM, 0);
@@ -42,45 +72,44 @@ int main() {
     socklen_t sockAddrInterSize = sizeof(sockAddrInter);
 
     if( bind(sockServ,(SOCKADDR*)&sockAddrInter,sizeof(sockAddrInter)) != 0  ) {
-        std::cout << "Bind error" << std::endl;
+        log(logs,"Bind error");
         return -1;
     }
-    std::cout << "Bind Done" << std::endl;
-    std::cout << "IP: " << inet_ntoa(sockAddrInter.sin_addr) << std::endl;
-    std::cout << "Port: " << htons(sockAddrInter.sin_port) << std::endl;
+
+    log(logs,"Bind Done");
+    log(logs,"IP: " + std::string(inet_ntoa(sockAddrInter.sin_addr)));
 
     if(listen(sockServ, 5) != 0){
-        std::cout << "Listen error" << std::endl;
+        log(logs,"Listen error");
         return -1;
     }
-    std::cout << "Listen Done" << std::endl;
+    log(logs,"Listen Done");
 
 
     while(true){
         SOCKET clientSock=accept(sockServ, (SOCKADDR*)&sockAddrInter, &sockAddrInterSize);
         if( clientSock == SOCKET_ERROR ) {
-            std::cout << "Connect error" << std::endl;
+            log(logs,"Connect error");
             break;
         }
 
-        std::cout << "Connect done" << std::endl;
-        std::cout << "Client IP: " << inet_ntoa(sockAddrInter.sin_addr) << std::endl;
+        log(logs,"Connect done, Client IP: " + std::string(inet_ntoa(sockAddrInter.sin_addr)));
 
         std::string msg = "Hello world";
         size_t msgSize[] = {msg.size()};
         if(send(clientSock, (char*)msgSize, sizeof(size_t), 0)==SOCKET_ERROR){
-            std::cout << "Send size error" << std::endl;
+            log(logs,"Send size error");
             closesocket(clientSock);
             break;
         }
-        std::cout << "Send size" << std::endl;
+        log(logs,"Send size");
 
         if(send(clientSock, msg.c_str(), (int)msgSize[0], 0)==SOCKET_ERROR){
-            std::cout << "Send message error" << std::endl;
+            log(logs,"Send message error");
             closesocket(clientSock);
             break;
         }
-        std::cout << "Send message" << std::endl;
+        log(logs,"Send message");
 
         closesocket(clientSock);
         break;

@@ -1,0 +1,14 @@
+[Unit]
+Description=<Resolution Sockets Serveur For Ricochet Robot App>
+After=apache2.service
+
+[Service]
+User=root
+WorkingDirectory=/home/buildServeur
+ExecStart=StdSockets
+# optional items below
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
