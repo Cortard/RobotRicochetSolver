@@ -114,27 +114,4 @@ public class PictureVerifyActivity extends AppCompatActivity {
             }
         }).start();
     }
-
-    private static File uriToJpg(Context context, Uri imageUri) {
-        File jpgFile = null;
-        try {
-            ContentResolver resolver = context.getContentResolver();
-            InputStream inputStream = resolver.openInputStream(imageUri);
-            if (inputStream != null) {
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-
-                File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                jpgFile = File.createTempFile("image", ".jpg", storageDir);
-
-                FileOutputStream outputStream = new FileOutputStream(jpgFile);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-
-                inputStream.close();
-                outputStream.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return jpgFile;
-    }
 }

@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +41,6 @@ public class PictureAnswerActivity extends AppCompatActivity {
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         Button bCancel = findViewById(R.id.btnCancel);
         Button bSave = findViewById(R.id.btnSave);
-
 
         getImageFromServer();
 
@@ -126,6 +126,9 @@ public class PictureAnswerActivity extends AppCompatActivity {
 
             // Convertir le fichier en URI
             Uri imageUri = Uri.fromFile(imageFile);
+
+            ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
+            pb.setVisibility(ProgressBar.INVISIBLE);
 
             // Afficher l'image dans votre ImageView
             imageView.setImageURI(imageUri);
