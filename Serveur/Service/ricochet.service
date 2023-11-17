@@ -4,8 +4,8 @@ After=apache2.service
 
 [Service]
 User=root
-WorkingDirectory=/home/buildServeur
-ExecStart=StdSockets
+WorkingDirectory=/home/ricochet/
+ExecStart=/home/ricochet/buildServeur/StdSockets
 # optional items below
 Restart=always
 RestartSec=3
