@@ -21,11 +21,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/StdSocketsClient.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/StdSocketsClient.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +87,7 @@
       <workItem from="1699604585877" duration="6290000" />
       <workItem from="1699628161614" duration="523000" />
       <workItem from="1699989013467" duration="61000" />
-      <workItem from="1700226149893" duration="3082000" />
+      <workItem from="1700226149893" duration="3190000" />
     </task>
     <servers />
   </component>

@@ -66,7 +66,7 @@ int main() {
 
 
     /* On ferme la socket précédemment ouverte */
-    closesocket(sockServ);
+    //closesocket(sockServ);
 
 
     #if defined (WIN32)
