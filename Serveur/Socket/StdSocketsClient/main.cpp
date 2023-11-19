@@ -19,18 +19,22 @@ typedef int socklen_t;
     typedef struct sockaddr SOCKADDR;
 #endif
 
-#define IP "195.201.205.241"//195.201.205.241 127.0.0.1
+#define DEV_MODE 1
+
+#if DEV_MODE==1
+#define IP "127.0.0.1"
+    #define PORT 9090
+#else
+#define IP "195.201.205.241"
 #define PORT 9090
+#endif
 
 int main() {
     #if defined (WIN32)
         WSADATA WSAData;
-        int erreur = WSAStartup(MAKEWORD(2,2), &WSAData);
-    #else
-        int erreur = 0;
+        int _erreur = WSAStartup(MAKEWORD(2,2), &WSAData);
+        if(_erreur) return -1;
     #endif
-
-    if(erreur) return -1;
 
     SOCKET sockServ;
     sockServ = socket(AF_INET, SOCK_STREAM, 0);

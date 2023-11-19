@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug"
+			"value" : "c:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -575,7 +575,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -647,7 +647,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ"
+			"value" : "C:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -659,7 +659,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/StdSockets"
+			"value" : "C:/Program Files (x86)/StdSocketsServer"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -1254,42 +1254,6 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "StdSocketsServ_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug"
-		},
-		{
-			"name" : "StdSocketsServ_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "StdSocketsServ_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ"
-		},
-		{
 			"name" : "StdSocketsServer_BINARY_DIR",
 			"properties" : 
 			[
@@ -1299,7 +1263,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug"
+			"value" : "C:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug"
 		},
 		{
 			"name" : "StdSocketsServer_IS_TOP_LEVEL",
@@ -1323,43 +1287,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ"
-		},
-		{
-			"name" : "StdSockets_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug"
-		},
-		{
-			"name" : "StdSockets_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "StdSockets_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ"
+			"value" : "C:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",

@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ
+# Install script for directory: C:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/StdSockets")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/StdSocketsServer")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Petit Corto/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

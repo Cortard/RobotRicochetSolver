@@ -8,5 +8,8 @@ IF (WIN32)
 ENDIF()
 
 add_executable(StdSockets main.cpp
+        logs/Logs.cpp
+        logs/Logs.h
+        devMode.h
 )
 

@@ -1,2 +1,9 @@
-Fri Nov 17 22:39:49 2023: ouverture logs
-Fri Nov 17 22:39:49 2023: Bind error
+Sun Nov 19 15:36:11 2023: Initialisation socket |0
+Sun Nov 19 15:36:11 2023: Bind Done |1
+Sun Nov 19 15:36:11 2023: IP: 127.0.0.1 PORT : 9090 |1
+Sun Nov 19 15:36:11 2023: Listen Done |1
+Sun Nov 19 15:36:45 2023: Connect done, Client IP: 127.0.0.1 |1
+Sun Nov 19 15:36:45 2023: Send size |1
+Sun Nov 19 15:36:45 2023: Send message |1
+Sun Nov 19 15:36:45 2023: Close socket |0
+Sun Nov 19 15:36:45 2023: Serve shutdown |0

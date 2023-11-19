@@ -1,16 +1,6 @@
 # ninja log v5
-9	1906	7213182020155512	CMakeFiles/StdSocketsClient.dir/main.cpp.obj	9e198d8e60e7f9c3
-5	254	7213313626933169	build.ninja	58c9e24075f7f335
-1907	2013	7213182021149937	StdSocketsClient.exe	b87b7386bd88a0e5
-4	5248	7219300345531657	CMakeFiles/StdSocketsClient.dir/main.cpp.obj	9e198d8e60e7f9c3
-5249	5515	7219300348147054	StdSocketsClient.exe	b87b7386bd88a0e5
-6	2003	7219307928689896	CMakeFiles/StdSocketsClient.dir/main.cpp.obj	9e198d8e60e7f9c3
-2004	2115	7219307929767968	StdSocketsClient.exe	b87b7386bd88a0e5
-4	1874	7219312968551806	CMakeFiles/StdSocketsClient.dir/main.cpp.obj	9e198d8e60e7f9c3
-1875	1975	7219312969506446	StdSocketsClient.exe	b87b7386bd88a0e5
-5	1794	7219313656923986	CMakeFiles/StdSocketsClient.dir/main.cpp.obj	9e198d8e60e7f9c3
-1794	1895	7219313657886964	StdSocketsClient.exe	b87b7386bd88a0e5
-5	1952	7219332728837039	CMakeFiles/StdSocketsClient.dir/main.cpp.obj	9e198d8e60e7f9c3
-1953	2083	7219332730112981	StdSocketsClient.exe	b87b7386bd88a0e5
 4	2008	7219340537171643	CMakeFiles/StdSocketsClient.dir/main.cpp.obj	9e198d8e60e7f9c3
+5	254	7221058058516259	build.ninja	58c9e24075f7f335
 2009	2116	7219340538219186	StdSocketsClient.exe	b87b7386bd88a0e5
+6	1800	7221078040963958	CMakeFiles/StdSocketsClient.dir/main.cpp.obj	202cd1d9bcef7246
+1810	1887	7221078041785666	StdSocketsClient.exe	ea23c619e33825bc
