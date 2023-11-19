@@ -39,7 +39,7 @@ int main() {
 
     if(!Logs::write("Start Server",LOG_LEVEL_INFO)) return -1;
 
-    Logs::write("Initialisation  socket",LOG_LEVEL_INFO);
+    Logs::write("Initialisation socket",LOG_LEVEL_INFO);
     SOCKET sockServ;
     sockServ = socket(AF_INET, SOCK_STREAM, 0);
 
