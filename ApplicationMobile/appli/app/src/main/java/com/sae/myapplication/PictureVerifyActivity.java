@@ -1,7 +1,6 @@
 package com.sae.myapplication;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,15 +15,17 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-
 
 public class PictureVerifyActivity extends AppCompatActivity {
 
@@ -80,67 +81,113 @@ public class PictureVerifyActivity extends AppCompatActivity {
         });
 
         bVld.setOnClickListener(v -> {
-            sendImageToServer(image_uri, getString(R.string.IP), 8080);
+            System.out.println("Valide");
+            try {
+                System.out.println("sendimg");
+                sendImage(getString(R.string.IP), 9090, compressImage(image_uri));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             Intent intent = new Intent(this, PictureAnswerActivity.class);
             startActivity(intent);
         });
 
     }
 
-    private void sendImageToServer(Uri imageUri, String serverIp, int serverPort) {
-        new Thread(() -> {
+    private File compressImage(Uri imageUri) throws IOException {
+        // Transformez l'URI en Bitmap
+        Bitmap bitmap = getBitmapFromUri(imageUri);
+
+        // Comprimez le Bitmap en fichier JPG
+        if (bitmap != null) {
+            File compressedFile = compressBitmapToJpg(bitmap);
+
+            // Nettoyez la mémoire
+            bitmap.recycle();
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream oss = new ObjectOutputStream(bos);
+            oss.writeObject(compressedFile);
+            System.out.println(oss);
+            System.out.println("test");
+            return compressedFile;
+        }
+        return null;
+    }
+
+    private Bitmap getBitmapFromUri(Uri uri) {
+        try {
+            ContentResolver resolver = getContentResolver();
+            InputStream inputStream = resolver.openInputStream(uri);
+            return BitmapFactory.decodeStream(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private File compressBitmapToJpg(Bitmap bitmap) {
+        File compressedFile = null;
+        try {
+            File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            compressedFile = File.createTempFile("compressed_image", ".jpg", storageDir);
+
+            FileOutputStream outputStream = new FileOutputStream(compressedFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return compressedFile;
+    }
+
+    public static void sendImage(String serverIp, int serverPort, File imageFile) {
+        Socket socket = null;
+        FileInputStream fileInputStream = null;
+        BufferedOutputStream bufferedOutputStream = null;
+
+        System.out.println("sendimgg test");
+
+        try {
+            socket = new Socket(serverIp, serverPort);
+            fileInputStream = new FileInputStream(imageFile);
+            bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
+            DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
+
+            // Envoie la taille du fichier au serveur
+            dataOutputStream.writeLong(imageFile.length());
+
+            // Envoie le contenu du fichier
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+                bufferedOutputStream.write(buffer, 0, bytesRead);
+            }
+            bufferedOutputStream.flush();
+
+            System.out.println("sendimgsucc");
+
+            // Ferme les flux
+            fileInputStream.close();
+            bufferedOutputStream.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
             try {
-
-                Socket clientSocket = new Socket(serverIp, serverPort);
-                OutputStream outputStream = clientSocket.getOutputStream();
-
-                // Ouvrir l'input stream pour lire l'URI de l'image
-                try {
-                    InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                    byte[] buffer = new byte[1024];
-                    int bytesRead;
-
-                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                        outputStream.write(buffer, 0, bytesRead);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (fileInputStream != null) {
+                    fileInputStream.close();
                 }
-
-                // Fermer la socket
-                clientSocket.close();
+                if (bufferedOutputStream != null) {
+                    bufferedOutputStream.close();
+                }
+                if (socket != null) {
+                    socket.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).start();
-    }
-
-    public static void toserv() {
-        String serverAddress = "195.201.205.241"; // Remplacez par l'adresse IP de votre serveur
-        int serverPort = 80; // Remplacez par le port de votre serveur
-
-        try {
-            Socket socket = new Socket(serverAddress, serverPort);
-
-            // Obtenez le flux de sortie du socket
-            OutputStream outputStream = socket.getOutputStream();
-
-            // Message à envoyer
-            String message = "Hello, World!";
-
-            // Convertissez le message en tableau de bytes
-            byte[] messageBytes = message.getBytes("UTF-8");
-
-            // Envoyez le message au serveur
-            outputStream.write(messageBytes);
-
-            // Fermez la connexion
-            socket.close();
-
-            System.out.println("Message envoyé avec succès au serveur.");
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
