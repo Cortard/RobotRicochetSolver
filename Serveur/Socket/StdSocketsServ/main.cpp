@@ -58,8 +58,6 @@ void acceptLoop(SOCKET sockServ, Client clients[MAX_CLIENTS]){
     }
 }
 
-
-#include <unistd.h>
 void traitementLoop(Client clients[MAX_CLIENTS]){
     Logs::write("Traitement loop start",LOG_LEVEL_INFO);
     while (true) {
