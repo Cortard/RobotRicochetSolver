@@ -11,5 +11,7 @@ add_executable(StdSockets main.cpp
         logs/Logs.cpp
         logs/Logs.h
         devMode.h
+        clients/Client.cpp
+        clients/Client.h
 )
 

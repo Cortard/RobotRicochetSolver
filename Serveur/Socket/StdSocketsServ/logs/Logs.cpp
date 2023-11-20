@@ -1,7 +1,3 @@
-//
-// Created by cfaur on 19/11/2023.
-//
-
 #include "Logs.h"
 
 std::ofstream Logs::file;

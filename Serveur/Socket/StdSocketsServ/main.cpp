@@ -1,4 +1,5 @@
-#include <iostream>
+#include <thread>
+#include "clients/Client.h"
 #include "devMode.h"
 #include "logs/Logs.h"
 
@@ -24,10 +25,71 @@
 #if DEV_MODE==1
     #define IP "127.0.0.1"
     #define PORT 9090
+    #define MAX_CLIENTS 5
 #else
     #define IP "195.201.205.241"
     #define PORT 9090
+    #define MAX_CLIENTS 5
 #endif
+
+void acceptLoop(SOCKET sockServ, Client clients[MAX_CLIENTS]){
+    Logs::write("Accept loop start",LOG_LEVEL_INFO);
+
+    SOCKET* client;
+    SOCKADDR* sockAddrClient;
+    socklen_t sockAddrClientSize=sizeof(sockAddrClient);
+    int nbClient=0;
+    while(true){
+        SOCKET newClientSock=accept(sockServ, sockAddrClient, &sockAddrClientSize);
+        if( newClientSock == SOCKET_ERROR ) {
+            continue;
+        }
+        Logs::write("Accept client IP :" + std::string(inet_ntoa(((SOCKADDR_IN*)sockAddrClient)->sin_addr)) + " PORT : " + std::to_string(htons(((SOCKADDR_IN*)sockAddrClient)->sin_port)),LOG_LEVEL_DETAILS);
+
+        int i=0;
+        while(i<MAX_CLIENTS && clients[i].getState()!=STATE_DISCONNECTED) i++;
+        if(i==MAX_CLIENTS){
+            Logs::write("Max client reached",LOG_LEVEL_WARNING);
+            continue;
+        }
+        clients[i]=Client(newClientSock,i);
+        Logs::write("Client added on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
+    }
+}
+
+
+#include <unistd.h>
+void traitementLoop(Client clients[MAX_CLIENTS]){
+    Logs::write("Traitement loop start",LOG_LEVEL_INFO);
+    while (true) {
+        for (int i = 0; i < MAX_CLIENTS; i++) {
+            if (clients[i].getState() == STATE_CONNECTED) {
+                char buffer[1024];
+                int size = recv(clients[i].getSock(), buffer, 1024, 0);
+                if (size == SOCKET_ERROR) {
+                    Logs::write("Error recv", LOG_LEVEL_ERROR);
+                    clients[i].close();
+                    clients[i].setState(STATE_DISCONNECTED);
+                    continue;
+                }
+                if (size == 0) {
+                    Logs::write("Client disconnected", LOG_LEVEL_INFO);
+                    clients[i].close();
+                    clients[i].setState(STATE_DISCONNECTED);
+                    continue;
+                }
+                buffer[size] = '\0';
+                Logs::write("Message received : " + std::string(buffer), LOG_LEVEL_INFO);
+                if (send(clients[i].getSock(), buffer, size, 0) == SOCKET_ERROR) {
+                    Logs::write("Error send", LOG_LEVEL_ERROR);
+                    clients[i].close();
+                    clients[i].setState(STATE_DISCONNECTED);
+                    continue;
+                }
+            }
+        }
+    }
+}
 
 int main() {
     #if defined (WIN32)
@@ -62,35 +124,13 @@ int main() {
     }
     Logs::write("Listen Done",LOG_LEVEL_DETAILS);
 
+    Client clients[MAX_CLIENTS];
 
-    while(true){
-        SOCKET clientSock=accept(sockServ, (SOCKADDR*)&sockAddrInter, &sockAddrInterSize);
-        if( clientSock == SOCKET_ERROR ) {
-            Logs::write("Accept error",LOG_LEVEL_ERROR);
-            break;
-        }
+    std::thread acceptThread(acceptLoop,sockServ,clients);
+    std::thread traitementThread(traitementLoop,clients);
 
-        Logs::write("Connect done, Client IP: " + std::string(inet_ntoa(sockAddrInter.sin_addr)),LOG_LEVEL_DETAILS);
-
-        std::string msg = "Hello world";
-        size_t msgSize[] = {msg.size()};
-        if(send(clientSock, (char*)msgSize, sizeof(size_t), 0)==SOCKET_ERROR){
-            Logs::write("Send size error",LOG_LEVEL_ERROR);
-            closesocket(clientSock);
-            break;
-        }
-        Logs::write("Send size",LOG_LEVEL_DETAILS);
-
-        if(send(clientSock, msg.c_str(), (int)msgSize[0], 0)==SOCKET_ERROR){
-            Logs::write("Send message error",LOG_LEVEL_ERROR);
-            closesocket(clientSock);
-            break;
-        }
-        Logs::write("Send message",LOG_LEVEL_DETAILS);
-
-        closesocket(clientSock);
-        break;
-    }
+    acceptThread.join();
+    traitementThread.join();
 
     closesocket(sockServ);
     Logs::write("Close socket",LOG_LEVEL_INFO);

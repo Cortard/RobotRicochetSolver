@@ -61,6 +61,12 @@ build CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj: CXX_COMPILER__StdSockets_unsc
   OBJECT_DIR = CMakeFiles\StdSockets.dir
   OBJECT_FILE_DIR = CMakeFiles\StdSockets.dir\logs
 
+build CMakeFiles/StdSockets.dir/clients/Client.cpp.obj: CXX_COMPILER__StdSockets_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/clients/Client.cpp || cmake_object_order_depends_target_StdSockets
+  DEP_FILE = CMakeFiles\StdSockets.dir\clients\Client.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\StdSockets.dir
+  OBJECT_FILE_DIR = CMakeFiles\StdSockets.dir\clients
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target StdSockets
@@ -69,7 +75,7 @@ build CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj: CXX_COMPILER__StdSockets_unsc
 #############################################
 # Link the executable StdSockets.exe
 
-build StdSockets.exe: CXX_EXECUTABLE_LINKER__StdSockets_Debug CMakeFiles/StdSockets.dir/main.cpp.obj CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj
+build StdSockets.exe: CXX_EXECUTABLE_LINKER__StdSockets_Debug CMakeFiles/StdSockets.dir/main.cpp.obj CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj CMakeFiles/StdSockets.dir/clients/Client.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lws2_32  -lwsock32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\StdSockets.dir
