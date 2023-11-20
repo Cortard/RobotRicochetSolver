@@ -114,4 +114,33 @@ public class PictureVerifyActivity extends AppCompatActivity {
             }
         }).start();
     }
+
+    public static void toserv() {
+        String serverAddress = "195.201.205.241"; // Remplacez par l'adresse IP de votre serveur
+        int serverPort = 80; // Remplacez par le port de votre serveur
+
+        try {
+            Socket socket = new Socket(serverAddress, serverPort);
+
+            // Obtenez le flux de sortie du socket
+            OutputStream outputStream = socket.getOutputStream();
+
+            // Message à envoyer
+            String message = "Hello, World!";
+
+            // Convertissez le message en tableau de bytes
+            byte[] messageBytes = message.getBytes("UTF-8");
+
+            // Envoyez le message au serveur
+            outputStream.write(messageBytes);
+
+            // Fermez la connexion
+            socket.close();
+
+            System.out.println("Message envoyé avec succès au serveur.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

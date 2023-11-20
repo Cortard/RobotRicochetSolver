@@ -12,21 +12,27 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 
 public class PictureAnswerActivity extends AppCompatActivity {
 
     ImageView imageView;
+    static TextView txt;
 
 
     @Override
@@ -42,7 +48,12 @@ public class PictureAnswerActivity extends AppCompatActivity {
         Button bCancel = findViewById(R.id.btnCancel);
         Button bSave = findViewById(R.id.btnSave);
 
-        getImageFromServer();
+        txt = findViewById(R.id.textView);
+
+
+        fromServ();
+
+        //getImageFromServer();
 
 
         bHelp.setOnClickListener(v -> {
@@ -100,6 +111,34 @@ public class PictureAnswerActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public static void fromServ() {
+        String serverAddress = "195.201.205.241"; // Remplacez par l'adresse IP de votre serveur
+        int serverPort = 9090; // Remplacez par le port de votre serveur
+
+        try {
+            Socket socket = new Socket(serverAddress, serverPort);
+
+            System.out.println("Connexion...");
+
+            InputStream input = socket.getInputStream();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+            String line = reader.readLine();    // reads a line of text
+
+            System.out.println("Connecté");
+
+            System.out.println("Message reçu du serveur : " + line);
+
+            txt.setText(line);
+
+            // Fermez la connexion
+            socket.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void getImageFromServer(){

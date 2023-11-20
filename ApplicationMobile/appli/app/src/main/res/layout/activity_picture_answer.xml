@@ -198,4 +198,16 @@
         app:layout_constraintStart_toStartOf="@+id/surfaceView"
         app:layout_constraintTop_toTopOf="@+id/surfaceView" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="240dp"
+        android:layout_height="90dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/surfaceView"
+        app:layout_constraintEnd_toEndOf="@+id/surfaceView"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="@+id/surfaceView"
+        app:layout_constraintTop_toTopOf="@+id/surfaceView"
+        app:layout_constraintVertical_bias="0.134" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

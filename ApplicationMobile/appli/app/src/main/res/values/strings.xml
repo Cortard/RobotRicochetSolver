@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestSAE</string>
+    <string name="app_name">Ricochet Robot</string>
     <string name="boutonHelp">Ouvre les paramètres</string>
     <string name="boutonExit">Fermer l\'application</string>
     <string name="boutonReturn">Revient en arrière</string>
@@ -27,6 +27,6 @@
     <string name="correction">Correction</string>
     <string name="save">Enregistrer</string>
     <string name="imageRep">Reponse du serveur image</string>
-    <string name="IP">127.0.0.1</string>
+    <string name="IP">195.201.205.241</string>
 
 </resources>
