@@ -32,7 +32,6 @@ import java.nio.ByteBuffer;
 import android.Manifest;
 
 
-
 public class PictureActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1234;
     private static final int CAPTURE_CODE = 1001;

@@ -51,10 +51,9 @@ public class PictureAnswerActivity extends AppCompatActivity {
         txt = findViewById(R.id.textView);
 
 
-        fromServ();
-
-
         //getImageFromServer();
+
+        fromServ();
 
 
         bHelp.setOnClickListener(v -> {
@@ -88,58 +87,60 @@ public class PictureAnswerActivity extends AppCompatActivity {
             finish();
         });
 
-        bSave.setOnClickListener(v -> {
-            // Assurez-vous que l'imageView a été initialisé avec l'image du serveur au préalable.
-
-            // Récupérez l'image affichée dans l'ImageView
-            Bitmap imageBitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
-
-            if (imageBitmap != null) {
-                // Enregistrez l'image dans la galerie de l'utilisateur
-                String savedImageURL = MediaStore.Images.Media.insertImage(
-                        getContentResolver(), imageBitmap, "Image correction", "Correction du plateau de jeu ricochet robot"
-                );
-
-                // Si l'enregistrement est réussi, affichez un message de succès
-                if (savedImageURL != null) {
-                    Toast.makeText(this, "Image enregistrée avec succès", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Sinon, affichez un message d'erreur
-                    Toast.makeText(this, "Échec de l'enregistrement de l'image", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        bSave.setOnClickListener(v -> {
+//            // Assurez-vous que l'imageView a été initialisé avec l'image du serveur au préalable.
+//
+//            // Récupérez l'image affichée dans l'ImageView
+//            Bitmap imageBitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+//
+//            if (imageBitmap != null) {
+//                // Enregistrez l'image dans la galerie de l'utilisateur
+//                String savedImageURL = MediaStore.Images.Media.insertImage(
+//                        getContentResolver(), imageBitmap, "Image correction", "Correction du plateau de jeu ricochet robot"
+//                );
+//
+//                // Si l'enregistrement est réussi, affichez un message de succès
+//                if (savedImageURL != null) {
+//                    Toast.makeText(this, "Image enregistrée avec succès", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    // Sinon, affichez un message d'erreur
+//                    Toast.makeText(this, "Échec de l'enregistrement de l'image", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
 
 
     }
 
-    public static void fromServ() {
-        String serverAddress = "195.201.205.241"; // Remplacez par l'adresse IP de votre serveur
-        int serverPort = 9090; // Remplacez par le port de votre serveur
+    public void fromServ() {
+        Thread th = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String serverAddress = "195.201.205.241"; // Remplacez par l'adresse IP de votre serveur
+                int serverPort = 9090; // Remplacez par le port de votre serveur
 
-        try {
-            Socket socket = new Socket(serverAddress, serverPort);
+                try {
+                    Socket socket = new Socket(serverAddress, serverPort);
 
-            System.out.println("Connexion...");
+                    InputStream input = socket.getInputStream();
 
-            InputStream input = socket.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                    String line = reader.readLine();    // reads a line of text
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            String line = reader.readLine();    // reads a line of text
 
-            System.out.println("Connecté");
+                    txt.setText(line);
 
-            System.out.println("Message reçu du serveur : " + line);
+                    // Fermez la connexion
+                    socket.close();
 
-            txt.setText(line);
+                } catch (Exception e) {
+                    txt.setText(e.toString());
+                }
+            }
+        });
 
-            // Fermez la connexion
-            socket.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        th.start();
     }
 
     private void getImageFromServer(){

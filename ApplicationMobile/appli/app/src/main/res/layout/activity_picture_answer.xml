@@ -44,7 +44,7 @@
         android:autoSizeMinTextSize="24sp"
         android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
-        android:fontFamily="casual"
+        android:fontFamily="@font/poppins_regular"
         android:gravity="center"
         android:padding="10sp"
         android:text="@string/correction"
@@ -143,7 +143,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="#B3E5FC"
-        android:fontFamily="casual"
+        android:fontFamily="@font/poppins_regular"
         android:shadowColor="#292626"
         android:text="@string/save"
         android:textAlignment="center"
@@ -154,7 +154,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.792" />
+        app:layout_constraintVertical_bias="0.82" />
 
     <Button
         android:id="@+id/btnCancel"
@@ -163,7 +163,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="#B3E5FC"
-        android:fontFamily="casual"
+        android:fontFamily="@font/poppins_regular"
         android:shadowColor="#292626"
         android:text="@string/recomencer"
         android:textAlignment="center"
@@ -202,6 +202,7 @@
         android:id="@+id/textView"
         android:layout_width="240dp"
         android:layout_height="90dp"
+        android:maxLength="999999999"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/surfaceView"
         app:layout_constraintEnd_toEndOf="@+id/surfaceView"
