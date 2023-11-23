@@ -45,7 +45,7 @@ int main() {
     acceptThread.join();
     processThread.join();
 
-    Serveur::close();
+    Serveur::end();
 
     #if defined (WIN32)
         WSACleanup();

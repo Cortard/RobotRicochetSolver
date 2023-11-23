@@ -35,7 +35,7 @@ int Serveur::init() {
     return 0;
 }
 
-void Serveur::close() {
+void Serveur::end() {
     shutdown(sock, 2);
     closesocket(sock);
     Logs::write("Close socket",LOG_LEVEL_INFO);

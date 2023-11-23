@@ -18,7 +18,7 @@ public:
     static Client slots[MAX_CLIENTS];
 
     static int init();
-    static void close();
+    static void end();
 
     static void acceptLoop();
     static void processLoop();
