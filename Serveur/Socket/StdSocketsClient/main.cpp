@@ -1,5 +1,3 @@
-#include <iostream>
-
 #if defined (WIN32)
 #include <winsock2.h>
 typedef int socklen_t;
@@ -19,15 +17,8 @@ typedef int socklen_t;
     typedef struct sockaddr SOCKADDR;
 #endif
 
-#define DEV_MODE 1
-
-#if DEV_MODE==1
-#define IP "127.0.0.1"
-    #define PORT 9090
-#else
-#define IP "195.201.205.241"
-#define PORT 9090
-#endif
+#include <iostream>
+#include "configue.h"
 
 int main() {
     #if defined (WIN32)
@@ -44,38 +35,37 @@ int main() {
     sockAddrInter.sin_family = AF_INET;
     sockAddrInter.sin_port = htons(PORT);
 
-    if(connect(sockServ, (SOCKADDR*)&sockAddrInter, sizeof (sockAddrInter))!= SOCKET_ERROR) {
-        printf("Connexion à %s sur le port %d\n", inet_ntoa(sockAddrInter.sin_addr), htons(sockAddrInter.sin_port));
-        size_t size=sizeof(size_t);
-        char buffer[size];
-        if(recv(sockServ, buffer, (int)size, 0) != SOCKET_ERROR) {
-            printf("Recu taille\n");
-            size_t msgSize = *(size_t*)buffer;
-            char msg[msgSize];
-            if(recv(sockServ, msg, (int)msgSize, 0) != SOCKET_ERROR) {
-                printf("Recu message\n");
-                printf("Message recu : %s\n", msg);
-                shutdown(sockServ, 2);
-            }
-            else {
-                printf("Erreur de reception message\n");
-            }
-        }
-        else {
-            printf("Erreur de reception taille\n");
-        }
-    } else {
+    if(connect(sockServ, (SOCKADDR*)&sockAddrInter, sizeof (sockAddrInter))== SOCKET_ERROR) {
         printf("Impossible de se connecter\n");
+        return EXIT_FAILURE;
     }
+    printf("Connecté a %s:%d\n", inet_ntoa(sockAddrInter.sin_addr), htons(sockAddrInter.sin_port));
 
+    char typeDate= 1;
+    int result=send(sockServ, (char *)&typeDate, sizeof(typeDate), 0);
+    if(result==SOCKET_ERROR) {
+        printf("Impossible d'envoyer le type de donnée\n");
+        return EXIT_FAILURE;
+    }
+    printf("Type de donnée envoyé\n");
 
-    /* On ferme la socket précédemment ouverte */
-    //closesocket(sockServ);
+    char typeDateReceive;
+    result=recv(sockServ, &typeDateReceive, sizeof(typeDate),0);
+    if(result==SOCKET_ERROR) {
+        printf("Impossible de recevoir le type de donnée\n");
+        return EXIT_FAILURE;
+    }
+    printf("Type de donnée reçu\n");
 
+    if(typeDateReceive!=typeDate) {
+        printf("Type de donnée reçu différent de celui envoyé\n");
+        return EXIT_FAILURE;
+    }
+    printf("Type de donnée reçu identique à celui envoyé\n");
 
-    #if defined (WIN32)
-        WSACleanup();
-    #endif
-
+    Sleep(500);
+#if defined (WIN32)
+    WSACleanup();
+#endif
     return 0;
 }

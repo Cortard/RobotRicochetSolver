@@ -1,26 +1,28 @@
 #include "Client.h"
 
-Client::Client() : sock(INVALID_SOCKET), state(STATE_DISCONNECTED)
+Client::Client() : state(STATE_DISCONNECTED), socket(INVALID_SOCKET), output(nullptr)
 {
 }
 
-Client::Client(SOCKET sock, int id) : sock(sock), state(STATE_CONNECTED)
+void Client::connect(SOCKET socket)
 {
+    state=STATE_NEW_CONNECTED;
+    this->socket=socket;
+    output= nullptr;
 }
 
-SOCKET Client::getSock() const {
-    return this->sock;
+void Client::disconnect()
+{
+    if(output!= nullptr) throw std::logic_error("Client output should be null to disconnect client");
+    state=STATE_DISCONNECTED;
+    closesocket(socket);
+    this->socket=INVALID_SOCKET;
 }
 
-int Client::getState() const {
-    return this->state;
+Client::~Client()  {
+    std::unique_lock<std::mutex> lock(mutex);
+    closesocket(socket);
 }
 
-void Client::setState(int newState) {
-    this->state=newState;
-}
 
-void Client::close() const {
-    closesocket(this->sock);
-}
 

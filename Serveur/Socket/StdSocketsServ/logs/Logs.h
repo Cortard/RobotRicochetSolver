@@ -3,13 +3,8 @@
 
 #include <fstream>
 #include <ctime>
-#include "../devMode.h"
-
-#if DEV_MODE==1
-    #define LOG_PATH "./logs.txt"
-#else
-    #define LOG_PATH "/home/ricochet/logs.txt"
-#endif
+#include <mutex>
+#include "../configue.h"
 
 #define LOG_LEVEL_ERROR 0
 #define LOG_LEVEL_WARNING 1
@@ -22,6 +17,7 @@
 
 class Logs {
 private:
+    static std::mutex mutex;
     static std::ofstream file;
     static bool openLogs();
 

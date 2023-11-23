@@ -20,7 +20,45 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="" />
+    <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/configue.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StdSocketsServ/configue.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-a209b8da79b060508cb7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-6309762bc6471fd4f172.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-11-19T14-03-25-0980.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-StdSocketsClient-Debug-bf45109bb102f5d134e1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/StdSocketsClient.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/StdSocketsClient.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/StdSocketsClient.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/StdSocketsClient.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/clients/Client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/clients/Client.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/clients/Client.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/clients/Client.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-cdb9791dc08f389a8742.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/index-2023-11-19T15-07-40-0441.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/target-StdSockets-Debug-802fca8b221811dc9c60.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/clients/Client.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/clients/Client.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/StdSockets.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/StdSockets.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/logs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/devMode.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/logs/Logs.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/logs/Logs.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/logs/Logs.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/logs/Logs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,25 +84,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "serveur",
-    "last_opened_file_path": "C:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;serveur&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="StdSocketsClient" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="StdSocketsClient" TARGET_NAME="StdSocketsClient" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="StdSocketsClient" RUN_TARGET_NAME="StdSocketsClient">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -86,6 +129,8 @@
       <workItem from="1700402603431" duration="2072000" />
       <workItem from="1700472115918" duration="30000" />
       <workItem from="1700475328891" duration="609000" />
+      <workItem from="1700656775536" duration="6383000" />
+      <workItem from="1700725613795" duration="4139000" />
     </task>
     <servers />
   </component>

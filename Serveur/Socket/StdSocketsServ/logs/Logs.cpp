@@ -1,5 +1,6 @@
 #include "Logs.h"
 
+std::mutex Logs::mutex;
 std::ofstream Logs::file;
 
 bool Logs::openLogs()
@@ -10,7 +11,8 @@ bool Logs::openLogs()
 
 bool Logs::write(const std::string &msg, int level)
 {
-    if(!Logs::file.is_open()) return openLogs();
+    std::unique_lock<std::mutex> lock(mutex);
+    if(!Logs::file.is_open() && ! openLogs()) return false ;
 
     time_t now = time(nullptr);
     std::string dt = ctime(&now);
@@ -19,12 +21,14 @@ bool Logs::write(const std::string &msg, int level)
     Logs::file<<msg;
     Logs::file<<" |"<<level;
     Logs::file<<std::endl;
+    lock.unlock();
 
     return true;
 }
 
 void Logs::close()
 {
+    std::unique_lock<std::mutex> lock(mutex);
     Logs::file.close();
 }
 

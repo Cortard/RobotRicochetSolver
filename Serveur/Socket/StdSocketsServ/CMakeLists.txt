@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.25)
 project(StdSocketsServer)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -10,8 +10,10 @@ ENDIF()
 add_executable(StdSockets main.cpp
         logs/Logs.cpp
         logs/Logs.h
-        devMode.h
         clients/Client.cpp
         clients/Client.h
+        configue.h
+        Serveur.cpp
+        Serveur.h
 )
 
