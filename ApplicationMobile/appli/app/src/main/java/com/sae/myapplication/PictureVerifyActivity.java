@@ -43,7 +43,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         Button bVld = findViewById(R.id.btnValide);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
-        ImageView box = findViewById(R.id.footerbox1);
+        ImageView box = findViewById(R.id.footerbox);
         ImageView box2 = findViewById(R.id.footerbox2);
 
         image_uri = getIntent().getData();
@@ -52,11 +52,11 @@ public class PictureVerifyActivity extends AppCompatActivity {
         }
 
         bHelp.setOnClickListener(v -> {
-            box.setBackgroundColor(Color.parseColor("#4288BF"));
+            box.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box.setBackgroundColor(Color.parseColor("#1C5F93"));
+                    box.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             Intent intent = new Intent(this, HelpActivity.class);
@@ -64,11 +64,11 @@ public class PictureVerifyActivity extends AppCompatActivity {
         });
 
         bReturn.setOnClickListener(v -> {
-            box2.setBackgroundColor(Color.parseColor("#4288BF"));
+            box2.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box2.setBackgroundColor(Color.parseColor("#1C5F93"));
+                    box2.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             finish();

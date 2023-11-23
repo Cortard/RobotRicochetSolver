@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D5F6EF"
+    android:background="#A9DFF4"
     tools:context=".MainActivity">
 
 
@@ -12,8 +12,7 @@
         android:id="@+id/header2"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="#347FBA"
-        android:backgroundTint="#347FBA"
+        android:background="#6085A6"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintDimensionRatio="1:0"
@@ -28,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:accessibilityHeading="false"
-        android:background="#347FBA"
+        android:background="#6085A6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:0"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +40,7 @@
         android:id="@+id/footerbox"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#1C5F93"
+        android:background="#506F8A"
         android:outlineAmbientShadowColor="@color/black"
         android:outlineSpotShadowColor="#191616"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,58 +67,21 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/_11758_help_icon" />
 
-    <TextView
-        android:id="@+id/ricochet_robot"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="24sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/poppins_regular"
-        android:gravity="center"
-        android:padding="10sp"
-        android:text="@string/titreMain"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/header2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/header2"
-        app:layout_constraintTop_toTopOf="@+id/header2" />
-
     <ImageView
         android:id="@+id/footerbox2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#1C5F93"
-        android:backgroundTint="#1C5F93"
+        android:background="#506F8A"
         android:outlineAmbientShadowColor="@color/black"
         android:outlineSpotShadowColor="#191616"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/footer"
         app:layout_constraintTop_toTopOf="@+id/footer"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
-        android:id="@+id/surfaceView5"
-        android:layout_width="340dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="50dp"
-        android:background="#C8DEEF"
-        android:backgroundTint="#C8DEEF"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/boutonExit"
@@ -134,6 +96,42 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/footerbox2"
         app:layout_constraintTop_toTopOf="@+id/footerbox2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/ricochet_robot"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="24sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:padding="10sp"
+        android:text="@string/titreMain"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/header2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/header2"
+        app:layout_constraintTop_toTopOf="@+id/header2" />
+
+    <ImageView
+        android:id="@+id/surfaceView5"
+        android:layout_width="340dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="50dp"
+        android:background="#86BFE3"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header2"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -178,7 +176,7 @@
         style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#B3E5FC"
+        android:backgroundTint="#7FA9CF"
         android:fontFamily="@font/poppins_regular"
         android:shadowColor="#292626"
         android:text="@string/boutonTest"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D5F6EF"
+    android:background="#A9DFF4"
     tools:context=".PictureVerifyActivity">
 
 
@@ -16,7 +16,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="120dp"
-        android:background="#C8DEEF"
+        android:background="#86BFE3"
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,72 +27,48 @@
         android:id="@+id/header2"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="#347FBA"
-        android:backgroundTint="#347FBA"
+        android:background="#6085A6"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintDimensionRatio="1:0"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/titrePhoto"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="24sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:padding="10sp"
-        android:text="@string/titrePhoto"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/header2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/header2"
-        app:layout_constraintTop_toTopOf="@+id/header2"
-        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/footer"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:accessibilityHeading="false"
-        android:background="#347FBA"
+        android:background="#4C647A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/footerbox1"
+        android:id="@+id/footerbox"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#1C5F93"
+        android:background="#506F8A"
         android:outlineAmbientShadowColor="@color/black"
         android:outlineSpotShadowColor="#191616"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/footer"
         app:layout_constraintTop_toTopOf="@+id/footer"
         app:layout_constraintVertical_bias="0.0" />
 
-
     <ImageButton
         android:id="@+id/boutonHelp"
-        style="@android:style/Widget.DeviceDefault.ImageButton"
+        style="@android:style/Widget.ImageButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="#00FFFFFF"
@@ -110,7 +86,7 @@
         android:id="@+id/footerbox2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#1C5F93"
+        android:background="#506F8A"
         android:outlineAmbientShadowColor="@color/black"
         android:outlineSpotShadowColor="#191616"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -119,8 +95,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/footer"
         app:layout_constraintTop_toTopOf="@+id/footer"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/boutonReturn"
@@ -137,13 +112,36 @@
         app:layout_constraintTop_toTopOf="@+id/footer"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/titrePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="24sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:padding="10sp"
+        android:text="@string/titrePhoto"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/header2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/header2"
+        app:layout_constraintTop_toTopOf="@+id/header2"
+        app:layout_constraintVertical_bias="1.0" />
+
     <Button
         android:id="@+id/btnValide"
         style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
         android:layout_width="172dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="#B3E5FC"
+        android:backgroundTint="#7FA9CF"
         android:fontFamily="@font/poppins_regular"
         android:shadowColor="#292626"
         android:text="@string/valider"
@@ -163,7 +161,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="#B3E5FC"
+        android:backgroundTint="#7FA9CF"
         android:fontFamily="@font/poppins_regular"
         android:shadowColor="#292626"
         android:text="@string/recomencer"

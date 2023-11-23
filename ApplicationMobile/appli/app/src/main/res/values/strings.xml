@@ -12,6 +12,10 @@
 
     <!--Page Photo-->
     <string name="titrePhoto">Valider la photo</string>
+    <string name="textPic"><b>1</b> - Placez l\'objectif au centre du plateau
+                                \n<b>2</b> - Prennez en photo le plateau de manière à ce que l\'on voit la totalité du plateau
+                                \n<b>3</b> - Assurez vous que touts les pions et l\'objectif soit visible sur l\'image
+                                \n<b>4</b> - N\'oubliez pas le pion de déstination au centre du plateau</string>
 
     <!--Page Help-->
     <string name="titreHelp">Aide</string>
@@ -21,6 +25,9 @@
                                 \n<b>4</b> - Assurez vous que touts les pions et l\'objectif soit visible sur l\'image
                                 \n<b>5</b> - Si tout est bon vous pouvez envoyer la photo
                                 \n<b>6</b> - Et voilà votre reponse</string>
+
+
+
     <string name="recomencer">Recomencer</string>
     <string name="valider">Valider</string>
     <string name="imagefin">imagefin</string>

@@ -46,7 +46,7 @@ public class PictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
 
-        ImageView box = findViewById(R.id.footerbox1);
+        ImageView box = findViewById(R.id.footerbox);
         ImageView box2 = findViewById(R.id.footerbox2);
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
@@ -54,11 +54,11 @@ public class PictureActivity extends AppCompatActivity {
 
         bHelp.setOnClickListener(v -> {
 
-            box.setBackgroundColor(Color.parseColor("#4288BF"));
+            box.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box.setBackgroundColor(Color.parseColor("#1C5F93"));
+                    box.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
 
@@ -67,11 +67,11 @@ public class PictureActivity extends AppCompatActivity {
         });
 
         bReturn.setOnClickListener(v -> {
-            box2.setBackgroundColor(Color.parseColor("#4288BF"));
+            box2.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box2.setBackgroundColor(Color.parseColor("#1C5F93"));
+                    box2.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             finish();

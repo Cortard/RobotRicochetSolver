@@ -41,7 +41,7 @@ public class PictureAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture_answer);
 
         imageView = findViewById(R.id.imageRep);
-        ImageView box = findViewById(R.id.footerbox1);
+        ImageView box = findViewById(R.id.footerbox);
         ImageView box2 = findViewById(R.id.footerbox2);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
         ImageButton bReturn = findViewById(R.id.boutonReturn);
@@ -57,11 +57,11 @@ public class PictureAnswerActivity extends AppCompatActivity {
 
 
         bHelp.setOnClickListener(v -> {
-            box.setBackgroundColor(Color.parseColor("#4288BF"));
+            box.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box.setBackgroundColor(Color.parseColor("#1C5F93"));
+                    box.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             Intent intent = new Intent(this, HelpActivity.class);
@@ -69,11 +69,11 @@ public class PictureAnswerActivity extends AppCompatActivity {
         });
 
         bReturn.setOnClickListener(v -> {
-            box2.setBackgroundColor(Color.parseColor("#4288BF"));
+            box2.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box2.setBackgroundColor(Color.parseColor("#1C5F93"));
+                    box2.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             Intent intent = new Intent(this, PictureActivity.class);
