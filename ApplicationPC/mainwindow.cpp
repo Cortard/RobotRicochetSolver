@@ -1,0 +1,91 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QWidget>
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent),
+    ui(new Ui::MainWindow),
+    viewBoard(nullptr)
+{
+    ui->setupUi(this);
+
+    viewMenu = new viewMainMenu(ui->stackedWidget->widget(1)->findChild<QWidget*>("mainmenuwindow"));
+    viewPlato = new viewPlateau(ui->stackedWidget->widget(2)->findChild<QWidget*>("pageplateau"));
+    //    connect(ui->pushButtonJouer, SIGNAL(clicked()), viewMenu, SLOT(changerPage()));
+
+
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::on_pushButtonJouer_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->pagejouer);
+
+    if (!viewBoard) {
+        viewBoard = new ViewBoard();
+        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+    }
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+//void MainWindow::on_pushButton_6_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
+//}
+//void MainWindow::on_pushHistoire_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->pagehistoire);
+//}
+//void MainWindow::on_Retour_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->pagejouer);
+//}
+//void MainWindow::on_Home_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
+//}
+//void MainWindow::on_Retour_3_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->pagejouer);
+//}
+//void MainWindow::on_Home_2_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
+//}
+//void MainWindow::on_Retour_5_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->pagejouer);
+//}
+//void MainWindow::on_pushTrain_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->pagetrain);
+//}
+//void MainWindow::on_Home_3_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
+//}
+//void MainWindow::on_Retour_4_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->pagetrain);
+//}
+
+void MainWindow::on_pushObjective_clicked()
+{
+
+}
+
+void MainWindow::on_pushWall_clicked()
+{
+
+}
+
+void MainWindow::on_pushButton_21_clicked()
+{
+
+}
+

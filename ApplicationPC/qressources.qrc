@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/img">
+        <file alias="galaxy.png">galaxy.png</file>
+        <file>robot.webp</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>
