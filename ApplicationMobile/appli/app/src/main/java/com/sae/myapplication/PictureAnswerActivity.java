@@ -117,7 +117,7 @@ public class PictureAnswerActivity extends AppCompatActivity {
         Thread th = new Thread(new Runnable() {
             @Override
             public void run() {
-                String serverAddress = "195.201.205.241"; // Remplacez par l'adresse IP de votre serveur
+                String serverAddress = MainActivity.ip; // Remplacez par l'adresse IP de votre serveur
                 int serverPort = 9090; // Remplacez par le port de votre serveur
 
                 try {
@@ -146,17 +146,13 @@ public class PictureAnswerActivity extends AppCompatActivity {
     private void getImageFromServer(){
         // Établir une connexion socket avec le serveur
         try {
-            Socket socket = new Socket(getString(R.string.IP), 8080);
-
-            // Envoyer une demande au serveur pour récupérer l'image
-            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-            dos.writeUTF("demande_image"); // Remplacez "demande_image" par la demande réelle
+            Socket socket = new Socket(MainActivity.ip, 9090);
 
             // Recevoir les données de l'image depuis le serveur via la connexion socket
             DataInputStream dis = new DataInputStream(socket.getInputStream());
 
             // Stocker les données de l'image dans un fichier localement
-            File imageFile = new File(getFilesDir(), "image.jpg");
+            File imageFile = new File(getFilesDir(), "correction.jpg");
             FileOutputStream fos = new FileOutputStream(imageFile);
             byte[] buffer = new byte[1024];
             int bytesRead;

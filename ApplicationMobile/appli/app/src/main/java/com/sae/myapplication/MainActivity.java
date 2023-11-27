@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String ip = "1.1.1.1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             String ipAddress = ipEditText.getText().toString();
 
             if (isValidIpAddress(ipAddress)) {
+                ip = ipAddress;
                 Intent intent = new Intent(this, PictureActivity.class);
                 startActivity(intent);
             } else {

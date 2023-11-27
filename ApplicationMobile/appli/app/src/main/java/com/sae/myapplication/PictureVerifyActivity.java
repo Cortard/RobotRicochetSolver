@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -82,53 +84,11 @@ public class PictureVerifyActivity extends AppCompatActivity {
         });
 
         bVld.setOnClickListener(v -> {
-            System.out.println("Valide");
-            System.out.println("sendimg");
-            //sendImage(getString(R.string.IP), 9090, new File(image_uri.getPath()));
+            sendImage(MainActivity.ip, 9090, new File(image_uri.getPath()));
             Intent intent = new Intent(this, PictureAnswerActivity.class);
             startActivity(intent);
         });
 
-    }
-
-    private File compressImage(Uri imageUri) throws IOException {
-        // Transformez l'URI en Bitmap
-        Bitmap bitmap = null;
-
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Comprimez le Bitmap en fichier JPG
-        if (bitmap != null) {
-            File compressedFile = compressBitmapToJpg(bitmap);
-
-            // Nettoyez la mémoire
-            bitmap.recycle();
-
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ObjectOutputStream oss = new ObjectOutputStream(bos);
-            oss.writeObject(compressedFile);
-            System.out.println(oss);
-            System.out.println("test");
-            return compressedFile;
-        }
-        return null;
-    }
-
-    private File compressBitmapToJpg(Bitmap bitmap) {
-        File compressedFile = null;
-        try {
-            FileOutputStream outputStream = new FileOutputStream(new File(getCacheDir(), "tempBMP"));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return compressedFile;
     }
 
     public static void sendImage(String serverIp, int serverPort, File imageFile) {
@@ -140,21 +100,50 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 BufferedOutputStream bufferedOutputStream = null;
 
                 try {
+                    // Obtention des dimensions de l'image
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = true;
+                    BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+                    int width = options.outWidth;
+                    int height = options.outHeight;
+
                     socket = new Socket(serverIp, serverPort);
                     fileInputStream = new FileInputStream(imageFile);
                     bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
                     DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
 
-                    // Envoie la taille du fichier au serveur
-                    dataOutputStream.writeLong(imageFile.length());
+                    // Envoie du FLAG au serveur : 1
+                    dataOutputStream.writeChar('1');
+                    dataOutputStream.flush();
 
-                    // Envoie le contenu du fichier
-                    byte[] buffer = new byte[4096];
-                    int bytesRead;
-                    while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-                        bufferedOutputStream.write(buffer, 0, bytesRead);
+                    // Attente de la réponse du serveur
+                    DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                    char response = dataInputStream.readChar();
+
+                    if (response == '1') {
+                        // Envoie des dimensions de l'image au serveur
+                        dataOutputStream.writeInt(width);
+                        dataOutputStream.writeInt(height);
+
+                        long responseSize = dataInputStream.readLong();
+
+                        if (responseSize == width*height) {
+                            byte[] buffer = new byte[4096];
+                            int bytesRead;
+                            while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+                                bufferedOutputStream.write(buffer, 0, bytesRead);
+                            }
+                            bufferedOutputStream.flush();
+
+                            // Attente de la confirmation de la réception
+                            int responseConfirm = dataInputStream.readInt();
+                            Log.d("finish", String.valueOf(responseConfirm));
+                        } else {
+                            Log.d("denied","Pas de reponse server : confirm_size ");
+                        }
+                    } else {
+                        Log.d("denied","Pas de reponse server : 1");
                     }
-                    bufferedOutputStream.flush();
 
                     // Ferme les flux
                     fileInputStream.close();
@@ -162,20 +151,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     socket.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
-                    try {
-                        if (fileInputStream != null) {
-                            fileInputStream.close();
-                        }
-                        if (bufferedOutputStream != null) {
-                            bufferedOutputStream.close();
-                        }
-                        if (socket != null) {
-                            socket.close();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
         });
