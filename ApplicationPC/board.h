@@ -2,6 +2,7 @@
 #define BOARD_H
 
 #include <map>
+#include <QPointF>
 
 class Board {
 public:
@@ -12,6 +13,7 @@ public:
 
     static int getBoardSize();
     int getIndex(int x, int y) const;
+    void moveShape(QPointF);
 
 
 private:

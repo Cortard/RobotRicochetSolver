@@ -2,6 +2,8 @@
     <qresource prefix="/img">
         <file alias="galaxy.png">galaxy.png</file>
         <file>robot.webp</file>
+        <file>tennis.png</file>
+        <file>balle.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     board.cpp \
+    controller.cpp \
     main.cpp \
     mainwindow.cpp \
     viewboard.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     board.h \
+    controller.h \
     mainwindow.h \
     observer.h \
     viewboard.h \

@@ -37,3 +37,9 @@ int Board::getBoardSize() {
     return BOARD_SIZE;
 }
 
+void ShapeManager::moveShape(QPointF pos)
+{
+    if (selected == nullptr) return;
+
+    selected->pos = pos;
+}

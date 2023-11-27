@@ -11,9 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     viewMenu = new viewMainMenu(ui->stackedWidget->widget(1)->findChild<QWidget*>("mainmenuwindow"));
     viewPlato = new viewPlateau(ui->stackedWidget->widget(2)->findChild<QWidget*>("pageplateau"));
-    //    connect(ui->pushButtonJouer, SIGNAL(clicked()), viewMenu, SLOT(changerPage()));
-
-
 }
 
 MainWindow::~MainWindow()
