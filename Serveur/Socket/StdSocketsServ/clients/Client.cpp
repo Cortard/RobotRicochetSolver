@@ -9,9 +9,9 @@ Client::Client() : slotNum(nextIdSlot++), state(STATE_DISCONNECTED), socket(INVA
 
 void Client::connect(SOCKET client)
 {
-    state=STATE_NEW_CONNECTED;
     this->socket=client;
     output= nullptr;
+    state=STATE_NEW_CONNECTED;
 }
 
 template void Client::clearOutput<char>();
@@ -26,14 +26,14 @@ void Client::clearOutput() {
 void Client::disconnect()
 {
     if(output!= nullptr) throw std::logic_error("Client output should be null to disconnect client");
-    state=STATE_DISCONNECTED;
     closesocket(socket);
     this->socket=INVALID_SOCKET;
+    state=STATE_DISCONNECTED;
 }
 
 Client::~Client()  {
-    std::unique_lock<std::mutex> lock(mutex);
-    closesocket(socket);
+    if(state!=STATE_DISCONNECTED)
+        closesocket(socket);
 }
 
 

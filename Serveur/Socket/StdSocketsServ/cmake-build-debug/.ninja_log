@@ -34,3 +34,13 @@
 3474	3783	7228894302178812	StdSockets.exe	5ab03b9ea0f58bd7
 3	1593	7228895222363773	CMakeFiles/StdSockets.dir/Serveur.cpp.obj	2985d78dc77b7e16
 1594	1699	7228895223386881	StdSockets.exe	5ab03b9ea0f58bd7
+24	992	7228955738717965	CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj	823a8fa6886d058a
+16	3137	7228955760170853	CMakeFiles/StdSockets.dir/clients/Client.cpp.obj	907faf26662a9f51
+31	3214	7228955760941349	CMakeFiles/StdSockets.dir/Serveur.cpp.obj	2985d78dc77b7e16
+8	3264	7228955761450719	CMakeFiles/StdSockets.dir/main.cpp.obj	23c67b666cec120a
+3264	3449	7228955763226610	StdSockets.exe	5ab03b9ea0f58bd7
+21	885	7228956131148992	CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj	823a8fa6886d058a
+14	3054	7228956152841262	CMakeFiles/StdSockets.dir/clients/Client.cpp.obj	907faf26662a9f51
+28	3108	7228956153376078	CMakeFiles/StdSockets.dir/Serveur.cpp.obj	2985d78dc77b7e16
+6	3231	7228956154608245	CMakeFiles/StdSockets.dir/main.cpp.obj	23c67b666cec120a
+3231	3461	7228956156830652	StdSockets.exe	5ab03b9ea0f58bd7

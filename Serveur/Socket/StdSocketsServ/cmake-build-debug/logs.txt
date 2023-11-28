@@ -1,16 +1,16 @@
-Tue Nov 28 16:45:23 2023: Start Server |2
-Tue Nov 28 16:45:23 2023: Initialisation socket |2
-Tue Nov 28 16:45:23 2023: Socket Done |3
-Tue Nov 28 16:45:23 2023: Bind Done for IP: 127.0.0.1 PORT : 9090 |3
-Tue Nov 28 16:45:23 2023: Listen Done |3
-Tue Nov 28 16:45:23 2023: Accept loop start |2
-Tue Nov 28 16:45:23 2023: Process loop start |2
-Tue Nov 28 16:45:26 2023: Client accepted IP127.0.0.1 PORT : 59828 |3
-Tue Nov 28 16:45:26 2023: Client added on slot 0 |4
-Tue Nov 28 16:45:26 2023: Receiving type from client on slot 0 |4
-Tue Nov 28 16:45:26 2023: Sending typeConfirm to client on slot 0 |4
-Tue Nov 28 16:45:26 2023: Slot 0 choose to send us a picture |4
-Tue Nov 28 16:45:26 2023: Sending pictureSizeConfirm to client on slot 0 |4
-Tue Nov 28 16:45:26 2023: Receiving picture from client on slot 0 |4
-Tue Nov 28 16:45:26 2023: Sending pictureConfirm to client on slot 0 |4
-Tue Nov 28 16:45:26 2023: Slot 0 is ready to process |4
+Tue Nov 28 18:26:56 2023: Start Server |2
+Tue Nov 28 18:26:56 2023: Initialisation socket |2
+Tue Nov 28 18:26:56 2023: Socket Done |3
+Tue Nov 28 18:26:56 2023: Bind Done for IP: 127.0.0.1 PORT : 9090 |3
+Tue Nov 28 18:26:56 2023: Listen Done |3
+Tue Nov 28 18:26:56 2023: Accept loop start |2
+Tue Nov 28 18:26:56 2023: Process loop start |2
+Tue Nov 28 18:27:29 2023: Client accepted IP127.0.0.1 PORT : 60333 |3
+Tue Nov 28 18:27:29 2023: Client added on slot 0 |4
+Tue Nov 28 18:27:29 2023: Receiving type from client on slot 0 |4
+Tue Nov 28 18:27:29 2023: Sending typeConfirm to client on slot 0 |4
+Tue Nov 28 18:27:29 2023: Slot 0 choose to send us a picture |4
+Tue Nov 28 18:27:29 2023: Sending pictureSizeConfirm to client on slot 0 |4
+Tue Nov 28 18:27:29 2023: Receiving picture from client on slot 0 |4
+Tue Nov 28 18:27:29 2023: Sending pictureConfirm to client on slot 0 |4
+Tue Nov 28 18:27:29 2023: Slot 0 is ready to process |4

@@ -60,7 +60,6 @@ class Client {
 private:
     static int nextIdSlot;
 public:
-    std::mutex mutex;
     int slotNum;
     int state;
     SOCKET socket;
