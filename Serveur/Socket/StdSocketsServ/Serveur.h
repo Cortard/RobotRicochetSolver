@@ -7,13 +7,6 @@
 
 
 class Serveur {
-private:
-    static SOCKET sock;
-    static SOCKADDR_IN addressInternet;
-
-    static int foundEmptySlot();
-    static void getTypeDataClient(Client* slot);
-    static void confirmTypeDataClient(Client* slot);
 public:
     static Client slots[MAX_CLIENTS];
 
@@ -22,6 +15,22 @@ public:
 
     static void acceptLoop();
     static void processLoop();
+private:
+    static SOCKET sock;
+    static SOCKADDR_IN addressInternet;
+
+    static int foundEmptySlot();
+
+    template <typename T>
+    static int verifySocketOutput(Client* slot, bool send, int result);
+
+    static void getClientDataType(Client* slot);
+    static void confirmClientDataType(Client* slot);
+
+    static void getClientPictureSize(Client* slot);
+    static void confirmClientPictureSize(Client* slot);
+    static void getClientPicture(Client* slot);
+    static void confirmClientPicture(Client* slot);
 };
 
 

@@ -4,6 +4,9 @@ SOCKET Serveur::sock;
 SOCKADDR_IN Serveur::addressInternet;
 Client Serveur::slots[MAX_CLIENTS];
 
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                                       init                                                                      //
+//---------------------------------------------------------------------------------------------------------------------------------//
 int Serveur::init() {
     Logs::write("Initialisation socket",LOG_LEVEL_INFO);
     sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -35,27 +38,18 @@ int Serveur::init() {
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                                       end                                                                       //
+//---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::end() {
     shutdown(sock, 2);
     closesocket(sock);
     Logs::write("Close socket",LOG_LEVEL_INFO);
 }
 
-#include <iostream>
-int Serveur::foundEmptySlot()
-{
-    int i=0;
-    std::unique_lock<std::mutex> lock(slots[i].mutex);
-    while(slots[i].state!=STATE_DISCONNECTED){
-        lock.unlock();
-        ++i;
-        if(i<MAX_CLIENTS)  lock = std::unique_lock<std::mutex>(slots[i].mutex);
-        else break;
-    }
-    return i;
-}
-
-#include <iostream>
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                                 acceptLoop                                                                      //
+//---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::acceptLoop() {
     Logs::write("Accept loop start",LOG_LEVEL_INFO);
 
@@ -80,50 +74,9 @@ void Serveur::acceptLoop() {
     }
 }
 
-void Serveur::getTypeDataClient(Client* slot){
-    slot->output=new char[1];
-    int result = recv(slot->socket, (char*)slot->output, sizeof(char), MSG_WAITALL);
-    switch (result) {
-        case SOCKET_ERROR:
-            Logs::write("Error recv", LOG_LEVEL_ERROR);
-            delete (char*)slot->output;
-            slot->output= nullptr;
-            slot->disconnect();
-            return;
-        case 0:
-            Logs::write("Client disconnected", LOG_LEVEL_VERBOSE);
-            delete (char*)slot->output;
-            slot->output= nullptr;
-            slot->disconnect();
-            return;
-    }
-
-    std::unique_lock<std::mutex> lock(slot->mutex);
-    slot->state=STATE_RECEIVED_TYPE_DATE;
-    lock.unlock();
-}
-
-void Serveur::confirmTypeDataClient(Client *slot) {
-    int result = send(slot->socket, (char*)slot->output, sizeof(char), 0);
-    switch (result) {
-        case SOCKET_ERROR:
-            Logs::write("Error send", LOG_LEVEL_ERROR);
-            delete (char*)slot->output;
-            slot->output= nullptr;
-            slot->disconnect();
-            return;
-        case 0:
-            Logs::write("Client disconnected", LOG_LEVEL_VERBOSE);
-            delete (char*)slot->output;
-            slot->output= nullptr;
-            slot->disconnect();
-            return;
-    }
-    std::unique_lock<std::mutex> lock(slot->mutex);
-    slot->state=STATE_SENT_TYPE_DATA_CONFIRMATION;
-    lock.unlock();
-}
-
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                                 processLoop                                                                     //
+//---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::processLoop(){
     Logs::write("Process loop start",LOG_LEVEL_INFO);
     while (true) {
@@ -139,18 +92,53 @@ void Serveur::processLoop(){
                 case STATE_NEW_CONNECTED:
                     Logs::write("Receiving type from client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
                     slot.state = STATE_RECEIVING_TYPE_DATA;
-                    std::thread(Serveur::getTypeDataClient, &slot).detach();
+                    std::thread(Serveur::getClientDataType, &slot).detach();
                     break;
                 case STATE_RECEIVED_TYPE_DATE:
                     Logs::write("Sending typeConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
                     slot.state = STATE_SENDING_TYPE_DATA_CONFIRMATION;
-                    std::thread(Serveur::confirmTypeDataClient, &slot).detach();
+                    std::thread(Serveur::confirmClientDataType, &slot).detach();
                     break;
                 case STATE_SENT_TYPE_DATA_CONFIRMATION:
+                    if(((char*)slot.output)[0]==0){
+                        slot.clearOutput<char>();
+                        Logs::write("Slot " + std::to_string(i) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
+                        slot.state = STATE_RECEIVING_PICTURE_SIZE;
+                        std::thread(Serveur::getClientPictureSize, &slot).detach();
+                    } else {
+                        slot.clearOutput<char>();
+                        Logs::write("Slot " + std::to_string(i) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
+                        slot.state = STATE_RECEIVING_GRIP_TYPE;
+                        //TODO
+                    }
+                    break;
+
+                case STATE_RECEIVED_PICTURE_SIZE:
+                    Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
+                    slot.state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
+                    std::thread(Serveur::confirmClientPictureSize, &slot).detach();
+                    break;
+                case STATE_SENT_PICTURE_SIZE_CONFIRMATION:
+                    Logs::write("Receiving picture from client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
+                    slot.state = STATE_RECEIVING_PICTURE;
+                    std::thread(Serveur::getClientPicture, &slot).detach();
+                    break;
+                case STATE_RECEIVED_PICTURE:
+                    Logs::write("Sending pictureConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
+                    slot.state = STATE_SENDING_PICTURE_CONFIRMATION;
+                    std::thread(Serveur::confirmClientPicture, &slot).detach();
+                    break;
+                case STATE_SENT_TYPE_PICTURE_CONFIRMATION:
+                    slot.clearOutput<char>();
+                    Logs::write("Slot " + std::to_string(i) + " is ready to process",LOG_LEVEL_VERBOSE);
+                    slot.state = STATE_Process1;
+                    //TODO
+                    break;
+
+                case STATE_Process1:
                     Logs::write("Client process on slot " + std::to_string(i) + " is done",LOG_LEVEL_VERBOSE);
                     shutdown(slot.socket, 2);
                     std::unique_lock<std::mutex> lockEnd(slot.mutex);
-                    delete (char *)slot.output;
                     slot.output= nullptr;
                     slot.disconnect();
                     lockEnd.unlock();
@@ -158,4 +146,103 @@ void Serveur::processLoop(){
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                            acceptLoop tools                                                                     //
+//---------------------------------------------------------------------------------------------------------------------------------//
+int Serveur::foundEmptySlot()
+{
+    int i=0;
+    std::unique_lock<std::mutex> lock(slots[i].mutex);
+    while(slots[i].state!=STATE_DISCONNECTED){
+        lock.unlock();
+        ++i;
+        if(i<MAX_CLIENTS)  lock = std::unique_lock<std::mutex>(slots[i].mutex);
+        else break;
+    }
+    return i;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                           processLoop tools                                                                     //
+//---------------------------------------------------------------------------------------------------------------------------------//
+template <typename T>
+int Serveur::verifySocketOutput(Client *slot, bool send, int result) {
+    switch (result) {
+        case SOCKET_ERROR:
+            if(send) Logs::write("Error when send for slot "+std::to_string(slot->slotNum)+" on state "+std::to_string(slots[slot->slotNum].state), LOG_LEVEL_ERROR);
+            else Logs::write("Error when receive for slot "+std::to_string(slot->slotNum)+" on state "+std::to_string(slots[slot->slotNum].state), LOG_LEVEL_ERROR);
+            slot->clearOutput<T>();
+            slot->disconnect();
+            return EXIT_FAILURE;
+        case 0:
+            Logs::write("Client disconnected for slot "+std::to_string(slot->slotNum)+" on state "+std::to_string(slots[slot->slotNum].state), LOG_LEVEL_WARNING);
+            slot->clearOutput<T>();
+            slot->disconnect();
+            return EXIT_FAILURE;
+        default:
+            break;
+    }
+    return EXIT_SUCCESS;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                        reception type of Client input                                                           //
+//---------------------------------------------------------------------------------------------------------------------------------//
+void Serveur::getClientDataType(Client* slot){
+    slot->output=new char[1];
+    int result = recv(slot->socket, (char*)slot->output, sizeof(char), MSG_WAITALL);
+    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return;
+    std::unique_lock<std::mutex> lock(slot->mutex);
+    slot->state=STATE_RECEIVED_TYPE_DATE;
+    lock.unlock();
+}
+void Serveur::confirmClientDataType(Client *slot) {
+    int result = send(slot->socket, (char*)slot->output, sizeof(char), 0);
+    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return;
+    std::unique_lock<std::mutex> lock(slot->mutex);
+    slot->state=STATE_SENT_TYPE_DATA_CONFIRMATION;
+    lock.unlock();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                               reception picture                                                                 //
+//---------------------------------------------------------------------------------------------------------------------------------//
+void Serveur::getClientPictureSize(Client *slot) {
+    slot->output=new unsigned int[2];
+    int result = recv(slot->socket, (char*)slot->output, sizeof(unsigned int[2]), MSG_WAITALL);
+    if(verifySocketOutput<unsigned int>(slot,false,result)==EXIT_FAILURE) return;
+    std::unique_lock<std::mutex> lock(slot->mutex);
+    slot->state=STATE_RECEIVED_PICTURE_SIZE;
+    lock.unlock();
+}
+void Serveur::confirmClientPictureSize(Client *slot) {
+    auto* size=static_cast<unsigned int*>(slot->output);
+    long confirmSize=static_cast<long>(size[0])*static_cast<long>(size[1])*3;
+    int result = send(slot->socket, (char*)&confirmSize, sizeof(long), 0);
+    if(verifySocketOutput<unsigned int>(slot,false,result)==EXIT_FAILURE) return;
+    std::unique_lock<std::mutex> lock(slot->mutex);
+    slot->state=STATE_SENT_PICTURE_SIZE_CONFIRMATION;
+    lock.unlock();
+}
+void Serveur::getClientPicture(Client *slot) {
+    auto* size=static_cast<unsigned int*>(slot->output);
+    slot->output=new char[size[0]*size[1]*3];
+    int result = recv(slot->socket, (char*)slot->output, sizeof(char)*size[0]*size[1]*3, MSG_WAITALL);
+    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return;
+    //TODO put real picture object in slot->output
+    delete[] size;
+    std::unique_lock<std::mutex> lock(slot->mutex);
+    slot->state=STATE_RECEIVED_PICTURE;
+    lock.unlock();
+}
+void Serveur::confirmClientPicture(Client *slot) {
+    char confirm=0;
+    int result = send(slot->socket, (char*)&confirm, sizeof(char), 0);
+    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return;
+    //TODO change char for type of picture on the previous line
+    std::unique_lock<std::mutex> lock(slot->mutex);
+    slot->state=STATE_SENT_TYPE_PICTURE_CONFIRMATION;
+    lock.unlock();
 }

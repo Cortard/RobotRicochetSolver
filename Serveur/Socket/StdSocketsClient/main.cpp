@@ -41,7 +41,7 @@ int main() {
     }
     printf("Connecté a %s:%d\n", inet_ntoa(sockAddrInter.sin_addr), htons(sockAddrInter.sin_port));
 
-    char typeDate= 1;
+    char typeDate= 0;
     int result=send(sockServ, (char *)&typeDate, sizeof(typeDate), 0);
     if(result==SOCKET_ERROR) {
         printf("Impossible d'envoyer le type de donnée\n");
@@ -63,7 +63,53 @@ int main() {
     }
     printf("Type de donnée reçu identique à celui envoyé\n");
 
-    Sleep(500);
+    unsigned int pictureSize[2]= {10,10};
+    result=send(sockServ, (char *)&pictureSize, sizeof(pictureSize), 0);
+    if(result==SOCKET_ERROR) {
+        printf("Impossible d'envoyer la taille de l'image\n");
+        return EXIT_FAILURE;
+    }
+    printf("Taille de l'image envoyé\n");
+
+    unsigned long pictureSizeReceive;
+    result=recv(sockServ, (char *)(&pictureSizeReceive), sizeof(pictureSize), 0);
+    if(result==SOCKET_ERROR) {
+        printf("Impossible de recevoir la taille de l'image\n");
+        return EXIT_FAILURE;
+    }
+    printf("Taille de l'image reçu\n");
+
+    if(pictureSizeReceive!=pictureSize[0]*pictureSize[1]*3) {
+        printf("Taille de l'image reçu différent de celui envoyé\n");
+        return EXIT_FAILURE;
+    }
+    printf("Taille de l'image reçu identique à celui envoyé\n");
+
+    unsigned char picture[pictureSize[0]*pictureSize[1]*3];
+    for(int i=0;i<pictureSize[0]*pictureSize[1]*3;i++) {
+        picture[i]=i%255;
+    }
+    result=send(sockServ, (char *)&picture, sizeof(picture), 0);
+    if(result==SOCKET_ERROR) {
+        printf("Impossible d'envoyer l'image\n");
+        return EXIT_FAILURE;
+    }
+    printf("Image envoyé\n");
+
+    unsigned char confirm;
+    result=recv(sockServ, (char*)&confirm, sizeof(confirm),0);
+    if(result==SOCKET_ERROR) {
+        printf("Impossible de recevoir la confirmation de l'image\n");
+        return EXIT_FAILURE;
+    }
+    printf("Confirmation de l'image reçu\n");
+
+    if(confirm!=0) {
+        printf("Confirmation de l'image pas ok\n");
+        return EXIT_FAILURE;
+    }
+    printf("Confirmation de l'image ok\n");
+
 #if defined (WIN32)
     WSACleanup();
 #endif

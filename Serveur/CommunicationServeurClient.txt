@@ -2,32 +2,26 @@ Serveur				                                             Client
    |                             connect                                        |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |                       int : flag {1(PICTURE),2(GRID)}                      |
+   |                      char : flag {1(PICTURE),2(GRID)}                      |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |            int : confirm_flag {-1(DENIED),1(PICTURE),2(GRID),}             |
+   |           char : confirm_flag {-1(DENIED),1(PICTURE),2(GRID),}             |
    |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
 
 			        Cas 0(PICTURE) :
 Serveur				                                             Client
    |                                                                            |
-   |                          unsigned int : hauteur                            |
+   |                  unsigned int[2] : hauteur,largeur                         |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |                          unsigned int : largeur                            |
-   |<<<<<<<<<<<-----------------------------------------------------------------|
-   |                                                                            |
-   |                      unsigned char : dep {8, 16 24}                        |
-   |<<<<<<<<<<<-----------------------------------------------------------------|
-   |                                                                            |
-   |              unsigned long : confirm_size (largeur*hauteur*dep)            |
+   |                unsigned long : confirm_size (largeur*hauteur*3)              |
    |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
-   |            char[size] buffer : picture (size=largeur*hauteur*dep)          |
+   |             char[size] buffer : picture (size=largeur*hauteur*3)           |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |                   unsigned int : estimate_time (unit : sec)                |
+   |            unsigned char : confirmation reception {0(OK), 1(NO)            |
    |----------------------------------------------------------------->>>>>>>>>>>|
 
 			     	Cas 1(GRID) :
@@ -35,6 +29,9 @@ Serveur				                                       Client
    |                                                                            |
    |  unsigned char : type (0b0000 00[x][y] => [x+4=nbRobots][y=murDeTravers?]  |
    |<<<<<<<<<<<-----------------------------------------------------------------|
+   |                                                                            |
+   |  unsigned char : type (0b0000 00[x][y] => [x+4=nbRobots][y=murDeTravers?]  |
+   |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
    |                   unsigned int buffer[256+nbRobot+1]                       |
    |<<<<<<<<<<<-----------------------------------------------------------------|

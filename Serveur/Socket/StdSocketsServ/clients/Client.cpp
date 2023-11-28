@@ -1,13 +1,25 @@
 #include "Client.h"
 
-Client::Client() : state(STATE_DISCONNECTED), socket(INVALID_SOCKET), output(nullptr)
+int Client::nextIdSlot=0;
+
+Client::Client() : slotNum(nextIdSlot++), state(STATE_DISCONNECTED), socket(INVALID_SOCKET), output(nullptr)
 {
 }
 
-void Client::connect(SOCKET socket)
+
+void Client::connect(SOCKET client)
 {
     state=STATE_NEW_CONNECTED;
-    this->socket=socket;
+    this->socket=client;
+    output= nullptr;
+}
+
+template void Client::clearOutput<char>();
+template void Client::clearOutput<unsigned int>();
+
+template <typename T>
+void Client::clearOutput() {
+    delete[] static_cast<T*>(output);
     output= nullptr;
 }
 
@@ -23,6 +35,7 @@ Client::~Client()  {
     std::unique_lock<std::mutex> lock(mutex);
     closesocket(socket);
 }
+
 
 
 
