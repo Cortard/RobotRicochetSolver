@@ -1,11 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QWidget>
+#include <iostream>
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
     ui(new Ui::MainWindow),
-    viewBoard(nullptr)
+    viewBoard(nullptr),
+    board(bd)
 {
     ui->setupUi(this);
 
@@ -23,7 +25,7 @@ void MainWindow::on_pushButtonJouer_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pagejouer);
 
     if (!viewBoard) {
-        viewBoard = new ViewBoard();
+        viewBoard = new ViewBoard(board);
         ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
         viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
     }
@@ -73,7 +75,13 @@ void MainWindow::on_pushButtonJouer_clicked()
 
 void MainWindow::on_pushObjective_clicked()
 {
+//    for(int i=0;i<16;i++){
+//        if(board->objectives.at(i)!=-1){
+//            ControllerAddObj(board).control(i,135);
+//        }
+//    }
 
+    ControllerAddObj(board).control();
 }
 
 void MainWindow::on_pushWall_clicked()

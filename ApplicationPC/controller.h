@@ -1,11 +1,28 @@
 #pragma once
 #include <QPointF>
 #include "board.h"
+#include <QGraphicsItem>
 
-class ControllerMoveShape
+class ControllerAddObj
 {
     Board* board;
 public:
-    ControllerMoveShape(Board* = nullptr);
-    void control(const QVector<QGraphicsItem *> &);
+    ControllerAddObj(Board* = nullptr);
+    void control();
+};
+
+class ControllerMoveObj
+{
+    Board* board;
+public:
+    ControllerMoveObj(Board* = nullptr);
+    void control(int id, int pos);
+};
+
+class ControllerAddWall
+{
+    Board* board;
+public:
+    ControllerAddWall(Board* = nullptr);
+    void control();
 };

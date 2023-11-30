@@ -1,9 +1,13 @@
 #include "board.h"
 #include <iostream>
+#include "observer.h"
 
 Board::Board() {
     for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; ++i) {
         cases[i] = 0;
+    }
+    for(int i=0;i<17;i++){
+        this->objectives.insert(std::pair<int,int>(i,-1));
     }
 }
 
@@ -11,35 +15,23 @@ int Board::getIndex(int x, int y) const {
     return x + y * BOARD_SIZE;
 }
 
-void Board::addWall(int x, int y, char dir) {
-    if (dir == 'N') {
-        y += 1;
-    }
-
-    if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
-        int index = getIndex(x, y);
-        cases[index] = 1;
-    } else {
-        std::cerr << "Erreur : Coordonnées hors limites.\n";
-    }
+void Board::addObjective(int id, int pos)
+{
+    this->objectives.at(id)=pos;
+    notifyObserver();
 }
 
-void Board::addObjective(int x, int y, int id) {
-    if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
-        int index = getIndex(x, y);
-        objectives[id] = index;
-    } else {
-        std::cerr << "Erreur : Coordonnées hors limites.\n";
-    }
+
+void Board::addWall(int x, int y, char dir) {
 }
 
 int Board::getBoardSize() {
     return BOARD_SIZE;
 }
 
-void ShapeManager::moveShape(QPointF pos)
+void Board::moveObject(int id, int pos)
 {
-    if (selected == nullptr) return;
-
-    selected->pos = pos;
+    this->objectives.at(id)=pos;
+    notifyObserver();
 }
+

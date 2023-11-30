@@ -3,8 +3,22 @@
 #include <QGraphicsSceneMouseEvent>
 #include <iostream>
 
-ViewBoard::ViewBoard() : QGraphicsScene()
+ViewBoard::ViewBoard(Board* board) : QGraphicsScene(), Observer()
 {
+
+    this->board=board;
+    board->addObserver(this);
+//    (new ControllerAddObj(board))->control(0,0);
+//    std::cout<< "avant call" <<std::endl;
+//    addImageToCell(board->objectives.at(0), ":/img/balle.png", 0);
+    updateModel();
+    update();
+}
+
+void ViewBoard::updateModel()
+{
+    clear();
+
     const int cellSize = 25;
     const int rowCount = 16;
     const int colCount = 16;
@@ -42,44 +56,50 @@ ViewBoard::ViewBoard() : QGraphicsScene()
             topLine->setAcceptHoverEvents(true);
             addItem(rightLine);
 
+            if(temp==0){
+                lines.push_back(topLine);
+                lines.push_back(leftLine);
+                lines.push_back(bottomLine);
+                lines.push_back(rightLine);
 
-            lines.push_back(topLine);
-            lines.push_back(leftLine);
-            lines.push_back(bottomLine);
-            lines.push_back(rightLine);
+                int cellIndex = col + row * colCount;
+                cellMap[cellIndex] = topLine;
+                cellMap[cellIndex + 256] = leftLine;
+                cellMap[cellIndex + 512] = bottomLine;
+                cellMap[cellIndex + 768] = rightLine;
 
-            int cellIndex = col + row * colCount;
-            cellMap[cellIndex] = topLine;
-            cellMap[cellIndex + 256] = leftLine;
-            cellMap[cellIndex + 512] = bottomLine;
-            cellMap[cellIndex + 768] = rightLine;
-
-            cellImageMap[cellIndex] = false;
+                cellImageMap[cellIndex] = false;
+                temp++;
+            }
         }
     }
 
-    addImageToCell(2, ":/img/balle.png");
+    for(int i=0;i<16;i++){
+        if(board->objectives.at(i)!=-1){
+            addImageToCell(board->objectives.at(i), ":/img/balle.png", i);
+        }
+    }
+
     update();
 }
 
-void ViewBoard::addImageToCell(int targetCell, const QString& imagePath)
+void ViewBoard::addImageToCell(int targetCell, const QString& imagePath, int id)
 {
-    auto it = cellImageMap.find(targetCell);
-    if (it != cellImageMap.end() && !it->second) {
-        QPixmap pixmap(imagePath);
-        QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(pixmap);
-        pixmapItem->setScale(25.0 / pixmap.width());
+    QPixmap pixmap(imagePath);
+    QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(pixmap);
+    pixmapItem->setScale(25.0 / pixmap.width());
 
-        int col = targetCell % 16;
-        int row = targetCell / 16;
+    int col = targetCell % 16;
+    int row = targetCell / 16;
 
-        pixmapItem->setPos(col * 25, row * 25);
-        pixmapItem->setFlag(QGraphicsItem::ItemIsMovable);
+    pixmapItem->setPos(col * 25, row * 25);
+    pixmapItem->setFlag(QGraphicsItem::ItemIsMovable);
 
-        addItem(pixmapItem);
+    pixmapItem->setData(0, id);
 
-        cellImageMap[targetCell] = true;
-    }
+    addItem(pixmapItem);
+
+    cellImageMap[targetCell] = true;
 }
 
 
@@ -88,20 +108,20 @@ void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton)
     {
         QPointF mousePos = mouseEvent->scenePos();
-        const qreal tolerance = 10.0;
-        for (QGraphicsLineItem* line : lines) {
-            QLineF lineGeometry = line->line();
-            if (QLineF(mousePos, lineGeometry.center()).length() < tolerance) {
-                QPen pen = line->pen();
-                if(pen.width()!=3){
-                    pen.setWidth(3);
-                }else{
-                    pen.setWidth(1);
-                }
-                line->setPen(pen);
-                break;
-            }
-        }
+//        const qreal tolerance = 10.0;
+//        for (QGraphicsLineItem* line : lines) {
+//            QLineF lineGeometry = line->line();
+//            if (QLineF(mousePos, lineGeometry.center()).length() < tolerance) {
+//                QPen pen = line->pen();
+//                if(pen.width()!=3){
+//                    pen.setWidth(3);
+//                }else{
+//                    pen.setWidth(1);
+//                }
+//                line->setPen(pen);
+//                break;
+//            }
+//        }
         QGraphicsItem* clickedItem = itemAt(mousePos, QTransform());
             if (clickedItem && clickedItem->type() == QGraphicsPixmapItem::Type) {
                 draggedPixmapItem = dynamic_cast<QGraphicsPixmapItem*>(clickedItem);
@@ -130,16 +150,9 @@ void ViewBoard::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
     QGraphicsScene::mouseReleaseEvent(mouseEvent);
 
     if (draggedPixmapItem) {
-            previousPos = mouseEvent->scenePos();
-            if ((mouseEvent->scenePos().x() < 25 * 7 || mouseEvent->scenePos().x() > 25 * 9) &&
-                (mouseEvent->scenePos().y() < 7 || mouseEvent->scenePos().y() > 9)) {
-                int newCellX = static_cast<int>(mouseEvent->scenePos().x());
-                int newCellY = static_cast<int>(mouseEvent->scenePos().y());
-                draggedPixmapItem->setPos(newCellX - (newCellX % 25), newCellY - (newCellY % 25));
-            }else{
-                draggedPixmapItem->setPos(initialPos.x()-12.5,initialPos.y()-12.5);
-            }
-
+            int id = draggedPixmapItem->data(0).toInt();
             draggedPixmapItem = nullptr;
+            int cellIndex = static_cast<int>(mouseEvent->scenePos().x() / 25) + static_cast<int>(mouseEvent->scenePos().y() / 25) * 16;
+            (new ControllerMoveObj(board))->control(id,cellIndex);
     }
 }

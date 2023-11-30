@@ -3,23 +3,27 @@
 
 #include <map>
 #include <QPointF>
+#include <observer.h>
 
-class Board {
+class Board : public Observable{
 public:
     Board();
 
-    void addWall(int x, int y, char dir);
-    void addObjective(int x, int y, int id);
-
     static int getBoardSize();
     int getIndex(int x, int y) const;
-    void moveShape(QPointF);
 
+    void moveObject(int id, int pos);
+
+    void addWall(int x, int y, char dir);
+    void addObjective(int id, int pos);
+
+    // premier int : id , deuxieme int : position du tableau
+    std::map<int, int> objectives;
 
 private:
     static const int BOARD_SIZE = 16;
     int cases[256];
-    std::map<int, int> objectives;
+
     std::map<int, int> robots;
 };
 

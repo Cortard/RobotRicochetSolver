@@ -5,25 +5,39 @@
 #include <iostream>
 #include <ctime>
 
-ControllerMoveShape::ControllerMoveShape(Board* sm) : board(sm)
+ControllerAddObj::ControllerAddObj(Board* bd) : board(bd)
 {}
 
-void ControllerMoveShape::control(const QVector<QGraphicsItem*>& items)
+void ControllerAddObj::control()
 {
     if (board == nullptr) return;
 
-    for (QGraphicsItem* item : items)
-    {
-        QVariant variant = item->data(0);
-        int id = variant.toInt();
-
-        bool selected = board->selectShape(id);
-        if (selected)
-        {
-            QRectF rect = item->boundingRect();
-            board->moveShape(item->scenePos() + rect.center());
+    for(int i=0;i<17;i++){
+        if(board->objectives.at(i)==-1){
+            board->addObjective(i, 135);
+            return ;
         }
     }
+}
 
-    board->notifyObserver();
+ControllerMoveObj::ControllerMoveObj(Board* bd) : board(bd)
+{}
+
+void ControllerMoveObj::control(int id, int pos)
+{
+    if (board == nullptr) return;
+
+    if(pos!=135 && pos!=136 && pos!=119 && pos!=120){
+        board->moveObject(id,pos);
+    }else{
+        board->notifyObserver();
+    }
+}
+
+ControllerAddWall::ControllerAddWall(Board* bd) : board(bd)
+{}
+
+void ControllerAddWall::control()
+{
+    if (board == nullptr) return;
 }
