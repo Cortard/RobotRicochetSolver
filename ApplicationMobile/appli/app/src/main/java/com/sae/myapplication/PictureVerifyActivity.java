@@ -84,7 +84,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
         });
 
         bVld.setOnClickListener(v -> {
-            sendImage(MainActivity.ip, 9090, new File(image_uri.getPath()));
+            //sendImage(MainActivity.ip, 9090, new File(image_uri.getPath()));
             Intent intent = new Intent(this, PictureAnswerActivity.class);
             startActivity(intent);
         });

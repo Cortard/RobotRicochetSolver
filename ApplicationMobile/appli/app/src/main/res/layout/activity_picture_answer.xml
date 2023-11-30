@@ -8,10 +8,31 @@
     tools:context=".PictureAnswerActivity">
 
 
+    <Button
+        android:id="@+id/btnCor"
+        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
+        android:layout_width="156dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#7FA9CF"
+        android:fontFamily="@font/poppins_regular"
+        android:shadowColor="#292626"
+        android:text="@string/correction"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header2"
+        app:layout_constraintVertical_bias="0.947" />
+
     <ImageView
         android:id="@+id/surfaceView"
-        android:layout_width="340dp"
-        android:layout_height="0dp"
+        android:layout_width="342dp"
+        android:layout_height="347dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
@@ -136,55 +157,38 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/btnSave"
-        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
-        android:layout_width="172dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#7FA9CF"
-        android:fontFamily="@font/poppins_regular"
-        android:shadowColor="#292626"
-        android:text="@string/save"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.769" />
-
-    <Button
         android:id="@+id/btnCancel"
         style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="156dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="#7FA9CF"
         android:fontFamily="@font/poppins_regular"
         android:shadowColor="#292626"
         android:text="@string/recomencer"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:typeface="normal"
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.901"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.971" />
+        app:layout_constraintVertical_bias="0.947" />
 
     <ImageView
         android:id="@+id/imageRep"
-        android:layout_width="270dp"
-        android:layout_height="273dp"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
         android:contentDescription="@string/imageRep"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/surfaceView"
         app:layout_constraintEnd_toEndOf="@+id/surfaceView"
         app:layout_constraintStart_toStartOf="@+id/surfaceView"
         app:layout_constraintTop_toTopOf="@+id/surfaceView"
-        app:layout_constraintVertical_bias="0.592" />
+        app:layout_constraintVertical_bias="0.518" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -197,17 +201,16 @@
         app:layout_constraintStart_toStartOf="@+id/surfaceView"
         app:layout_constraintTop_toTopOf="@+id/surfaceView" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="240dp"
-        android:layout_height="90dp"
-        android:maxLength="999999999"
-        android:text="TextView"
+
+    <com.sae.myapplication.MyCanvas
+        android:id="@+id/canva"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
         app:layout_constraintBottom_toBottomOf="@+id/surfaceView"
         app:layout_constraintEnd_toEndOf="@+id/surfaceView"
-        app:layout_constraintHorizontal_bias="0.65"
         app:layout_constraintStart_toStartOf="@+id/surfaceView"
-        app:layout_constraintTop_toTopOf="@+id/surfaceView"
-        app:layout_constraintVertical_bias="0.134" />
+        app:layout_constraintTop_toTopOf="@+id/surfaceView">
+
+    </com.sae.myapplication.MyCanvas>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
