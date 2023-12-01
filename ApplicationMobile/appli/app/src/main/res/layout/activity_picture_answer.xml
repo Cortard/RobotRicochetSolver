@@ -22,12 +22,11 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintBottom_toBottomOf="@+id/footer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.947" />
+        app:layout_constraintVertical_bias="0.966" />
 
     <ImageView
         android:id="@+id/surfaceView"
@@ -155,27 +154,6 @@
         app:layout_constraintStart_toStartOf="@+id/header2"
         app:layout_constraintTop_toTopOf="@+id/header2"
         app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/btnCancel"
-        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
-        android:layout_width="156dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#7FA9CF"
-        android:fontFamily="@font/poppins_regular"
-        android:shadowColor="#292626"
-        android:text="@string/recomencer"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.901"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.947" />
 
     <ImageView
         android:id="@+id/imageRep"
