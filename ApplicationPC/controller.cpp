@@ -27,7 +27,7 @@ void ControllerMoveObj::control(int id, int pos)
 {
     if (board == nullptr) return;
 
-    if(pos!=135 && pos!=136 && pos!=119 && pos!=120){
+    if(pos!=135 && pos!=136 && pos!=119 && pos!=120 && pos>0 && pos<256){
         board->moveObject(id,pos);
     }else{
         board->notifyObserver();
@@ -37,7 +37,9 @@ void ControllerMoveObj::control(int id, int pos)
 ControllerAddWall::ControllerAddWall(Board* bd) : board(bd)
 {}
 
-void ControllerAddWall::control()
+void ControllerAddWall::control(int x, int y, char dir)
 {
     if (board == nullptr) return;
+
+    board->addWall(x, y, dir);
 }

@@ -5,12 +5,9 @@
 
 ViewBoard::ViewBoard(Board* board) : QGraphicsScene(), Observer()
 {
-
     this->board=board;
     board->addObserver(this);
-//    (new ControllerAddObj(board))->control(0,0);
-//    std::cout<< "avant call" <<std::endl;
-//    addImageToCell(board->objectives.at(0), ":/img/balle.png", 0);
+    temp=0;
     updateModel();
     update();
 }
@@ -19,6 +16,19 @@ void ViewBoard::updateModel()
 {
     clear();
 
+    for(int i=0;i<16;i++){
+        if(board->objectives.at(i)!=-1){
+            drawObjectives(board->objectives.at(i), ":/img/balle.png", i);
+        }
+    }
+
+    setSceneRect(0, 0, 25*16, 25*16);
+    drawWall();
+    update();
+}
+
+void ViewBoard::drawWall()
+{
     const int cellSize = 25;
     const int rowCount = 16;
     const int colCount = 16;
@@ -34,26 +44,58 @@ void ViewBoard::updateModel()
 
             // Ligne horizontale supérieure
             QGraphicsLineItem *topLine = new QGraphicsLineItem(x, y, x + cellSize, y);
-            topLine->setPen(QPen(Qt::black, 1));
+            if(temp==1){
+                if (HAS_WALL(board->cases[col + row * colCount], NORTH) == 1){
+                    topLine->setPen(QPen(Qt::black, 3));
+                }else{
+                    topLine->setPen(QPen(Qt::black, 1));
+                }
+            }else{
+                topLine->setPen(QPen(Qt::black, 1));
+            }
             topLine->setAcceptHoverEvents(true);
             addItem(topLine);
 
             // Ligne verticale gauche
             QGraphicsLineItem *leftLine = new QGraphicsLineItem(x, y, x, y + cellSize);
-            leftLine->setPen(QPen(Qt::black, 1));
-            topLine->setAcceptHoverEvents(true);
+            if(temp==1){
+                if (HAS_WALL(board->cases[col + row * colCount], WEST) == 8){
+                    leftLine->setPen(QPen(Qt::black, 3));
+                }else{
+                    leftLine->setPen(QPen(Qt::black, 1));
+                }
+            }else{
+                leftLine->setPen(QPen(Qt::black, 1));
+            }
+            leftLine->setAcceptHoverEvents(true);
             addItem(leftLine);
 
             // Ligne horizontale inférieure
             QGraphicsLineItem *bottomLine = new QGraphicsLineItem(x, y + cellSize, x + cellSize, y + cellSize);
-            bottomLine->setPen(QPen(Qt::black, 1));
-            topLine->setAcceptHoverEvents(true);
+            if(temp==1){
+                if (HAS_WALL(board->cases[col + row * colCount], SOUTH) == 4){
+                    bottomLine->setPen(QPen(Qt::black, 3));
+                }else{
+                    bottomLine->setPen(QPen(Qt::black, 1));
+                }
+            }else{
+                bottomLine->setPen(QPen(Qt::black, 1));
+            }
+            bottomLine->setAcceptHoverEvents(true);
             addItem(bottomLine);
 
             // Ligne verticale droite
             QGraphicsLineItem *rightLine = new QGraphicsLineItem(x + cellSize, y, x + cellSize, y + cellSize);
-            rightLine->setPen(QPen(Qt::black, 1));
-            topLine->setAcceptHoverEvents(true);
+            if(temp==1){
+                if (HAS_WALL(board->cases[col + row * colCount], EAST) == 2){
+                    rightLine->setPen(QPen(Qt::black, 3));
+                }else{
+                    rightLine->setPen(QPen(Qt::black, 1));
+                }
+            }else{
+                rightLine->setPen(QPen(Qt::black, 1));
+            }
+            rightLine->setAcceptHoverEvents(true);
             addItem(rightLine);
 
             if(temp==0){
@@ -63,27 +105,22 @@ void ViewBoard::updateModel()
                 lines.push_back(rightLine);
 
                 int cellIndex = col + row * colCount;
+
                 cellMap[cellIndex] = topLine;
                 cellMap[cellIndex + 256] = leftLine;
                 cellMap[cellIndex + 512] = bottomLine;
                 cellMap[cellIndex + 768] = rightLine;
 
                 cellImageMap[cellIndex] = false;
-                temp++;
             }
         }
     }
 
-    for(int i=0;i<16;i++){
-        if(board->objectives.at(i)!=-1){
-            addImageToCell(board->objectives.at(i), ":/img/balle.png", i);
-        }
-    }
-
-    update();
+    temp=1;
 }
 
-void ViewBoard::addImageToCell(int targetCell, const QString& imagePath, int id)
+
+void ViewBoard::drawObjectives(int targetCell, const QString& imagePath, int id)
 {
     QPixmap pixmap(imagePath);
     QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(pixmap);
@@ -108,20 +145,42 @@ void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton)
     {
         QPointF mousePos = mouseEvent->scenePos();
-//        const qreal tolerance = 10.0;
-//        for (QGraphicsLineItem* line : lines) {
-//            QLineF lineGeometry = line->line();
-//            if (QLineF(mousePos, lineGeometry.center()).length() < tolerance) {
-//                QPen pen = line->pen();
-//                if(pen.width()!=3){
-//                    pen.setWidth(3);
-//                }else{
-//                    pen.setWidth(1);
-//                }
-//                line->setPen(pen);
-//                break;
-//            }
-//        }
+
+        int col = static_cast<int>(mousePos.x() / 25);
+        int row = static_cast<int>(mousePos.y() / 25);
+
+        QPointF cellTopLeft(col * 25, row * 25);
+
+        qreal dxLeft = mousePos.x() - cellTopLeft.x();
+        qreal dxRight = (cellTopLeft.x() + 25) - mousePos.x();
+        qreal dyTop = mousePos.y() - cellTopLeft.y();
+        qreal dyBottom = (cellTopLeft.y() + 25) - mousePos.y();
+
+        qreal minDistance = std::min({dxLeft, dxRight, dyTop, dyBottom});
+
+        qreal threshold = 25.0 / 2.0;
+
+        if (minDistance < threshold)
+        {
+            if (minDistance == dxLeft && mousePos.x()>25)
+            {
+                (new ControllerAddWall(board))->control(mousePos.x(), mousePos.y(), 'W');
+            }
+            if (minDistance == dxRight && mousePos.x()<25*15)
+            {
+                (new ControllerAddWall(board))->control(mousePos.x(), mousePos.y(), 'E');
+            }
+            if (minDistance == dyTop && mousePos.y()>25)
+            {
+                (new ControllerAddWall(board))->control(mousePos.x(), mousePos.y(), 'N');
+            }
+            if (minDistance == dyBottom && mousePos.y()<25*15)
+            {
+                (new ControllerAddWall(board))->control(mousePos.x(), mousePos.y(), 'S');
+            }
+        }
+
+
         QGraphicsItem* clickedItem = itemAt(mousePos, QTransform());
             if (clickedItem && clickedItem->type() == QGraphicsPixmapItem::Type) {
                 draggedPixmapItem = dynamic_cast<QGraphicsPixmapItem*>(clickedItem);

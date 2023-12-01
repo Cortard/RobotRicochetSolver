@@ -24,5 +24,5 @@ class ControllerAddWall
     Board* board;
 public:
     ControllerAddWall(Board* = nullptr);
-    void control();
+    void control(int x, int y, char dir);
 };

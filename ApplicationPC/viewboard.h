@@ -26,7 +26,8 @@ private:
 public:
     ViewBoard(Board* = nullptr);
     void updateModel();
-    void addImageToCell(int targetCell, const QString& imagePath, int id);
+    void drawObjectives(int targetCell, const QString& imagePath, int id);
+    void drawWall();
 
 public slots:
     void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);

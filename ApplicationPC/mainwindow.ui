@@ -174,16 +174,16 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
-             <widget class="QPushButton" name="pushWall">
+             <widget class="QPushButton" name="pushRobot">
               <property name="text">
-               <string>Wall</string>
+               <string>Robots</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="pushObjective">
               <property name="text">
-               <string>Objective</string>
+               <string>Objectives</string>
               </property>
              </widget>
             </item>

@@ -1,6 +1,15 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#define NORTH 0x01
+#define EAST 0x02
+#define SOUTH 0x04
+#define WEST 0x08
+
+#define HAS_WALL(x,wall)(x & wall)
+#define SET_WALL(x,wall)(x |= wall)
+#define DEL_WALL(x,wall)(x &= ~wall)
+
 #include <map>
 #include <QPointF>
 #include <observer.h>
@@ -20,11 +29,11 @@ public:
     // premier int : id , deuxieme int : position du tableau
     std::map<int, int> objectives;
 
-private:
-    static const int BOARD_SIZE = 16;
+    std::map<int, int> robots;
     int cases[256];
 
-    std::map<int, int> robots;
+private:
+    static const int BOARD_SIZE = 16;
 };
 
 #endif // BOARD_H

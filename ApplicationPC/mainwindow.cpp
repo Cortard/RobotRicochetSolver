@@ -75,12 +75,6 @@ void MainWindow::on_pushButtonJouer_clicked()
 
 void MainWindow::on_pushObjective_clicked()
 {
-//    for(int i=0;i<16;i++){
-//        if(board->objectives.at(i)!=-1){
-//            ControllerAddObj(board).control(i,135);
-//        }
-//    }
-
     ControllerAddObj(board).control();
 }
 
