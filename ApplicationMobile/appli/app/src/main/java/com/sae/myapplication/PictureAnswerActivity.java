@@ -82,48 +82,19 @@ public class PictureAnswerActivity extends AppCompatActivity {
 
         int[] gridData = {9, 1, 5, 1, 3, 9, 1, 1, 1, 3, 9, 1, 1, 1, 1, 3, 8, 2, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 3, 8, 0, 0, 0, 0, 2, 12, 0, 2, 9, 0, 0, 0, 0, 4, 2, 12, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 10, 9, 0, 0, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 6, 8, 0, 0, 0, 0, 4, 4, 0, 0, 2, 12, 0, 0, 2, 8, 1, 0, 0, 0, 0, 2, 9, 3, 8, 0, 0, 1, 0, 0, 2, 8, 0, 4, 0, 2, 12, 2, 12, 6, 8, 0, 0, 0, 0, 0, 6, 8, 18, 9, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9, 0, 2, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 0, 0, 0, 2, 9, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 2, 12, 2, 8, 0, 0, 16, 3, 8, 0, 0, 0, 4, 0, 0, 0, 0, 1, 2, 8, 6, 8, 0, 0, 0, 0, 0, 0, 3, 8, 0, 0, 0, 16, 2, 12, 5, 4, 4, 4, 6, 12, 4, 4, 4, 4, 6, 12, 4, 4, 6};
         int[] correctionData = {1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 63};
+        int[] initialRobotPositions = {176, 145, 211, 238};
 
-        myCanvas.setGridData(gridData);
+        myCanvas.setGridData(gridData,initialRobotPositions,54);
 
         Button btnCorrect = findViewById(R.id.btnCor);
         btnCorrect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myCanvas.correctGrid(correctionData);
+                myCanvas.startCorrection(correctionData);
             }
         });
 
-
-//        Button btnCor = findViewById(R.id.btnCor); // Replace with the actual ID
-//        btnCor.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startCorrection();
-//            }
-//        });
     }
-
-//    private void startCorrection() {
-//        MyCanvas myCanvas = findViewById(R.id.canva);
-//
-//        // Assume you have a method to obtain the correction path array
-//        int[] correctionPath = getCorrectionPath();
-//
-//        // Set the correction path to the MyCanvas view
-//        myCanvas.setCorrectionPath(correctionPath);
-//    }
-//
-//    private int[] getCorrectionPath() {
-//        // Replace this with your logic to obtain the correction path array
-//        // For example, you might have a separate class or method for correction calculation
-//        // that returns the correction path array.
-//        // The correctionPath array structure and values should match your requirements.
-//        // Dummy example:
-//        int[] dummyCorrectionPath = {
-//                1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 63
-//        };
-//        return dummyCorrectionPath;
-//    }
 
     public void fromServ() {
         Thread th = new Thread(new Runnable() {

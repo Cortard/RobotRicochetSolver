@@ -95,9 +95,9 @@ public class MyCanvas extends View {
     public void startCorrection(int[] correctionGrid) {
         if (correctionIndex < correctionGrid.length) {
             int correctionValue = correctionGrid[correctionIndex];
-            int direction = correctionValue & 0x0F;  // Extraire les 4 bits de la direction
-            System.out.println("Direction: " + direction);  // Ajoutez cette ligne pour déboguer
-            moveRobot(direction);
+            int robot = (correctionValue >> 4) & 0x0F;  // Extraire les 4 bits du robot
+            int direction = correctionValue & 0x0F;       // Extraire les 4 bits de la direction
+            moveRobot(robot, direction);
             correctionIndex++;
 
             // Répéter le mouvement après un délai de 500 millisecondes (modifiable)
@@ -110,9 +110,7 @@ public class MyCanvas extends View {
         }
     }
 
-
-
-    private void moveRobot(int direction) {
+    private void moveRobot(int robot, int direction) {
         int robotX = -1;
         int robotY = -1;
 
@@ -120,7 +118,8 @@ public class MyCanvas extends View {
         outerLoop:
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                if ((gridData[i * 16 + j] & ROBOT) == ROBOT) {
+                // Utilisez le masque pour obtenir les 4 bits supérieurs
+                if ((gridData[i * 16 + j] & 0xF0) == (robot << 4)) {
                     robotX = j;
                     robotY = i;
                     break outerLoop;
@@ -158,7 +157,7 @@ public class MyCanvas extends View {
                 break;
         }
 
-        gridData[robotY * 16 + robotX] |= ROBOT;
+        gridData[robotY * 16 + robotX] |= (robot << 4) | ROBOT;
         invalidate();
     }
 
