@@ -43,3 +43,31 @@ void ControllerAddWall::control(int x, int y, char dir)
 
     board->addWall(x, y, dir);
 }
+
+ControllerAddRobot::ControllerAddRobot(Board* bd) : board(bd)
+{}
+
+void ControllerAddRobot::control(){
+    if (board == nullptr) return;
+
+    for(int i=0;i<17;i++){
+        if(board->robots.at(i)==-1){
+            board->addRobot(i, 136);
+            return ;
+        }
+    }
+}
+
+ControllerMoveRobot::ControllerMoveRobot(Board* bd) : board(bd)
+{}
+
+void ControllerMoveRobot::control(int id, int pos)
+{
+    if (board == nullptr) return;
+
+    if(pos!=135 && pos!=136 && pos!=119 && pos!=120 && pos>0 && pos<256){
+        board->moveRobot(id,pos);
+    }else{
+        board->notifyObserver();
+    }
+}

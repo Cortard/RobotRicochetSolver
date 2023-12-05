@@ -22,13 +22,14 @@ public:
     int getIndex(int x, int y) const;
 
     void moveObject(int id, int pos);
+    void moveRobot(int id, int pos);
 
     void addWall(int x, int y, char dir);
     void addObjective(int id, int pos);
+    void addRobot(int id, int pos);
 
     // premier int : id , deuxieme int : position du tableau
     std::map<int, int> objectives;
-
     std::map<int, int> robots;
     int cases[256];
 

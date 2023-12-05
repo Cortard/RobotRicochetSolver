@@ -88,3 +88,8 @@ void MainWindow::on_pushButton_21_clicked()
 
 }
 
+void MainWindow::on_pushRobot_clicked()
+{
+    ControllerAddRobot(board).control();
+}
+

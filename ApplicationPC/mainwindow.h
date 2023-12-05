@@ -39,6 +39,8 @@ private slots:
 
     void on_pushButton_21_clicked();
 
+    void on_pushRobot_clicked();
+
 private:
     Ui::MainWindow *ui;
     Board* board;

@@ -9,6 +9,9 @@ Board::Board() {
     for(int i=0;i<17;i++){
         this->objectives.insert(std::pair<int,int>(i,-1));
     }
+    for(int i=0;i<5;i++){
+        this->robots.insert(std::pair<int,int>(i,-1));
+    }
 }
 
 int Board::getIndex(int x, int y) const {
@@ -21,6 +24,11 @@ void Board::addObjective(int id, int pos)
     notifyObserver();
 }
 
+void Board::addRobot(int id, int pos)
+{
+    this->robots.at(id)=pos;
+    notifyObserver();
+}
 
 void Board::addWall(int x, int y, char dir) {
     int cellIndex = getIndex(x, y);
@@ -75,3 +83,8 @@ void Board::moveObject(int id, int pos)
     notifyObserver();
 }
 
+void Board::moveRobot(int id, int pos)
+{
+    this->robots.at(id)=pos;
+    notifyObserver();
+}

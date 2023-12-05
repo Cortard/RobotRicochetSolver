@@ -26,3 +26,19 @@ public:
     ControllerAddWall(Board* = nullptr);
     void control(int x, int y, char dir);
 };
+
+class ControllerAddRobot
+{
+    Board* board;
+public:
+    ControllerAddRobot(Board* = nullptr);
+    void control();
+};
+
+class ControllerMoveRobot
+{
+    Board* board;
+public:
+    ControllerMoveRobot(Board* = nullptr);
+    void control(int id, int pos);
+};

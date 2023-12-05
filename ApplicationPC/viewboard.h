@@ -28,6 +28,7 @@ public:
     void updateModel();
     void drawObjectives(int targetCell, const QString& imagePath, int id);
     void drawWall();
+    void drawRobot(int targetCell, const QString& imagePath, int id);
 
 public slots:
     void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);

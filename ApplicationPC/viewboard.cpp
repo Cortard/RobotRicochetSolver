@@ -16,9 +16,14 @@ void ViewBoard::updateModel()
 {
     clear();
 
-    for(int i=0;i<16;i++){
+    for(int i=0;i<17;i++){
         if(board->objectives.at(i)!=-1){
             drawObjectives(board->objectives.at(i), ":/img/balle.png", i);
+        }
+    }
+    for(int i=0;i<4;i++){
+        if(board->robots.at(i)!=-1){
+            drawRobot(board->robots.at(i), ":/img/tennis.png", i);
         }
     }
 
@@ -53,6 +58,9 @@ void ViewBoard::drawWall()
             }else{
                 topLine->setPen(QPen(Qt::black, 1));
             }
+            if(y<25 || (x>6*25 && x<9*25) && (y>6*25 && y<10*25)){
+                topLine->setPen(QPen(Qt::black, 3));
+            }
             topLine->setAcceptHoverEvents(true);
             addItem(topLine);
 
@@ -66,6 +74,9 @@ void ViewBoard::drawWall()
                 }
             }else{
                 leftLine->setPen(QPen(Qt::black, 1));
+            }
+            if(x<25 || (x>6*25 && x<10*25) && (y>6*25 && y<9*25)){
+                leftLine->setPen(QPen(Qt::black, 3));
             }
             leftLine->setAcceptHoverEvents(true);
             addItem(leftLine);
@@ -81,6 +92,9 @@ void ViewBoard::drawWall()
             }else{
                 bottomLine->setPen(QPen(Qt::black, 1));
             }
+            if(y>14*25 || (x>6*25 && x<9*25) && (y>5*25 && y<9*25)){
+                bottomLine->setPen(QPen(Qt::black, 3));
+            }
             bottomLine->setAcceptHoverEvents(true);
             addItem(bottomLine);
 
@@ -94,6 +108,9 @@ void ViewBoard::drawWall()
                 }
             }else{
                 rightLine->setPen(QPen(Qt::black, 1));
+            }
+            if(x>14*25 || (x>5*25 && x<9*25) && (y>6*25 && y<9*25)){
+                rightLine->setPen(QPen(Qt::black, 3));
             }
             rightLine->setAcceptHoverEvents(true);
             addItem(rightLine);
@@ -119,7 +136,6 @@ void ViewBoard::drawWall()
     temp=1;
 }
 
-
 void ViewBoard::drawObjectives(int targetCell, const QString& imagePath, int id)
 {
     QPixmap pixmap(imagePath);
@@ -133,18 +149,46 @@ void ViewBoard::drawObjectives(int targetCell, const QString& imagePath, int id)
     pixmapItem->setFlag(QGraphicsItem::ItemIsMovable);
 
     pixmapItem->setData(0, id);
+    pixmapItem->setData(1, QGraphicsPixmapItem::UserType + 2);
+    addItem(pixmapItem);
+
+    cellImageMap[targetCell] = true;
+}
+
+void ViewBoard::drawRobot(int targetCell, const QString& imagePath, int id)
+{
+    QPixmap pixmap(imagePath);
+    QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(pixmap);
+    pixmapItem->setScale(25.0 / pixmap.width());
+
+    int col = targetCell % 16;
+    int row = targetCell / 16;
+
+    pixmapItem->setPos(col * 25, row * 25);
+    pixmapItem->setFlag(QGraphicsItem::ItemIsMovable);
+
+    pixmapItem->setData(0, id);
+    pixmapItem->setData(1, QGraphicsPixmapItem::UserType + 1);
 
     addItem(pixmapItem);
 
     cellImageMap[targetCell] = true;
 }
 
-
 void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
     if (mouseEvent->button() == Qt::LeftButton)
     {
         QPointF mousePos = mouseEvent->scenePos();
+
+        QGraphicsItem* clickedItem = itemAt(mousePos, QTransform());
+        if (clickedItem && clickedItem->type() == QGraphicsPixmapItem::Type) {
+            draggedPixmapItem = dynamic_cast<QGraphicsPixmapItem*>(clickedItem);
+            initialPos=mouseEvent->scenePos();
+            if (draggedPixmapItem) {
+                previousPos = mousePos;
+            }
+        }
 
         int col = static_cast<int>(mousePos.x() / 25);
         int row = static_cast<int>(mousePos.y() / 25);
@@ -160,7 +204,7 @@ void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
         qreal threshold = 25.0 / 2.0;
 
-        if (minDistance < threshold)
+        if (minDistance < threshold && !draggedPixmapItem)
         {
             if (minDistance == dxLeft && mousePos.x()>25)
             {
@@ -179,39 +223,41 @@ void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                 (new ControllerAddWall(board))->control(mousePos.x(), mousePos.y(), 'S');
             }
         }
-
-
-        QGraphicsItem* clickedItem = itemAt(mousePos, QTransform());
-            if (clickedItem && clickedItem->type() == QGraphicsPixmapItem::Type) {
-                draggedPixmapItem = dynamic_cast<QGraphicsPixmapItem*>(clickedItem);
-                initialPos=mouseEvent->scenePos();
-                if (draggedPixmapItem) {
-                    previousPos = mousePos;
-                }
-            }
     }
     update();
 }
 
 void ViewBoard::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-
     if (draggedPixmapItem) {
-            QPointF delta = mouseEvent->scenePos() - previousPos;
-            draggedPixmapItem->setPos(draggedPixmapItem->pos() + delta);
-            previousPos = mouseEvent->scenePos();
+        QPointF delta = mouseEvent->scenePos() - previousPos;
+        draggedPixmapItem->setPos(draggedPixmapItem->pos() + delta);
+        previousPos = mouseEvent->scenePos();
     }
-
 }
+
 
 void ViewBoard::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
     QGraphicsScene::mouseReleaseEvent(mouseEvent);
 
     if (draggedPixmapItem) {
-            int id = draggedPixmapItem->data(0).toInt();
-            draggedPixmapItem = nullptr;
-            int cellIndex = static_cast<int>(mouseEvent->scenePos().x() / 25) + static_cast<int>(mouseEvent->scenePos().y() / 25) * 16;
-            (new ControllerMoveObj(board))->control(id,cellIndex);
+        int id = draggedPixmapItem->data(0).toInt();
+        int col = static_cast<int>(mouseEvent->scenePos().x() / 25);
+        int row = static_cast<int>(mouseEvent->scenePos().y() / 25);
+        int cellIndex = col + row * 16;
+
+        if (draggedPixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 1) {
+            // C'est un robot
+            (new ControllerMoveRobot(board))->control(id, cellIndex);
+        } else if (draggedPixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 2) {
+            // C'est un objectif
+            (new ControllerMoveObj(board))->control(id, cellIndex);
+        }
+
+        // Réinitialiser draggedPixmapItem après avoir terminé le traitement
+        draggedPixmapItem = nullptr;
     }
 }
+
+
