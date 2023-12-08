@@ -35,6 +35,8 @@ public class PictureAnswerActivity extends AppCompatActivity {
 
     ImageView imageView;
 
+    private boolean isCorrectionRunning = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +89,15 @@ public class PictureAnswerActivity extends AppCompatActivity {
         myCanvas.setGridData(gridData,initialRobotPositions,54);
 
         Button btnCorrect = findViewById(R.id.btnCor);
-        btnCorrect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myCanvas.startCorrection(correctionData);
+        btnCorrect.setOnClickListener(v -> {
+            myCanvas.startCorrection(correctionData);
+            btnCorrect.setText("Recommencer");
+            if (isCorrectionRunning) {
+                Intent intent = new Intent(this, PictureAnswerActivity.class);
+                startActivity(intent);
+                finish();
             }
+            isCorrectionRunning = true;
         });
 
     }

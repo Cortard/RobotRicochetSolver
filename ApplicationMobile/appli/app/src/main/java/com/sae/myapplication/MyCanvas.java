@@ -4,10 +4,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
-
-import android.os.Handler;
 
 public class MyCanvas extends View {
 
@@ -24,24 +23,38 @@ public class MyCanvas extends View {
     private static final int ROBOT = 0x10; // 0b00010000
     private static final int GOAL = 0x20; // 0b00100000
 
-
-
     private Handler correctionHandler;
+
+    private Robot[] robots;
 
     public MyCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.BLACK);
 
         correctionHandler = new Handler();
     }
 
     public void setGridData(int[] gridData, int[] initialRobotPositions, int goalPosition) {
         this.gridData = gridData;
-        placeInitialRobots(initialRobotPositions);
         placeGoal(goalPosition);
+        initializeRobots(initialRobotPositions);
         invalidate();
+    }
+
+    private int getRobotColor(int robotNumber) {
+        switch (robotNumber) {
+            case 0:
+                return Color.RED;
+            case 1:
+                return Color.BLUE;
+            case 2:
+                return Color.GREEN;
+            case 3:
+                return Color.YELLOW;
+            default:
+                return Color.BLACK;  // Couleur par défaut au cas où
+        }
     }
 
     private void placeGoal(int goalPosition) {
@@ -55,8 +68,16 @@ public class MyCanvas extends View {
         }
     }
 
+    private void drawRobot(Canvas canvas, int x, int y, int robotNumber) {
+        float centerX = (x + 0.5f) * cellSize;
+        float centerY = (y + 0.5f) * cellSize;
+        float radius = 0.4f * cellSize;
 
-    private void placeInitialRobots(int[] initialRobotPositions) {
+        paint.setColor(getRobotColor(robotNumber));
+        canvas.drawCircle(centerX, centerY, radius, paint);
+    }
+
+    private void initializeRobots(int[] initialRobotPositions) {
         if (initialRobotPositions.length > 0) {
             // Réinitialiser les positions précédentes des robots
             for (int i = 0; i < 16; i++) {
@@ -66,14 +87,20 @@ public class MyCanvas extends View {
             }
 
             // Placer les robots aux positions initiales spécifiées
-            for (int position : initialRobotPositions) {
-                int x = position % 16;
-                int y = position / 16;
+            robots = new Robot[initialRobotPositions.length];
+            for (int i = 0; i < initialRobotPositions.length; i++) {
+                int x = initialRobotPositions[i] % 16;
+                int y = initialRobotPositions[i] / 16;
+                int robotNumber = i;  // Numérotation des robots à partir de 0
+                int robotColor = getRobotColor(robotNumber);
+                robots[i] = new Robot(x, y, robotNumber, robotColor);
                 gridData[y * 16 + x] |= ROBOT;
             }
+
+            // Mettre à jour l'affichage après la réinitialisation des positions des robots
+            invalidate();
         }
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -90,14 +117,21 @@ public class MyCanvas extends View {
             }
         }
 
+        // Dessiner les robots
+        if (robots != null) {
+            for (Robot robot : robots) {
+                drawRobot(canvas, robot.getX(), robot.getY(), robot.getNumber());
+            }
+        }
     }
 
     public void startCorrection(int[] correctionGrid) {
         if (correctionIndex < correctionGrid.length) {
             int correctionValue = correctionGrid[correctionIndex];
-            int direction = correctionValue & 0x0F;  // Extraire les 4 bits de la direction
-            System.out.println("Direction: " + direction);  // Ajoutez cette ligne pour déboguer
-            moveRobot(direction);
+            int robotNumber = (correctionValue & 0x70) >> 4;
+            int direction = correctionValue & 0x0F;
+
+            moveRobot(robotNumber, direction);
             correctionIndex++;
 
             // Répéter le mouvement après un délai de 500 millisecondes (modifiable)
@@ -110,101 +144,99 @@ public class MyCanvas extends View {
         }
     }
 
+    private void updateRobotPosition(int oldX, int oldY, int newX, int newY, int robotNumber) {
+        gridData[oldY * 16 + oldX] &= ~ROBOT; // Effacer l'ancienne position du robot
+        gridData[newY * 16 + newX] |= ROBOT;  // Mettre à jour la nouvelle position du robot
 
-
-    private void moveRobot(int direction) {
-        int robotX = -1;
-        int robotY = -1;
-
-        // Recherche de la position actuelle du robot dans la grille
-        outerLoop:
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                if ((gridData[i * 16 + j] & ROBOT) == ROBOT) {
-                    robotX = j;
-                    robotY = i;
-                    break outerLoop;
-                }
-            }
+        // Mettez à jour la position du robot dans votre tableau de robots (si vous en avez un)
+        if (robots != null && robotNumber >= 0 && robotNumber < robots.length) {
+            robots[robotNumber].setX(newX);
+            robots[robotNumber].setY(newY);
         }
+    }
 
-        if (robotX == -1 || robotY == -1) {
+    private void moveRobot(int robotNumber, int direction) {
+        Robot currentRobot = findRobotByNumber(robotNumber);
+
+        if (currentRobot == null) {
             // Le robot n'a pas été trouvé, traitement d'erreur
             return;
         }
 
-        gridData[robotY * 16 + robotX] &= ~ROBOT;
+        int oldX = currentRobot.getX();
+        int oldY = currentRobot.getY();
 
         switch (direction) {
-            case NORTH:
-                while (robotY > 0 && (gridData[(robotY - 1) * 16 + robotX] & (SOUTH | ROBOT)) == 0) {
-                    robotY--;
+            case NORTH: //1
+                while (currentRobot.getY() > 0 && (gridData[(currentRobot.getY() - 1) * 16 + currentRobot.getX()] & (SOUTH | ROBOT)) == 0) {
+                    currentRobot.setY(currentRobot.getY() - 1);
                 }
                 break;
-            case EAST:
-                while (robotX < 15 && (gridData[robotY * 16 + robotX + 1] & (WEST | ROBOT)) == 0) {
-                    robotX++;
+            case EAST: //2
+                while (currentRobot.getX() < 15 && (gridData[currentRobot.getY() * 16 + currentRobot.getX() + 1] & (WEST | ROBOT)) == 0) {
+                    currentRobot.setX(currentRobot.getX() + 1);
                 }
                 break;
-            case SOUTH:
-                while (robotY < 15 && (gridData[(robotY + 1) * 16 + robotX] & (NORTH | ROBOT)) == 0) {
-                    robotY++;
+            case SOUTH: //4
+                while (currentRobot.getY() < 15 && (gridData[(currentRobot.getY() + 1) * 16 + currentRobot.getX()] & (NORTH | ROBOT)) == 0) {
+                    currentRobot.setY(currentRobot.getY() + 1);
                 }
                 break;
-            case WEST:
-                while (robotX > 0 && (gridData[robotY * 16 + robotX - 1] & (EAST | ROBOT)) == 0) {
-                    robotX--;
+            case WEST: //8
+                while (currentRobot.getX() > 0 && (gridData[currentRobot.getY() * 16 + currentRobot.getX() - 1] & (EAST | ROBOT)) == 0) {
+                    currentRobot.setX(currentRobot.getX() - 1);
                 }
                 break;
         }
 
-        gridData[robotY * 16 + robotX] |= ROBOT;
+        updateRobotPosition(oldX, oldY, currentRobot.getX(), currentRobot.getY(), robotNumber);
         invalidate();
     }
 
+    private Robot findRobotByNumber(int robotNumber) {
+        if (robots != null) {
+            for (Robot robot : robots) {
+                if (robot.getNumber() == robotNumber) {
+                    return robot;
+                }
+            }
+        }
+        return null;
+    }
 
     private void drawCell(Canvas canvas, int x, int y, int value) {
         float centerX = (x + 0.5f) * cellSize;
         float centerY = (y + 0.5f) * cellSize;
-        float radius = 0.4f * cellSize; // Ajustez la taille du cercle selon vos préférences
+        float radius = 0.4f * cellSize;
+
+        // Effacer l'ancienne position du robot
+        paint.setColor(Color.WHITE); // Cellule vide
+        canvas.drawRect(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint);
 
         if ((value & GOAL) == GOAL) {
-            paint.setColor(Color.WHITE); // Cellule vide
-            canvas.drawRect(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint);
-            paint.setColor(Color.GREEN);
+            paint.setColor(Color.GRAY);
             canvas.drawCircle(centerX, centerY, radius, paint);
-            paint.setColor(Color.BLACK);
-            return; // Pas besoin de dessiner les murs pour la case d'arrivée
         }
 
-        // Vérifiez si le robot est présent avant de le dessiner
-        if ((value & ROBOT) == ROBOT) {
-            paint.setColor(Color.WHITE); // Cellule vide
-            canvas.drawRect(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint);
-            paint.setColor(Color.RED);
-            canvas.drawCircle(centerX, centerY, radius, paint);
-        } else {
-            paint.setColor(Color.WHITE); // Cellule vide
-            canvas.drawRect(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint);
+        paint.setColor(Color.BLACK);
 
-            paint.setColor(Color.BLACK);
-
-            // Dessiner les murs seulement si la cellule est vide
-            if ((value & NORTH) == NORTH) {
-                canvas.drawLine(x * cellSize, y * cellSize, (x + 1) * cellSize, y * cellSize, paint); // NORTH
-            }
-            if ((value & EAST) == EAST) {
-                canvas.drawLine((x + 1) * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint); // EAST
-            }
-            if ((value & SOUTH) == SOUTH) {
-                canvas.drawLine(x * cellSize, (y + 1) * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint); // SOUTH
-            }
-            if ((value & WEST) == WEST) {
-                canvas.drawLine(x * cellSize, y * cellSize, x * cellSize, (y + 1) * cellSize, paint); // WEST
-            }
+        if ((value & NORTH) == NORTH) {
+            canvas.drawLine(x * cellSize, y * cellSize, (x + 1) * cellSize, y * cellSize, paint); // NORTH
+        }
+        if ((value & EAST) == EAST) {
+            canvas.drawLine((x + 1) * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint); // EAST
+        }
+        if ((value & SOUTH) == SOUTH) {
+            canvas.drawLine(x * cellSize, (y + 1) * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint); // SOUTH
+        }
+        if ((value & WEST) == WEST) {
+            canvas.drawLine(x * cellSize, y * cellSize, x * cellSize, (y + 1) * cellSize, paint); // WEST
         }
     }
 
+    public void resetCorrectionIndex() {
+        correctionIndex = 0;
+    }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
