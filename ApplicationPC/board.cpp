@@ -24,9 +24,31 @@ void Board::addObjective(int id, int pos)
     notifyObserver();
 }
 
+void Board::removeObj(int pos)
+{
+    std::for_each(this->objectives.begin(), this->objectives.end(),
+                  [pos](auto& pair) {
+                      if (pair.second == pos) {
+                        pair.second = -1;
+                      }
+                  });
+    notifyObserver();
+}
+
 void Board::addRobot(int id, int pos)
 {
     this->robots.at(id)=pos;
+    notifyObserver();
+}
+
+void Board::removeRobot(int pos)
+{
+    std::for_each(this->robots.begin(), this->robots.end(),
+                  [pos](auto& pair) {
+                      if (pair.second == pos) {
+                        pair.second = -1;
+                      }
+                  });
     notifyObserver();
 }
 

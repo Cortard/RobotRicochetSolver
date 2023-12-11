@@ -27,6 +27,8 @@ public:
     void addWall(int x, int y, char dir);
     void addObjective(int id, int pos);
     void addRobot(int id, int pos);
+    void removeRobot(int pos);
+    void removeObj(int pos);
 
     // premier int : id , deuxieme int : position du tableau
     std::map<int, int> objectives;

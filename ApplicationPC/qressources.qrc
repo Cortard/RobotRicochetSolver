@@ -1,9 +1,34 @@
 <RCC>
     <qresource prefix="/img">
         <file alias="galaxy.png">galaxy.png</file>
-        <file>robot.webp</file>
         <file>tennis.png</file>
         <file>balle.png</file>
+        <file>etoilerouge.png</file>
+        <file>lunerouge.png</file>
+        <file>satelliterouge.png</file>
+        <file>trianglerouge.png</file>
+        <file>etoilebleu.png</file>
+        <file>etoilejaune.png</file>
+        <file>etoilevert.png</file>
+        <file>lunebleu.png</file>
+        <file>lunejaune.png</file>
+        <file>lunevert.png</file>
+        <file>planetebleu.png</file>
+        <file>planetejaune.png</file>
+        <file>planetevert.png</file>
+        <file>trianglebleu.png</file>
+        <file>trianglejaune.png</file>
+        <file>trianglevert.png</file>
+        <file>robotbleu.png</file>
+        <file>robotjaune.png</file>
+        <file>robotnoir.png</file>
+        <file>robotrouge.png</file>
+        <file>robotvert.png</file>
+        <file>portail.png</file>
+        <file>nom.png</file>
+        <file>sol.jpg</file>
+        <file>fond.png</file>
+        <file>edition.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

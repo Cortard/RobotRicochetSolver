@@ -42,3 +42,19 @@ public:
     ControllerMoveRobot(Board* = nullptr);
     void control(int id, int pos);
 };
+
+class ControllerRemoveRobot
+{
+    Board* board;
+public:
+    ControllerRemoveRobot(Board* = nullptr);
+    void control(int pos);
+};
+
+class ControllerRemoveObj
+{
+    Board* board;
+public:
+    ControllerRemoveObj(Board* = nullptr);
+    void control(int pos);
+};

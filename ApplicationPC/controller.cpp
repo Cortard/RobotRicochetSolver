@@ -27,7 +27,7 @@ void ControllerMoveObj::control(int id, int pos)
 {
     if (board == nullptr) return;
 
-    if(pos!=135 && pos!=136 && pos!=119 && pos!=120 && pos>0 && pos<256){
+    if(pos!=135 && pos!=136 && pos!=119 && pos!=120 && pos>=0 && pos<256){
         board->moveObject(id,pos);
     }else{
         board->notifyObserver();
@@ -65,9 +65,27 @@ void ControllerMoveRobot::control(int id, int pos)
 {
     if (board == nullptr) return;
 
-    if(pos!=135 && pos!=136 && pos!=119 && pos!=120 && pos>0 && pos<256){
+    if(pos!=135 && pos!=136 && pos!=119 && pos!=120 && pos>=0 && pos<256){
         board->moveRobot(id,pos);
     }else{
         board->notifyObserver();
     }
+}
+
+ControllerRemoveRobot::ControllerRemoveRobot(Board* bd) : board(bd)
+{}
+
+void ControllerRemoveRobot::control(int pos){
+    if (board == nullptr) return;
+
+    board->removeRobot(pos);
+}
+
+ControllerRemoveObj::ControllerRemoveObj(Board* bd) : board(bd)
+{}
+
+void ControllerRemoveObj::control(int pos){
+    if (board == nullptr) return;
+
+    board->removeObj(pos);
 }
