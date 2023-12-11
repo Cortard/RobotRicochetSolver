@@ -1,6 +1,6 @@
 #include <map>
 #include <cstring>
-#include "solver.h"
+#include "Solver.h"
 
 int Solver::search(Game *game, unsigned char *path, bool (*callBack)(unsigned int, std::chrono::seconds)) {
     if(game_over(game)) return 0;//si le jeu est fini
