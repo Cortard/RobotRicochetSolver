@@ -14,6 +14,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +35,7 @@ import java.net.Socket;
 public class PictureVerifyActivity extends AppCompatActivity {
 
     ImageView imageView;
+    static TextView txt;
 
     Uri image_uri;
 
@@ -83,8 +86,11 @@ public class PictureVerifyActivity extends AppCompatActivity {
             finish();
         });
 
+        sendImage("195.201.205.241", 9090, new File(image_uri.getPath()));
+
         bVld.setOnClickListener(v -> {
-            sendImage(MainActivity.ip, 9090, new File(image_uri.getPath()));
+            //MainActivity.ip
+
             Intent intent = new Intent(this, PictureAnswerActivity.class);
             startActivity(intent);
         });
@@ -120,14 +126,19 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                     char response = dataInputStream.readChar();
 
+                    txt.setText(response);
+
                     if (response == '1') {
-                        // Envoie des dimensions de l'image au serveur sous la forme d'un tableau d'entiers non signés
                         int[] dimensions = {width, height};
                         for (int dimension : dimensions) {
                             dataOutputStream.writeInt(dimension);
                         }
+                        dataOutputStream.flush();
 
-                        long responseSize = dataInputStream.readLong();
+                        txt.setText(width*height + " ");
+
+                        DataInputStream dataInputStreamLong = new DataInputStream(socket.getInputStream());
+                        long responseSize = dataInputStreamLong.readLong();
 
                         if (responseSize == width * height * 3) {
                             byte[] buffer = new byte[4096];
@@ -136,6 +147,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 bufferedOutputStream.write(buffer, 0, bytesRead);
                             }
                             bufferedOutputStream.flush();
+
+                            txt.setText("fait");
 
                             // Attente de la confirmation de la réception
                             int responseConfirm = dataInputStream.readInt();

@@ -114,25 +114,44 @@ public class PictureAnswerActivity extends AppCompatActivity {
 
                 try {
                     Socket socket = new Socket(serverAddress, serverPort);
-
-                    // Envoyer une demande au serveur pour obtenir les données
-                    DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-                    dos.writeUTF("demande_donnees"); // Remplacez "demande_donnees" par la demande réelle
-
-                    // Recevoir les données du serveur via la connexion socket
                     DataInputStream dis = new DataInputStream(socket.getInputStream());
+                    DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 
-                    // Recevoir les trois tableaux d'entiers
-                    gridData = receiveIntArray(dis);
-                    correctionData = receiveIntArray(dis);
-                    initialRobotPositions = receiveIntArray(dis);
+                    // Cas 1: STATE
+                    dos.writeInt(1); // Sending estimate_time request
+                    int estimateTime = dis.readInt();
+                    char stateFlag = dis.readChar();
 
-                    // Fermer la connexion
+                    if (stateFlag == '1') {
+                        dos.writeChar('1'); // Confirming STATE
+                        // Perform additional actions if needed
+                        int depth = dis.readInt();
+                        int duration = dis.readInt();
+                        char nextStateFlag = dis.readChar();
+                        // Continue processing based on nextStateFlag
+                    } else if (stateFlag == '2') {
+                        // Cas 2: NOTFOUND
+                        // Handle NOTFOUND case, possibly close the connection
+                        socket.close();
+                    } else if (stateFlag == '3') {
+                        // Cas 3: SOLVED
+                        dos.writeChar('1'); // Confirming SOLVED
+                        byte[] path = new byte[32];
+                        dis.readFully(path);
+                        // Process the path as needed
+                        socket.close();
+                    }
+
+                    // Close the connection
                     socket.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                    // Recevoir les trois tableaux d'entiers
+                    //gridData = receiveIntArray(dis);
+                    //correctionData = receiveIntArray(dis);
+                    //initialRobotPositions = receiveIntArray(dis);
             }
         });
 
