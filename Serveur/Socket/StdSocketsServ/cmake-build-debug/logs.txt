@@ -1,16 +1,21 @@
-Tue Nov 28 18:26:56 2023: Start Server |2
-Tue Nov 28 18:26:56 2023: Initialisation socket |2
-Tue Nov 28 18:26:56 2023: Socket Done |3
-Tue Nov 28 18:26:56 2023: Bind Done for IP: 127.0.0.1 PORT : 9090 |3
-Tue Nov 28 18:26:56 2023: Listen Done |3
-Tue Nov 28 18:26:56 2023: Accept loop start |2
-Tue Nov 28 18:26:56 2023: Process loop start |2
-Tue Nov 28 18:27:29 2023: Client accepted IP127.0.0.1 PORT : 60333 |3
-Tue Nov 28 18:27:29 2023: Client added on slot 0 |4
-Tue Nov 28 18:27:29 2023: Receiving type from client on slot 0 |4
-Tue Nov 28 18:27:29 2023: Sending typeConfirm to client on slot 0 |4
-Tue Nov 28 18:27:29 2023: Slot 0 choose to send us a picture |4
-Tue Nov 28 18:27:29 2023: Sending pictureSizeConfirm to client on slot 0 |4
-Tue Nov 28 18:27:29 2023: Receiving picture from client on slot 0 |4
-Tue Nov 28 18:27:29 2023: Sending pictureConfirm to client on slot 0 |4
-Tue Nov 28 18:27:29 2023: Slot 0 is ready to process |4
+Mon Dec 11 15:48:16 2023: Start Server |2
+Mon Dec 11 15:48:16 2023: Initialisation socket |2
+Mon Dec 11 15:48:16 2023: Socket Done |3
+Mon Dec 11 15:48:16 2023: Bind Done for IP: 127.0.0.1 PORT : 9090 |3
+Mon Dec 11 15:48:16 2023: Listen Done |3
+Mon Dec 11 15:48:16 2023: Accept loop start |2
+Mon Dec 11 15:48:16 2023: Process loop start |2
+Mon Dec 11 15:48:19 2023: Client accepted IP127.0.0.1 PORT : 52633 |3
+Mon Dec 11 15:48:19 2023: Client added on slot 0 |4
+Mon Dec 11 15:48:19 2023: Receiving type from client on slot 0 |4
+Mon Dec 11 15:48:19 2023: Sending typeConfirm to client on slot 0 |4
+Mon Dec 11 15:48:19 2023: Slot 0 choose to send us a grid |4
+Mon Dec 11 15:48:19 2023: Sending gridTypeConfirm to client on slot 0 |4
+Mon Dec 11 15:48:19 2023: Receiving grid from client on slot 0 |4
+Mon Dec 11 15:48:19 2023: Sending gridConfirm to client on slot 0 |4
+Mon Dec 11 15:48:19 2023: Slot 0 begin to solve |4
+Mon Dec 11 15:48:36 2023: Not solution in depth 18 in 8s on slot 0 |3
+Mon Dec 11 15:48:50 2023: Not solution in depth 19 in 14s on slot 0 |3
+Mon Dec 11 15:48:54 2023: Solution found on slot 0 |2
+Mon Dec 11 15:48:54 2023: Sending path to client on slot 0 |4
+Mon Dec 11 15:48:54 2023: Client process on slot 0 is done |4

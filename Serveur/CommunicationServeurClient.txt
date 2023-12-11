@@ -15,7 +15,7 @@ Serveur				                                             Client
    |                  unsigned int[2] : hauteur,largeur                         |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |                unsigned long : confirm_size (largeur*hauteur*3)              |
+   |                unsigned long : confirm_size (largeur*hauteur*3)            |
    |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
    |             char[size] buffer : picture (size=largeur*hauteur*3)           |
@@ -23,20 +23,67 @@ Serveur				                                             Client
    |                                                                            |
    |            unsigned char : confirmation reception {0(OK), 1(NO)            |
    |----------------------------------------------------------------->>>>>>>>>>>|
+   |                         begin TRAITEMENT                                   |
+   |                                                                            |
 
 			     	Cas 1(GRID) :
-Serveur				                                       Client
+Serveur				                                             Client
    |                                                                            |
-   |  unsigned char : type (0b0000 00[x][y] => [x+4=nbRobots][y=murDeTravers?]  |
+   |         char : type (0b0000 00[x][y] => [x+4=nbRobots][y=murDeTravers?]    |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |  unsigned char : type (0b0000 00[x][y] => [x+4=nbRobots][y=murDeTravers?]  |
+   |         char : type (0b0000 00[x][y] => [x+4=nbRobots][y=murDeTravers?]    |
    |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
-   |                   unsigned int buffer[256+nbRobot+1]                       |
+   |                          unsigned int grid[256]                            |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |                   unsigned int : estimate_time (unit : sec)                |
-   |----------------------------------------------------------------->>>>>>>>>>>|
+   |                       unsigned int robots[nbRobots]                        |
+   |<<<<<<<<<<<-----------------------------------------------------------------|
+   |                                                                            |
+   |                            unsigned int token                              |
+   |<<<<<<<<<<<-----------------------------------------------------------------|
+   |                         begin TRAITEMENT                                   |
+   |                                                                            |
 
+			     	TRAITEMENT :
+Serveur				                                             Client
+   |                                                                            |
+   |                      int : estimate_time (unit : sec)                      |
+   |----------------------------------------------------------------->>>>>>>>>>>|
+   |                                                                            |
+   |                  char : flag {1(STATE),2(NOTFOUND),3(SOLVED)}              |
+   |----------------------------------------------------------------->>>>>>>>>>>|
+   |                                                                            |
+
+			     	Cas 1(STATE) :
+Serveur				                                             Client
+   |                                                                            |
+   |             char : confirm_flag {1(STATE),2(NOTFOUND),3(SOLVED)}           |
+   |<<<<<<<<<<<-----------------------------------------------------------------|
+   |                                                                            |
+   |                          >>  some time  <<                                 |
+   |                                                                            |
+   |                   int[2] : [depth,duration (in seconds)]                   |
+   |----------------------------------------------------------------->>>>>>>>>>>|
+   |                                                                            |
+   |                char : flag {1(STATE),2(NOTFOUND),3(SOLVED)}                |
+   |----------------------------------------------------------------->>>>>>>>>>>|
+   |                                                                            |
+
+			     	Cas 2(NOTFOUND) :
+Serveur				                                             Client
+   |########################## communication shutdown ##########################|
+   |                                                                            |
+
+			     	Cas 3(SOLVED) :
+Serveur				                                             Client
+   |                                                                            |
+   |             char : confirm_flag {1(STATE),2(NOTFOUND),3(SOLVED)}           |
+   |<<<<<<<<<<<-----------------------------------------------------------------|
+   |                                                                            |
+   |                         unsigned char path[32]                             |
+   |----------------------------------------------------------------->>>>>>>>>>>|
+   |########################## communication shutdown ##########################|
+   |                                                                            |
 

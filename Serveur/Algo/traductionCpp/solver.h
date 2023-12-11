@@ -46,7 +46,7 @@ private:
     //hasmap
     static void swap(unsigned int *array, unsigned int a, unsigned int b);
     static unsigned long make_key(Game *game);
-    static bool set_add(std::map<unsigned long,unsigned int>* set, unsigned int key, unsigned int depth);
+    static bool set_add(std::map<unsigned int,unsigned int>* set, unsigned int key, unsigned int depth);
 
     //move
     static bool can_move(Game *game, unsigned int robot, unsigned int direction);
@@ -55,7 +55,7 @@ private:
     static unsigned int compute_move(Game *game, unsigned int robot, unsigned int direction);
 
     unsigned int nodes, hits, inner;
-    unsigned int _search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<unsigned long,unsigned int>* set);
+    unsigned int _search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<unsigned int,unsigned int>* set);
     static void callback(unsigned int max_depth, unsigned int nodes, unsigned int inner, unsigned int hits, std::chrono::milliseconds duration);
 };
 

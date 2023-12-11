@@ -2,6 +2,7 @@
 
 SOCKET Serveur::sock;
 SOCKADDR_IN Serveur::addressInternet;
+std::chrono::seconds Serveur::lastProcessTime=std::chrono::seconds(35);
 Client Serveur::slots[MAX_CLIENTS];
 
 //---------------------------------------------------------------------------------------------------------------------------------//
@@ -16,7 +17,7 @@ int Serveur::init() {
     }
     Logs::write("Socket Done",LOG_LEVEL_DETAILS);
 
-    addressInternet.sin_addr.s_addr = inet_addr(IP);//htonl(INADDR_ANY)
+    addressInternet.sin_addr.s_addr = inet_addr(IP);
     addressInternet.sin_family = AF_INET;
     addressInternet.sin_port = htons(PORT);
     socklen_t sockAddrInterSize = sizeof(addressInternet);
@@ -50,7 +51,7 @@ void Serveur::end() {
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                                 acceptLoop                                                                      //
 //---------------------------------------------------------------------------------------------------------------------------------//
-void Serveur::acceptLoop() {
+[[noreturn]] void Serveur::acceptLoop() {
     Logs::write("Accept loop start",LOG_LEVEL_INFO);
 
     SOCKADDR_IN sockAddrClient;
@@ -76,7 +77,7 @@ void Serveur::acceptLoop() {
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                                 processLoop                                                                     //
 //---------------------------------------------------------------------------------------------------------------------------------//
-void Serveur::processLoop(){
+[[noreturn]] void Serveur::processLoop(){
     Logs::write("Process loop start",LOG_LEVEL_INFO);
     while (true) {
         for (int i=0;i<MAX_CLIENTS; ++i) {
@@ -98,18 +99,18 @@ void Serveur::processLoop(){
                     break;
                 case STATE_SENT_TYPE_DATA_CONFIRMATION:
                     if(((char*)slot.output)[0]==0){
-                        slot.state = STATE_RECEIVING_PICTURE_SIZE;
                         slot.clearOutput<char>();
+                        slot.state = STATE_RECEIVING_PICTURE_SIZE;
                         Logs::write("Slot " + std::to_string(i) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
                         std::thread(Serveur::getClientPictureSize, &slot).detach();
                     } else {
-                        slot.state = STATE_RECEIVING_GRIP_TYPE;
                         slot.clearOutput<char>();
+                        slot.state = STATE_RECEIVING_GRIP_TYPE;
                         Logs::write("Slot " + std::to_string(i) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
-                        //TODO
+                        std::thread(Serveur::getClientGridType, &slot).detach();
                     }
                     break;
-
+                //Picture Part ------------------------------------------------------------------------------------------
                 case STATE_RECEIVED_PICTURE_SIZE:
                     slot.state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
                     Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
@@ -131,9 +132,41 @@ void Serveur::processLoop(){
                     Logs::write("Slot " + std::to_string(i) + " is ready to process",LOG_LEVEL_VERBOSE);
                     //TODO
                     break;
+                //Grid Part ------------------------------------------------------------------------------------------
+                case STATE_RECEIVED_GRIP_TYPE:
+                    slot.state = STATE_SENDING_GRIP_TYPE_CONFIRMATION;
+                    Logs::write("Sending gridTypeConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
+                    std::thread(Serveur::confirmClientGridType, &slot).detach();
+                    break;
+                case STATE_SENT_TYPE_GRIP_TYPE_CONFIRMATION:
+                    slot.state = STATE_RECEIVING_GRID;
+                    Logs::write("Receiving grid from client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
+                    std::thread(Serveur::getClientGrid, &slot).detach();
+                    break;
+                case STATE_RECEIVED_GRID:
+                    slot.state = STATE_SENDING_GRID_CONFIRMATION;
+                    Logs::write("Sending gridConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
+                    std::thread(Serveur::confirmClientGrid, &slot).detach();
+                    break;
+                case STATE_SENT_TYPE_GRID_CONFIRMATION:
+                    slot.state = STATE_SOLVING;
+                    Logs::write("Slot " + std::to_string(i) + " begin to solve",LOG_LEVEL_VERBOSE);
+                    std::thread(Serveur::solving, &slot).detach();
+                    break;
+                //Process Part ------------------------------------------------------------------------------------------
+                case STATE_SOLVED:
+                    slot.state = STATE_SENDING_PATH;
+                    Logs::write("Sending path to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
+                    std::thread(Serveur::sendPath, &slot).detach();
+                    break;
+                case STATE_SENT_TYPE_PATH:
+                    Logs::write("Client process on slot " + std::to_string(i) + " is done",LOG_LEVEL_VERBOSE);
+                    shutdown(slot.socket, 2);
+                    slot.disconnect();
+                    break;
 
                 case STATE_Process1:
-                    Logs::write("Client process on slot " + std::to_string(i) + " is done",LOG_LEVEL_VERBOSE);
+                default:
                     shutdown(slot.socket, 2);
                     slot.output= nullptr;
                     slot.disconnect();
@@ -183,7 +216,7 @@ int Serveur::verifySocketOutput(Client *slot, bool send, int result) {
 //---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::getClientDataType(Client* slot){
     slot->output=new char[1];
-    int result = recv(slot->socket, (char*)slot->output, sizeof(char), MSG_WAITALL);
+    int result = recv(slot->socket, (char*)slot->output, sizeof(char), 0);
     if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return;
     slot->state=STATE_RECEIVED_TYPE_DATE;
 }
@@ -198,7 +231,7 @@ void Serveur::confirmClientDataType(Client *slot) {
 //---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::getClientPictureSize(Client *slot) {
     slot->output=new unsigned int[2];
-    int result = recv(slot->socket, (char*)slot->output, sizeof(unsigned int[2]), MSG_WAITALL);
+    int result = recv(slot->socket, (char*)slot->output, sizeof(unsigned int[2]), 0);
     if(verifySocketOutput<unsigned int>(slot,false,result)==EXIT_FAILURE) return;
     slot->state=STATE_RECEIVED_PICTURE_SIZE;
 }
@@ -212,7 +245,7 @@ void Serveur::confirmClientPictureSize(Client *slot) {
 void Serveur::getClientPicture(Client *slot) {
     auto* size=static_cast<unsigned int*>(slot->output);
     slot->output=new char[size[0]*size[1]*3];
-    int result = recv(slot->socket, (char*)slot->output, sizeof(char)*size[0]*size[1]*3, MSG_WAITALL);
+    int result = recv(slot->socket, (char*)slot->output, sizeof(char)*size[0]*size[1]*3, 0);
     if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return;
     //TODO put real picture object in slot->output
     delete[] size;
@@ -224,4 +257,93 @@ void Serveur::confirmClientPicture(Client *slot) {
     if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return;
     //TODO change char for type of picture on the previous line
     slot->state=STATE_SENT_TYPE_PICTURE_CONFIRMATION;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                               reception grid                                                                    //
+//---------------------------------------------------------------------------------------------------------------------------------//
+void Serveur::getClientGridType(Client *slot) {
+    slot->output=new char[1];
+    int result = recv(slot->socket, (char*)slot->output, sizeof(char), 0);
+    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return;
+    slot->state=STATE_RECEIVED_GRIP_TYPE;
+}
+void Serveur::confirmClientGridType(Client *slot) {
+    int result = send(slot->socket, (char*)slot->output, sizeof(char), 0);
+    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return;
+    slot->state=STATE_SENT_TYPE_GRIP_TYPE_CONFIRMATION;
+}
+void Serveur::getClientGrid(Client *slot) {
+    char* type=static_cast<char*>(slot->output);
+    slot->output=new Game;
+
+    int result = recv(slot->socket, (char*)((Game*)slot->output)->grid, sizeof(unsigned int[256]), 0);
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return;
+
+    result = recv(slot->socket, (char*)((Game*)slot->output)->robots, sizeof(unsigned int[4]), 0);
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return;
+
+    result = recv(slot->socket, (char*)&((Game*)slot->output)->token, sizeof(unsigned int ), 0);
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return;
+
+    ((Game*)slot->output)->last=0;
+
+    delete type;
+    slot->state=STATE_RECEIVED_GRID;
+}
+void Serveur::confirmClientGrid(Client *slot) {
+    int lastTime=static_cast<int>(lastProcessTime.count());
+    int result = send(slot->socket, (char*)&lastTime, sizeof(lastTime), 0);
+    if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
+    slot->state=STATE_SENT_TYPE_GRID_CONFIRMATION;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------//
+//                                               process                                                                           //
+//---------------------------------------------------------------------------------------------------------------------------------//
+void Serveur::solving(Client *slot) {
+    auto* path = new unsigned char[32]{0};
+    int result = Solver::search((Game*)slot->output, path, callbackSolver);
+    if (result==-1) return;//Client disconnected
+    if(result==0){
+        Logs::write("No solution found on slot " + std::to_string(slot->slotNum),LOG_LEVEL_WARNING);
+        char flag=2;
+        result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
+        if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
+        slot->clearOutput<Game>();
+        slot->disconnect();
+        return;
+    }
+    Logs::write("Solution found on slot " + std::to_string(slot->slotNum),LOG_LEVEL_INFO);
+    char flag=3;
+    result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
+    if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
+
+    slot->clearOutput<Game>();
+    slot->output=path;
+    slot->state=STATE_SOLVED;
+}
+bool Serveur::callbackSolver(unsigned int max_depth, std::chrono::seconds duration) {
+    if(duration.count()<5) return true;
+
+    char flag=1;
+    int result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
+    if(verifySocketOutput<Game>(&slots[0],true,result)==EXIT_FAILURE) return false;
+
+    int message[2]={static_cast<int>(max_depth),static_cast<int>(duration.count())};
+    result = send(slots[0].socket, (char*)message, sizeof(int[2]), 0);
+    if(verifySocketOutput<Game>(&slots[0],true,result)==EXIT_FAILURE) return false;
+    Logs::write("Not solution in depth " + std::to_string(max_depth) + " in " + std::to_string(duration.count()) + "s on slot " + std::to_string(slots[0].slotNum),LOG_LEVEL_DETAILS);
+
+    return true;
+}
+void Serveur::sendPath(Client *slot) {
+    int result = send(slot->socket,(char*)slot->output, sizeof(unsigned char) * 32, 0);
+    if(verifySocketOutput<unsigned char>(slot,true,result)==EXIT_FAILURE) return;
+    char confirm;
+    result = recv(slot->socket, (char*)&confirm, sizeof(char),MSG_WAITALL);
+    if(verifySocketOutput<unsigned char>(slot,false,result)==EXIT_FAILURE) return;
+
+    slot->clearOutput<unsigned char>();
+    slot->state=STATE_SENT_TYPE_PATH;
 }

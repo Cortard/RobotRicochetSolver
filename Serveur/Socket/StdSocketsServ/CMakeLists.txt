@@ -15,5 +15,8 @@ add_executable(StdSockets main.cpp
         configue.h
         Serveur.cpp
         Serveur.h
+        solver/Solver.cpp
+        solver/Solver.h
+        solver/Game.h
 )
 

@@ -4,9 +4,8 @@
 
 unsigned int Solver::search(Game *game, unsigned char *path) {
     if(game_over(game)) return 0;//si le jeu est fini
-
     unsigned int result = 0;
-    std::map<unsigned long,unsigned int> set= {};//initialise le set
+    std::map<unsigned int,unsigned int> set= {};//initialise le set
 
     precompute_minimum_moves(game);//calcul des distances minimales
 
@@ -64,7 +63,7 @@ void Solver::precompute_minimum_moves(Game *game) {
     }
 }
 
-unsigned int Solver::_search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<unsigned long,unsigned int> *set) {
+unsigned int Solver::_search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<unsigned int,unsigned int> *set) {
     nodes++;
     if(game_over(game)) return depth;//si le jeu est fini
     if (depth == max_depth) return 0;//si la profondeur max est atteinte
@@ -112,7 +111,7 @@ unsigned long Solver::make_key(Game *game) {
     return MAKE_KEY(robots);
 }
 
-bool Solver::set_add(std::map<unsigned long,unsigned int>* set, unsigned int key, unsigned int depth){
+bool Solver::set_add(std::map<unsigned int,unsigned int>* set, unsigned int key, unsigned int depth){
     auto it = set->find(key);//on cherche la clé dans le set
     if(it == set->end()){//si la clé n'est pas dans le set
         set->insert(std::pair<int,int>(key, depth));//on l'ajoute
