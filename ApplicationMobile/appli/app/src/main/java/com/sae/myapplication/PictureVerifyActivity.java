@@ -84,7 +84,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
         });
 
         bVld.setOnClickListener(v -> {
-            //sendImage(MainActivity.ip, 9090, new File(image_uri.getPath()));
+            sendImage(MainActivity.ip, 9090, new File(image_uri.getPath()));
             Intent intent = new Intent(this, PictureAnswerActivity.class);
             startActivity(intent);
         });
@@ -121,13 +121,15 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     char response = dataInputStream.readChar();
 
                     if (response == '1') {
-                        // Envoie des dimensions de l'image au serveur
-                        dataOutputStream.writeInt(width);
-                        dataOutputStream.writeInt(height);
+                        // Envoie des dimensions de l'image au serveur sous la forme d'un tableau d'entiers non signés
+                        int[] dimensions = {width, height};
+                        for (int dimension : dimensions) {
+                            dataOutputStream.writeInt(dimension);
+                        }
 
                         long responseSize = dataInputStream.readLong();
 
-                        if (responseSize == width*height) {
+                        if (responseSize == width * height * 3) {
                             byte[] buffer = new byte[4096];
                             int bytesRead;
                             while ((bytesRead = fileInputStream.read(buffer)) != -1) {
@@ -139,10 +141,10 @@ public class PictureVerifyActivity extends AppCompatActivity {
                             int responseConfirm = dataInputStream.readInt();
                             Log.d("finish", String.valueOf(responseConfirm));
                         } else {
-                            Log.d("denied","Pas de reponse server : confirm_size ");
+                            Log.d("denied", "Pas de reponse server : confirm_size ");
                         }
                     } else {
-                        Log.d("denied","Pas de reponse server : 1");
+                        Log.d("denied", "Pas de reponse server : 1");
                     }
 
                     // Ferme les flux

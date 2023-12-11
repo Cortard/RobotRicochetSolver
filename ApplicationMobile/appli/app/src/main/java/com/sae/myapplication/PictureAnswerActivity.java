@@ -35,6 +35,9 @@ public class PictureAnswerActivity extends AppCompatActivity {
 
     ImageView imageView;
 
+    int[] gridData;
+    int[] correctionData;
+    int[] initialRobotPositions;
     private boolean isCorrectionRunning = false;
 
 
@@ -82,9 +85,9 @@ public class PictureAnswerActivity extends AppCompatActivity {
 
         MyCanvas myCanvas = findViewById(R.id.canva);
 
-        int[] gridData = {9, 1, 5, 1, 3, 9, 1, 1, 1, 3, 9, 1, 1, 1, 1, 3, 8, 2, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 3, 8, 0, 0, 0, 0, 2, 12, 0, 2, 9, 0, 0, 0, 0, 4, 2, 12, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 10, 9, 0, 0, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 6, 8, 0, 0, 0, 0, 4, 4, 0, 0, 2, 12, 0, 0, 2, 8, 1, 0, 0, 0, 0, 2, 9, 3, 8, 0, 0, 1, 0, 0, 2, 8, 0, 4, 0, 2, 12, 2, 12, 6, 8, 0, 0, 0, 0, 0, 6, 8, 18, 9, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9, 0, 2, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 0, 0, 0, 2, 9, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 2, 12, 2, 8, 0, 0, 16, 3, 8, 0, 0, 0, 4, 0, 0, 0, 0, 1, 2, 8, 6, 8, 0, 0, 0, 0, 0, 0, 3, 8, 0, 0, 0, 16, 2, 12, 5, 4, 4, 4, 6, 12, 4, 4, 4, 4, 6, 12, 4, 4, 6};
-        int[] correctionData = {1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 63};
-        int[] initialRobotPositions = {176, 145, 211, 238};
+        gridData = new int[]{9, 1, 5, 1, 3, 9, 1, 1, 1, 3, 9, 1, 1, 1, 1, 3, 8, 2, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 3, 8, 0, 0, 0, 0, 2, 12, 0, 2, 9, 0, 0, 0, 0, 4, 2, 12, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 10, 9, 0, 0, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 6, 8, 0, 0, 0, 0, 4, 4, 0, 0, 2, 12, 0, 0, 2, 8, 1, 0, 0, 0, 0, 2, 9, 3, 8, 0, 0, 1, 0, 0, 2, 8, 0, 4, 0, 2, 12, 2, 12, 6, 8, 0, 0, 0, 0, 0, 6, 8, 18, 9, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9, 0, 2, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 0, 0, 0, 2, 9, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 2, 12, 2, 8, 0, 0, 16, 3, 8, 0, 0, 0, 4, 0, 0, 0, 0, 1, 2, 8, 6, 8, 0, 0, 0, 0, 0, 0, 3, 8, 0, 0, 0, 16, 2, 12, 5, 4, 4, 4, 6, 12, 4, 4, 4, 4, 6, 12, 4, 4, 6};
+        correctionData = new int[]{1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 63};
+        initialRobotPositions = new int[]{176, 145, 211, 238};
 
         myCanvas.setGridData(gridData,initialRobotPositions,54);
 
@@ -112,21 +115,23 @@ public class PictureAnswerActivity extends AppCompatActivity {
                 try {
                     Socket socket = new Socket(serverAddress, serverPort);
 
-                    InputStream input = socket.getInputStream();
+                    // Envoyer une demande au serveur pour obtenir les données
+                    DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+                    dos.writeUTF("demande_donnees"); // Remplacez "demande_donnees" par la demande réelle
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                    String line = reader.readLine();    // reads a line of text
+                    // Recevoir les données du serveur via la connexion socket
+                    DataInputStream dis = new DataInputStream(socket.getInputStream());
 
+                    // Recevoir les trois tableaux d'entiers
+                    gridData = receiveIntArray(dis);
+                    correctionData = receiveIntArray(dis);
+                    initialRobotPositions = receiveIntArray(dis);
 
-                    //txt.setText(line);
-                    Log.d("MSG", line);
-
-                    // Fermez la connexion
+                    // Fermer la connexion
                     socket.close();
 
-                } catch (Exception e) {
-                    //txt.setText(e.toString());
-                    Log.d("ERROR", e.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -134,43 +139,14 @@ public class PictureAnswerActivity extends AppCompatActivity {
         th.start();
     }
 
-    private void getImageFromServer(){
-        // Établir une connexion socket avec le serveur
-        try {
-            Socket socket = new Socket(getString(R.string.IP), 8080);
-
-            // Envoyer une demande au serveur pour récupérer l'image
-            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-            dos.writeUTF("demande_image"); // Remplacez "demande_image" par la demande réelle
-
-            // Recevoir les données de l'image depuis le serveur via la connexion socket
-            DataInputStream dis = new DataInputStream(socket.getInputStream());
-
-            // Stocker les données de l'image dans un fichier localement
-            File imageFile = new File(getFilesDir(), "image.jpg");
-            FileOutputStream fos = new FileOutputStream(imageFile);
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = dis.read(buffer)) != -1) {
-                fos.write(buffer, 0, bytesRead);
-            }
-            fos.close();
-
-            // Convertir le fichier en URI
-            Uri imageUri = Uri.fromFile(imageFile);
-
-            ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
-            pb.setVisibility(ProgressBar.INVISIBLE);
-
-            // Afficher l'image dans votre ImageView
-            imageView.setImageURI(imageUri);
-
-            // Fermer la connexion
-            socket.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    // Méthode pour recevoir un tableau d'entiers depuis le flux d'entrée
+    private int[] receiveIntArray(DataInputStream dis) throws IOException {
+        int length = dis.readInt(); // Recevoir la longueur du tableau
+        int[] array = new int[length];
+        for (int i = 0; i < length; i++) {
+            array[i] = dis.readInt(); // Recevoir chaque élément du tableau
         }
+        return array;
     }
 
 }
