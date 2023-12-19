@@ -35,7 +35,7 @@ import java.net.Socket;
 public class PictureVerifyActivity extends AppCompatActivity {
 
     ImageView imageView;
-    static TextView txt;
+     static TextView txt;
 
     Uri image_uri;
 
@@ -45,6 +45,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture_verify);
 
         imageView = findViewById(R.id.imageVerif);
+        txt = findViewById(R.id.textView);
+
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         Button bVld = findViewById(R.id.btnValide);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
@@ -79,6 +81,9 @@ public class PictureVerifyActivity extends AppCompatActivity {
             finish();
         });
 
+
+        txt.setText("test");
+
         Button bCancel = findViewById(R.id.btnCancel);
         bCancel.setOnClickListener(v -> {
             Intent intent = new Intent(this, PictureActivity.class);
@@ -105,8 +110,9 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 FileInputStream fileInputStream = null;
                 BufferedOutputStream bufferedOutputStream = null;
 
+                txt.setText("1");
+
                 try {
-                    // Obtention des dimensions de l'image
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inJustDecodeBounds = true;
                     BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
@@ -117,6 +123,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     fileInputStream = new FileInputStream(imageFile);
                     bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
                     DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
+
+                    txt.setText("2");
 
                     // Envoie du FLAG au serveur : 1
                     dataOutputStream.writeChar('1');
