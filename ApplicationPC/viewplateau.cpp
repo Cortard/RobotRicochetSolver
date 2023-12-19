@@ -32,6 +32,7 @@ viewPlateau::viewPlateau(Board* board) : QGraphicsScene(), Observer()
     robotImg[3]=":/img/robotjaune.png";
     robotImg[4]=":/img/robotnoir.png";
 
+    drawWall();
     updateModel();
     update();
 }
@@ -39,7 +40,6 @@ viewPlateau::viewPlateau(Board* board) : QGraphicsScene(), Observer()
 void viewPlateau::updateModel()
 {
     clear();
-
     for(int i=0;i<17;i++){
         if(board->objectives.at(i)!=-1){
             drawObjectives(board->objectives.at(i), objImg[i], i);
@@ -63,9 +63,6 @@ void viewPlateau::drawWall()
 
     for (int row = 0; row < rowCount; ++row) {
         for (int col = 0; col < colCount; ++col) {
-            if (row >= 7 && row < 9 && col >= 7  && col < 9) {
-                continue;
-            }
 
             int x = col * CellSize;
             int y = row * CellSize;
@@ -81,9 +78,7 @@ void viewPlateau::drawWall()
             }else{
                 topLine->setPen(QPen(Qt::black, 1));
             }
-            if(y<CellSize || (x>6*CellSize && x<9*CellSize) && (y>6*CellSize && y<10*CellSize)){
-                topLine->setPen(QPen(Qt::black, 3));
-            }
+
             topLine->setAcceptHoverEvents(true);
             addItem(topLine);
 
@@ -98,9 +93,7 @@ void viewPlateau::drawWall()
             }else{
                 leftLine->setPen(QPen(Qt::black, 1));
             }
-            if(x<CellSize || (x>6*CellSize && x<10*CellSize) && (y>6*CellSize && y<9*CellSize)){
-                leftLine->setPen(QPen(Qt::black, 3));
-            }
+
             leftLine->setAcceptHoverEvents(true);
             addItem(leftLine);
 
@@ -115,9 +108,7 @@ void viewPlateau::drawWall()
             }else{
                 bottomLine->setPen(QPen(Qt::black, 1));
             }
-            if(y>14*CellSize || (x>6*CellSize && x<9*CellSize) && (y>5*CellSize && y<9*CellSize)){
-                bottomLine->setPen(QPen(Qt::black, 3));
-            }
+
             bottomLine->setAcceptHoverEvents(true);
             addItem(bottomLine);
 
@@ -132,9 +123,7 @@ void viewPlateau::drawWall()
             }else{
                 rightLine->setPen(QPen(Qt::black, 1));
             }
-            if(x>14*CellSize || (x>5*CellSize && x<9*CellSize) && (y>6*CellSize && y<9*CellSize)){
-                rightLine->setPen(QPen(Qt::black, 3));
-            }
+
             rightLine->setAcceptHoverEvents(true);
             addItem(rightLine);
 
@@ -207,102 +196,211 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
         QGraphicsItem* clickedItem = itemAt(mousePos, QTransform());
         if (clickedItem && clickedItem->type() == QGraphicsPixmapItem::Type) {
             draggedPixmapItem = dynamic_cast<QGraphicsPixmapItem*>(clickedItem);
-            initialPos=mouseEvent->scenePos();
-            if (draggedPixmapItem) {
-                previousPos = mousePos;
-            }
         }
 
-        int col = static_cast<int>(mousePos.x() / CellSize);
-        int row = static_cast<int>(mousePos.y() / CellSize);
-
-        QPointF cellTopLeft(col * CellSize, row * CellSize);
-
-        qreal dxLeft = mousePos.x() - cellTopLeft.x();
-        qreal dxRight = (cellTopLeft.x() + CellSize) - mousePos.x();
-        qreal dyTop = mousePos.y() - cellTopLeft.y();
-        qreal dyBottom = (cellTopLeft.y() + CellSize) - mousePos.y();
-
-        qreal minDistance = std::min({dxLeft, dxRight, dyTop, dyBottom});
-
-        qreal threshold = 25.0 / 2.0;
-
-        if (minDistance < threshold && !draggedPixmapItem)
+        click++;
+        if(click==1){
+            col = static_cast<int>(mousePos.x() / CellSize);
+            row = static_cast<int>(mousePos.y() / CellSize);
+            selectedRow = row;
+            selectedCol = col;
+            id = draggedPixmapItem->data(0).toInt();
+            drawSelectionSquare(selectedRow, selectedCol, id);
+            std::cout<<col + row * 16<<std::endl;
+        }
+        if (click == 2)
         {
-            if (minDistance == dxLeft && mousePos.x()>CellSize)
-            {
-                (new ControllerAddWall(board))->control(mousePos.x(), mousePos.y(), 'W');
+            QPointF secondMouse = mouseEvent->scenePos();
+            clearSelectionSquares();
+
+            int col2 = static_cast<int>(secondMouse.x() / CellSize);
+            int row2 = static_cast<int>(secondMouse.y() / CellSize);
+
+            int tab[5];
+            for(int i=0;i<5;i++){
+                tab[i]=board->robots.at(i);
+                //std::cout<<tab[i]<<std::endl;
             }
-            if (minDistance == dxRight && mousePos.x()<CellSize*15)
+
+            if (row2 == row && col2 < col)
             {
-                (new ControllerAddWall(board))->control(mousePos.x(), mousePos.y(), 'E');
+                for(int i=col;i>=0;i--){
+                    if (HAS_WALL(board->cases[i + row * 16], WEST) == 8){
+                        compPos = (i + row * 16);
+                        break;
+                    }
+                }
+
+                int targetRow = row;
+                int targetCol = -1;
+
+                for (int i = col-1 ; i >= 0 ; i--){
+                    int pos = i + row * 16;
+                    auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                           [pos](const auto& pair) { return pair.second == pos; });
+                    if (it != board->robots.end()){
+                        targetCol = i;
+                        break;
+                    }
+                }
+
+                int targetPos = targetCol + targetRow * 16;
+
+                if(targetPos >= compPos && targetCol!=-1 ){
+                    (new ControllerMoveRobot(board))->control(id, targetPos+1);
+                }else{
+                    (new ControllerMoveRobot(board))->control(id, compPos);
+                }
+                click = 0;
+                return;
             }
-            if (minDistance == dyTop && mousePos.y()>CellSize)
+            else if (row2 == row && col2 > col)
             {
-                (new ControllerAddWall(board))->control(mousePos.x(), mousePos.y(), 'N');
+                for(int i=col;i<16;i++){
+                    if (HAS_WALL(board->cases[i + row * 16], EAST) == 2){
+                        compPos = (i + row * 16);
+                        break;
+                    }
+                }
+
+                int targetRow = row;
+                int targetCol = -1;
+
+                for (int i = col+1 ; i <= 16 ; i++){
+                    int pos = i + row * 16;
+
+                    auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                           [pos](const auto& pair) { return pair.second == pos; });
+                    if (it != board->robots.end()){
+                        targetCol = i;
+                        break;
+                    }
+                }
+
+                int targetPos = targetCol + targetRow * 16;
+
+                if(targetPos <= compPos && targetCol!=-1 ){
+                    (new ControllerMoveRobot(board))->control(id, targetPos-1);
+                }else{
+                    (new ControllerMoveRobot(board))->control(id, compPos);
+                }
+                click = 0;
+                return;
             }
-            if (minDistance == dyBottom && mousePos.y()<CellSize*15)
+            else if (row2 > row && col2 == col)
             {
-                (new ControllerAddWall(board))->control(mousePos.x(), mousePos.y(), 'S');
+                for(int i=row;i<=16;i++){
+                    if (HAS_WALL(board->cases[col + i * 16], SOUTH) == 4){
+                        compPos = (col + i * 16);
+                        break;
+                    }
+                }
+
+                int targetRow = -1;
+                int targetCol = col;
+
+                for (int i = row+1 ; i <= 16 ; i++){
+                    int pos = col + i * 16;
+                    auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                           [pos](const auto& pair) { return pair.second == pos; });
+                    if (it != board->robots.end()){
+                        targetRow = i;
+                        break;
+                    }
+                }
+
+                int targetPos = targetCol + targetRow * 16;
+
+                if(targetPos <= compPos && targetRow!=-1 ){
+                    (new ControllerMoveRobot(board))->control(id, targetPos-16);
+                }else{
+                    (new ControllerMoveRobot(board))->control(id, compPos);
+                }
+                click = 0;
+                return;
+            }
+            else if (row2 < row && col2 == col)
+            {
+                for(int i=row;i>=0;i--){
+                    if (HAS_WALL(board->cases[col + i * 16], NORTH) == 1){
+                        compPos = (col + i * 16);
+                        break;
+                    }
+                }
+
+                int targetRow = -1;
+                int targetCol = col;
+
+                for (int i = 0; i < row ; i++){
+                    int pos = col + i * 16;
+                    auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                           [pos](const auto& pair) { return pair.second == pos; });
+                    if (it != board->robots.end()){
+                        targetRow = i;
+                    }
+                }
+                int targetPos = targetCol + targetRow * 16;
+                if(compPos <= targetPos+16){
+                    (new ControllerMoveRobot(board))->control(id, targetPos+16);
+                }else{
+                    (new ControllerMoveRobot(board))->control(id, compPos);
+                }
+                click = 0;
+                return;
+            }
+            click = 0;
+
+            for(int i =0;i<5;i++){
+                if(tab[i]!=board->robots.at(i)){
+                    board->mouvement++;
+                }
             }
         }
-    }
-    if (mouseEvent->button() == Qt::RightButton) {
-        int col = static_cast<int>(mouseEvent->scenePos().x() / CellSize);
-        int row = static_cast<int>(mouseEvent->scenePos().y() / CellSize);
-
-        int cellIndex = col + row * 16;
-
-        (new ControllerRemoveRobot(board))->control(cellIndex);
-        (new ControllerRemoveObj(board))->control(cellIndex);
     }
 
     update();
 }
 
-void viewPlateau::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void viewPlateau::drawSelectionSquare(int row, int col, int id)
 {
-    if (draggedPixmapItem) {
-        QPointF delta = mouseEvent->scenePos() - previousPos;
-        draggedPixmapItem->setPos(draggedPixmapItem->pos() + delta);
-        previousPos = mouseEvent->scenePos();
+    int x = col * CellSize;
+    int y = row * CellSize;
+
+    QGraphicsRectItem* selectionSquare = new QGraphicsRectItem(x, y, CellSize, CellSize);
+
+    int r=0;
+    int g=0;
+    int b=0;
+
+    switch(id){
+    case 0:
+        r=255;
+        break;
+    case 1:
+        g=255;
+        break;
+    case 2:
+        b=255;
+        break;
+    case 3:
+        g=255;
+        r=255;
+        break;
     }
+
+    QBrush brush(QColor(r, g, b, 128));
+    selectionSquare->setBrush(brush);
+    addItem(selectionSquare);
+
+    selectionSquares.push_back(selectionSquare);
 }
 
-void viewPlateau::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void viewPlateau::clearSelectionSquares()
 {
-    QGraphicsScene::mouseReleaseEvent(mouseEvent);
-
-    if (draggedPixmapItem) {
-        int id = draggedPixmapItem->data(0).toInt();
-        int col = static_cast<int>(mouseEvent->scenePos().x() / CellSize);
-        int row = static_cast<int>(mouseEvent->scenePos().y() / CellSize);
-
-        int initialCol = static_cast<int>(initialPos.x() / CellSize);
-        int initialRow = static_cast<int>(initialPos.y() / CellSize);
-
-        int initialCell = initialCol + initialRow *16;
-
-        int cellIndex = col + row * 16;
-        if(cellImageMap[cellIndex]==false){
-            if (draggedPixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 1) {
-                // C'est un robot
-                (new ControllerMoveRobot(board))->control(id, cellIndex);
-            } else if (draggedPixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 2) {
-                // C'est un objectif
-                (new ControllerMoveObj(board))->control(id, cellIndex);
-            }
-        }else{
-            if (draggedPixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 1) {
-                // C'est un robot
-                (new ControllerMoveRobot(board))->control(id, initialCell);
-            } else if (draggedPixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 2) {
-                // C'est un objectif
-                (new ControllerMoveObj(board))->control(id, initialCell);
-            }
-        }
-
-        // Réinitialiser draggedPixmapItem après avoir terminé le traitement
-        draggedPixmapItem = nullptr;
+    for (QGraphicsRectItem* square : selectionSquares) {
+        removeItem(square);
+        delete square;
     }
+
+    selectionSquares.clear();
 }

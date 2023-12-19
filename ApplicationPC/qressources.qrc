@@ -29,6 +29,10 @@
         <file>sol.jpg</file>
         <file>fond.png</file>
         <file>edition.png</file>
+        <file>charger.png</file>
+        <file>creer.jpg</file>
+        <file>histoire.jpg</file>
+        <file>train.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

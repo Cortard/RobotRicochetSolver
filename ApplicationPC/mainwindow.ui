@@ -834,7 +834,7 @@ QPushButton#pushPlateau:pressed {
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/robotbleu.png) center center;</string>
+             <string notr="true">background : url(:/img/histoire.jpg) center center;</string>
             </property>
             <property name="text">
              <string>Mode Histoire</string>
@@ -856,7 +856,7 @@ QPushButton#pushPlateau:pressed {
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/robotrouge.png) center center;</string>
+             <string notr="true">background : url(:/img/train.png) center center;</string>
             </property>
             <property name="text">
              <string>Entrainement</string>
@@ -961,7 +961,7 @@ border:none;</string>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/robotbleu.png) center center;
+             <string notr="true">background : url(:/img/charger.png) center center;
 border:none;</string>
             </property>
             <property name="text">
@@ -984,7 +984,7 @@ border:none;</string>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/robotrouge.png) center center;
+             <string notr="true">background : url(:/img/creer.jpg) center center;
 border:none;</string>
             </property>
             <property name="text">

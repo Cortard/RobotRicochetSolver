@@ -1,26 +1,9 @@
-//#ifndef VIEWPLATEAU_H
-//#define VIEWPLATEAU_H
-
-//#include <QWidget>
-
-//class viewPlateau : public QObject
-//{
-//    Q_OBJECT
-//private:
-//    QWidget *widg2;
-//public:
-//    viewPlateau(QWidget *parent);
-//};
-
-//#endif // VIEWPLATEAU_H
-
 #pragma once
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QTreeWidget>
 #include "controller.h"
 #include "board.h"
-
 
 class viewPlateau : public QGraphicsScene, public Observer
 {
@@ -42,6 +25,16 @@ private:
     QGraphicsPixmapItem* draggedPixmapItem = nullptr;
     int temp = 0;
     Board* board;
+    int click=0;
+    int direction=-1;
+    int col=0;
+    int row=0;
+    int id=-1;
+    int compPos=0;
+    int selectedRow = -1;
+    int selectedCol = -1;
+    QList<QGraphicsRectItem*> selectionSquares;
+
 
 public:
     viewPlateau(Board* = nullptr);
@@ -49,11 +42,11 @@ public:
     void drawObjectives(int targetCell, const QString& imagePath, int id);
     void drawWall();
     void drawRobot(int targetCell, const QString& imagePath, int id);
+    void drawSelectionSquare(int row, int col, int id);
+    void clearSelectionSquares();
 
 public slots:
     void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
-    void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
 };
 
 

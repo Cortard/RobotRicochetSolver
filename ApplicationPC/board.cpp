@@ -12,6 +12,21 @@ Board::Board() {
     for(int i=0;i<5;i++){
         this->robots.insert(std::pair<int,int>(i,-1));
     }
+
+    for(int i=0;i<16;i++){
+        SET_WALL(cases[i], NORTH);
+        SET_WALL(cases[i+16*15], SOUTH);
+        SET_WALL(cases[i*16], WEST);
+        SET_WALL(cases[i*16+15], EAST);
+    }
+    SET_WALL(cases[151],NORTH);
+    SET_WALL(cases[152],NORTH);
+    SET_WALL(cases[103],SOUTH);
+    SET_WALL(cases[104],SOUTH);
+    SET_WALL(cases[118],EAST);
+    SET_WALL(cases[134],EAST);
+    SET_WALL(cases[121],WEST);
+    SET_WALL(cases[137],WEST);
 }
 
 int Board::getIndex(int x, int y) const {

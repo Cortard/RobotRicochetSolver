@@ -3,16 +3,26 @@
 #include <QWidget>
 #include <iostream>
 
+#include <QGuiApplication>
+#include <QScreen>
+
+
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
     ui(new Ui::MainWindow),
-    viewBoard(nullptr),
-    viewPlato(nullptr),
     board(bd)
 {
     ui->setupUi(this);
 
+    viewBoard = nullptr;
+    viewPlato = nullptr;
+
     viewMenu = new viewMainMenu(ui->stackedWidget->widget(1)->findChild<QWidget*>("mainmenuwindow"));
+
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect screenGeometry = screen->geometry();
+    move((screenGeometry.width() - width()) / 2, (screenGeometry.height() - height()) / 2);
+
 }
 
 MainWindow::~MainWindow()
@@ -20,14 +30,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::on_pushButtonJouer_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagejouer);
-}
-
-void MainWindow::on_pushButton_6_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 void MainWindow::on_pushHistoire_clicked()
 {
@@ -81,11 +87,6 @@ void MainWindow::on_pushObjective_clicked()
 
 }
 
-void MainWindow::on_pushWall_clicked()
-{
-
-}
-
 void MainWindow::on_pushButton_21_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->edition);
@@ -114,7 +115,7 @@ void MainWindow::on_Retour_2_clicked()
 
 void MainWindow::on_pushTrain_2_clicked()
 {
-    if (!viewBoard) {
+    if (viewBoard == nullptr) {
         viewBoard = new ViewBoard(board);
         ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
         viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
@@ -125,11 +126,17 @@ void MainWindow::on_pushTrain_2_clicked()
 
 void MainWindow::on_pushPlateau_clicked()
 {
-    if (!viewPlato) {
+    if (viewPlato == nullptr) {
         viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
+        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
     }
     ui->stackedWidget->setCurrentWidget(ui->plateau);
+}
+
+
+void MainWindow::on_Home_5_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 

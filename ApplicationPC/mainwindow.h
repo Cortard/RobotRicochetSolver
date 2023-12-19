@@ -22,7 +22,6 @@ public:
 
 private slots:
     void on_pushButtonJouer_clicked();
-    void on_pushButton_6_clicked();
     void on_pushHistoire_clicked();
     void on_Retour_clicked();
     void on_Home_clicked();
@@ -35,8 +34,6 @@ private slots:
 
     void on_pushObjective_clicked();
 
-    void on_pushWall_clicked();
-
     void on_pushButton_21_clicked();
 
     void on_pushRobot_clicked();
@@ -47,11 +44,14 @@ private slots:
 
     void on_pushPlateau_clicked();
 
+    void on_Home_5_clicked();
+
 private:
     Ui::MainWindow *ui;
     Board* board;
     ViewBoard *viewBoard;
     viewMainMenu *viewMenu;
     viewPlateau *viewPlato;
+
 };
 #endif // MAINWINDOW_H

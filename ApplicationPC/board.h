@@ -27,6 +27,7 @@ public:
     void addWall(int x, int y, char dir);
     void addObjective(int id, int pos);
     void addRobot(int id, int pos);
+
     void removeRobot(int pos);
     void removeObj(int pos);
 
@@ -34,6 +35,7 @@ public:
     std::map<int, int> objectives;
     std::map<int, int> robots;
     int cases[256];
+    int mouvement=0;
 
 private:
     static const int BOARD_SIZE = 16;
