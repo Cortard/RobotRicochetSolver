@@ -45,6 +45,8 @@ public:
     void drawRobot(int targetCell, const QString& imagePath, int id);
     void drawSelectionSquare(int row, int col, int id);
     void clearSelectionSquares();
+signals:
+    void movementOccurred();
 
 public slots:
     void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);

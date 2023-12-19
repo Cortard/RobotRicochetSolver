@@ -197,8 +197,6 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
     }
 
     if (robotId==-1 || (board->objJeu >= 0 && board->objJeu <= 3 && robotId!=0) || (board->objJeu >= 4 && board->objJeu <= 7 && robotId!=1) || (board->objJeu >= 8 && board->objJeu <= 11 && robotId!=2) || (robotId != 3 && board->objJeu >= 12 && board->objJeu <= 15)) {
-        int positionObjectif = board->objectives[board->objJeu];
-        int positionRobot = board->robots[robotId];
 
         if (mouseEvent->button() == Qt::LeftButton){
             QPointF mousePos = mouseEvent->scenePos();
@@ -216,7 +214,6 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                 selectedCol = col;
                 id = draggedPixmapItem->data(0).toInt();
                 drawSelectionSquare(selectedRow, selectedCol, id);
-                std::cout<<col + row * 16<<std::endl;
             }
             int pos = col + row * 16;
             auto it = std::find_if(board->robots.begin(), board->robots.end(),
@@ -260,6 +257,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
                         click = 0;
+                        emit movementOccurred();
                         return;
                     }
                     else if (row2 == row && col2 > col)
@@ -293,6 +291,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
                         click = 0;
+                        emit movementOccurred();
                         return;
                     }
                     else if (row2 > row && col2 == col)
@@ -325,6 +324,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
                         click = 0;
+                        emit movementOccurred();
                         return;
                     }
                     else if (row2 < row && col2 == col)
@@ -354,6 +354,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
                         click = 0;
+                        emit movementOccurred();
                         return;
                     }
                     click = 0;
@@ -363,7 +364,6 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                 click = 0;
             }
         }
-
     }
 
 

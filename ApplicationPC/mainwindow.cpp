@@ -30,6 +30,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::handleMovement() {
+    board->mouvement++;
+    ui->label->setText(QString::number(board->mouvement));
+}
 
 void MainWindow::on_pushButtonJouer_clicked()
 {
@@ -130,6 +134,7 @@ void MainWindow::on_pushPlateau_clicked()
         viewPlato = new viewPlateau(board);
         ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
+        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }

@@ -45,6 +45,7 @@ private slots:
     void on_pushPlateau_clicked();
 
     void on_Home_5_clicked();
+    void handleMovement();
 
 private:
     Ui::MainWindow *ui;
