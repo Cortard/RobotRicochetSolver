@@ -43,10 +43,10 @@ void Board::removeObj(int pos)
 {
     std::for_each(this->objectives.begin(), this->objectives.end(),
                   [pos](auto& pair) {
-                      if (pair.second == pos) {
-                        pair.second = -1;
-                      }
-                  });
+        if (pair.second == pos) {
+            pair.second = -1;
+        }
+    });
     notifyObserver();
 }
 
@@ -60,10 +60,10 @@ void Board::removeRobot(int pos)
 {
     std::for_each(this->robots.begin(), this->robots.end(),
                   [pos](auto& pair) {
-                      if (pair.second == pos) {
-                        pair.second = -1;
-                      }
-                  });
+        if (pair.second == pos) {
+            pair.second = -1;
+        }
+    });
     notifyObserver();
 }
 

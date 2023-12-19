@@ -36,6 +36,7 @@ public:
     std::map<int, int> robots;
     int cases[256];
     int mouvement=0;
+    int objJeu=-1;
 
 private:
     static const int BOARD_SIZE = 16;

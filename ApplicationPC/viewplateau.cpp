@@ -189,176 +189,186 @@ void viewPlateau::drawRobot(int targetCell, const QString& imagePath, int id)
 
 void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-    if (mouseEvent->button() == Qt::LeftButton)
-    {
-        QPointF mousePos = mouseEvent->scenePos();
-
-        QGraphicsItem* clickedItem = itemAt(mousePos, QTransform());
-        if (clickedItem && clickedItem->type() == QGraphicsPixmapItem::Type) {
-            draggedPixmapItem = dynamic_cast<QGraphicsPixmapItem*>(clickedItem);
-        }
-
-        click++;
-        if(click==1){
-            col = static_cast<int>(mousePos.x() / CellSize);
-            row = static_cast<int>(mousePos.y() / CellSize);
-            selectedRow = row;
-            selectedCol = col;
-            id = draggedPixmapItem->data(0).toInt();
-            drawSelectionSquare(selectedRow, selectedCol, id);
-            std::cout<<col + row * 16<<std::endl;
-        }
-        if (click == 2)
-        {
-            QPointF secondMouse = mouseEvent->scenePos();
-            clearSelectionSquares();
-
-            int col2 = static_cast<int>(secondMouse.x() / CellSize);
-            int row2 = static_cast<int>(secondMouse.y() / CellSize);
-
-            int tab[5];
-            for(int i=0;i<5;i++){
-                tab[i]=board->robots.at(i);
-                //std::cout<<tab[i]<<std::endl;
-            }
-
-            if (row2 == row && col2 < col)
-            {
-                for(int i=col;i>=0;i--){
-                    if (HAS_WALL(board->cases[i + row * 16], WEST) == 8){
-                        compPos = (i + row * 16);
-                        break;
-                    }
-                }
-
-                int targetRow = row;
-                int targetCol = -1;
-
-                for (int i = col-1 ; i >= 0 ; i--){
-                    int pos = i + row * 16;
-                    auto it = std::find_if(board->robots.begin(), board->robots.end(),
-                                           [pos](const auto& pair) { return pair.second == pos; });
-                    if (it != board->robots.end()){
-                        targetCol = i;
-                        break;
-                    }
-                }
-
-                int targetPos = targetCol + targetRow * 16;
-
-                if(targetPos >= compPos && targetCol!=-1 ){
-                    (new ControllerMoveRobot(board))->control(id, targetPos+1);
-                }else{
-                    (new ControllerMoveRobot(board))->control(id, compPos);
-                }
-                click = 0;
-                return;
-            }
-            else if (row2 == row && col2 > col)
-            {
-                for(int i=col;i<16;i++){
-                    if (HAS_WALL(board->cases[i + row * 16], EAST) == 2){
-                        compPos = (i + row * 16);
-                        break;
-                    }
-                }
-
-                int targetRow = row;
-                int targetCol = -1;
-
-                for (int i = col+1 ; i <= 16 ; i++){
-                    int pos = i + row * 16;
-
-                    auto it = std::find_if(board->robots.begin(), board->robots.end(),
-                                           [pos](const auto& pair) { return pair.second == pos; });
-                    if (it != board->robots.end()){
-                        targetCol = i;
-                        break;
-                    }
-                }
-
-                int targetPos = targetCol + targetRow * 16;
-
-                if(targetPos <= compPos && targetCol!=-1 ){
-                    (new ControllerMoveRobot(board))->control(id, targetPos-1);
-                }else{
-                    (new ControllerMoveRobot(board))->control(id, compPos);
-                }
-                click = 0;
-                return;
-            }
-            else if (row2 > row && col2 == col)
-            {
-                for(int i=row;i<=16;i++){
-                    if (HAS_WALL(board->cases[col + i * 16], SOUTH) == 4){
-                        compPos = (col + i * 16);
-                        break;
-                    }
-                }
-
-                int targetRow = -1;
-                int targetCol = col;
-
-                for (int i = row+1 ; i <= 16 ; i++){
-                    int pos = col + i * 16;
-                    auto it = std::find_if(board->robots.begin(), board->robots.end(),
-                                           [pos](const auto& pair) { return pair.second == pos; });
-                    if (it != board->robots.end()){
-                        targetRow = i;
-                        break;
-                    }
-                }
-
-                int targetPos = targetCol + targetRow * 16;
-
-                if(targetPos <= compPos && targetRow!=-1 ){
-                    (new ControllerMoveRobot(board))->control(id, targetPos-16);
-                }else{
-                    (new ControllerMoveRobot(board))->control(id, compPos);
-                }
-                click = 0;
-                return;
-            }
-            else if (row2 < row && col2 == col)
-            {
-                for(int i=row;i>=0;i--){
-                    if (HAS_WALL(board->cases[col + i * 16], NORTH) == 1){
-                        compPos = (col + i * 16);
-                        break;
-                    }
-                }
-
-                int targetRow = -1;
-                int targetCol = col;
-
-                for (int i = 0; i < row ; i++){
-                    int pos = col + i * 16;
-                    auto it = std::find_if(board->robots.begin(), board->robots.end(),
-                                           [pos](const auto& pair) { return pair.second == pos; });
-                    if (it != board->robots.end()){
-                        targetRow = i;
-                    }
-                }
-                int targetPos = targetCol + targetRow * 16;
-                if(compPos <= targetPos+16){
-                    (new ControllerMoveRobot(board))->control(id, targetPos+16);
-                }else{
-                    (new ControllerMoveRobot(board))->control(id, compPos);
-                }
-                click = 0;
-                return;
-            }
-            click = 0;
-
-            for(int i =0;i<5;i++){
-                if(tab[i]!=board->robots.at(i)){
-                    board->mouvement++;
-                }
-            }
+    for (const auto& robot : board->robots) {
+        if (robot.second == board->objectives[board->objJeu]) {
+            robotId = robot.first;
+            break;
         }
     }
 
+    if (robotId==-1 || (board->objJeu >= 0 && board->objJeu <= 3 && robotId!=0) || (board->objJeu >= 4 && board->objJeu <= 7 && robotId!=1) || (board->objJeu >= 8 && board->objJeu <= 11 && robotId!=2) || (robotId != 3 && board->objJeu >= 12 && board->objJeu <= 15)) {
+        int positionObjectif = board->objectives[board->objJeu];
+        int positionRobot = board->robots[robotId];
+
+        if (mouseEvent->button() == Qt::LeftButton){
+            QPointF mousePos = mouseEvent->scenePos();
+
+            QGraphicsItem* clickedItem = itemAt(mousePos, QTransform());
+            if (clickedItem && clickedItem->type() == QGraphicsPixmapItem::Type) {
+                draggedPixmapItem = dynamic_cast<QGraphicsPixmapItem*>(clickedItem);
+            }
+
+            click++;
+            if(click==1){
+                col = static_cast<int>(mousePos.x() / CellSize);
+                row = static_cast<int>(mousePos.y() / CellSize);
+                selectedRow = row;
+                selectedCol = col;
+                id = draggedPixmapItem->data(0).toInt();
+                drawSelectionSquare(selectedRow, selectedCol, id);
+                std::cout<<col + row * 16<<std::endl;
+            }
+            int pos = col + row * 16;
+            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                   [pos](const auto& pair) { return pair.second == pos; });
+
+            if (it != board->robots.end()) {
+                if (click == 2){
+                    QPointF secondMouse = mouseEvent->scenePos();
+                    clearSelectionSquares();
+
+                    int col2 = static_cast<int>(secondMouse.x() / CellSize);
+                    int row2 = static_cast<int>(secondMouse.y() / CellSize);
+
+                    if (row2 == row && col2 < col)
+                    {
+                        for(int i=col;i>=0;i--){
+                            if (HAS_WALL(board->cases[i + row * 16], WEST) == 8){
+                                compPos = (i + row * 16);
+                                break;
+                            }
+                        }
+
+                        int targetRow = row;
+                        int targetCol = -1;
+
+                        for (int i = col-1 ; i >= 0 ; i--){
+                            int pos = i + row * 16;
+                            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                                   [pos](const auto& pair) { return pair.second == pos; });
+                            if (it != board->robots.end()){
+                                targetCol = i;
+                                break;
+                            }
+                        }
+
+                        int targetPos = targetCol + targetRow * 16;
+
+                        if(targetPos >= compPos && targetCol!=-1 ){
+                            (new ControllerMoveRobot(board))->control(id, targetPos+1);
+                        }else{
+                            (new ControllerMoveRobot(board))->control(id, compPos);
+                        }
+                        click = 0;
+                        return;
+                    }
+                    else if (row2 == row && col2 > col)
+                    {
+                        for(int i=col;i<16;i++){
+                            if (HAS_WALL(board->cases[i + row * 16], EAST) == 2){
+                                compPos = (i + row * 16);
+                                break;
+                            }
+                        }
+
+                        int targetRow = row;
+                        int targetCol = -1;
+
+                        for (int i = col+1 ; i <= 16 ; i++){
+                            int pos = i + row * 16;
+
+                            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                                   [pos](const auto& pair) { return pair.second == pos; });
+                            if (it != board->robots.end()){
+                                targetCol = i;
+                                break;
+                            }
+                        }
+
+                        int targetPos = targetCol + targetRow * 16;
+
+                        if(targetPos <= compPos && targetCol!=-1 ){
+                            (new ControllerMoveRobot(board))->control(id, targetPos-1);
+                        }else{
+                            (new ControllerMoveRobot(board))->control(id, compPos);
+                        }
+                        click = 0;
+                        return;
+                    }
+                    else if (row2 > row && col2 == col)
+                    {
+                        for(int i=row;i<=16;i++){
+                            if (HAS_WALL(board->cases[col + i * 16], SOUTH) == 4){
+                                compPos = (col + i * 16);
+                                break;
+                            }
+                        }
+
+                        int targetRow = -1;
+                        int targetCol = col;
+
+                        for (int i = row+1 ; i <= 16 ; i++){
+                            int pos = col + i * 16;
+                            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                                   [pos](const auto& pair) { return pair.second == pos; });
+                            if (it != board->robots.end()){
+                                targetRow = i;
+                                break;
+                            }
+                        }
+
+                        int targetPos = targetCol + targetRow * 16;
+
+                        if(targetPos <= compPos && targetRow!=-1 ){
+                            (new ControllerMoveRobot(board))->control(id, targetPos-16);
+                        }else{
+                            (new ControllerMoveRobot(board))->control(id, compPos);
+                        }
+                        click = 0;
+                        return;
+                    }
+                    else if (row2 < row && col2 == col)
+                    {
+                        for(int i=row;i>=0;i--){
+                            if (HAS_WALL(board->cases[col + i * 16], NORTH) == 1){
+                                compPos = (col + i * 16);
+                                break;
+                            }
+                        }
+
+                        int targetRow = -1;
+                        int targetCol = col;
+
+                        for (int i = 0; i < row ; i++){
+                            int pos = col + i * 16;
+                            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                                   [pos](const auto& pair) { return pair.second == pos; });
+                            if (it != board->robots.end()){
+                                targetRow = i;
+                            }
+                        }
+                        int targetPos = targetCol + targetRow * 16;
+                        if(compPos <= targetPos+16){
+                            (new ControllerMoveRobot(board))->control(id, targetPos+16);
+                        }else{
+                            (new ControllerMoveRobot(board))->control(id, compPos);
+                        }
+                        click = 0;
+                        return;
+                    }
+                    click = 0;
+                }
+            }else{
+                clearSelectionSquares();
+                click = 0;
+            }
+        }
+
+    }
+
+
     update();
+
 }
 
 void viewPlateau::drawSelectionSquare(int row, int col, int id)
@@ -404,3 +414,4 @@ void viewPlateau::clearSelectionSquares()
 
     selectionSquares.clear();
 }
+

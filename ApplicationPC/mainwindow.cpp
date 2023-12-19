@@ -9,8 +9,8 @@
 
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    board(bd)
+      ui(new Ui::MainWindow),
+      board(bd)
 {
     ui->setupUi(this);
 

@@ -34,6 +34,7 @@ private:
     int selectedRow = -1;
     int selectedCol = -1;
     QList<QGraphicsRectItem*> selectionSquares;
+    int robotId = -1;
 
 
 public:

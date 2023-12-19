@@ -26,6 +26,7 @@ private:
     QGraphicsPixmapItem* draggedPixmapItem = nullptr;
     int temp = 0;
     Board* board;
+    int clickdroit =0;
 
 public:
     ViewBoard(Board* = nullptr);

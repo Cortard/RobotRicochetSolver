@@ -247,7 +247,7 @@ void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
             }
         }
     }
-    if (mouseEvent->button() == Qt::RightButton) {
+    if (mouseEvent->button() == Qt::MiddleButton) {
         int col = static_cast<int>(mouseEvent->scenePos().x() / CellSize);
         int row = static_cast<int>(mouseEvent->scenePos().y() / CellSize);
 
@@ -255,6 +255,21 @@ void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
         (new ControllerRemoveRobot(board))->control(cellIndex);
         (new ControllerRemoveObj(board))->control(cellIndex);
+    }
+    if(mouseEvent->button() == Qt::RightButton){
+        QPointF mousePos = mouseEvent->scenePos();
+        QGraphicsItem* clickedItem = itemAt(mousePos, QTransform());
+        if (clickedItem && clickedItem->type() == QGraphicsPixmapItem::Type) {
+            QGraphicsPixmapItem* pixmapItem = dynamic_cast<QGraphicsPixmapItem*>(clickedItem);
+            if (pixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 2) {
+                int id = pixmapItem->data(0).toInt();
+                if(clickdroit==0){
+                    qDebug() << "Clic droit sur l'objectif avec l'ID : " << id;
+                    clickdroit++;
+                    board->objJeu=id;
+                }
+            }
+        }
     }
 
     update();
