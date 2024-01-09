@@ -1,35 +1,22 @@
 package com.sae.myapplication;
 
-import android.content.ContentResolver;
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.ImageButton;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectOutputStream;
-import java.net.URI;
-import java.nio.ByteBuffer;
-
-import android.Manifest;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class PictureActivity extends AppCompatActivity {
@@ -46,19 +33,17 @@ public class PictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
 
-        ImageView box = findViewById(R.id.footerbox);
-        ImageView box2 = findViewById(R.id.footerbox2);
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
 
 
         bHelp.setOnClickListener(v -> {
 
-            box.setBackgroundColor(Color.parseColor("#4C647A"));
+            bHelp.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bHelp.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
 
@@ -67,11 +52,11 @@ public class PictureActivity extends AppCompatActivity {
         });
 
         bReturn.setOnClickListener(v -> {
-            box2.setBackgroundColor(Color.parseColor("#4C647A"));
+            bReturn.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box2.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bReturn.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             finish();

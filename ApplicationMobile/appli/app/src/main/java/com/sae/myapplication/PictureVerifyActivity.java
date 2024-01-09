@@ -1,41 +1,34 @@
 package com.sae.myapplication;
 
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class PictureVerifyActivity extends AppCompatActivity {
 
     ImageView imageView;
      static TextView txt;
+
+    private static final int TIMEOUT_IN_MILLISECONDS = 10000; // 0b00010000
 
     Uri image_uri;
 
@@ -50,8 +43,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         Button bVld = findViewById(R.id.btnValide);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
-        ImageView box = findViewById(R.id.footerbox);
-        ImageView box2 = findViewById(R.id.footerbox2);
 
         image_uri = getIntent().getData();
         if (image_uri != null) {
@@ -59,11 +50,11 @@ public class PictureVerifyActivity extends AppCompatActivity {
         }
 
         bHelp.setOnClickListener(v -> {
-            box.setBackgroundColor(Color.parseColor("#4C647A"));
+            bHelp.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bHelp.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             Intent intent = new Intent(this, HelpActivity.class);
@@ -71,11 +62,11 @@ public class PictureVerifyActivity extends AppCompatActivity {
         });
 
         bReturn.setOnClickListener(v -> {
-            box2.setBackgroundColor(Color.parseColor("#4C647A"));
+            bReturn.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box2.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bReturn.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             finish();
@@ -91,18 +82,18 @@ public class PictureVerifyActivity extends AppCompatActivity {
             finish();
         });
 
-        sendImage("195.201.205.241", 9090, new File(image_uri.getPath()));
+        //sendImage("195.201.205.241", 9090, new File(image_uri.getPath()),this);
 
         bVld.setOnClickListener(v -> {
             //MainActivity.ip
-
-            Intent intent = new Intent(this, PictureAnswerActivity.class);
+            Intent intent = new Intent(this, PictureLoadActivity.class);
+            intent.setData(image_uri);
             startActivity(intent);
         });
 
     }
 
-    public static void sendImage(String serverIp, int serverPort, File imageFile) {
+    public void sendImage(String serverIp, int serverPort, File imageFile, PictureVerifyActivity answer) {
         Thread th = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -119,7 +110,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     int width = options.outWidth;
                     int height = options.outHeight;
 
-                    socket = new Socket(serverIp, serverPort);
+                    socket = new Socket();
+                    socket.connect(new InetSocketAddress(serverIp, serverPort), TIMEOUT_IN_MILLISECONDS);
                     fileInputStream = new FileInputStream(imageFile);
                     bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
                     DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
@@ -130,11 +122,14 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     dataOutputStream.writeChar('1');
                     dataOutputStream.flush();
 
-                    // Attente de la réponse du serveur
+                    // Attente de la réponse du serveur avec timeout
+                    socket.setSoTimeout(TIMEOUT_IN_MILLISECONDS); // Définit le timeout pour la réponse
                     DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                     char response = dataInputStream.readChar();
 
                     txt.setText(response);
+
+                    txt.setText("reponse");
 
                     if (response == '1') {
                         int[] dimensions = {width, height};
@@ -143,7 +138,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         }
                         dataOutputStream.flush();
 
-                        txt.setText(width*height + " ");
+                        txt.setText(width * height + " ");
 
                         DataInputStream dataInputStreamLong = new DataInputStream(socket.getInputStream());
                         long responseSize = dataInputStreamLong.readLong();
@@ -161,17 +156,20 @@ public class PictureVerifyActivity extends AppCompatActivity {
                             // Attente de la confirmation de la réception
                             int responseConfirm = dataInputStream.readInt();
                             Log.d("finish", String.valueOf(responseConfirm));
+
                         } else {
-                            Log.d("denied", "Pas de reponse server : confirm_size ");
+                            Log.d("denied", "Pas de réponse server : confirm_size ");
                         }
                     } else {
-                        Log.d("denied", "Pas de reponse server : 1");
+                        Log.d("denied", "Pas de réponse server : 1");
                     }
 
                     // Ferme les flux
                     fileInputStream.close();
                     bufferedOutputStream.close();
                     socket.close();
+                } catch (SocketTimeoutException e) {
+                    Log.d("timeout", "Timeout lors de l'attente de la réponse du serveur");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

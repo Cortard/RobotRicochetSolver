@@ -54,7 +54,11 @@
         <activity
             android:name=".PictureVerifyActivity"
             android:exported="true">
+        </activity>
 
+        <activity
+            android:name=".PictureLoadActivity"
+            android:exported="true">
         </activity>
 
         <activity

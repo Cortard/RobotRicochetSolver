@@ -1,33 +1,17 @@
 package com.sae.myapplication;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 
@@ -47,23 +31,16 @@ public class PictureAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture_answer);
 
         imageView = findViewById(R.id.imageRep);
-        ImageView box = findViewById(R.id.footerbox);
-        ImageView box2 = findViewById(R.id.footerbox2);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
         ImageButton bReturn = findViewById(R.id.boutonReturn);
 
 
-        //getImageFromServer();
-
-        //fromServ();
-
-
         bHelp.setOnClickListener(v -> {
-            box.setBackgroundColor(Color.parseColor("#4C647A"));
+            bHelp.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bHelp.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             Intent intent = new Intent(this, HelpActivity.class);
@@ -71,11 +48,11 @@ public class PictureAnswerActivity extends AppCompatActivity {
         });
 
         bReturn.setOnClickListener(v -> {
-            box2.setBackgroundColor(Color.parseColor("#4C647A"));
+            bReturn.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box2.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bReturn.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             Intent intent = new Intent(this, PictureActivity.class);

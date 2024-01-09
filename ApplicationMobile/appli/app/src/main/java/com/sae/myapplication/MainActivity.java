@@ -1,18 +1,16 @@
 package com.sae.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.SurfaceView;
-import android.view.TextureView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,16 +23,14 @@ public class MainActivity extends AppCompatActivity {
         Button bStart = findViewById(R.id.button);
         ImageButton bExit = findViewById(R.id.boutonExit);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
-        ImageView box = findViewById(R.id.footerbox);
-        ImageView box2 = findViewById(R.id.footerbox2);
 
         bHelp.setOnClickListener(v -> {
 
-            box.setBackgroundColor(Color.parseColor("#4C647A"));
+            bHelp.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bHelp.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
 
@@ -57,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bExit.setOnClickListener(v -> {
-            box2.setBackgroundColor(Color.parseColor("#4C647A"));
+            bExit.setBackgroundColor(Color.parseColor("#4C647A"));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    box2.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bExit.setBackgroundColor(Color.parseColor("#506F8A"));
                 }
             }, 50);
             System.exit(0);
