@@ -1,6 +1,6 @@
 #if defined (WIN32)
-#include <winsock2.h>
-typedef int socklen_t;
+    #include <winsock2.h>
+    typedef int socklen_t;
 #elif defined (linux)
     #include <sys/types.h>
     #include <sys/socket.h>
@@ -210,6 +210,12 @@ int main() {
             printf("Impossible de recevoir le path\n");
             return EXIT_FAILURE;
         }printf("Path reçu\n");
+
+        result = send(sockServ, (char *) &robots, sizeof(robots), 0);
+        if (result == SOCKET_ERROR) {
+            printf("Impossible d'envoyer confirmation\n");
+            return EXIT_FAILURE;
+        }printf("Confirmation envoyée\n");
 
         for(unsigned char& i : path){
             printf("%d, ", i);

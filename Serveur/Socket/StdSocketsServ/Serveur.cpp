@@ -317,7 +317,6 @@ void Serveur::solving(Client *slot) {
         slot->disconnect();
         return;
     }
-    ((Game*)slot->output)->displayGame();
     int result=0;
     try {
         result = Solver::search((Game*)slot->output, path, callbackSolver);
@@ -347,7 +346,7 @@ void Serveur::solving(Client *slot) {
     slot->state=STATE_SOLVED;
 }
 bool Serveur::callbackSolver(unsigned int max_depth, std::chrono::seconds duration) {
-    if(duration.count()<5) return true;
+    //if(duration.count()<5) return true;
 
     char flag=1;
     int result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);

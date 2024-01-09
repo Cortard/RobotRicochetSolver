@@ -3,7 +3,9 @@ project(StdSocketsClient)
 
 set(CMAKE_CXX_STANDARD 17)
 
-link_libraries(ws2_32 wsock32)
+IF (WIN32)
+    link_libraries(ws2_32 wsock32)
+ENDIF()
 
 add_executable(StdSocketsClient main.cpp
         configue.h

@@ -18,5 +18,8 @@ add_executable(StdSockets main.cpp
         solver/Solver.cpp
         solver/Solver.h
         solver/Game.h
+        boardBuilder/boardBuilder.h
+        boardIsolation/boardIsolation.h
+        jpegBuilder/jpegBuilder.h
 )
 

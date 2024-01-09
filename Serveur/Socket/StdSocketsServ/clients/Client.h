@@ -58,6 +58,7 @@
 #define STATE_SOLVED 52
 #define STATE_SENDING_PATH 53
 #define STATE_SENT_TYPE_PATH 54
+
 #define STATE_Process1 98
 
 class Client {

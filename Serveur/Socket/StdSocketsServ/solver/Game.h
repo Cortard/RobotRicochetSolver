@@ -2,6 +2,7 @@
 #define STDSOCKETSSERVER_GAME_H
 
 #include <iostream>
+#include <cstring>
 
 class Game {
 public:
