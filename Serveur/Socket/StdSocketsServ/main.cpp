@@ -19,11 +19,17 @@
 
 #include <thread>
 #include <mutex>
+#include <csignal>
 
 #include "Serveur.h"
 #include "clients/Client.h"
 #include "logs/Logs.h"
 #include "configue.h"
+
+void signalHandler(int signum) {
+    Serveur::end();
+    exit(EXIT_SUCCESS);
+}
 
 int main() {
     #if defined (WIN32)
@@ -32,6 +38,7 @@ int main() {
         if(_erreur) return EXIT_FAILURE;
     #endif
 
+    signal(SIGTERM, signalHandler);
 
     if(!Logs::write("Start Server",LOG_LEVEL_INFO)) return EXIT_FAILURE;
 

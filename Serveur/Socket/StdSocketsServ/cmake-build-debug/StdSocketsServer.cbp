@@ -17,8 +17,8 @@
 					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="StdSockets">
-				<Option output="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/StdSockets" prefix_auto="0" extension_auto="0"/>
+			<Target title="RicochetSocketServer.exe">
+				<Option output="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/RicochetSocketServer.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -33,14 +33,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 StdSockets"/>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 RicochetSocketServer.exe"/>
 					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="StdSockets/fast">
-				<Option output="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/StdSockets" prefix_auto="0" extension_auto="0"/>
+			<Target title="RicochetSocketServer.exe/fast">
+				<Option output="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/RicochetSocketServer.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -55,7 +55,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 StdSockets/fast"/>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 RicochetSocketServer.exe/fast"/>
 					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -83,46 +83,46 @@
 			</Target>
 		</Build>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/Serveur.cpp">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/Serveur.h">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/boardBuilder/boardBuilder.h">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/boardIsolation/boardIsolation.h">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/clients/Client.cpp">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/clients/Client.h">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/configue.h">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/jpegBuilder/jpegBuilder.h">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/logs/Logs.cpp">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/logs/Logs.h">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/main.cpp">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/solver/Game.h">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/solver/Solver.cpp">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/solver/Solver.h">
-			<Option target="StdSockets"/>
+			<Option target="RicochetSocketServer.exe"/>
 		</Unit>
 		<Unit filename="/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

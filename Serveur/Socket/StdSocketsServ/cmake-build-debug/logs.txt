@@ -1,38 +1,8 @@
-Tue Jan  9 11:05:29 2024: Start Server |2
-Tue Jan  9 11:05:29 2024: Initialisation socket |2
-Tue Jan  9 11:05:29 2024: Socket Done |3
-Tue Jan  9 11:05:29 2024: Bind Done for IP: 127.0.0.1 PORT : 9090 |3
-Tue Jan  9 11:05:29 2024: Listen Done |3
-Tue Jan  9 11:05:29 2024: Process loop start |2
-Tue Jan  9 11:05:29 2024: Accept loop start |2
-Tue Jan  9 11:05:45 2024: Client accepted IP127.0.0.1 PORT : 34894 |3
-Tue Jan  9 11:05:45 2024: Client added on slot 0 |4
-Tue Jan  9 11:05:45 2024: Receiving type from client on slot 0 |4
-Tue Jan  9 11:05:45 2024: Sending typeConfirm to client on slot 0 |4
-Tue Jan  9 11:05:45 2024: Slot 0 choose to send us a grid |4
-Tue Jan  9 11:05:45 2024: Sending gridTypeConfirm to client on slot 0 |4
-Tue Jan  9 11:05:45 2024: Receiving grid from client on slot 0 |4
-Tue Jan  9 11:05:45 2024: Sending gridConfirm to client on slot 0 |4
-Tue Jan  9 11:05:45 2024: Slot 0 begin to solve |4
-Tue Jan  9 11:05:45 2024: Not solution in depth 1 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 2 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 3 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 4 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 5 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 6 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 7 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 8 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 9 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 10 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 11 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 12 in 0s on slot 0 |3
-Tue Jan  9 11:05:45 2024: Not solution in depth 13 in 0s on slot 0 |3
-Tue Jan  9 11:05:46 2024: Not solution in depth 14 in 0s on slot 0 |3
-Tue Jan  9 11:05:47 2024: Not solution in depth 15 in 1s on slot 0 |3
-Tue Jan  9 11:05:49 2024: Not solution in depth 16 in 2s on slot 0 |3
-Tue Jan  9 11:05:53 2024: Not solution in depth 17 in 3s on slot 0 |3
-Tue Jan  9 11:06:00 2024: Not solution in depth 18 in 6s on slot 0 |3
-Tue Jan  9 11:06:12 2024: Not solution in depth 19 in 12s on slot 0 |3
-Tue Jan  9 11:06:15 2024: Solution found on slot 0 |2
-Tue Jan  9 11:06:15 2024: Sending path to client on slot 0 |4
-Tue Jan  9 11:06:15 2024: Client process on slot 0 is done |4
+Tue Jan  9 14:26:10 2024: Start Server |2
+Tue Jan  9 14:26:10 2024: Initialisation socket |2
+Tue Jan  9 14:26:10 2024: Socket Done |3
+Tue Jan  9 14:26:10 2024: Bind Done for IP: 127.0.0.1 PORT : 9090 |3
+Tue Jan  9 14:26:10 2024: Listen Done |3
+Tue Jan  9 14:26:10 2024: Accept loop start |2
+Tue Jan  9 14:26:10 2024: Process loop start |2
+Tue Jan  9 14:26:11 2024: Close socket |2

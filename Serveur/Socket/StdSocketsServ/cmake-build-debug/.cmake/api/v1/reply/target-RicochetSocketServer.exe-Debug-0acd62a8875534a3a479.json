@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "StdSockets"
+			"path" : "RicochetSocketServer.exe"
 		}
 	],
 	"backtrace" : 1,
@@ -57,7 +57,7 @@
 			]
 		}
 	],
-	"id" : "StdSockets::@6890427a1f51a3e7e1df",
+	"id" : "RicochetSocketServer.exe::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -73,8 +73,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "StdSockets",
-	"nameOnDisk" : "StdSockets",
+	"name" : "RicochetSocketServer.exe",
+	"nameOnDisk" : "RicochetSocketServer.exe",
 	"paths" : 
 	{
 		"build" : ".",

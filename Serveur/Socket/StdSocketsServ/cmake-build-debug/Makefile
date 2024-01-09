@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named StdSockets
+# Target rules for targets named RicochetSocketServer.exe
 
 # Build rule for target.
-StdSockets: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 StdSockets
-.PHONY : StdSockets
+RicochetSocketServer.exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RicochetSocketServer.exe
+.PHONY : RicochetSocketServer.exe
 
 # fast build rule for target.
-StdSockets/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/build
-.PHONY : StdSockets/fast
+RicochetSocketServer.exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/build
+.PHONY : RicochetSocketServer.exe/fast
 
 Serveur.o: Serveur.cpp.o
 .PHONY : Serveur.o
 
 # target to build an object file
 Serveur.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/Serveur.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/Serveur.cpp.o
 .PHONY : Serveur.cpp.o
 
 Serveur.i: Serveur.cpp.i
@@ -142,7 +142,7 @@ Serveur.i: Serveur.cpp.i
 
 # target to preprocess a source file
 Serveur.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/Serveur.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/Serveur.cpp.i
 .PHONY : Serveur.cpp.i
 
 Serveur.s: Serveur.cpp.s
@@ -150,7 +150,7 @@ Serveur.s: Serveur.cpp.s
 
 # target to generate assembly for a file
 Serveur.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/Serveur.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/Serveur.cpp.s
 .PHONY : Serveur.cpp.s
 
 clients/Client.o: clients/Client.cpp.o
@@ -158,7 +158,7 @@ clients/Client.o: clients/Client.cpp.o
 
 # target to build an object file
 clients/Client.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/clients/Client.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.o
 .PHONY : clients/Client.cpp.o
 
 clients/Client.i: clients/Client.cpp.i
@@ -166,7 +166,7 @@ clients/Client.i: clients/Client.cpp.i
 
 # target to preprocess a source file
 clients/Client.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/clients/Client.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.i
 .PHONY : clients/Client.cpp.i
 
 clients/Client.s: clients/Client.cpp.s
@@ -174,7 +174,7 @@ clients/Client.s: clients/Client.cpp.s
 
 # target to generate assembly for a file
 clients/Client.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/clients/Client.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.s
 .PHONY : clients/Client.cpp.s
 
 logs/Logs.o: logs/Logs.cpp.o
@@ -182,7 +182,7 @@ logs/Logs.o: logs/Logs.cpp.o
 
 # target to build an object file
 logs/Logs.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/logs/Logs.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/logs/Logs.cpp.o
 .PHONY : logs/Logs.cpp.o
 
 logs/Logs.i: logs/Logs.cpp.i
@@ -190,7 +190,7 @@ logs/Logs.i: logs/Logs.cpp.i
 
 # target to preprocess a source file
 logs/Logs.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/logs/Logs.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/logs/Logs.cpp.i
 .PHONY : logs/Logs.cpp.i
 
 logs/Logs.s: logs/Logs.cpp.s
@@ -198,7 +198,7 @@ logs/Logs.s: logs/Logs.cpp.s
 
 # target to generate assembly for a file
 logs/Logs.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/logs/Logs.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/logs/Logs.cpp.s
 .PHONY : logs/Logs.cpp.s
 
 main.o: main.cpp.o
@@ -206,7 +206,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -214,7 +214,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -222,7 +222,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 solver/Solver.o: solver/Solver.cpp.o
@@ -230,7 +230,7 @@ solver/Solver.o: solver/Solver.cpp.o
 
 # target to build an object file
 solver/Solver.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/solver/Solver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/solver/Solver.cpp.o
 .PHONY : solver/Solver.cpp.o
 
 solver/Solver.i: solver/Solver.cpp.i
@@ -238,7 +238,7 @@ solver/Solver.i: solver/Solver.cpp.i
 
 # target to preprocess a source file
 solver/Solver.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/solver/Solver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/solver/Solver.cpp.i
 .PHONY : solver/Solver.cpp.i
 
 solver/Solver.s: solver/Solver.cpp.s
@@ -246,7 +246,7 @@ solver/Solver.s: solver/Solver.cpp.s
 
 # target to generate assembly for a file
 solver/Solver.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StdSockets.dir/build.make CMakeFiles/StdSockets.dir/solver/Solver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RicochetSocketServer.exe.dir/build.make CMakeFiles/RicochetSocketServer.exe.dir/solver/Solver.cpp.s
 .PHONY : solver/Solver.cpp.s
 
 # Help Target
@@ -257,7 +257,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... StdSockets"
+	@echo "... RicochetSocketServer.exe"
 	@echo "... Serveur.o"
 	@echo "... Serveur.i"
 	@echo "... Serveur.s"

@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "StdSockets::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-StdSockets-Debug-000254435383f1b91bb0.json",
-					"name" : "StdSockets",
+					"id" : "RicochetSocketServer.exe::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RicochetSocketServer.exe-Debug-0acd62a8875534a3a479.json",
+					"name" : "RicochetSocketServer.exe",
 					"projectIndex" : 0
 				}
 			]

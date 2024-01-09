@@ -7,7 +7,7 @@ IF (WIN32)
     link_libraries(ws2_32 wsock32)
 ENDIF()
 
-add_executable(StdSockets main.cpp
+add_executable(RicochetSocketServer.exe main.cpp
         logs/Logs.cpp
         logs/Logs.h
         clients/Client.cpp
