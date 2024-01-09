@@ -275,7 +275,7 @@ void Serveur::confirmClientGridType(Client *slot) {
 }
 void Serveur::getClientGrid(Client *slot) {
     char* type=static_cast<char*>(slot->output);
-    slot->output=new Game;
+    slot->output=new Game();
 
     int result = recv(slot->socket, (char*)((Game*)slot->output)->grid, sizeof(unsigned int[256]), 0);
     if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return;
@@ -286,11 +286,14 @@ void Serveur::getClientGrid(Client *slot) {
     result = recv(slot->socket, (char*)&((Game*)slot->output)->token, sizeof(unsigned int ), 0);
     if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return;
 
+
+
     ((Game*)slot->output)->last=0;
 
     delete type;
     slot->state=STATE_RECEIVED_GRID;
 }
+
 void Serveur::confirmClientGrid(Client *slot) {
     int lastTime=static_cast<int>(lastProcessTime.count());
     int result = send(slot->socket, (char*)&lastTime, sizeof(lastTime), 0);
@@ -302,8 +305,28 @@ void Serveur::confirmClientGrid(Client *slot) {
 //                                               process                                                                           //
 //---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::solving(Client *slot) {
-    auto* path = new unsigned char[32]{0};
-    int result = Solver::search((Game*)slot->output, path, callbackSolver);
+    unsigned char* path;
+    try{
+        path = new unsigned char[32]{0};
+    } catch (std::bad_alloc& ba) {
+        Logs::write("Bad alloc on slot " + std::to_string(slot->slotNum),LOG_LEVEL_ERROR);
+        char flag=2;
+        int result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
+        if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
+        slot->clearOutput<Game>();
+        slot->disconnect();
+        return;
+    }
+    ((Game*)slot->output)->displayGame();
+    int result=0;
+    try {
+        result = Solver::search((Game*)slot->output, path, callbackSolver);
+    } catch (const std::exception& e) {
+        Logs::write("Client disconnected on slot " + std::to_string(slot->slotNum),LOG_LEVEL_WARNING);
+        slot->clearOutput<Game>();
+        slot->disconnect();
+        return;
+    }
     if (result==-1) return;//Client disconnected
     if(result==0){
         Logs::write("No solution found on slot " + std::to_string(slot->slotNum),LOG_LEVEL_WARNING);

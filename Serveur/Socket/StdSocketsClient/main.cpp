@@ -176,11 +176,13 @@ int main() {
                 result = recv(sockServ, (char *) &flag, sizeof(flag), MSG_WAITALL);
             printf("Flag reçu : %d\n", flag);
             if(flag!=1) break;
+            /*
             result = send(sockServ, (char *) &flag, sizeof(flag), 0);
             if (result == SOCKET_ERROR) {
                 printf("Impossible d'envoyer la confirmation flag\n");
                 return EXIT_FAILURE;
             }
+             */
             int state[2];
             result = recv(sockServ, (char *) &state, sizeof(state), MSG_WAITALL);
             if (result == SOCKET_ERROR) {

@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "0"
+			"value" : "8"
 		},
 		{
 			"name" : "CMAKE_COLOR_DIAGNOSTICS",
@@ -154,7 +154,7 @@
 					"value" : "CXX compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "C:/Program Files/JetBrains/CLion 2023.2.2/bin/mingw/bin/g++.exe"
 		},
 		{
@@ -298,7 +298,7 @@
 					"value" : "C compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "C:/Program Files/JetBrains/CLion 2023.2.2/bin/mingw/bin/gcc.exe"
 		},
 		{
@@ -1270,6 +1270,18 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "OpenCV_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for OpenCV."
+				}
+			],
+			"type" : "PATH",
+			"value" : "OpenCV_DIR-NOTFOUND"
+		},
+		{
 			"name" : "StdSocketsClient_BINARY_DIR",
 			"properties" : 
 			[
@@ -1316,6 +1328,18 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "TRUE"
+		},
+		{
+			"name" : "opencv_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for opencv."
+				}
+			],
+			"type" : "PATH",
+			"value" : "opencv_DIR-NOTFOUND"
 		}
 	],
 	"kind" : "cache",
