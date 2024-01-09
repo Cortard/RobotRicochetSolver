@@ -2,12 +2,10 @@ package com.sae.myapplication;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -19,26 +17,29 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-public class PictureLoadActivity extends AppCompatActivity {
-
-     static TextView txt;
+public class PictureLoadActivity extends PictureActivity {
 
     private static final int TIMEOUT = 10000;
 
-    Uri image_uri;
+    private TextView txt;
+
+    ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_verify);
 
+        imageView = findViewById(R.id.imageVerif2);
+
         txt = findViewById(R.id.textView);
 
-        image_uri = getIntent().getData();
 
-        sendImage("195.201.205.241", 9090, new File(image_uri.getPath()),this);
+        sendImage("195.201.205.241", 9090, new File(image_uri.getPath()), this);
 
     }
+
 
     public void sendImage(String serverIp, int serverPort, File imageFile, PictureLoadActivity answer) {
         Thread th = new Thread(new Runnable() {
@@ -48,7 +49,7 @@ public class PictureLoadActivity extends AppCompatActivity {
                 FileInputStream fileInputStream = null;
                 BufferedOutputStream bufferedOutputStream = null;
 
-                txt.setText("1");
+                txt.setText(imageFile + "");
 
                 try {
                     BitmapFactory.Options options = new BitmapFactory.Options();
@@ -75,8 +76,6 @@ public class PictureLoadActivity extends AppCompatActivity {
                     char response = dataInputStream.readChar();
 
                     txt.setText(response);
-
-                    txt.setText("reponse");
 
                     if (response == '1') {
                         int[] dimensions = {width, height};
@@ -195,7 +194,7 @@ public class PictureLoadActivity extends AppCompatActivity {
                     bufferedOutputStream.close();
                     socket.close();
                 } catch (SocketTimeoutException e) {
-                    Intent intent = new Intent(answer, PictureVerifyActivity.class);
+                    Intent intent = new Intent(answer, PictureActivity.class);
                     startActivity(intent);
                     Log.d("timeout", "Timeout lors de l'attente de la réponse du serveur");
                 } catch (IOException | InterruptedException e) {

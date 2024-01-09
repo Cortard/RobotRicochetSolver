@@ -20,11 +20,11 @@ public class HelpActivity extends AppCompatActivity {
 
         bReturn.setOnClickListener(v -> {
 
-            bReturn.setBackgroundColor(Color.parseColor("#4C647A"));
+            bReturn.setBackgroundColor(getColor(R.color.blueFooterBoxPress));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    bReturn.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bReturn.setBackgroundColor(getColor(R.color.blueFooterBox));
                 }
             }, 50);
 

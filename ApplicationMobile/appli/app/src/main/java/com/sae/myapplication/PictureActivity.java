@@ -39,11 +39,11 @@ public class PictureActivity extends AppCompatActivity {
 
         bHelp.setOnClickListener(v -> {
 
-            bHelp.setBackgroundColor(Color.parseColor("#4C647A"));
+            bHelp.setBackgroundColor(getColor(R.color.blueFooterBoxPress));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    bHelp.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bHelp.setBackgroundColor(getColor(R.color.blueFooterBox));
                 }
             }, 50);
 
@@ -52,11 +52,11 @@ public class PictureActivity extends AppCompatActivity {
         });
 
         bReturn.setOnClickListener(v -> {
-            bReturn.setBackgroundColor(Color.parseColor("#4C647A"));
+            bReturn.setBackgroundColor(getColor(R.color.blueFooterBoxPress));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    bReturn.setBackgroundColor(Color.parseColor("#506F8A"));
+                    bReturn.setBackgroundColor(getColor(R.color.blueFooterBox));
                 }
             }, 50);
             finish();
