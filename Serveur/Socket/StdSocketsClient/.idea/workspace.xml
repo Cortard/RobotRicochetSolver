@@ -22,14 +22,25 @@
   <component name="ChangeListManager">
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-ebca3c42c3dbcb60d4bb.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/index-2024-01-09T09-26-11-0856.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/target-StdSockets-Debug-000254435383f1b91bb0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/StdSocketsServer.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/StdSocketsServer.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2024-01-09T10-05-45-0097.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/StdSocketsClient.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/StdSocketsClient.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/StdSocketsClient" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/StdSocketsClient" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Serveur.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/clients/Client.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/clients/Client.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/Serveur.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/Serveur.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.o.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/compiler_depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/compiler_depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/RicochetSocketServer.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/RicochetSocketServer.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/logs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StdSocketsServ/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/main.cpp" afterDir="false" />
     </list>
@@ -124,7 +135,8 @@
       <workItem from="1704635929299" duration="177000" />
       <workItem from="1704636531802" duration="4106000" />
       <workItem from="1704792283197" duration="197000" />
-      <workItem from="1704792486767" duration="3578000" />
+      <workItem from="1704792486767" duration="7933000" />
+      <workItem from="1704873965208" duration="915000" />
     </task>
     <servers />
   </component>

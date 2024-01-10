@@ -22,6 +22,7 @@
 
 #include <mutex>
 #include <stdexcept>
+#include <thread>
 #include "../configue.h"
 #include "../logs/Logs.h"
 
@@ -66,6 +67,7 @@ private:
     static int nextIdSlot;
 public:
     int slotNum;
+    std::thread processThread;
     int state;
     SOCKET socket;
     void *output;

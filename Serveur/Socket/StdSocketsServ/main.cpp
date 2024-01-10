@@ -28,6 +28,10 @@
 
 void signalHandler(int signum) {
     Serveur::end();
+    #if defined (WIN32)
+        WSACleanup();
+    #endif
+    Logs::write("Server shutdown",LOG_LEVEL_INFO);
     exit(EXIT_SUCCESS);
 }
 
@@ -47,10 +51,8 @@ int main() {
     Client clients[MAX_CLIENTS];
 
     std::thread acceptThread(Serveur::acceptLoop);
-    std::thread processThread(Serveur::processLoop);
 
     acceptThread.join();
-    processThread.join();
 
     Serveur::end();
 

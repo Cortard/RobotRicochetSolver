@@ -167,6 +167,9 @@ CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.o: \
  /usr/include/c++/12/ext/atomicity.h \
  /usr/include/x86_64-linux-gnu/c++/12/bits/atomic_word.h \
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
+ /usr/include/c++/12/thread /usr/include/c++/12/bits/std_thread.h \
+ /usr/include/c++/12/bits/unique_ptr.h \
+ /usr/include/c++/12/bits/this_thread_sleep.h \
  /home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/clients/../configue.h \
  /home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/clients/../logs/Logs.h \
  /usr/include/c++/12/fstream /usr/include/c++/12/istream \

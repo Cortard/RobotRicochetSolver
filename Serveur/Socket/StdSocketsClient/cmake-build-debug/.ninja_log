@@ -1,6 +1,13 @@
 # ninja log v5
-0	35	1704794641854252815	StdSocketsClient	c4a49b7d0230854c
-0	12	1704794745093633761	build.ninja	1d8ea3af2c109cf8
-1	215	1704794618010481406	CMakeFiles/StdSocketsClient.dir/main.cpp.o	68adbff0bdd54fd
+209	242	1704807487882230710	StdSocketsClient	c4a49b7d0230854c
+1	12	1704807740979942376	build.ninja	1d8ea3af2c109cf8
+1	209	1704807487846229579	CMakeFiles/StdSocketsClient.dir/main.cpp.o	68adbff0bdd54fd
 1373	1448	7263455744902662	StdSocketsClient.exe	ea23c619e33825bc
-1	12	1704794745093633761	build.ninja	1d8ea3af2c109cf8
+1	214	1704815139467894763	CMakeFiles/StdSocketsClient.dir/main.cpp.o	68adbff0bdd54fd
+214	246	1704815139495894471	StdSocketsClient	c4a49b7d0230854c
+1	206	1704816751227672460	CMakeFiles/StdSocketsClient.dir/main.cpp.o	68adbff0bdd54fd
+206	242	1704816751263672865	StdSocketsClient	c4a49b7d0230854c
+1	209	1704817345364663284	CMakeFiles/StdSocketsClient.dir/main.cpp.o	68adbff0bdd54fd
+209	242	1704817345396663491	StdSocketsClient	c4a49b7d0230854c
+1	214	1704874517539521696	CMakeFiles/StdSocketsClient.dir/main.cpp.o	68adbff0bdd54fd
+214	248	1704874517575518927	StdSocketsClient	c4a49b7d0230854c

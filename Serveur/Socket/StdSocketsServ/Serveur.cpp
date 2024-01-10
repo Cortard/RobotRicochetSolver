@@ -9,13 +9,13 @@ Client Serveur::slots[MAX_CLIENTS];
 //                                                       init                                                                      //
 //---------------------------------------------------------------------------------------------------------------------------------//
 int Serveur::init() {
-    Logs::write("Initialisation socket",LOG_LEVEL_INFO);
+    Logs::write("-Initialisation socket",LOG_LEVEL_INFO);
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock == INVALID_SOCKET) {
         Logs::write("Socket error",LOG_LEVEL_ERROR);
         return EXIT_FAILURE;
     }
-    Logs::write("Socket Done",LOG_LEVEL_DETAILS);
+    Logs::write("Socket Done",LOG_LEVEL_INFO);
 
     addressInternet.sin_addr.s_addr = inet_addr(IP);
     addressInternet.sin_family = AF_INET;
@@ -26,13 +26,13 @@ int Serveur::init() {
         Logs::write("Bind error",LOG_LEVEL_ERROR);
         return EXIT_FAILURE;
     }
-    Logs::write("Bind Done for IP: " + std::string(inet_ntoa(addressInternet.sin_addr)) + " PORT : " + std::to_string(htons(addressInternet.sin_port)),LOG_LEVEL_DETAILS);
+    Logs::write("Bind Done for IP: " + std::string(inet_ntoa(addressInternet.sin_addr)) + " PORT : " + std::to_string(htons(addressInternet.sin_port)),LOG_LEVEL_INFO);
 
     if(listen(sock, 5) != 0){
         Logs::write("Listen error",LOG_LEVEL_ERROR);
         return EXIT_FAILURE;
     }
-    Logs::write("Listen Done",LOG_LEVEL_DETAILS);
+    Logs::write("Listen Done",LOG_LEVEL_INFO);
 
     for(Client & slot: slots) slot.state=STATE_DISCONNECTED;
 
@@ -44,6 +44,10 @@ int Serveur::init() {
 //---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::end() {
     shutdown(sock, 2);
+    for(Client & slot: slots) {
+        if(slot.state==STATE_DISCONNECTED) continue;
+        slot.processThread.join();
+    }
     closesocket(sock);
     Logs::write("Close socket",LOG_LEVEL_INFO);
 }
@@ -71,109 +75,103 @@ void Serveur::end() {
         }
         slots[freeSlot].connect(newClientSock);
         Logs::write("Client added on slot " + std::to_string(freeSlot),LOG_LEVEL_VERBOSE);
+
+        if(slots[freeSlot].processThread.joinable()) {
+            Logs::write("Slot " + std::to_string(freeSlot) + " is already processing",LOG_LEVEL_WARNING);
+            slots[freeSlot].processThread.join();
+            Logs::write("Slot " + std::to_string(freeSlot) + " is done",LOG_LEVEL_VERBOSE);
+        }
+        slots[freeSlot].processThread=std::thread(Serveur::processLoop,&slots[freeSlot]);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                                 processLoop                                                                     //
 //---------------------------------------------------------------------------------------------------------------------------------//
-[[noreturn]] void Serveur::processLoop(){
-    Logs::write("Process loop start",LOG_LEVEL_INFO);
-    while (true) {
-        for (int i=0;i<MAX_CLIENTS; ++i) {
-            Client& slot = slots[i];
-            int state = slot.state;
-            if(state%2) continue;// if state is odd, the slot is processing or disconnected
-            switch (state) {
-                case STATE_DISCONNECTED:
-                    break;
-                case STATE_NEW_CONNECTED:
-                    slot.state = STATE_RECEIVING_TYPE_DATA;
-                    Logs::write("Receiving type from client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::getClientDataType, &slot).detach();
-                    break;
-                case STATE_RECEIVED_TYPE_DATE:
-                    slot.state = STATE_SENDING_TYPE_DATA_CONFIRMATION;
-                    Logs::write("Sending typeConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::confirmClientDataType, &slot).detach();
-                    break;
-                case STATE_SENT_TYPE_DATA_CONFIRMATION:
-                    if(((char*)slot.output)[0]==0){
-                        slot.clearOutput<char>();
-                        slot.state = STATE_RECEIVING_PICTURE_SIZE;
-                        Logs::write("Slot " + std::to_string(i) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
-                        std::thread(Serveur::getClientPictureSize, &slot).detach();
-                    } else {
-                        slot.clearOutput<char>();
-                        slot.state = STATE_RECEIVING_GRIP_TYPE;
-                        Logs::write("Slot " + std::to_string(i) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
-                        std::thread(Serveur::getClientGridType, &slot).detach();
-                    }
-                    break;
-                //Picture Part ------------------------------------------------------------------------------------------
-                case STATE_RECEIVED_PICTURE_SIZE:
-                    slot.state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
-                    Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::confirmClientPictureSize, &slot).detach();
-                    break;
-                case STATE_SENT_PICTURE_SIZE_CONFIRMATION:
-                    slot.state = STATE_RECEIVING_PICTURE;
-                    Logs::write("Receiving picture from client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::getClientPicture, &slot).detach();
-                    break;
-                case STATE_RECEIVED_PICTURE:
-                    slot.state = STATE_SENDING_PICTURE_CONFIRMATION;
-                    Logs::write("Sending pictureConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::confirmClientPicture, &slot).detach();
-                    break;
-                case STATE_SENT_TYPE_PICTURE_CONFIRMATION:
-                    slot.state = STATE_Process1;
-                    slot.clearOutput<char>();
-                    Logs::write("Slot " + std::to_string(i) + " is ready to process",LOG_LEVEL_VERBOSE);
-                    //TODO
-                    break;
-                //Grid Part ------------------------------------------------------------------------------------------
-                case STATE_RECEIVED_GRIP_TYPE:
-                    slot.state = STATE_SENDING_GRIP_TYPE_CONFIRMATION;
-                    Logs::write("Sending gridTypeConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::confirmClientGridType, &slot).detach();
-                    break;
-                case STATE_SENT_TYPE_GRIP_TYPE_CONFIRMATION:
-                    slot.state = STATE_RECEIVING_GRID;
-                    Logs::write("Receiving grid from client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::getClientGrid, &slot).detach();
-                    break;
-                case STATE_RECEIVED_GRID:
-                    slot.state = STATE_SENDING_GRID_CONFIRMATION;
-                    Logs::write("Sending gridConfirm to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::confirmClientGrid, &slot).detach();
-                    break;
-                case STATE_SENT_TYPE_GRID_CONFIRMATION:
-                    slot.state = STATE_SOLVING;
-                    Logs::write("Slot " + std::to_string(i) + " begin to solve",LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::solving, &slot).detach();
-                    break;
-                //Process Part ------------------------------------------------------------------------------------------
-                case STATE_SOLVED:
-                    slot.state = STATE_SENDING_PATH;
-                    Logs::write("Sending path to client on slot " + std::to_string(i),LOG_LEVEL_VERBOSE);
-                    std::thread(Serveur::sendPath, &slot).detach();
-                    break;
-                case STATE_SENT_TYPE_PATH:
-                    Logs::write("Client process on slot " + std::to_string(i) + " is done",LOG_LEVEL_VERBOSE);
-                    shutdown(slot.socket, 2);
-                    slot.disconnect();
-                    break;
+void Serveur::processLoop(Client* slot){
+    Logs::write("Process loop start on slot" + std::to_string(slot->slotNum),LOG_LEVEL_DEBUG);
+    // STATE_NEW_CONNECTED:
+    slot->state = STATE_RECEIVING_TYPE_DATA;
+    Logs::write("Receiving type from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+    if( ! Serveur::getClientDataType(slot) ) return;
 
-                case STATE_Process1:
-                default:
-                    shutdown(slot.socket, 2);
-                    slot.output= nullptr;
-                    slot.disconnect();
-                    break;
-            }
-        }
+    // STATE_RECEIVED_TYPE_DATE:
+    slot->state = STATE_SENDING_TYPE_DATA_CONFIRMATION;
+    Logs::write("Sending typeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+    if( ! Serveur::confirmClientDataType(slot) ) return;
+
+    // STATE_SENT_TYPE_DATA_CONFIRMATION:
+    if(((char*)slot->output)[0]==0){
+        slot->clearOutput<char>();
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_DETAILS);
+
+        //Picture Part ------------------------------------------------------------------------------------------
+
+        slot->state = STATE_RECEIVING_PICTURE_SIZE;
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
+        if( ! Serveur::getClientPictureSize(slot) ) return;
+
+        // STATE_RECEIVED_PICTURE_SIZE:
+        slot->state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
+        Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::confirmClientPictureSize(slot) ) return;
+
+        // STATE_SENT_PICTURE_SIZE_CONFIRMATION:
+        slot->state = STATE_RECEIVING_PICTURE;
+        Logs::write("Receiving picture from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::getClientPicture(slot) ) return;
+
+        // STATE_RECEIVED_PICTURE:
+        slot->state = STATE_SENDING_PICTURE_CONFIRMATION;
+        Logs::write("Sending pictureConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::confirmClientPicture(slot) ) return;
+
+        // STATE_SENT_TYPE_PICTURE_CONFIRMATION:
+        slot->state = STATE_Process1;
+        slot->clearOutput<char>();
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " is ready to process",LOG_LEVEL_VERBOSE);
+        //TODO
+
+    } else {
+        slot->clearOutput<char>();
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_DETAILS);
+
+        //Grid Part ------------------------------------------------------------------------------------------
+
+        slot->state = STATE_RECEIVING_GRIP_TYPE;
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
+        if( ! Serveur::getClientGridType(slot) ) return;
+
+        // STATE_RECEIVED_GRIP_TYPE:
+        slot->state = STATE_SENDING_GRIP_TYPE_CONFIRMATION;
+        Logs::write("Sending gridTypeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::confirmClientGridType(slot) ) return;
+
+        // STATE_SENT_TYPE_GRIP_TYPE_CONFIRMATION:
+        slot->state = STATE_RECEIVING_GRID;
+        Logs::write("Receiving grid from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::getClientGrid(slot) ) return;
+
+        // STATE_RECEIVED_GRID:
+        slot->state = STATE_SENDING_GRID_CONFIRMATION;
+        Logs::write("Sending gridConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::confirmClientGrid(slot) ) return;
     }
+
+    // STATE_SENT_TYPE_GRID_CONFIRMATION OR STATE_SENT_TYPE_PICTURE_CONFIRMATION:
+    slot->state = STATE_SOLVING;
+    Logs::write("Slot " + std::to_string(slot->slotNum) + " begin to solve",LOG_LEVEL_VERBOSE);
+    if( ! Serveur::solving(slot) ) return;
+
+    // STATE_SOLVED:
+    slot->state = STATE_SENDING_PATH;
+    Logs::write("Sending path to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+    if( ! Serveur::sendPath(slot) ) return;
+
+    // STATE_SENT_TYPE_PATH:
+    Logs::write("Client process on slot " + std::to_string(slot->slotNum) + " is done",LOG_LEVEL_DETAILS);
+    shutdown(slot->socket, 2);
+    slot->disconnect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------//
@@ -214,97 +212,105 @@ int Serveur::verifySocketOutput(Client *slot, bool send, int result) {
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                        reception type of Client input                                                           //
 //---------------------------------------------------------------------------------------------------------------------------------//
-void Serveur::getClientDataType(Client* slot){
+bool Serveur::getClientDataType(Client* slot){
     slot->output=new char[1];
     int result = recv(slot->socket, (char*)slot->output, sizeof(char), 0);
-    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
     slot->state=STATE_RECEIVED_TYPE_DATE;
+    return true;
 }
-void Serveur::confirmClientDataType(Client *slot) {
+bool Serveur::confirmClientDataType(Client *slot) {
     int result = send(slot->socket, (char*)slot->output, sizeof(char), 0);
-    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return false;
     slot->state=STATE_SENT_TYPE_DATA_CONFIRMATION;
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                               reception picture                                                                 //
 //---------------------------------------------------------------------------------------------------------------------------------//
-void Serveur::getClientPictureSize(Client *slot) {
+bool Serveur::getClientPictureSize(Client *slot) {
     slot->output=new unsigned int[2];
     int result = recv(slot->socket, (char*)slot->output, sizeof(unsigned int[2]), 0);
-    if(verifySocketOutput<unsigned int>(slot,false,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<unsigned int>(slot,false,result)==EXIT_FAILURE) return false;
     slot->state=STATE_RECEIVED_PICTURE_SIZE;
+    return true;
 }
-void Serveur::confirmClientPictureSize(Client *slot) {
+bool Serveur::confirmClientPictureSize(Client *slot) {
     auto* size=static_cast<unsigned int*>(slot->output);
     long confirmSize=static_cast<long>(size[0])*static_cast<long>(size[1])*3;
     int result = send(slot->socket, (char*)&confirmSize, sizeof(long), 0);
-    if(verifySocketOutput<unsigned int>(slot,false,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<unsigned int>(slot,false,result)==EXIT_FAILURE) return false;
     slot->state=STATE_SENT_PICTURE_SIZE_CONFIRMATION;
+    return true;
 }
-void Serveur::getClientPicture(Client *slot) {
+bool Serveur::getClientPicture(Client *slot) {
     auto* size=static_cast<unsigned int*>(slot->output);
     slot->output=new char[size[0]*size[1]*3];
     int result = recv(slot->socket, (char*)slot->output, sizeof(char)*size[0]*size[1]*3, 0);
-    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
     //TODO put real picture object in slot->output
     delete[] size;
     slot->state=STATE_RECEIVED_PICTURE;
+    return true;
 }
-void Serveur::confirmClientPicture(Client *slot) {
+bool Serveur::confirmClientPicture(Client *slot) {
     char confirm=0;
     int result = send(slot->socket, (char*)&confirm, sizeof(char), 0);
-    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return false;
     //TODO change char for type of picture on the previous line
     slot->state=STATE_SENT_TYPE_PICTURE_CONFIRMATION;
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                               reception grid                                                                    //
 //---------------------------------------------------------------------------------------------------------------------------------//
-void Serveur::getClientGridType(Client *slot) {
+bool Serveur::getClientGridType(Client *slot) {
     slot->output=new char[1];
     int result = recv(slot->socket, (char*)slot->output, sizeof(char), 0);
-    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
     slot->state=STATE_RECEIVED_GRIP_TYPE;
+    return true;
 }
-void Serveur::confirmClientGridType(Client *slot) {
+bool Serveur::confirmClientGridType(Client *slot) {
     int result = send(slot->socket, (char*)slot->output, sizeof(char), 0);
-    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return false;
     slot->state=STATE_SENT_TYPE_GRIP_TYPE_CONFIRMATION;
+    return true;
 }
-void Serveur::getClientGrid(Client *slot) {
+bool Serveur::getClientGrid(Client *slot) {
     char* type=static_cast<char*>(slot->output);
     slot->output=new Game();
 
     int result = recv(slot->socket, (char*)((Game*)slot->output)->grid, sizeof(unsigned int[256]), 0);
-    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
 
     result = recv(slot->socket, (char*)((Game*)slot->output)->robots, sizeof(unsigned int[4]), 0);
-    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
 
     result = recv(slot->socket, (char*)&((Game*)slot->output)->token, sizeof(unsigned int ), 0);
-    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return;
-
-
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
 
     ((Game*)slot->output)->last=0;
 
     delete type;
     slot->state=STATE_RECEIVED_GRID;
+    return true;
 }
 
-void Serveur::confirmClientGrid(Client *slot) {
+bool Serveur::confirmClientGrid(Client *slot) {
     int lastTime=static_cast<int>(lastProcessTime.count());
     int result = send(slot->socket, (char*)&lastTime, sizeof(lastTime), 0);
-    if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
     slot->state=STATE_SENT_TYPE_GRID_CONFIRMATION;
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                               process                                                                           //
 //---------------------------------------------------------------------------------------------------------------------------------//
-void Serveur::solving(Client *slot) {
+bool Serveur::solving(Client *slot) {
     unsigned char* path;
     try{
         path = new unsigned char[32]{0};
@@ -312,10 +318,10 @@ void Serveur::solving(Client *slot) {
         Logs::write("Bad alloc on slot " + std::to_string(slot->slotNum),LOG_LEVEL_ERROR);
         char flag=2;
         int result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
-        if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
+        if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
         slot->clearOutput<Game>();
         slot->disconnect();
-        return;
+        return false;
     }
     int result=0;
     try {
@@ -324,26 +330,27 @@ void Serveur::solving(Client *slot) {
         Logs::write("Client disconnected on slot " + std::to_string(slot->slotNum),LOG_LEVEL_WARNING);
         slot->clearOutput<Game>();
         slot->disconnect();
-        return;
+        return false;
     }
-    if (result==-1) return;//Client disconnected
+    if (result==-1) return false;//Client disconnected
     if(result==0){
         Logs::write("No solution found on slot " + std::to_string(slot->slotNum),LOG_LEVEL_WARNING);
         char flag=2;
         result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
-        if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
+        if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
         slot->clearOutput<Game>();
         slot->disconnect();
-        return;
+        return false;
     }
     Logs::write("Solution found on slot " + std::to_string(slot->slotNum),LOG_LEVEL_INFO);
     char flag=3;
     result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
-    if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
 
     slot->clearOutput<Game>();
     slot->output=path;
     slot->state=STATE_SOLVED;
+    return true;
 }
 bool Serveur::callbackSolver(unsigned int max_depth, std::chrono::seconds duration) {
     //if(duration.count()<5) return true;
@@ -359,13 +366,14 @@ bool Serveur::callbackSolver(unsigned int max_depth, std::chrono::seconds durati
 
     return true;
 }
-void Serveur::sendPath(Client *slot) {
+bool Serveur::sendPath(Client *slot) {
     int result = send(slot->socket,(char*)slot->output, sizeof(unsigned char) * 32, 0);
-    if(verifySocketOutput<unsigned char>(slot,true,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<unsigned char>(slot,true,result)==EXIT_FAILURE) return false;
     char confirm;
     result = recv(slot->socket, (char*)&confirm, sizeof(char),MSG_WAITALL);
-    if(verifySocketOutput<unsigned char>(slot,false,result)==EXIT_FAILURE) return;
+    if(verifySocketOutput<unsigned char>(slot,false,result)==EXIT_FAILURE) return false;
 
     slot->clearOutput<unsigned char>();
     slot->state=STATE_SENT_TYPE_PATH;
+    return true;
 }

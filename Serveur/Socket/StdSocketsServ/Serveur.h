@@ -16,7 +16,7 @@ public:
 
     [[noreturn]] static void acceptLoop();
 
-    [[noreturn]] static void processLoop();
+    static void processLoop(Client* slot);
 private:
     static SOCKET sock;
     static SOCKADDR_IN addressInternet;
@@ -27,25 +27,25 @@ private:
     template <typename T>
     static int verifySocketOutput(Client* slot, bool send, int result);
 
-    static void getClientDataType(Client* slot);
-    static void confirmClientDataType(Client* slot);
+    static bool getClientDataType(Client* slot);
+    static bool confirmClientDataType(Client* slot);
 
     //Picture
-    static void getClientPictureSize(Client* slot);
-    static void confirmClientPictureSize(Client* slot);
-    static void getClientPicture(Client* slot);
-    static void confirmClientPicture(Client* slot);
+    static bool getClientPictureSize(Client* slot);
+    static bool confirmClientPictureSize(Client* slot);
+    static bool getClientPicture(Client* slot);
+    static bool confirmClientPicture(Client* slot);
 
     //Grid
-    static void getClientGridType(Client* slot);
-    static void confirmClientGridType(Client* slot);
-    static void getClientGrid(Client* slot);
-    static void confirmClientGrid(Client* slot);
+    static bool getClientGridType(Client* slot);
+    static bool confirmClientGridType(Client* slot);
+    static bool getClientGrid(Client* slot);
+    static bool confirmClientGrid(Client* slot);
 
     //Process
-    static void solving(Client* slot);
+    static bool solving(Client* slot);
     static bool callbackSolver(unsigned int max_depth, std::chrono::seconds duration);
-    static void sendPath(Client* slot);
+    static bool sendPath(Client* slot);
 };
 
 
