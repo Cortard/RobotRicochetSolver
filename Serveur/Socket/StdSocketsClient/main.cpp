@@ -104,7 +104,7 @@ int main() {
             return EXIT_FAILURE;
         }printf("Confirmation de l'image ok\n");
     }else{//grille*******************************************************************************************************
-        char typeDate = 2;
+        char typeDate = 1;
         int result = send(sockServ, (char *) &typeDate, sizeof(typeDate), 0);
         if (result == SOCKET_ERROR) {
             printf("Impossible d'envoyer le type de donnée\n");

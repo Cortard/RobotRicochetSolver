@@ -101,61 +101,69 @@ void Serveur::processLoop(Client* slot){
     if( ! Serveur::confirmClientDataType(slot) ) return;
 
     // STATE_SENT_TYPE_DATA_CONFIRMATION:
-    if(((char*)slot->output)[0]==0){
-        slot->clearOutput<char>();
-        Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_DETAILS);
+    switch (((char*)slot->output)[0]){
+        case 0:
+            slot->clearOutput<char>();
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_DETAILS);
 
-        //Picture Part ------------------------------------------------------------------------------------------
+            //Picture Part ------------------------------------------------------------------------------------------
 
-        slot->state = STATE_RECEIVING_PICTURE_SIZE;
-        Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
-        if( ! Serveur::getClientPictureSize(slot) ) return;
+            slot->state = STATE_RECEIVING_PICTURE_SIZE;
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
+            if( ! Serveur::getClientPictureSize(slot) ) return;
 
-        // STATE_RECEIVED_PICTURE_SIZE:
-        slot->state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
-        Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-        if( ! Serveur::confirmClientPictureSize(slot) ) return;
+            // STATE_RECEIVED_PICTURE_SIZE:
+            slot->state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
+            Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::confirmClientPictureSize(slot) ) return;
 
-        // STATE_SENT_PICTURE_SIZE_CONFIRMATION:
-        slot->state = STATE_RECEIVING_PICTURE;
-        Logs::write("Receiving picture from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-        if( ! Serveur::getClientPicture(slot) ) return;
+            // STATE_SENT_PICTURE_SIZE_CONFIRMATION:
+            slot->state = STATE_RECEIVING_PICTURE;
+            Logs::write("Receiving picture from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::getClientPicture(slot) ) return;
 
-        // STATE_RECEIVED_PICTURE:
-        slot->state = STATE_SENDING_PICTURE_CONFIRMATION;
-        Logs::write("Sending pictureConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-        if( ! Serveur::confirmClientPicture(slot) ) return;
+            // STATE_RECEIVED_PICTURE:
+            slot->state = STATE_SENDING_PICTURE_CONFIRMATION;
+            Logs::write("Sending pictureConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::confirmClientPicture(slot) ) return;
 
-        // STATE_SENT_TYPE_PICTURE_CONFIRMATION:
-        slot->state = STATE_Process1;
-        slot->clearOutput<char>();
-        Logs::write("Slot " + std::to_string(slot->slotNum) + " is ready to process",LOG_LEVEL_VERBOSE);
-        //TODO
+            // STATE_SENT_TYPE_PICTURE_CONFIRMATION:
+            slot->state = STATE_Process1;
+            slot->clearOutput<char>();
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " is ready to process",LOG_LEVEL_VERBOSE);
+            //TODO
+            return;
+            break;
+        case 1:
+            slot->clearOutput<char>();
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_DETAILS);
 
-    } else {
-        slot->clearOutput<char>();
-        Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_DETAILS);
+            //Grid Part ------------------------------------------------------------------------------------------
 
-        //Grid Part ------------------------------------------------------------------------------------------
+            slot->state = STATE_RECEIVING_GRIP_TYPE;
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
+            if( ! Serveur::getClientGridType(slot) ) return;
 
-        slot->state = STATE_RECEIVING_GRIP_TYPE;
-        Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
-        if( ! Serveur::getClientGridType(slot) ) return;
+            // STATE_RECEIVED_GRIP_TYPE:
+            slot->state = STATE_SENDING_GRIP_TYPE_CONFIRMATION;
+            Logs::write("Sending gridTypeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::confirmClientGridType(slot) ) return;
 
-        // STATE_RECEIVED_GRIP_TYPE:
-        slot->state = STATE_SENDING_GRIP_TYPE_CONFIRMATION;
-        Logs::write("Sending gridTypeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-        if( ! Serveur::confirmClientGridType(slot) ) return;
+            // STATE_SENT_TYPE_GRIP_TYPE_CONFIRMATION:
+            slot->state = STATE_RECEIVING_GRID;
+            Logs::write("Receiving grid from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::getClientGrid(slot) ) return;
 
-        // STATE_SENT_TYPE_GRIP_TYPE_CONFIRMATION:
-        slot->state = STATE_RECEIVING_GRID;
-        Logs::write("Receiving grid from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-        if( ! Serveur::getClientGrid(slot) ) return;
-
-        // STATE_RECEIVED_GRID:
-        slot->state = STATE_SENDING_GRID_CONFIRMATION;
-        Logs::write("Sending gridConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-        if( ! Serveur::confirmClientGrid(slot) ) return;
+            // STATE_RECEIVED_GRID:
+            slot->state = STATE_SENDING_GRID_CONFIRMATION;
+            Logs::write("Sending gridConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::confirmClientGrid(slot) ) return;
+            break;
+        default:
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " send us a wrong choice",LOG_LEVEL_WARNING);
+            slot->clearOutput<char>();
+            slot->disconnect();
+            return;
     }
 
     // STATE_SENT_TYPE_GRID_CONFIRMATION OR STATE_SENT_TYPE_PICTURE_CONFIRMATION:

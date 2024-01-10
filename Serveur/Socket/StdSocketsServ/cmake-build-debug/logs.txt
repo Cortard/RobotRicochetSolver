@@ -1,150 +1,63 @@
-Wed Jan 10 09:09:25 2024: Start Server |2
-Wed Jan 10 09:09:25 2024: -Initialisation socket |2
-Wed Jan 10 09:09:25 2024: Socket Done |2
-Wed Jan 10 09:09:25 2024: Bind Done for IP: 127.0.0.1 PORT : 9090 |2
-Wed Jan 10 09:09:25 2024: Listen Done |2
-Wed Jan 10 09:09:25 2024: Accept loop start |2
-Wed Jan 10 09:09:25 2024: Client accepted IP127.0.0.1 PORT : 52090 |3
-Wed Jan 10 09:09:25 2024: Client added on slot 0 |4
-Wed Jan 10 09:09:25 2024: Process loop start on slot0 |5
-Wed Jan 10 09:09:25 2024: Receiving type from client on slot 0 |4
-Wed Jan 10 09:09:25 2024: Sending typeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:25 2024: Slot 0 choose to send us a grid |3
-Wed Jan 10 09:09:25 2024: Slot 0 choose to send us a grid |4
-Wed Jan 10 09:09:25 2024: Sending gridTypeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:25 2024: Receiving grid from client on slot 0 |4
-Wed Jan 10 09:09:26 2024: Sending gridConfirm to client on slot 0 |4
-Wed Jan 10 09:09:26 2024: Slot 0 begin to solve |4
-Wed Jan 10 09:09:26 2024: Solution found on slot 0 |2
-Wed Jan 10 09:09:26 2024: Sending path to client on slot 0 |4
-Wed Jan 10 09:09:26 2024: Client process on slot 0 is done |3
-Wed Jan 10 09:09:31 2024: Client accepted IP127.0.0.1 PORT : 52102 |3
-Wed Jan 10 09:09:31 2024: Client added on slot 0 |4
-Wed Jan 10 09:09:31 2024: Slot 0 is already processing |1
-Wed Jan 10 09:09:31 2024: Slot 0 is done |4
-Wed Jan 10 09:09:31 2024: Process loop start on slot0 |5
-Wed Jan 10 09:09:31 2024: Receiving type from client on slot 0 |4
-Wed Jan 10 09:09:31 2024: Sending typeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:31 2024: Slot 0 choose to send us a grid |3
-Wed Jan 10 09:09:31 2024: Slot 0 choose to send us a grid |4
-Wed Jan 10 09:09:31 2024: Sending gridTypeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:31 2024: Receiving grid from client on slot 0 |4
-Wed Jan 10 09:09:31 2024: Sending gridConfirm to client on slot 0 |4
-Wed Jan 10 09:09:31 2024: Slot 0 begin to solve |4
-Wed Jan 10 09:09:31 2024: Solution found on slot 0 |2
-Wed Jan 10 09:09:31 2024: Sending path to client on slot 0 |4
-Wed Jan 10 09:09:31 2024: Client process on slot 0 is done |3
-Wed Jan 10 09:09:34 2024: Client accepted IP127.0.0.1 PORT : 52104 |3
-Wed Jan 10 09:09:34 2024: Client added on slot 0 |4
-Wed Jan 10 09:09:34 2024: Slot 0 is already processing |1
-Wed Jan 10 09:09:34 2024: Slot 0 is done |4
-Wed Jan 10 09:09:34 2024: Process loop start on slot0 |5
-Wed Jan 10 09:09:34 2024: Receiving type from client on slot 0 |4
-Wed Jan 10 09:09:34 2024: Sending typeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:34 2024: Slot 0 choose to send us a grid |3
-Wed Jan 10 09:09:34 2024: Slot 0 choose to send us a grid |4
-Wed Jan 10 09:09:34 2024: Sending gridTypeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:34 2024: Receiving grid from client on slot 0 |4
-Wed Jan 10 09:09:34 2024: Sending gridConfirm to client on slot 0 |4
-Wed Jan 10 09:09:34 2024: Slot 0 begin to solve |4
-Wed Jan 10 09:09:34 2024: Solution found on slot 0 |2
-Wed Jan 10 09:09:34 2024: Sending path to client on slot 0 |4
-Wed Jan 10 09:09:34 2024: Client process on slot 0 is done |3
-Wed Jan 10 09:09:35 2024: Client accepted IP127.0.0.1 PORT : 36822 |3
-Wed Jan 10 09:09:35 2024: Client added on slot 0 |4
-Wed Jan 10 09:09:35 2024: Slot 0 is already processing |1
-Wed Jan 10 09:09:35 2024: Slot 0 is done |4
-Wed Jan 10 09:09:35 2024: Process loop start on slot0 |5
-Wed Jan 10 09:09:35 2024: Receiving type from client on slot 0 |4
-Wed Jan 10 09:09:35 2024: Sending typeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:35 2024: Slot 0 choose to send us a grid |3
-Wed Jan 10 09:09:35 2024: Slot 0 choose to send us a grid |4
-Wed Jan 10 09:09:35 2024: Sending gridTypeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:35 2024: Receiving grid from client on slot 0 |4
-Wed Jan 10 09:09:35 2024: Sending gridConfirm to client on slot 0 |4
-Wed Jan 10 09:09:35 2024: Slot 0 begin to solve |4
-Wed Jan 10 09:09:35 2024: Solution found on slot 0 |2
-Wed Jan 10 09:09:35 2024: Sending path to client on slot 0 |4
-Wed Jan 10 09:09:35 2024: Client process on slot 0 is done |3
-Wed Jan 10 09:09:36 2024: Client accepted IP127.0.0.1 PORT : 36830 |3
-Wed Jan 10 09:09:36 2024: Client added on slot 0 |4
-Wed Jan 10 09:09:36 2024: Slot 0 is already processing |1
-Wed Jan 10 09:09:36 2024: Slot 0 is done |4
-Wed Jan 10 09:09:36 2024: Process loop start on slot0 |5
-Wed Jan 10 09:09:36 2024: Receiving type from client on slot 0 |4
-Wed Jan 10 09:09:36 2024: Sending typeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:36 2024: Slot 0 choose to send us a grid |3
-Wed Jan 10 09:09:36 2024: Slot 0 choose to send us a grid |4
-Wed Jan 10 09:09:36 2024: Sending gridTypeConfirm to client on slot 0 |4
-Wed Jan 10 09:09:36 2024: Receiving grid from client on slot 0 |4
-Wed Jan 10 09:09:36 2024: Sending gridConfirm to client on slot 0 |4
-Wed Jan 10 09:09:36 2024: Slot 0 begin to solve |4
-Wed Jan 10 09:09:36 2024: Solution found on slot 0 |2
-Wed Jan 10 09:09:36 2024: Sending path to client on slot 0 |4
-Wed Jan 10 09:09:36 2024: Client process on slot 0 is done |3
-Wed Jan 10 09:15:17 2024: Client accepted IP127.0.0.1 PORT : 55054 |3
-Wed Jan 10 09:15:17 2024: Client added on slot 0 |4
-Wed Jan 10 09:15:17 2024: Slot 0 is already processing |1
-Wed Jan 10 09:15:17 2024: Slot 0 is done |4
-Wed Jan 10 09:15:17 2024: Process loop start on slot0 |5
-Wed Jan 10 09:15:17 2024: Receiving type from client on slot 0 |4
-Wed Jan 10 09:15:17 2024: Sending typeConfirm to client on slot 0 |4
-Wed Jan 10 09:15:17 2024: Slot 0 choose to send us a grid |3
-Wed Jan 10 09:15:17 2024: Slot 0 choose to send us a grid |4
-Wed Jan 10 09:15:17 2024: Sending gridTypeConfirm to client on slot 0 |4
-Wed Jan 10 09:15:17 2024: Receiving grid from client on slot 0 |4
-Wed Jan 10 09:15:17 2024: Sending gridConfirm to client on slot 0 |4
-Wed Jan 10 09:15:17 2024: Slot 0 begin to solve |4
-Wed Jan 10 09:15:17 2024: Not solution in depth 1 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 2 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 3 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 4 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 5 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 6 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 7 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 8 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 9 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 10 in 0s on slot 0 |3
-Wed Jan 10 09:15:17 2024: Not solution in depth 11 in 0s on slot 0 |3
-Wed Jan 10 09:15:18 2024: Not solution in depth 12 in 0s on slot 0 |3
-Wed Jan 10 09:15:18 2024: Not solution in depth 13 in 0s on slot 0 |3
-Wed Jan 10 09:15:18 2024: Not solution in depth 14 in 0s on slot 0 |3
-Wed Jan 10 09:15:19 2024: Not solution in depth 15 in 1s on slot 0 |3
-Wed Jan 10 09:15:22 2024: Not solution in depth 16 in 2s on slot 0 |3
-Wed Jan 10 09:15:26 2024: Not solution in depth 17 in 4s on slot 0 |3
-Wed Jan 10 09:15:33 2024: Not solution in depth 18 in 7s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Client accepted IP127.0.0.1 PORT : 55968 |3
-Wed Jan 10 09:15:39 2024: Client added on slot 1 |4
-Wed Jan 10 09:15:39 2024: Process loop start on slot1 |5
-Wed Jan 10 09:15:39 2024: Receiving type from client on slot 1 |4
-Wed Jan 10 09:15:39 2024: Sending typeConfirm to client on slot 1 |4
-Wed Jan 10 09:15:39 2024: Slot 1 choose to send us a grid |3
-Wed Jan 10 09:15:39 2024: Slot 1 choose to send us a grid |4
-Wed Jan 10 09:15:39 2024: Sending gridTypeConfirm to client on slot 1 |4
-Wed Jan 10 09:15:39 2024: Receiving grid from client on slot 1 |4
-Wed Jan 10 09:15:39 2024: Sending gridConfirm to client on slot 1 |4
-Wed Jan 10 09:15:39 2024: Slot 1 begin to solve |4
-Wed Jan 10 09:15:39 2024: Not solution in depth 1 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 2 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 3 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 4 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 5 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 6 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 7 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 8 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 9 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 10 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 11 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 12 in 0s on slot 0 |3
-Wed Jan 10 09:15:39 2024: Not solution in depth 13 in 0s on slot 0 |3
-Wed Jan 10 09:15:40 2024: Not solution in depth 14 in 0s on slot 0 |3
-Wed Jan 10 09:15:41 2024: Not solution in depth 15 in 1s on slot 0 |3
-Wed Jan 10 09:15:43 2024: Not solution in depth 16 in 2s on slot 0 |3
-Wed Jan 10 09:15:46 2024: Not solution in depth 19 in 13s on slot 0 |3
-Wed Jan 10 09:15:47 2024: Not solution in depth 17 in 3s on slot 0 |3
-Wed Jan 10 09:15:49 2024: Solution found on slot 0 |2
-Wed Jan 10 09:15:49 2024: Sending path to client on slot 0 |4
-Wed Jan 10 09:15:49 2024: Client process on slot 0 is done |3
-Wed Jan 10 09:15:54 2024: Error when send for slot 0 on state -1 |0
-Wed Jan 10 09:17:53 2024: Close socket |2
-Wed Jan 10 09:17:53 2024: Server shutdown |2
+Wed Jan 10 09:42:16 2024: Start Server |2
+Wed Jan 10 09:42:16 2024: -Initialisation socket |2
+Wed Jan 10 09:42:16 2024: Socket Done |2
+Wed Jan 10 09:42:16 2024: Bind Done for IP: 127.0.0.1 PORT : 9090 |2
+Wed Jan 10 09:42:16 2024: Listen Done |2
+Wed Jan 10 09:42:16 2024: Accept loop start |2
+Wed Jan 10 09:42:18 2024: Client accepted IP127.0.0.1 PORT : 60426 |3
+Wed Jan 10 09:42:18 2024: Client added on slot 0 |4
+Wed Jan 10 09:42:18 2024: Process loop start on slot0 |5
+Wed Jan 10 09:42:18 2024: Receiving type from client on slot 0 |4
+Wed Jan 10 09:42:18 2024: Sending typeConfirm to client on slot 0 |4
+Wed Jan 10 09:42:18 2024: Slot 0 send us a wrong choice |1
+Wed Jan 10 09:42:26 2024: Client accepted IP127.0.0.1 PORT : 44652 |3
+Wed Jan 10 09:42:26 2024: Client added on slot 0 |4
+Wed Jan 10 09:42:26 2024: Slot 0 is already processing |1
+Wed Jan 10 09:42:26 2024: Slot 0 is done |4
+Wed Jan 10 09:42:26 2024: Process loop start on slot0 |5
+Wed Jan 10 09:42:26 2024: Receiving type from client on slot 0 |4
+Wed Jan 10 09:42:26 2024: Sending typeConfirm to client on slot 0 |4
+Wed Jan 10 09:42:26 2024: Slot 0 send us a wrong choice |1
+Wed Jan 10 09:42:29 2024: Client accepted IP127.0.0.1 PORT : 44668 |3
+Wed Jan 10 09:42:29 2024: Client added on slot 0 |4
+Wed Jan 10 09:42:29 2024: Slot 0 is already processing |1
+Wed Jan 10 09:42:29 2024: Slot 0 is done |4
+Wed Jan 10 09:42:29 2024: Process loop start on slot0 |5
+Wed Jan 10 09:42:29 2024: Receiving type from client on slot 0 |4
+Wed Jan 10 09:42:29 2024: Sending typeConfirm to client on slot 0 |4
+Wed Jan 10 09:42:29 2024: Slot 0 send us a wrong choice |1
+Wed Jan 10 09:43:33 2024: Client accepted IP127.0.0.1 PORT : 34120 |3
+Wed Jan 10 09:43:33 2024: Client added on slot 0 |4
+Wed Jan 10 09:43:33 2024: Slot 0 is already processing |1
+Wed Jan 10 09:43:33 2024: Slot 0 is done |4
+Wed Jan 10 09:43:33 2024: Process loop start on slot0 |5
+Wed Jan 10 09:43:33 2024: Receiving type from client on slot 0 |4
+Wed Jan 10 09:43:33 2024: Sending typeConfirm to client on slot 0 |4
+Wed Jan 10 09:43:33 2024: Slot 0 choose to send us a grid |3
+Wed Jan 10 09:43:33 2024: Slot 0 choose to send us a grid |4
+Wed Jan 10 09:43:33 2024: Sending gridTypeConfirm to client on slot 0 |4
+Wed Jan 10 09:43:33 2024: Receiving grid from client on slot 0 |4
+Wed Jan 10 09:43:33 2024: Sending gridConfirm to client on slot 0 |4
+Wed Jan 10 09:43:33 2024: Slot 0 begin to solve |4
+Wed Jan 10 09:43:33 2024: Not solution in depth 1 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 2 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 3 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 4 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 5 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 6 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 7 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 8 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 9 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 10 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 11 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 12 in 0s on slot 0 |3
+Wed Jan 10 09:43:33 2024: Not solution in depth 13 in 0s on slot 0 |3
+Wed Jan 10 09:43:34 2024: Not solution in depth 14 in 0s on slot 0 |3
+Wed Jan 10 09:43:35 2024: Not solution in depth 15 in 1s on slot 0 |3
+Wed Jan 10 09:43:37 2024: Not solution in depth 16 in 2s on slot 0 |3
+Wed Jan 10 09:43:41 2024: Not solution in depth 17 in 4s on slot 0 |3
+Wed Jan 10 09:43:49 2024: Not solution in depth 18 in 7s on slot 0 |3
+Wed Jan 10 09:44:02 2024: Not solution in depth 19 in 12s on slot 0 |3
+Wed Jan 10 09:44:05 2024: Solution found on slot 0 |2
+Wed Jan 10 09:44:05 2024: Sending path to client on slot 0 |4
+Wed Jan 10 09:44:05 2024: Client process on slot 0 is done |3
