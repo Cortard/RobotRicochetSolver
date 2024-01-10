@@ -15,7 +15,8 @@ SOURCES += \
     mainwindow.cpp \
     viewboard.cpp \
     viewmainmenu.cpp \
-    viewplateau.cpp
+    viewplateau.cpp \
+    viewplateauofficiel.cpp
 
 HEADERS += \
     board.h \
@@ -24,7 +25,8 @@ HEADERS += \
     observer.h \
     viewboard.h \
     viewmainmenu.h \
-    viewplateau.h
+    viewplateau.h \
+    viewplateauofficiel.h
 
 FORMS += \
     mainwindow.ui

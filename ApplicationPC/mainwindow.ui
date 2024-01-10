@@ -1152,6 +1152,181 @@ QPushButton#pushObjective_3:pressed {
        </layout>
       </widget>
      </widget>
+     <widget class="QWidget" name="choixplateau">
+      <widget class="QWidget" name="verticalLayoutWidget_7">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>1261</width>
+         <height>701</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <property name="leftMargin">
+         <number>100</number>
+        </property>
+        <property name="rightMargin">
+         <number>100</number>
+        </property>
+        <property name="bottomMargin">
+         <number>200</number>
+        </property>
+        <item row="3" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="spacing">
+           <number>150</number>
+          </property>
+          <property name="leftMargin">
+           <number>100</number>
+          </property>
+          <property name="rightMargin">
+           <number>100</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pushHistoire_3">
+            <property name="minimumSize">
+             <size>
+              <width>350</width>
+              <height>350</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>350</width>
+              <height>350</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background : url(:/img/histoire.jpg) center center;</string>
+            </property>
+            <property name="text">
+             <string>Officiel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushTrain_3">
+            <property name="minimumSize">
+             <size>
+              <width>350</width>
+              <height>350</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>350</width>
+              <height>350</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background : url(:/img/train.png) center center;</string>
+            </property>
+            <property name="text">
+             <string>Libre</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="font">
+           <font>
+            <pointsize>30</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(194, 167, 225);</string>
+          </property>
+          <property name="text">
+           <string>Edition</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="Retour_6">
+          <property name="text">
+           <string>Retour</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="plateauofficiel">
+      <widget class="QWidget" name="verticalLayoutWidget_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>1501</width>
+         <height>601</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <property name="leftMargin">
+         <number>100</number>
+        </property>
+        <property name="rightMargin">
+         <number>100</number>
+        </property>
+        <property name="bottomMargin">
+         <number>100</number>
+        </property>
+        <item row="1" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="Home_4">
+          <property name="text">
+           <string>Home</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="Retour_8">
+          <property name="text">
+           <string>Retour</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <property name="spacing">
+           <number>100</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>200</number>
+          </property>
+          <item>
+           <widget class="QGraphicsView" name="graphicsView_6">
+            <property name="minimumSize">
+             <size>
+              <width>1004</width>
+              <height>425</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1004</width>
+              <height>425</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background : url(:/img/Fond2.png) center center no-repeat;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
     </widget>
    </widget>
   </widget>

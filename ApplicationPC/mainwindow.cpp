@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
 
     viewBoard = nullptr;
     viewPlato = nullptr;
+    viewPlateauOfficiel = nullptr;
 
     viewMenu = new viewMainMenu(ui->stackedWidget->widget(1)->findChild<QWidget*>("mainmenuwindow"));
 
@@ -23,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
     QRect screenGeometry = screen->geometry();
     move((screenGeometry.width() - width()) / 2, (screenGeometry.height() - height()) / 2);
 
+    //connect(ui->graphicsView_5, SIGNAL(clicked(const QPointF&)), this, SLOT(onGraphicsViewClicked(const QPointF&)));
 }
 
 MainWindow::~MainWindow()
@@ -119,12 +121,7 @@ void MainWindow::on_Retour_2_clicked()
 
 void MainWindow::on_pushTrain_2_clicked()
 {
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentWidget(ui->choixplateau);
 }
 
 
@@ -143,5 +140,27 @@ void MainWindow::on_pushPlateau_clicked()
 void MainWindow::on_Home_5_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
+}
+
+
+void MainWindow::on_pushTrain_3_clicked()
+{
+    if (viewBoard == nullptr) {
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+    }
+    ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+}
+
+
+void MainWindow::on_pushHistoire_3_clicked()
+{
+    if (viewPlateauOfficiel == nullptr) {
+        viewPlateauOfficiel = new ViewPlateauOfficiel(board);
+        ui->stackedWidget->widget(8)->findChild<QGraphicsView*>()->setScene(viewPlateauOfficiel);
+        viewPlateauOfficiel->setParent(ui->stackedWidget->widget(8)->findChild<QGraphicsView*>());
+    }
+    ui->stackedWidget->setCurrentWidget(ui->plateauofficiel);
 }
 

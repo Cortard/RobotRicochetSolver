@@ -33,6 +33,23 @@
         <file>creer.jpg</file>
         <file>histoire.jpg</file>
         <file>train.png</file>
+        <file>part1.jpg</file>
+        <file>part2.jpg</file>
+        <file>part3.jpg</file>
+        <file>part4.jpg</file>
+        <file>part5.jpg</file>
+        <file>part6.jpg</file>
+        <file>part7.jpg</file>
+        <file>part8.jpg</file>
+        <file>part9.jpg</file>
+        <file>part10.jpg</file>
+        <file>part11.jpg</file>
+        <file>part12.jpg</file>
+        <file>part13.jpg</file>
+        <file>part14.jpg</file>
+        <file>part15.jpg</file>
+        <file>part16.jpg</file>
+        <file>Fond2.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

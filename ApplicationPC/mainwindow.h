@@ -6,6 +6,9 @@
 #include "viewboard.h"
 #include "viewmainmenu.h"
 #include "viewplateau.h"
+#include "viewplateauofficiel.h"
+#include "QGridLayout"
+#include <QLabel>
 
 
 QT_BEGIN_NAMESPACE
@@ -47,12 +50,18 @@ private slots:
     void on_Home_5_clicked();
     void handleMovement();
 
+    void on_pushTrain_3_clicked();
+
+    void on_pushHistoire_3_clicked();
 private:
     Ui::MainWindow *ui;
     Board* board;
     ViewBoard *viewBoard;
     viewMainMenu *viewMenu;
     viewPlateau *viewPlato;
+    ViewPlateauOfficiel *viewPlateauOfficiel;
+
+    QLabel *selectedLabel;
 
 };
 #endif // MAINWINDOW_H
