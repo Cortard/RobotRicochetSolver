@@ -61,3 +61,5 @@ Wed Jan 10 09:44:02 2024: Not solution in depth 19 in 12s on slot 0 |3
 Wed Jan 10 09:44:05 2024: Solution found on slot 0 |2
 Wed Jan 10 09:44:05 2024: Sending path to client on slot 0 |4
 Wed Jan 10 09:44:05 2024: Client process on slot 0 is done |3
+Wed Jan 10 09:44:24 2024: Close socket |2
+Wed Jan 10 09:44:24 2024: Server shutdown |2

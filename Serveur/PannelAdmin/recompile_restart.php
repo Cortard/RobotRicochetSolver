@@ -38,18 +38,25 @@ require_once 'include/makeLink.php';
 
 <main id="mainAdminPanel">
     <?php
+        echo '<div class="joliBox boxFullWidth">';
+            echo makeLink(false, false,'recompile2');
+            echo '<div class="result">';
+                echo "<pre>Status :</pre>";
+                $command = 'systemctl status ricochet.service';
+                $output = shell_exec($command);
+                echo "<pre>$output</pre>";
+            echo '</div>';
+        echo '</div>';
+    ?>
+
+    <?php
         if(isset($_GET['recompile']) && $_GET['recompile'] == 1){
             echo '<div class="joliBox boxFullWidth">';
                 echo makeLink(true, false,'recompile2');
                 echo '<div class="result">';
-                    echo "<pre>Recompiling...</pre>";
-                    $output =null;
-                    $return_var = null;
-                    $result = exec('/home/ricochet/buildServeur.sh', $output, $return_var);
-                    echo "Result : <pre>$result</pre>";
-                    echo "Output :";
-                    var_dump($output);
-                    echo "\n Return var : <pre>$return_var</pre>";
+                    echo "<pre>Try restart ...</pre>";
+                    $output = shell_exec('/home/ricochet/buildRicochetSocketServer.sh');
+                    echo "<pre>$output</pre>";
                 echo '</div>';
             echo '</div>';
         }

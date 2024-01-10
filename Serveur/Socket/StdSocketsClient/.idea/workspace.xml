@@ -25,11 +25,8 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/StdSocketsClient" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/StdSocketsClient" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/RicochetSocketServer.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/RicochetSocketServer.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/configue.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/logs.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/configue.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +120,7 @@
       <workItem from="1704636531802" duration="4106000" />
       <workItem from="1704792283197" duration="197000" />
       <workItem from="1704792486767" duration="7933000" />
-      <workItem from="1704873965208" duration="1449000" />
+      <workItem from="1704873965208" duration="2940000" />
     </task>
     <servers />
   </component>
