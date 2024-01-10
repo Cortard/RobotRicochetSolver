@@ -32,6 +32,7 @@ ViewBoard::ViewBoard(Board* board) : QGraphicsScene(), Observer()
     robotImg[3]=":/img/robotjaune.png";
     robotImg[4]=":/img/robotnoir.png";
 
+    drawWall();
     updateModel();
     update();
 }

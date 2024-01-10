@@ -53,6 +53,10 @@ private slots:
     void on_pushTrain_3_clicked();
 
     void on_pushHistoire_3_clicked();
+    void on_pushButton_clicked();
+
+    void on_pushButton_5_clicked();
+
 private:
     Ui::MainWindow *ui;
     Board* board;
