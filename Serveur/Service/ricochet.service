@@ -1,11 +1,10 @@
 [Unit]
 Description=<Resolution Sockets Serveur For Ricochet Robot App>
-After=apache2.service
 
 [Service]
-User=root
+User=ricochet
 WorkingDirectory=/home/ricochet/
-ExecStart=/home/ricochet/buildServeur/StdSockets
+ExecStart=/home/ricochet/buildServeur/RicochetSocketServer.exe
 # optional items below
 Restart=always
 RestartSec=3
