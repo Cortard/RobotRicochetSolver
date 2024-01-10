@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -15,9 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -39,7 +36,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
      static TextView txt;
     private static final int TIMEOUT = 10000;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
-    private static final int PERMISSION_CODE = 1234;
 
     String filePath;
 
@@ -104,44 +100,21 @@ public class PictureVerifyActivity extends AppCompatActivity {
         bVld.setOnClickListener(v -> {
             //MainActivity.ip
 
-           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-
-                    String[] permissions = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                    requestPermissions(permissions, PERMISSION_CODE);
-                } else {
-                    sendImage("195.201.205.241", 9090, filePath, this);
-                    imageView.setVisibility(View.INVISIBLE);
-                    bCancel.setVisibility(View.INVISIBLE);
-                    bVld.setVisibility(View.INVISIBLE);
-                }
-           } else {
-               sendImage("195.201.205.241", 9090, filePath, this);
-               imageView.setVisibility(View.INVISIBLE);
-               bCancel.setVisibility(View.INVISIBLE);
-               bVld.setVisibility(View.INVISIBLE);
-           }
-
+//            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+//                    != PackageManager.PERMISSION_GRANTED) {
+//                // La permission n'est pas accordée, demandez à l'utilisateur
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+//                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+//            } else {
+                sendImage("195.201.205.241", 9090, filePath, this);
+                imageView.setVisibility(View.INVISIBLE);
+                bCancel.setVisibility(View.INVISIBLE);
+                bVld.setVisibility(View.INVISIBLE);
+//            }
 
         });
 
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case PERMISSION_CODE:
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    sendImage("195.201.205.241", 9090, filePath, this);
-                    imageView.setVisibility(View.INVISIBLE);
-                    bCancel.setVisibility(View.INVISIBLE);
-                    bVld.setVisibility(View.INVISIBLE);
-                } else {
-                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-                }
-        }
     }
 
     public String getRealPathFromURI(Uri contentUri) {
