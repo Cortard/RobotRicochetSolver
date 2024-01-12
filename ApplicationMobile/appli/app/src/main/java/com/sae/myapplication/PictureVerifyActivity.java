@@ -1,10 +1,14 @@
 package com.sae.myapplication;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -14,12 +18,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -35,7 +42,9 @@ public class PictureVerifyActivity extends AppCompatActivity {
     ImageView imageView;
      static TextView txt;
     private static final int TIMEOUT = 10000;
-    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+
+    private static final int PERMISSION_CODE_FOLDER = 1234;
+
 
     String filePath;
 
@@ -98,23 +107,40 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
 
         bVld.setOnClickListener(v -> {
-            //MainActivity.ip
 
-//            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//                    != PackageManager.PERMISSION_GRANTED) {
-//                // La permission n'est pas accordée, demandez à l'utilisateur
-//                ActivityCompat.requestPermissions(this,
-//                        new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
-//                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-//            } else {
-                sendImage("195.201.205.241", 9090, filePath, this);
-                imageView.setVisibility(View.INVISIBLE);
-                bCancel.setVisibility(View.INVISIBLE);
-                bVld.setVisibility(View.INVISIBLE);
-//            }
+            try {
+                if (ActivityCompat.checkSelfPermission(PictureVerifyActivity.this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(PictureVerifyActivity.this, new String[]{Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE_FOLDER);
+                } else {
+                    sendImage("195.201.205.241", 9090, filePath, this);
+                    imageView.setVisibility(View.INVISIBLE);
+                    bCancel.setVisibility(View.INVISIBLE);
+                    bVld.setVisibility(View.INVISIBLE);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         });
 
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_CODE_FOLDER:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    sendImage("195.201.205.241", 9090, filePath, this);
+                    imageView.setVisibility(View.INVISIBLE);
+                    bCancel.setVisibility(View.INVISIBLE);
+                    bVld.setVisibility(View.INVISIBLE);
+                } else {
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 
     public String getRealPathFromURI(Uri contentUri) {
@@ -141,6 +167,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 try {
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inJustDecodeBounds = true;
+
+                    BitmapFactory.decodeFile(filePath, options);
 
                     int width = options.outWidth;
                     int height = options.outHeight;
@@ -170,55 +198,79 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         }
                         dataOutputStream.flush();
 
+                        txt.setText(width * height * 3 + " 1");
+
 
                         DataInputStream dataInputStreamLong = new DataInputStream(socket.getInputStream());
-                        long responseSize = dataInputStreamLong.readLong();
+                        long responseSize = dataInputStreamLong.read();
 
-                        txt.setText(width * height *3);
+                        txt.setText(width * height * 3 + " 2");
 
-                        if (responseSize == width * height * 3) {
-                            char[] imageData = readFileToCharArray(filePath);
+                        if (width * height * 3 > 0) {
+
+
+                            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] imageInByte = baos.toByteArray();
+
+                            char[] convertedChar = new char[imageInByte.length];
+                            for(int i=0;i < imageInByte.length;i++){
+                                convertedChar[i]=(char)imageInByte[i];
+                            }
+
+                            //char[] imageData = readFileToCharArray(filePath);
+
+                            txt.setText(width * height * 3 + " 3");
 
                             // Envoyer la taille du tableau
-                            int size = imageData.length;
+                            int size = convertedChar.length;
+
+                            txt.setText(size + " 3.5");
+
                             dataOutputStream.writeInt(size);
 
+                            txt.setText(size + " 4");
+
                             // Envoyer le tableau de chars
-                            for (char c : imageData) {
+                            for (char c : convertedChar) {
                                 dataOutputStream.writeChar(c);
                             }
 
+                            txt.setText(size + " 5");
 
                             // Attente de la confirmation de la réception
                             int responseConfirm = dataInputStream.readInt();
 
-                            if (responseConfirm == 1) { // confirm state
+                            txt.setText((int) responseConfirm + " 5");
+
+                            if ((int)responseConfirm == 1) { // confirm state
                                 // Envoie du FLAG au serveur : 1
-                                dataOutputStream.writeChar('1');
+                                dataOutputStream.writeChar(1);
                                 dataOutputStream.flush();
 
                                 // Attente de la réponse du serveur avec timeout
                                 char confirmFlag = dataInputStream.readChar();
 
-                                if (confirmFlag == '1') {
+                                if ((int)confirmFlag == 1) {
                                     // Attendre quelque temps (tu peux remplacer par la logique que tu souhaites)
                                     Thread.sleep(TIMEOUT);
 
                                     // Envoie des informations sur l'état
-                                    dataOutputStream.writeChar('1');
+                                    dataOutputStream.writeChar(1);
                                     dataOutputStream.flush();
 
                                     int depth = dataInputStream.readInt();
                                     int duration = dataInputStream.readInt();
 
                                     // Envoie du FLAG au serveur : 1
-                                    dataOutputStream.writeChar('1');
+                                    dataOutputStream.writeChar(1);
                                     dataOutputStream.flush();
 
                                     // Attente de la réponse du serveur avec timeout
                                     char finalFlag = dataInputStream.readChar();
 
-                                    if (finalFlag == '1') {
+                                    if ((int)finalFlag == 1) {
                                         // Processus terminé avec succès
                                         Intent intent = new Intent(answer, PictureAnswerActivity.class);
                                         startActivity(intent);
@@ -241,12 +293,12 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 // Attendre la confirmation du serveur
                                 char confirmFlag = dataInputStream.readChar();
 
-                                if (confirmFlag == '1') {
+                                if ((int)confirmFlag == 1) {
                                     // Attendre quelque temps (tu peux remplacer par la logique que tu souhaites)
                                     Thread.sleep(TIMEOUT);
 
                                     // Envoie des informations sur l'état
-                                    dataOutputStream.writeChar('1');
+                                    dataOutputStream.writeChar(1);
                                     dataOutputStream.flush();
 
                                     // Lire le chemin depuis le serveur : grille
@@ -254,12 +306,12 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                     dataInputStream.readFully(path);
 
 
-                                    if (confirmFlag == '1') {
+                                    if ((int)confirmFlag == 1) {
                                         // Attendre quelque temps (tu peux remplacer par la logique que tu souhaites)
                                         Thread.sleep(TIMEOUT);
 
                                         // Envoie des informations sur l'état
-                                        dataOutputStream.writeChar('1');
+                                        dataOutputStream.writeChar(1);
                                         dataOutputStream.flush();
 
                                         // Lire le chemin depuis le serveur : correction
@@ -300,17 +352,38 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 } catch (SocketTimeoutException e) {
 //                    Intent intent = new Intent(answer, PictureActivity.class);
 //                    startActivity(intent);
+                    try {
+                        fileInputStream.close();
+                        bufferedOutputStream.close();
+                        socket.close();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     txt.setText(e.toString());
                 } catch (IOException | InterruptedException e) {
 //                    Intent intent = new Intent(answer, PictureActivity.class);
 //                    startActivity(intent);
+                    try {
+                        fileInputStream.close();
+                        bufferedOutputStream.close();
+                        socket.close();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     e.printStackTrace();
-                    txt.setText(e.toString());
+                    txt.setText(e + " io");
                 } catch (Exception e) {
 //                    Intent intent = new Intent(answer, PictureActivity.class);
 //                    startActivity(intent);
+                    try {
+                        fileInputStream.close();
+                        bufferedOutputStream.close();
+                        socket.close();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     e.printStackTrace();
-                    txt.setText(e.toString());
+                    txt.setText(e + " exept");
                 }
             }
         });
