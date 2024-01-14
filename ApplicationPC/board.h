@@ -34,7 +34,7 @@ public:
     // premier int : id , deuxieme int : position du tableau
     std::map<int, int> objectives;
     std::map<int, int> robots;
-    int cases[256];
+    unsigned int cases[256];
     int mouvement=0;
     int objJeu=-1;
 

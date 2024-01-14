@@ -119,10 +119,11 @@ public:
     QWidget *plateauofficiel;
     QWidget *verticalLayoutWidget_8;
     QGridLayout *gridLayout_10;
-    QPushButton *Home_4;
-    QPushButton *Retour_8;
     QHBoxLayout *horizontalLayout_8;
     QGraphicsView *graphicsView_6;
+    QPushButton *Home_4;
+    QPushButton *Retour_8;
+    QPushButton *pushButton;
     QButtonGroup *buttonGroup;
 
     void setupUi(QMainWindow *MainWindow)
@@ -624,7 +625,11 @@ public:
         pushObjective_3->setGeometry(QRect(80, 220, 200, 41));
         pushObjective_3->setMinimumSize(QSize(200, 0));
         pushObjective_3->setMaximumSize(QSize(200, 100));
-        pushObjective_3->setFont(font2);
+        QFont font4;
+        font4.setFamilies({QString::fromUtf8("Quicksand Medium")});
+        font4.setPointSize(15);
+        font4.setBold(false);
+        pushObjective_3->setFont(font4);
         pushObjective_3->setStyleSheet(QString::fromUtf8("QPushButton#pushObjective_3 {\n"
 "    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));\n"
 "	border:none;\n"
@@ -645,10 +650,10 @@ public:
         label = new QLabel(frame_7);
         label->setObjectName("label");
         label->setGeometry(QRect(170, 150, 31, 31));
-        QFont font4;
-        font4.setFamilies({QString::fromUtf8("Quicksand Medium")});
-        font4.setPointSize(20);
-        label->setFont(font4);
+        QFont font5;
+        font5.setFamilies({QString::fromUtf8("Quicksand Medium")});
+        font5.setPointSize(20);
+        label->setFont(font5);
 
         verticalLayout_3->addWidget(frame_7);
 
@@ -716,20 +721,10 @@ public:
         plateauofficiel->setObjectName("plateauofficiel");
         verticalLayoutWidget_8 = new QWidget(plateauofficiel);
         verticalLayoutWidget_8->setObjectName("verticalLayoutWidget_8");
-        verticalLayoutWidget_8->setGeometry(QRect(10, 10, 1501, 601));
+        verticalLayoutWidget_8->setGeometry(QRect(10, 10, 1501, 639));
         gridLayout_10 = new QGridLayout(verticalLayoutWidget_8);
         gridLayout_10->setObjectName("gridLayout_10");
         gridLayout_10->setContentsMargins(100, 0, 100, 100);
-        Home_4 = new QPushButton(verticalLayoutWidget_8);
-        Home_4->setObjectName("Home_4");
-
-        gridLayout_10->addWidget(Home_4, 1, 0, 1, 1, Qt::AlignLeft);
-
-        Retour_8 = new QPushButton(verticalLayoutWidget_8);
-        Retour_8->setObjectName("Retour_8");
-
-        gridLayout_10->addWidget(Retour_8, 2, 0, 1, 1, Qt::AlignLeft);
-
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setSpacing(100);
         horizontalLayout_8->setObjectName("horizontalLayout_8");
@@ -744,6 +739,44 @@ public:
 
 
         gridLayout_10->addLayout(horizontalLayout_8, 3, 0, 1, 1);
+
+        Home_4 = new QPushButton(verticalLayoutWidget_8);
+        Home_4->setObjectName("Home_4");
+
+        gridLayout_10->addWidget(Home_4, 1, 0, 1, 1, Qt::AlignLeft);
+
+        Retour_8 = new QPushButton(verticalLayoutWidget_8);
+        Retour_8->setObjectName("Retour_8");
+
+        gridLayout_10->addWidget(Retour_8, 2, 0, 1, 1, Qt::AlignLeft);
+
+        pushButton = new QPushButton(verticalLayoutWidget_8);
+        pushButton->setObjectName("pushButton");
+        pushButton->setMaximumSize(QSize(200, 100));
+        QFont font6;
+        font6.setFamilies({QString::fromUtf8("Quicksand Medium")});
+        font6.setPointSize(15);
+        font6.setBold(true);
+        pushButton->setFont(font6);
+        pushButton->setStyleSheet(QString::fromUtf8("QPushButton#pushButton {\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));\n"
+"	border:none;\n"
+"	border-radius: 5px;\n"
+"	padding:10px;\n"
+"	color : #70bfcb;\n"
+"}\n"
+"\n"
+"QPushButton#pushButton:hover {\n"
+"    background-color: #9c2579;\n"
+"}\n"
+"\n"
+"QPushButton#pushButton:pressed {\n"
+"    background-color: #9c2579;     \n"
+"}\n"
+"\n"
+""));
+
+        gridLayout_10->addWidget(pushButton, 4, 0, 1, 1);
 
         stackedWidget->addWidget(plateauofficiel);
         MainWindow->setCentralWidget(centralwidget);
@@ -794,6 +827,7 @@ public:
         Retour_6->setText(QCoreApplication::translate("MainWindow", "Retour", nullptr));
         Home_4->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
         Retour_8->setText(QCoreApplication::translate("MainWindow", "Retour", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "Jouer", nullptr));
     } // retranslateUi
 
 };

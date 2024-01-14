@@ -22,9 +22,7 @@
 #include <iostream>
 #include "configure.h"
 
-SocketConnection::SocketConnection() {}
-
-int SocketConnection::getSolution() {
+int SocketConnection::getSolution(Board* board) {
     #if defined (WIN32)
         WSADATA WSAData;
         int _erreur = WSAStartup(MAKEWORD(2,2), &WSAData);
@@ -83,8 +81,17 @@ int SocketConnection::getSolution() {
         return EXIT_FAILURE;
     }printf("Type de grille reçu identique à celui envoyé\n");
 
-    unsigned int grid[256]={9, 1, 5, 1, 3, 9, 1, 1, 1, 3, 9, 1, 1, 1, 1, 3, 8, 2, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 3, 8, 0, 0, 0, 0, 2, 12, 0, 2, 9, 0, 0, 0, 0, 4, 2, 12, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 10, 9, 0, 0, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 6, 8, 0, 0, 0, 0, 4, 4, 0, 0, 2, 12, 0, 0, 2, 8, 1, 0, 0, 0, 0, 2, 9, 3, 8, 0, 0, 1, 0, 0, 2, 8, 0, 4, 0, 2, 12, 2, 12, 6, 8, 0, 0, 0, 0, 0, 6, 8, 18, 9, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9, 0, 2, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 0, 0, 0, 2, 9, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 2, 12, 2, 8, 0, 0, 16, 3, 8, 0, 0, 0, 4, 0, 0, 0, 0, 1, 2, 8, 6, 8, 0, 0, 0, 0, 0, 0, 3, 8, 0, 0, 0, 16, 2, 12, 5, 4, 4, 4, 6, 12, 4, 4, 4, 4, 6, 12, 4, 4, 6};
-    unsigned int robots[4]={176, 145, 211, 238};
+    unsigned int grid[256];
+    for(int i=0; i<256; ++i) {
+        grid[i] = board->cases[i];
+    }
+    unsigned int robots[4];
+    std::map<int, int>::iterator it;
+    int cpt = 0;
+    for(it = board->robots.begin(); it != board->robots.end(); ++it) {
+        robots[cpt] = it->second;
+        ++cpt;
+    }
     unsigned int token=54;
     result = send(sockServ, (char *) &grid, sizeof(grid), 0);
     if (result == SOCKET_ERROR) {
