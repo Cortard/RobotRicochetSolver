@@ -1080,6 +1080,7 @@ border:none;</string>
                 <font>
                  <family>Quicksand Medium</family>
                  <pointsize>15</pointsize>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="styleSheet">
@@ -1265,7 +1266,7 @@ QPushButton#pushObjective_3:pressed {
          <x>10</x>
          <y>10</y>
          <width>1501</width>
-         <height>601</height>
+         <height>639</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_10">
@@ -1278,20 +1279,6 @@ QPushButton#pushObjective_3:pressed {
         <property name="bottomMargin">
          <number>100</number>
         </property>
-        <item row="1" column="0" alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="Home_4">
-          <property name="text">
-           <string>Home</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0" alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="Retour_8">
-          <property name="text">
-           <string>Retour</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <property name="spacing">
@@ -1323,6 +1310,59 @@ QPushButton#pushObjective_3:pressed {
            </widget>
           </item>
          </layout>
+        </item>
+        <item row="1" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="Home_4">
+          <property name="text">
+           <string>Home</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="Retour_8">
+          <property name="text">
+           <string>Retour</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="pushButton">
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <pointsize>15</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#pushButton {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#pushButton:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#pushButton:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
+          <property name="text">
+           <string>Jouer</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
