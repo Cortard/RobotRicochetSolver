@@ -5,6 +5,7 @@ SOCKADDR_IN Serveur::addressInternet;
 std::chrono::seconds Serveur::lastProcessTime=std::chrono::seconds(35);
 Client Serveur::slots[MAX_CLIENTS];
 bool Serveur::running=false;
+std::mutex Serveur::mutexRunning;
 
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                                       init                                                                      //
@@ -37,7 +38,9 @@ int Serveur::init() {
 
     for(Client & slot: slots) slot.state=STATE_DISCONNECTED;
 
+    mutexRunning.lock();
     running=true;
+    mutexRunning.unlock();
 
     return 0;
 }
@@ -46,7 +49,10 @@ int Serveur::init() {
 //                                                       end                                                                       //
 //---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::end() {
+    mutexRunning.lock();
     running=false;
+    mutexRunning.unlock();
+
     shutdown(sock, 2);
     for(Client & slot: slots) {
         if(slot.state==STATE_DISCONNECTED) continue;
@@ -65,7 +71,9 @@ void Serveur::acceptLoop() {
     SOCKADDR_IN sockAddrClient;
     socklen_t sockAddrClientSize=sizeof(SOCKADDR_IN);
 
+    mutexRunning.lock();
     while(running){
+        mutexRunning.unlock();
         SOCKET newClientSock=accept(sock, (SOCKADDR*)&sockAddrClient, &sockAddrClientSize);
         if( newClientSock == SOCKET_ERROR ) {
             continue;
@@ -86,7 +94,9 @@ void Serveur::acceptLoop() {
             Logs::write("Slot " + std::to_string(freeSlot) + " is done",LOG_LEVEL_VERBOSE);
         }
         slots[freeSlot].processThread=std::thread(Serveur::processLoop,&slots[freeSlot]);
+        mutexRunning.lock();
     }
+    mutexRunning.unlock();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------//

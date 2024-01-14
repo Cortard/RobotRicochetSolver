@@ -21,14 +21,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/configue.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/configue.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/solver/Game.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/solver/Game.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/solver/Solver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/solver/Solver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/solver/Solver.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/solver/Solver.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Serveur.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +116,7 @@
       <workItem from="1704792283197" duration="197000" />
       <workItem from="1704792486767" duration="7933000" />
       <workItem from="1704873965208" duration="2940000" />
-      <workItem from="1705243709498" duration="2653000" />
+      <workItem from="1705243709498" duration="2999000" />
     </task>
     <servers />
   </component>

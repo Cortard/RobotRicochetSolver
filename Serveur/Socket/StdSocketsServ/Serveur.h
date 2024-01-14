@@ -22,6 +22,7 @@ private:
     static SOCKADDR_IN addressInternet;
     static std::chrono::seconds lastProcessTime;
     static bool running;
+    static std::mutex mutexRunning;
 
     static int foundEmptySlot();
 
