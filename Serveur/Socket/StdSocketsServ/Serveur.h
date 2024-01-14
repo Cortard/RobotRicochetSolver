@@ -14,13 +14,14 @@ public:
     static int init();
     static void end();
 
-    [[noreturn]] static void acceptLoop();
+    static void acceptLoop();
 
     static void processLoop(Client* slot);
 private:
     static SOCKET sock;
     static SOCKADDR_IN addressInternet;
     static std::chrono::seconds lastProcessTime;
+    static bool running;
 
     static int foundEmptySlot();
 

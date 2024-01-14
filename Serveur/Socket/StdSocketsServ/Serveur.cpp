@@ -4,6 +4,7 @@ SOCKET Serveur::sock;
 SOCKADDR_IN Serveur::addressInternet;
 std::chrono::seconds Serveur::lastProcessTime=std::chrono::seconds(35);
 Client Serveur::slots[MAX_CLIENTS];
+bool Serveur::running=false;
 
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                                       init                                                                      //
@@ -36,6 +37,8 @@ int Serveur::init() {
 
     for(Client & slot: slots) slot.state=STATE_DISCONNECTED;
 
+    running=true;
+
     return 0;
 }
 
@@ -43,6 +46,7 @@ int Serveur::init() {
 //                                                       end                                                                       //
 //---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::end() {
+    running=false;
     shutdown(sock, 2);
     for(Client & slot: slots) {
         if(slot.state==STATE_DISCONNECTED) continue;
@@ -55,13 +59,13 @@ void Serveur::end() {
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                                 acceptLoop                                                                      //
 //---------------------------------------------------------------------------------------------------------------------------------//
-[[noreturn]] void Serveur::acceptLoop() {
+void Serveur::acceptLoop() {
     Logs::write("Accept loop start",LOG_LEVEL_INFO);
 
     SOCKADDR_IN sockAddrClient;
     socklen_t sockAddrClientSize=sizeof(SOCKADDR_IN);
 
-    while(true){
+    while(running){
         SOCKET newClientSock=accept(sock, (SOCKADDR*)&sockAddrClient, &sockAddrClientSize);
         if( newClientSock == SOCKET_ERROR ) {
             continue;

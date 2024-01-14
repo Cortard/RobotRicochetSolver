@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/StdSockets.dir/main.cpp.o CMakeFiles/StdSockets.dir/logs/Logs.cpp.o CMakeFiles/StdSockets.dir/clients/Client.cpp.o CMakeFiles/StdSockets.dir/Serveur.cpp.o CMakeFiles/StdSockets.dir/solver/Solver.cpp.o -o StdSockets 

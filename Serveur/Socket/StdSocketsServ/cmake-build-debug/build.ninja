@@ -41,72 +41,72 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target StdSockets
+# Object build statements for EXECUTABLE target RicochetSocketServer.exe
 
 
 #############################################
-# Order-only phony target for StdSockets
+# Order-only phony target for RicochetSocketServer.exe
 
-build cmake_object_order_depends_target_StdSockets: phony || CMakeFiles/StdSockets.dir
+build cmake_object_order_depends_target_RicochetSocketServer.exe: phony || CMakeFiles/RicochetSocketServer.exe.dir
 
-build CMakeFiles/StdSockets.dir/main.cpp.obj: CXX_COMPILER__StdSockets_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/main.cpp || cmake_object_order_depends_target_StdSockets
-  DEP_FILE = CMakeFiles\StdSockets.dir\main.cpp.obj.d
+build CMakeFiles/RicochetSocketServer.exe.dir/main.cpp.obj: CXX_COMPILER__RicochetSocketServer.2eexe_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/main.cpp || cmake_object_order_depends_target_RicochetSocketServer.exe
+  DEP_FILE = CMakeFiles\RicochetSocketServer.exe.dir\main.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\StdSockets.dir
-  OBJECT_FILE_DIR = CMakeFiles\StdSockets.dir
-  TARGET_COMPILE_PDB = CMakeFiles\StdSockets.dir\
-  TARGET_PDB = StdSockets.pdb
+  OBJECT_DIR = CMakeFiles\RicochetSocketServer.exe.dir
+  OBJECT_FILE_DIR = CMakeFiles\RicochetSocketServer.exe.dir
+  TARGET_COMPILE_PDB = CMakeFiles\RicochetSocketServer.exe.dir\
+  TARGET_PDB = RicochetSocketServer.exe.pdb
 
-build CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj: CXX_COMPILER__StdSockets_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/logs/Logs.cpp || cmake_object_order_depends_target_StdSockets
-  DEP_FILE = CMakeFiles\StdSockets.dir\logs\Logs.cpp.obj.d
+build CMakeFiles/RicochetSocketServer.exe.dir/logs/Logs.cpp.obj: CXX_COMPILER__RicochetSocketServer.2eexe_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/logs/Logs.cpp || cmake_object_order_depends_target_RicochetSocketServer.exe
+  DEP_FILE = CMakeFiles\RicochetSocketServer.exe.dir\logs\Logs.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\StdSockets.dir
-  OBJECT_FILE_DIR = CMakeFiles\StdSockets.dir\logs
-  TARGET_COMPILE_PDB = CMakeFiles\StdSockets.dir\
-  TARGET_PDB = StdSockets.pdb
+  OBJECT_DIR = CMakeFiles\RicochetSocketServer.exe.dir
+  OBJECT_FILE_DIR = CMakeFiles\RicochetSocketServer.exe.dir\logs
+  TARGET_COMPILE_PDB = CMakeFiles\RicochetSocketServer.exe.dir\
+  TARGET_PDB = RicochetSocketServer.exe.pdb
 
-build CMakeFiles/StdSockets.dir/clients/Client.cpp.obj: CXX_COMPILER__StdSockets_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/clients/Client.cpp || cmake_object_order_depends_target_StdSockets
-  DEP_FILE = CMakeFiles\StdSockets.dir\clients\Client.cpp.obj.d
+build CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.obj: CXX_COMPILER__RicochetSocketServer.2eexe_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/clients/Client.cpp || cmake_object_order_depends_target_RicochetSocketServer.exe
+  DEP_FILE = CMakeFiles\RicochetSocketServer.exe.dir\clients\Client.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\StdSockets.dir
-  OBJECT_FILE_DIR = CMakeFiles\StdSockets.dir\clients
-  TARGET_COMPILE_PDB = CMakeFiles\StdSockets.dir\
-  TARGET_PDB = StdSockets.pdb
+  OBJECT_DIR = CMakeFiles\RicochetSocketServer.exe.dir
+  OBJECT_FILE_DIR = CMakeFiles\RicochetSocketServer.exe.dir\clients
+  TARGET_COMPILE_PDB = CMakeFiles\RicochetSocketServer.exe.dir\
+  TARGET_PDB = RicochetSocketServer.exe.pdb
 
-build CMakeFiles/StdSockets.dir/Serveur.cpp.obj: CXX_COMPILER__StdSockets_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/Serveur.cpp || cmake_object_order_depends_target_StdSockets
-  DEP_FILE = CMakeFiles\StdSockets.dir\Serveur.cpp.obj.d
+build CMakeFiles/RicochetSocketServer.exe.dir/Serveur.cpp.obj: CXX_COMPILER__RicochetSocketServer.2eexe_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/Serveur.cpp || cmake_object_order_depends_target_RicochetSocketServer.exe
+  DEP_FILE = CMakeFiles\RicochetSocketServer.exe.dir\Serveur.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\StdSockets.dir
-  OBJECT_FILE_DIR = CMakeFiles\StdSockets.dir
-  TARGET_COMPILE_PDB = CMakeFiles\StdSockets.dir\
-  TARGET_PDB = StdSockets.pdb
+  OBJECT_DIR = CMakeFiles\RicochetSocketServer.exe.dir
+  OBJECT_FILE_DIR = CMakeFiles\RicochetSocketServer.exe.dir
+  TARGET_COMPILE_PDB = CMakeFiles\RicochetSocketServer.exe.dir\
+  TARGET_PDB = RicochetSocketServer.exe.pdb
 
-build CMakeFiles/StdSockets.dir/solver/Solver.cpp.obj: CXX_COMPILER__StdSockets_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/solver/Solver.cpp || cmake_object_order_depends_target_StdSockets
-  DEP_FILE = CMakeFiles\StdSockets.dir\solver\Solver.cpp.obj.d
+build CMakeFiles/RicochetSocketServer.exe.dir/solver/Solver.cpp.obj: CXX_COMPILER__RicochetSocketServer.2eexe_unscanned_Debug C$:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/solver/Solver.cpp || cmake_object_order_depends_target_RicochetSocketServer.exe
+  DEP_FILE = CMakeFiles\RicochetSocketServer.exe.dir\solver\Solver.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\StdSockets.dir
-  OBJECT_FILE_DIR = CMakeFiles\StdSockets.dir\solver
-  TARGET_COMPILE_PDB = CMakeFiles\StdSockets.dir\
-  TARGET_PDB = StdSockets.pdb
+  OBJECT_DIR = CMakeFiles\RicochetSocketServer.exe.dir
+  OBJECT_FILE_DIR = CMakeFiles\RicochetSocketServer.exe.dir\solver
+  TARGET_COMPILE_PDB = CMakeFiles\RicochetSocketServer.exe.dir\
+  TARGET_PDB = RicochetSocketServer.exe.pdb
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target StdSockets
+# Link build statements for EXECUTABLE target RicochetSocketServer.exe
 
 
 #############################################
-# Link the executable StdSockets.exe
+# Link the executable RicochetSocketServer.exe.exe
 
-build StdSockets.exe: CXX_EXECUTABLE_LINKER__StdSockets_Debug CMakeFiles/StdSockets.dir/main.cpp.obj CMakeFiles/StdSockets.dir/logs/Logs.cpp.obj CMakeFiles/StdSockets.dir/clients/Client.cpp.obj CMakeFiles/StdSockets.dir/Serveur.cpp.obj CMakeFiles/StdSockets.dir/solver/Solver.cpp.obj
+build RicochetSocketServer.exe.exe: CXX_EXECUTABLE_LINKER__RicochetSocketServer.2eexe_Debug CMakeFiles/RicochetSocketServer.exe.dir/main.cpp.obj CMakeFiles/RicochetSocketServer.exe.dir/logs/Logs.cpp.obj CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.obj CMakeFiles/RicochetSocketServer.exe.dir/Serveur.cpp.obj CMakeFiles/RicochetSocketServer.exe.dir/solver/Solver.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lws2_32  -lwsock32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\StdSockets.dir
+  OBJECT_DIR = CMakeFiles\RicochetSocketServer.exe.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\StdSockets.dir\
-  TARGET_FILE = StdSockets.exe
-  TARGET_IMPLIB = libStdSockets.dll.a
-  TARGET_PDB = StdSockets.pdb
+  TARGET_COMPILE_PDB = CMakeFiles\RicochetSocketServer.exe.dir\
+  TARGET_FILE = RicochetSocketServer.exe.exe
+  TARGET_IMPLIB = libRicochetSocketServer.exe.dll.a
+  TARGET_PDB = RicochetSocketServer.exe.pdb
 
 
 #############################################
@@ -134,7 +134,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build StdSockets: phony StdSockets.exe
+build RicochetSocketServer.exe: phony RicochetSocketServer.exe.exe
 
 # =============================================================================
 # Folder targets.
@@ -144,7 +144,7 @@ build StdSockets: phony StdSockets.exe
 #############################################
 # Folder: C:/Users/cfaur/Documents/IUT/2y/sae/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/cmake-build-debug
 
-build all: phony StdSockets.exe
+build all: phony RicochetSocketServer.exe.exe
 
 # =============================================================================
 # Built-in targets
