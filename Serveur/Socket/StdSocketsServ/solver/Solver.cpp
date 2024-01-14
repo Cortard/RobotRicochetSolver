@@ -3,7 +3,8 @@
 #include "Solver.h"
 
 
-int Solver::search(Game *game, unsigned char *path, bool (*callBack)(unsigned int, std::chrono::seconds)) {
+int Solver::search(Game *game, unsigned char *path, bool (*callBack)(unsigned int, std::chrono::seconds), std::chrono::seconds* durationProcess, unsigned int* nbProcess, std::mutex* mutexTime) {
+    auto startAll = std::chrono::high_resolution_clock::now();//début du chrono
     if(game_over(game)) return 0;//si le jeu est fini
     unsigned int result = 0;
     bool callBackResult = true;
@@ -34,6 +35,13 @@ int Solver::search(Game *game, unsigned char *path, bool (*callBack)(unsigned in
         delete static_cast<std::map<unsigned long long, unsigned int>*>(set);
     }
     if(!callBackResult) return -1;
+    if(result){
+        std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - startAll;//fin du chrono
+        mutexTime->lock();
+        (*durationProcess)+=std::chrono::duration_cast<std::chrono::seconds>(elapsed);
+        (*nbProcess)++;
+        mutexTime->unlock();
+    }
     return static_cast<int>(result);
 }
 

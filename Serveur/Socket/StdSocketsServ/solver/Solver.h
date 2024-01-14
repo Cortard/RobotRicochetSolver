@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <chrono>
+#include <mutex>
 #include "Game.h"
 
 #define MAX_DEPTH 32
@@ -38,7 +39,7 @@ const int OFFSET[] = { //Décalage pour aller dans une direction
 
 class Solver {
 public:
-    static int search(Game* game, unsigned char *path, bool (*callBack)(unsigned int, std::chrono::seconds));
+    static int search(Game *game, unsigned char *path, bool (*callBack)(unsigned int, std::chrono::seconds), std::chrono::seconds* durationProcess, unsigned int* nbProcess, std::mutex *mutexTime);
 private:
     static bool game_over(Game *game);
     static void precompute_minimum_moves(Game *game);

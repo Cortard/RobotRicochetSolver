@@ -2,7 +2,9 @@
 
 SOCKET Serveur::sock;
 SOCKADDR_IN Serveur::addressInternet;
-std::chrono::seconds Serveur::lastProcessTime=std::chrono::seconds(35);
+std::chrono::seconds Serveur::totalProcessTime=std::chrono::seconds(0);
+unsigned int Serveur::totalNbProcess=0;
+std::mutex Serveur::mutexProcessTime;
 Client Serveur::slots[MAX_CLIENTS];
 bool Serveur::running=false;
 std::mutex Serveur::mutexRunning;
@@ -189,6 +191,11 @@ void Serveur::processLoop(Client* slot){
     Logs::write("Slot " + std::to_string(slot->slotNum) + " begin to solve",LOG_LEVEL_VERBOSE);
     if( ! Serveur::solving(slot) ) return;
 
+    mutexProcessTime.lock();
+    if(totalNbProcess!=0)
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " is solved, totalNbProcess : " + std::to_string(totalNbProcess) + " totalProcessTime : " + std::to_string(totalProcessTime.count()) + " time per process : " + std::to_string(totalProcessTime.count()/totalNbProcess),LOG_LEVEL_DETAILS);
+    mutexProcessTime.unlock();
+
     // STATE_SOLVED:
     slot->state = STATE_SENDING_PATH;
     Logs::write("Sending path to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
@@ -326,7 +333,11 @@ bool Serveur::getClientGrid(Client *slot) {
 }
 
 bool Serveur::confirmClientGrid(Client *slot) {
-    int lastTime=static_cast<int>(lastProcessTime.count());
+    mutexProcessTime.lock();
+    int lastTime;
+    if(totalNbProcess==0) lastTime=35;
+    else lastTime=static_cast<int>(totalProcessTime.count())/totalNbProcess;
+    mutexProcessTime.unlock();
     int result = send(slot->socket, (char*)&lastTime, sizeof(lastTime), 0);
     if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
     slot->state=STATE_SENT_TYPE_GRID_CONFIRMATION;
@@ -349,9 +360,9 @@ bool Serveur::solving(Client *slot) {
         slot->disconnect();
         return false;
     }
-    int result=0;
+    int result;
     try {
-        result = Solver::search((Game*)slot->output, path, callbackSolver);
+        result = Solver::search((Game *) slot->output, path, callbackSolver, &totalProcessTime, &totalNbProcess, &mutexProcessTime);
     } catch (const std::exception& e) {
         Logs::write("Client disconnected on slot " + std::to_string(slot->slotNum),LOG_LEVEL_WARNING);
         slot->clearOutput<Game>();

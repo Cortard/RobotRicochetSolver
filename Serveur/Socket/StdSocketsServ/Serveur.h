@@ -20,7 +20,9 @@ public:
 private:
     static SOCKET sock;
     static SOCKADDR_IN addressInternet;
-    static std::chrono::seconds lastProcessTime;
+    static std::chrono::seconds totalProcessTime;
+    static unsigned int totalNbProcess;
+    static std::mutex mutexProcessTime;
     static bool running;
     static std::mutex mutexRunning;
 
