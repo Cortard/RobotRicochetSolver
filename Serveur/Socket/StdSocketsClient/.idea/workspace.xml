@@ -22,145 +22,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-4eb505a85a7e98380b16.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-f2ec742d21e741dd13aa.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-bd0e17399c290e42be1c.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2024-01-09T13-42-20-0989.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-StdSocketsClient-Debug-167e610f70c2e665e594.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-16d5c1790d7e535d2a57.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdC/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdCXX/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/StdSocketsClient.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/configue.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Serveur.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/cache-v2-837411897ae508cbd411.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-f2b91d9287289fa1baad.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-4fae3b4b5c30c9e7d2df.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/index-2024-01-09T13-10-53-0701.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/target-RicochetSocketServer.exe-Debug-0acd62a8875534a3a479.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-16d5c1790d7e535d2a57.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CMakeSystem.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CMakeSystem.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdC/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdCXX/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/Serveur.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/Serveur.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/clients/Client.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/clients/Client.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/compiler_depend.internal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/compiler_depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/compiler_depend.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/logs/Logs.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/logs/Logs.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/main.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/solver/Solver.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.dir/solver/Solver.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/Serveur.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/Serveur.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/clients/Client.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/compiler_depend.internal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/compiler_depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/compiler_depend.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/logs/Logs.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/logs/Logs.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/main.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/solver/Solver.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/RicochetSocketServer.exe.dir/solver/Solver.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/Serveur.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/Serveur.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/clients/Client.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/clients/Client.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/compiler_depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/compiler_depend.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/logs/Logs.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/logs/Logs.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/main.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/solver/Solver.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/ServerSocketRicochet.dir/solver/Solver.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/Serveur.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/Serveur.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/clients/Client.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/clients/Client.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/compiler_depend.internal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/compiler_depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/compiler_depend.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/logs/Logs.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/logs/Logs.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/main.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/solver/Solver.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/StdSockets.dir/solver/Solver.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/configue.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/solver/Game.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/solver/Game.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/solver/Solver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/solver/Solver.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/solver/Solver.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/solver/Solver.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,11 +77,6 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="StdSocketsClient" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="StdSocketsClient" TARGET_NAME="StdSocketsClient" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="StdSocketsClient" RUN_TARGET_NAME="StdSocketsClient">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -260,6 +123,7 @@
       <workItem from="1704792283197" duration="197000" />
       <workItem from="1704792486767" duration="7933000" />
       <workItem from="1704873965208" duration="2940000" />
+      <workItem from="1705243709498" duration="2653000" />
     </task>
     <servers />
   </component>
@@ -270,5 +134,66 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>106</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>112</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>119</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>124</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>132</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>139</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>144</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>155</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>166</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>173</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>181</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

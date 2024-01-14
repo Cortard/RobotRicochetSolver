@@ -45,8 +45,9 @@ private:
 
     //hasmap
     static void swap(unsigned int *array, unsigned int a, unsigned int b);
-    static unsigned long make_key(Game *game);
-    static bool set_add(std::map<unsigned int,unsigned int>* set, unsigned int key, unsigned int depth);
+    static unsigned long long make_key(Game *game, bool moreThan4Robots);
+    template <typename setType>
+    static bool set_add(setType* set, unsigned long long key, unsigned int depth, bool moreThan4Robots);
 
     //move
     static bool can_move(Game *game, unsigned int robot, unsigned int direction);
@@ -54,7 +55,8 @@ private:
     static void undo_move(Game *game, unsigned int undo);
     static unsigned int compute_move(Game *game, unsigned int robot, unsigned int direction);
 
-    static unsigned int _search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, std::map<unsigned int,unsigned int>* set);
+    template <typename setType>
+    static unsigned int _search(Game *game, unsigned int depth, unsigned int max_depth, unsigned char *path, setType* set);
 };
 
 #endif //STDSOCKETSSERVER_SOLVER_H

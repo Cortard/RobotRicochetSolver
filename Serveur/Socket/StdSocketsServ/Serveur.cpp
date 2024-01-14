@@ -116,6 +116,8 @@ void Serveur::processLoop(Client* slot){
             Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
             if( ! Serveur::getClientPictureSize(slot) ) return;
 
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size : " + std::to_string(((unsigned int*)slot->output)[0]) + "x" + std::to_string(((unsigned int*)slot->output)[1]),LOG_LEVEL_DETAILS);
+
             // STATE_RECEIVED_PICTURE_SIZE:
             slot->state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
             Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
@@ -147,6 +149,8 @@ void Serveur::processLoop(Client* slot){
             slot->state = STATE_RECEIVING_GRIP_TYPE;
             Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
             if( ! Serveur::getClientGridType(slot) ) return;
+
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " nbRobot : " + std::to_string(((((char*)slot->output)[0]&2)>>1) + 4) + " mur de travers : " + std::to_string(((char*)slot->output)[0]&1),LOG_LEVEL_DETAILS);
 
             // STATE_RECEIVED_GRIP_TYPE:
             slot->state = STATE_SENDING_GRIP_TYPE_CONFIRMATION;
@@ -293,12 +297,12 @@ bool Serveur::confirmClientGridType(Client *slot) {
 }
 bool Serveur::getClientGrid(Client *slot) {
     char* type=static_cast<char*>(slot->output);
-    slot->output=new Game();
+    slot->output=new Game(((type[0]&2)>>1) + 4,type[0]&1);
 
     int result = recv(slot->socket, (char*)((Game*)slot->output)->grid, sizeof(unsigned int[256]), 0);
     if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
 
-    result = recv(slot->socket, (char*)((Game*)slot->output)->robots, sizeof(unsigned int[4]), 0);
+    result = recv(slot->socket, (char*)((Game*)slot->output)->robots, sizeof(unsigned int)*((Game*)slot->output)->nbRobots, 0);
     if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
 
     result = recv(slot->socket, (char*)&((Game*)slot->output)->token, sizeof(unsigned int ), 0);
