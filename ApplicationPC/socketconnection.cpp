@@ -92,7 +92,7 @@ int SocketConnection::getSolution(Board* board) {
         robots[cpt] = it->second;
         ++cpt;
     }
-    unsigned int token=54;
+    unsigned int token=board->objJeu;
     result = send(sockServ, (char *) &grid, sizeof(grid), 0);
     if (result == SOCKET_ERROR) {
         printf("Impossible d'envoyer la grille\n");
