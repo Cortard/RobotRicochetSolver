@@ -6,6 +6,7 @@
 #include "clients/Client.h"
 #include "configue.h"
 
+#define MAX_PICTURE_SIZE 1000000
 
 class Serveur {
 public:

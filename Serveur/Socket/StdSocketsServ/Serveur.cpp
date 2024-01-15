@@ -130,6 +130,13 @@ void Serveur::processLoop(Client* slot){
 
             Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size : " + std::to_string(((unsigned int*)slot->output)[0]) + "x" + std::to_string(((unsigned int*)slot->output)[1]),LOG_LEVEL_DETAILS);
 
+            if(((unsigned int*)slot->output)[0]*((unsigned int*)slot->output)[1]>MAX_PICTURE_SIZE){
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size is too big",LOG_LEVEL_WARNING);
+                slot->clearOutput<unsigned int>();
+                slot->disconnect();
+                return;
+            }
+
             // STATE_RECEIVED_PICTURE_SIZE:
             slot->state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
             Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
