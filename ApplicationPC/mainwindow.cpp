@@ -184,14 +184,14 @@ void MainWindow::on_pushButton_5_clicked()
 {
     if(ui->radioButton->isChecked()){
 
-        int rand1 = random() % 16;
-        srandom(QTime::currentTime().msec()+rand1);
-        int rand2 = random() % 16;
-        srandom(QTime::currentTime().msec()+rand2);
-        int rand3 = random() % 16;
-        srandom(QTime::currentTime().msec()+rand3);
-        int rand4 = random() % 16;
-        srandom(QTime::currentTime().msec()+rand4);
+        int rand1 = rand() % 16;
+        srand(QTime::currentTime().msec()+rand1);
+        int rand2 = rand() % 16;
+        srand(QTime::currentTime().msec()+rand2);
+        int rand3 = rand() % 16;
+        srand(QTime::currentTime().msec()+rand3);
+        int rand4 = rand() % 16;
+        srand(QTime::currentTime().msec()+rand4);
 
         switch (rand1) {
         case 0:
