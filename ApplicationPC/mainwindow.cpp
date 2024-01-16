@@ -137,7 +137,7 @@ void MainWindow::on_pushPlateau_clicked()
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
-    SocketConnection::getSolution(board);
+    //SocketConnection::getSolution(board);
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
