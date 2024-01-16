@@ -298,15 +298,17 @@ void ViewBoard::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
         int initialRow = static_cast<int>(initialPos.y() / CellSize);
 
         int initialCell = initialCol + initialRow *16;
-
         int cellIndex = col + row * 16;
+
         if(cellImageMap[cellIndex]==false){
             if (draggedPixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 1) {
                 // C'est un robot
                 (new ControllerMoveRobot(board))->control(id, cellIndex);
+                cellImageMap[initialCell]=false;
             } else if (draggedPixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 2) {
                 // C'est un objectif
                 (new ControllerMoveObj(board))->control(id, cellIndex);
+                cellImageMap[initialCell]=false;
             }
         }else{
             if (draggedPixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 1) {
