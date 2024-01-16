@@ -6,6 +6,9 @@
 #include "clients/Client.h"
 #include "configue.h"
 #include "jpegBuilder/jpegBuilder.h"
+#include "boardBuilder/board.h"
+#include "boardBuilder/boardBuilder.h"
+#include "boardIsolation/boardIsolation.h"
 
 #define MAX_PICTURE_SIZE 1000000000
 
@@ -41,6 +44,11 @@ private:
     static bool confirmClientPictureSize(Client* slot);
     static bool getClientPicture(Client* slot);
     static bool confirmClientPicture(Client* slot);
+    static bool buildBoard(Client* slot);
+    static bool getClientNbRobots(Client* slot);
+    static bool confirmClientNbRobots(Client* slot);
+    static bool getClientRobots(Client* slot);
+    static bool getClientToken(Client* slot);
 
     //Grid
     static bool getClientGridType(Client* slot);

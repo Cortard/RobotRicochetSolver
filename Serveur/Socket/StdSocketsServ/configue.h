@@ -11,6 +11,7 @@
     #define MAX_CLIENTS 5
     #define LOG_PATH "/home/ricochet/logs.txt"
     #define PICTURE_PATH "/home/ricochet/temp_picture/"
+    #define BOARD_PATH "/home/ricochet/RobotRicochetSolver/Serveur/Socket/StdSocketsServ/Board_part/"
 
 #else
 
@@ -19,6 +20,7 @@
     #define MAX_CLIENTS 5
     #define LOG_PATH "./logs.txt"
     #define PICTURE_PATH "./picture/"
+    #define BOARD_PATH "../Board_part/"
 
 #endif
 

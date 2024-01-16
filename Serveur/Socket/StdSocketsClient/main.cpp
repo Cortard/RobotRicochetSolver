@@ -118,6 +118,40 @@ int main() {
             printf("Confirmation de l'image pas ok\n");
             return EXIT_FAILURE;
         }printf("Confirmation de l'image ok\n");
+
+        char nbRobots=4;
+        result = send(sockServ, &nbRobots, sizeof(nbRobots), 0);
+        if(result == SOCKET_ERROR){
+            printf("Impossible d'envoyer le nombre de robots\n");
+            return EXIT_FAILURE;
+        }printf("Nombre de robots envoyé\n");
+
+        char nbRobotsReceive;
+        result = recv(sockServ, &nbRobotsReceive, sizeof(nbRobots), 0);
+        if(result == SOCKET_ERROR){
+            printf("Impossible de recevoir le nombre de robots\n");
+            return EXIT_FAILURE;
+        }printf("Nombre de robots reçu\n");
+
+        if(nbRobotsReceive!=nbRobots){
+            printf("Nombre de robots reçu différent de celui envoyé\n");
+            return EXIT_FAILURE;
+        }printf("Nombre de robots reçu identique à celui envoyé\n");
+
+        unsigned int robots[4]={176, 145, 211, 238};
+        result = send(sockServ, (char *) &robots, sizeof(robots), 0);
+        if (result == SOCKET_ERROR) {
+            printf("Impossible d'envoyer les robots\n");
+            return EXIT_FAILURE;
+        }printf("Robots envoyé\n");
+
+        unsigned int token=54;
+        result = send(sockServ, (char *) &token, sizeof(token), 0);
+        if (result == SOCKET_ERROR) {
+            printf("Impossible d'envoyer le goal\n");
+            return EXIT_FAILURE;
+        }printf("Goal envoyé\n");
+
     }else{//grille*******************************************************************************************************
         char typeDate = 1;
         int result = send(sockServ, (char *) &typeDate, sizeof(typeDate), 0);
@@ -180,66 +214,69 @@ int main() {
             return EXIT_FAILURE;
         }printf("Goal envoyé\n");
 
-        int time;
-        result = recv(sockServ, (char *) &time, sizeof(time), MSG_WAITALL);
-        if (result == SOCKET_ERROR) {
-            printf("Impossible de recevoir le temps\n");
-            return EXIT_FAILURE;
-        }printf("Temps reçu : %d\n", time);
-
-        char flag=1;
-        do{
-            result = SOCKET_ERROR;
-            while(result==SOCKET_ERROR)
-                result = recv(sockServ, (char *) &flag, sizeof(flag), MSG_WAITALL);
-            printf("Flag reçu : %d\n", flag);
-            if(flag!=1) break;
-            /*
-            result = send(sockServ, (char *) &flag, sizeof(flag), 0);
-            if (result == SOCKET_ERROR) {
-                printf("Impossible d'envoyer la confirmation flag\n");
-                return EXIT_FAILURE;
-            }
-             */
-            int state[2];
-            result = recv(sockServ, (char *) &state, sizeof(state), MSG_WAITALL);
-            if (result == SOCKET_ERROR) {
-                printf("Impossible de recevoir le state\n");
-                return EXIT_FAILURE;
-            }
-            printf("depth : %d, time in seconds : %d\n", state[0], state[1]);
-        } while (flag==1);
-
-        switch(flag){
-            case 2 :
-                printf("Pas de solution\n");
-                return EXIT_FAILURE;
-            case 3 :
-                printf("Solution trouvé\n");
-                break;
-            default:
-                printf("Flag inconnu\n");
-                return EXIT_FAILURE;
-        }
-
-        unsigned char path[32];
-        result = recv(sockServ, (char *)&path, sizeof(path), 0);
-        if (result == SOCKET_ERROR) {
-            printf("Impossible de recevoir le path\n");
-            return EXIT_FAILURE;
-        }printf("Path reçu\n");
-
-        result = send(sockServ, (char *) &robots, sizeof(robots), 0);
-        if (result == SOCKET_ERROR) {
-            printf("Impossible d'envoyer confirmation\n");
-            return EXIT_FAILURE;
-        }printf("Confirmation envoyée\n");
-
-        for(unsigned char& i : path){
-            printf("%d, ", i);
-        }printf("\n");
-        printf("1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \n");
     }
+
+    int time;
+    int result = recv(sockServ, (char *) &time, sizeof(time), MSG_WAITALL);
+    if (result == SOCKET_ERROR) {
+        printf("Impossible de recevoir le temps\n");
+        return EXIT_FAILURE;
+    }printf("Temps reçu : %d\n", time);
+
+    char flag=1;
+    do{
+        result = SOCKET_ERROR;
+        while(result==SOCKET_ERROR)
+            result = recv(sockServ, (char *) &flag, sizeof(flag), MSG_WAITALL);
+        printf("Flag reçu : %d\n", flag);
+        if(flag!=1) break;
+        /*
+        result = send(sockServ, (char *) &flag, sizeof(flag), 0);
+        if (result == SOCKET_ERROR) {
+            printf("Impossible d'envoyer la confirmation flag\n");
+            return EXIT_FAILURE;
+        }
+         */
+        int state[2];
+        result = recv(sockServ, (char *) &state, sizeof(state), MSG_WAITALL);
+        if (result == SOCKET_ERROR) {
+            printf("Impossible de recevoir le state\n");
+            return EXIT_FAILURE;
+        }
+        printf("depth : %d, time in seconds : %d\n", state[0], state[1]);
+    } while (flag==1);
+
+    switch(flag){
+        case 2 :
+            printf("Pas de solution\n");
+            return EXIT_FAILURE;
+        case 3 :
+            printf("Solution trouvé\n");
+            break;
+        default:
+            printf("Flag inconnu\n");
+            return EXIT_FAILURE;
+    }
+
+    unsigned char path[32];
+    result = recv(sockServ, (char *)&path, sizeof(path), 0);
+    if (result == SOCKET_ERROR) {
+        printf("Impossible de recevoir le path\n");
+        return EXIT_FAILURE;
+    }printf("Path reçu\n");
+
+    char confirm=0;
+    result = send(sockServ, &confirm, sizeof(char), 0);
+    if (result == SOCKET_ERROR) {
+        printf("Impossible d'envoyer confirmation\n");
+        return EXIT_FAILURE;
+    }printf("Confirmation envoyée\n");
+
+    for(unsigned char& i : path){
+        printf("%d, ", i);
+    }printf("\n");
+    printf("1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \n");
+
 
 
 #if defined (WIN32)

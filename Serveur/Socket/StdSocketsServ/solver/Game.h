@@ -22,6 +22,17 @@ public:
         token = 0;
         last = 0;
     }
+
+    void setNbRobots(int nbRobots) {
+        this->nbRobots = nbRobots;
+        delete[] robots;
+        robots = new unsigned int[nbRobots];
+        memset(robots, 0, sizeof(unsigned int) * nbRobots);
+    }
+
+    ~Game() {
+        delete[] robots;
+    }
 };
 
 #endif //STDSOCKETSSERVER_GAME_H

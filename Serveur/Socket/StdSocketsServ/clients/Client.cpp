@@ -25,8 +25,7 @@ void Client::clearOutput() {
     if (output != nullptr) {
         if(std::is_same<T, std::string>::value) {
             Logs::write("Remove file: "+*static_cast<std::string*>(output),LOG_LEVEL_DEBUG);
-            Logs::write("Result remove : "+std::to_string(std::remove(static_cast<const char*>(output))),LOG_LEVEL_DEBUG);
-//            remove(static_cast<const char*>(output));
+            remove(static_cast<const char*>(output));
             delete static_cast<std::string*>(output);
             return;
         }

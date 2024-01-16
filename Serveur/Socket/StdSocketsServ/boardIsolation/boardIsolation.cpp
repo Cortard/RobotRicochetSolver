@@ -24,6 +24,8 @@ int BoardIsolation::getBoard(std::string src_img_path, std::string output_img_pa
 	std::vector<std::vector<cv::Point>> contours;
 	std::vector<cv::Vec4i> hierarchy;
 	cv::findContours(canny, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
+    cv::drawContours(scaled_img, contours, -1, cv::Scalar(0, 0, 255), 2,8);
+    cv::imshow("contours",scaled_img);
 
 	// -- Find biggest shape --
 	int maxI = 0;
@@ -35,10 +37,12 @@ int BoardIsolation::getBoard(std::string src_img_path, std::string output_img_pa
 		}
 	}
 	std::vector<cv::Point> maxContour = contours[maxI];
+    std::cout<<maxContour.size()<<std::endl;
 
 	// -- Simplify biggest contour to square --
 	std::vector<cv::Point> squareContour;
-	cv::approxPolyDP(maxContour, squareContour, cv::arcLength(maxContour, true) * 0.1, true);
+    cv::approxPolyDP(maxContour, squareContour, cv::arcLength(maxContour, true) * 0.1, true);
+    std::cout<<squareContour.size() << std::endl;
 
 	if (squareContour.size() == 4) { // Check if finded shape is a square
 		// -- Get board from finded shape

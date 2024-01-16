@@ -153,12 +153,30 @@ void Serveur::processLoop(Client* slot){
             if( ! Serveur::confirmClientPicture(slot) ) return;
 
             // STATE_SENT_TYPE_PICTURE_CONFIRMATION:
-            slot->state = STATE_Process1;
-            slot->clearOutput<std::string>();
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " is ready to process",LOG_LEVEL_VERBOSE);
-            //TODO
-            return;
-            break;
+            slot->state = STATE_BUILDING_BOARD;
+            Logs::write("Building board on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            Serveur::buildBoard(slot);
+
+            // STATE_BUILT_BOARD:
+            slot->state = STATE_RECEIVING_NB_ROBOTS;
+            Logs::write("Receiving nbRobots from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::getClientNbRobots(slot) ) return;
+
+            // STATE_RECEIVED_NB_ROBOTS:
+            slot->state = STATE_SENDING_NB_ROBOTS_CONFIRMATION;
+            Logs::write("Sending nbRobotsConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::confirmClientNbRobots(slot) ) return;
+
+            // STATE_SENT_NB_ROBOTS_CONFIRMATION:
+            slot->state = STATE_RECEIVING_ROBOTS;
+            Logs::write("Receiving robots from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::getClientRobots(slot) ) return;
+
+            // RECEIVED_ROBOTS:
+            slot->state = RECEIVING_TOKEN;
+            Logs::write("Receiving token from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+            if( ! Serveur::getClientToken(slot) ) return;
+
         case 1:
             slot->clearOutput<char>();
             Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_DETAILS);
@@ -193,7 +211,7 @@ void Serveur::processLoop(Client* slot){
             return;
     }
 
-    // STATE_SENT_TYPE_GRID_CONFIRMATION OR STATE_SENT_TYPE_PICTURE_CONFIRMATION:
+    // STATE_SENT_TYPE_GRID_CONFIRMATION OR RECEIVED_TOKEN:
     slot->state = STATE_SOLVING;
     Logs::write("Slot " + std::to_string(slot->slotNum) + " begin to solve",LOG_LEVEL_VERBOSE);
     if( ! Serveur::solving(slot) ) return;
@@ -287,10 +305,7 @@ bool Serveur::confirmClientPictureSize(Client *slot) {
 bool Serveur::getClientPicture(Client *slot) {
     auto* size=static_cast<unsigned int*>(slot->output);
     slot->output=new char[size[0]*size[1]*3];
-    /*
-    int result = recv(slot->socket, (char*)slot->output, size[0]*size[1]*3, 0);
-    if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
-     */
+
     for(int i=0;i<size[0];++i){
         int result = recv(slot->socket, (char*)slot->output+i*size[1]*3, size[1]*3, 0);
         if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
@@ -299,13 +314,22 @@ bool Serveur::getClientPicture(Client *slot) {
 
     auto* picturePath = new std::string();
     *picturePath=PICTURE_PATH;
-    *picturePath+="slot"+std::to_string(slot->slotNum)+".jpg";
+    *picturePath+="slot"+std::to_string(slot->slotNum)+".png";
     JPEGBuilder::build((char*)slot->output,(int)(size[0]),(int)(size[1]),*picturePath);
     Logs::write("Slot " + std::to_string(slot->slotNum) + " picture saved at " + *picturePath,LOG_LEVEL_DEBUG);
 
     delete[] size;
     delete[] static_cast<char*>(slot->output);
     slot->output=picturePath;
+
+    if(BoardIsolation::getBoard(*picturePath,*picturePath)){
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " board not isolated",LOG_LEVEL_WARNING);
+        slot->clearOutput<std::string>();
+        slot->output= nullptr;
+        slot->disconnect();
+        return false;
+    }
+
     slot->state=STATE_RECEIVED_PICTURE;
     return true;
 }
@@ -316,7 +340,45 @@ bool Serveur::confirmClientPicture(Client *slot) {
     slot->state=STATE_SENT_TYPE_PICTURE_CONFIRMATION;
     return true;
 }
-
+bool Serveur::buildBoard(Client *slot) {
+    auto* picturePath = static_cast<std::string*>(slot->output);
+    Board board=BoardBuilder::constructBoard(*picturePath,BOARD_PATH);
+    Game* game=new Game(4,false);
+    for(int i=0;i<256;++i){
+        game->grid[i]=board.cases[i];
+    }
+    delete picturePath;
+    slot->output=game;
+    slot->state=STATE_BUILT_BOARD;
+    return true;
+}
+bool Serveur::getClientNbRobots(Client *slot) {
+    char nbRobots;
+    int result = recv(slot->socket, (char*)&nbRobots, sizeof(char), 0);
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
+    slot->state=STATE_RECEIVED_NB_ROBOTS;
+    ((Game*)slot->output)->setNbRobots((int)nbRobots);
+    return true;
+}
+bool Serveur::confirmClientNbRobots(Client *slot) {
+    char nbRobots=((Game*)slot->output)->nbRobots;
+    int result = send(slot->socket, (char*)&nbRobots, sizeof(char), 0);
+    if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
+    slot->state=STATE_SENT_NB_ROBOTS_CONFIRMATION;
+    return true;
+}
+bool Serveur::getClientRobots(Client *slot) {
+    int result = recv(slot->socket, (char*)((Game*)slot->output)->robots, sizeof(unsigned int)*((Game*)slot->output)->nbRobots, 0);
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
+    slot->state=RECEIVED_ROBOTS;
+    return true;
+}
+bool Serveur::getClientToken(Client *slot) {
+    int result = recv(slot->socket, (char*)&((Game*)slot->output)->token, sizeof(unsigned int ), 0);
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
+    slot->state=RECEIVED_TOKEN;
+    return true;
+}
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                               reception grid                                                                    //
 //---------------------------------------------------------------------------------------------------------------------------------//
