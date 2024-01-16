@@ -185,7 +185,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     dataOutputStream.flush();
 
                     // Attente de la réponse du serveur avec timeout
-                    socket.setSoTimeout(TIMEOUT); // Définit le timeout pour la réponse
+                    socket.setSoTimeout(TIMEOUT);
                     DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                     char response = dataInputStream.readChar();
 
@@ -253,7 +253,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 char confirmFlag = dataInputStream.readChar();
 
                                 if ((int)confirmFlag == 1) {
-                                    // Attendre quelque temps (tu peux remplacer par la logique que tu souhaites)
                                     Thread.sleep(TIMEOUT);
 
                                     // Envoie des informations sur l'état
@@ -272,7 +271,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                                     if ((int)finalFlag == 1) {
                                         // Processus terminé avec succès
-                                        Intent intent = new Intent(answer, PictureAnswerActivity.class);
+                                        Intent intent = new Intent(answer, RobotCorrectionActivity.class);
                                         startActivity(intent);
                                     } else {
                                         Log.d("denied", "Pas de réponse serveur : finalFlag");
@@ -294,7 +293,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 char confirmFlag = dataInputStream.readChar();
 
                                 if ((int)confirmFlag == 1) {
-                                    // Attendre quelque temps (tu peux remplacer par la logique que tu souhaites)
                                     Thread.sleep(TIMEOUT);
 
                                     // Envoie des informations sur l'état
@@ -307,7 +305,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
 
                                     if ((int)confirmFlag == 1) {
-                                        // Attendre quelque temps (tu peux remplacer par la logique que tu souhaites)
                                         Thread.sleep(TIMEOUT);
 
                                         // Envoie des informations sur l'état
@@ -319,7 +316,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                         dataInputStream.readFully(correction);
 
                                         // Processus terminé avec succès
-                                        Intent intent = new Intent(answer, PictureAnswerActivity.class);
+                                        Intent intent = new Intent(answer, RobotCorrectionActivity.class);
                                         startActivity(intent);
                                     } else {
                                         Log.d("denied", "Pas de réponse serveur : confirmFlag : Correction");
@@ -344,8 +341,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         //txt.setText(response + " confirm flag 1");
 
                     }
-
-                    // Ferme les flux
                     fileInputStream.close();
                     bufferedOutputStream.close();
                     socket.close();

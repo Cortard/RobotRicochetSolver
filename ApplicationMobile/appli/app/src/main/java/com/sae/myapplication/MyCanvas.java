@@ -53,7 +53,7 @@ public class MyCanvas extends View {
             case 3:
                 return Color.YELLOW;
             default:
-                return Color.BLACK;  // Couleur par défaut au cas où
+                return Color.BLACK;
         }
     }
 
@@ -61,7 +61,6 @@ public class MyCanvas extends View {
         if (goalPosition >= 0 && goalPosition < 256) {
             int x = goalPosition % 16;
             int y = goalPosition / 16;
-            // Assurez-vous que la case d'arrivée n'est pas déjà occupée par un robot
             if ((gridData[y * 16 + x] & ROBOT) == 0) {
                 gridData[y * 16 + x] |= GOAL;
             }
@@ -79,25 +78,21 @@ public class MyCanvas extends View {
 
     private void initializeRobots(int[] initialRobotPositions) {
         if (initialRobotPositions.length > 0) {
-            // Réinitialiser les positions précédentes des robots
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
                     gridData[i * 16 + j] &= ~ROBOT;
                 }
             }
 
-            // Placer les robots aux positions initiales spécifiées
             robots = new Robot[initialRobotPositions.length];
             for (int i = 0; i < initialRobotPositions.length; i++) {
                 int x = initialRobotPositions[i] % 16;
                 int y = initialRobotPositions[i] / 16;
-                int robotNumber = i;  // Numérotation des robots à partir de 0
+                int robotNumber = i;
                 int robotColor = getRobotColor(robotNumber);
                 robots[i] = new Robot(x, y, robotNumber, robotColor);
                 gridData[y * 16 + x] |= ROBOT;
             }
-
-            // Mettre à jour l'affichage après la réinitialisation des positions des robots
             invalidate();
         }
     }
@@ -109,15 +104,12 @@ public class MyCanvas extends View {
         if (gridData == null || gridData.length != 256) {
             return;
         }
-
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 int value = gridData[i * 16 + j];
                 drawCell(canvas, j, i, value);
             }
         }
-
-        // Dessiner les robots
         if (robots != null) {
             for (Robot robot : robots) {
                 drawRobot(canvas, robot.getX(), robot.getY(), robot.getNumber());
@@ -134,7 +126,6 @@ public class MyCanvas extends View {
             moveRobot(robotNumber, direction);
             correctionIndex++;
 
-            // Répéter le mouvement après un délai de 500 millisecondes (modifiable)
             correctionHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -145,10 +136,9 @@ public class MyCanvas extends View {
     }
 
     private void updateRobotPosition(int oldX, int oldY, int newX, int newY, int robotNumber) {
-        gridData[oldY * 16 + oldX] &= ~ROBOT; // Effacer l'ancienne position du robot
-        gridData[newY * 16 + newX] |= ROBOT;  // Mettre à jour la nouvelle position du robot
+        gridData[oldY * 16 + oldX] &= ~ROBOT;
+        gridData[newY * 16 + newX] |= ROBOT;
 
-        // Mettez à jour la position du robot dans votre tableau de robots (si vous en avez un)
         if (robots != null && robotNumber >= 0 && robotNumber < robots.length) {
             robots[robotNumber].setX(newX);
             robots[robotNumber].setY(newY);
@@ -159,7 +149,6 @@ public class MyCanvas extends View {
         Robot currentRobot = findRobotByNumber(robotNumber);
 
         if (currentRobot == null) {
-            // Le robot n'a pas été trouvé, traitement d'erreur
             return;
         }
 
@@ -209,8 +198,7 @@ public class MyCanvas extends View {
         float centerY = (y + 0.5f) * cellSize;
         float radius = 0.4f * cellSize;
 
-        // Effacer l'ancienne position du robot
-        paint.setColor(Color.WHITE); // Cellule vide
+        paint.setColor(Color.WHITE);
         canvas.drawRect(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint);
 
         if ((value & GOAL) == GOAL) {

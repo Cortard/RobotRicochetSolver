@@ -22,8 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class PictureActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1234;
     private static final int CAPTURE_CODE = 1001;
-
-    ImageView imageView;
     Uri image_uri;
 
     boolean galery = false;
@@ -75,7 +73,7 @@ public class PictureActivity extends AppCompatActivity {
         bTake.setOnClickListener(v -> {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
-                        checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ) {
 
                     String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                     requestPermissions(permissions, PERMISSION_CODE);
@@ -119,6 +117,7 @@ public class PictureActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && !galery){
+            Toast.makeText(this, "Photo Valide", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, PictureVerifyActivity.class);
             intent.setData(image_uri);
             startActivity(intent);
@@ -127,7 +126,8 @@ public class PictureActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK && data != null && galery){
             image_uri = data.getData();
-            Intent intent = new Intent(this, PictureVerifyActivity.class);
+            Toast.makeText(this, "Photo Valide", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, RobotCorrectionActivity.class);
             intent.setData(image_uri);
             startActivity(intent);
             finish();

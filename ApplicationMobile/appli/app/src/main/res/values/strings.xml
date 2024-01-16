@@ -22,8 +22,8 @@
     <string name="textHelp"><b>1</b> - Entrez l\'addresse IP du serveur
                                 \n<b>2</b> - Placez l\'objectif au centre du plateau
                                 \n<b>3</b> - Prennez en photo le plateau de manière à ce que l\'on voit la totalité du plateau
-                                \n<b>4</b> - Assurez vous que touts les pions et l\'objectif soit visible sur l\'image
-                                \n<b>5</b> - Si tout est bon vous pouvez envoyer la photo
+                                \n<b>4</b> - Si tout est bon vous pouvez envoyer la photo
+                                \n<b>5</b> - Entrez la position des pions dans le tableau hauteur/longueur, validez
                                 \n<b>6</b> - Et voilà votre reponse</string>
 
 
@@ -35,5 +35,7 @@
     <string name="save">Enregistrer</string>
     <string name="imageRep">Reponse du serveur image</string>
     <string name="IP">195.201.205.241</string>
+    <string name="titreRobotCor">Position des Robots</string>
+    <string name="btnRobotCor">Valider</string>
 
 </resources>
