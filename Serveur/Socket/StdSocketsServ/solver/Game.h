@@ -4,6 +4,12 @@
 #include <iostream>
 #include <cstring>
 
+#define NORTH 0x01 // 0b00000001 1
+#define EAST  0x02 // 0b00000010 2
+#define SOUTH 0x04 // 0b00000100 4
+#define WEST  0x08 // 0b00001000 8
+#define ROBOT 0x10 // 0b00010000 16
+
 class Game {
 public:
     unsigned int moves[256]; //tableau des distances au goal moves[256]
@@ -30,6 +36,37 @@ public:
         delete[] robots;
         robots = new unsigned int[nbRobots];
         memset(robots, 0, sizeof(unsigned int) * nbRobots);
+    }
+
+    void prepareGrid() {
+        //set borders
+        for (int i = 0; i < 16; i++) grid[i]|= NORTH;
+        for (int i = 240; i < 256; i++) grid[i]|= SOUTH;
+        for (int i = 0; i < 256; i+=16) grid[i]|= WEST;
+        for (int i = 15; i < 256; i+=16) grid[i]|= EAST;
+        //119 120 135 136
+        grid[118]|= EAST;
+        grid[119]|= WEST|NORTH;
+        grid[103]|= SOUTH;
+
+        grid[121]|= WEST;
+        grid[120]|= EAST|NORTH;
+        grid[104]|= SOUTH;
+
+        grid[134]|= EAST;
+        grid[135]|= WEST|SOUTH;
+        grid[151]|= NORTH;
+
+        grid[137]|= WEST;
+        grid[136]|= EAST|SOUTH;
+        grid[152]|= NORTH;
+
+        for (int i = 0; i < nbRobots; i++) {
+            if (robots[i] < 0 || robots[i] > 255) {
+                if(i==0) robots[i]=0;
+                else robots[i] = 119 + (i-1)%2 + (i > 2 ? 16 : 0);
+            }
+        }
     }
 
     ~Game() {

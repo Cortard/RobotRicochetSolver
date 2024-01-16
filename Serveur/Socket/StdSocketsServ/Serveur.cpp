@@ -212,6 +212,11 @@ void Serveur::processLoop(Client* slot){
     }
 
     // STATE_SENT_TYPE_GRID_CONFIRMATION OR RECEIVED_TOKEN:
+    slot->state = STATE_PREPARING_GRID;
+    Logs::write("Preparing grid on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+    Serveur::prepareGrid(slot);
+
+    // STATE_PREPARED_GRID:
     slot->state = STATE_SOLVING;
     Logs::write("Slot " + std::to_string(slot->slotNum) + " begin to solve",LOG_LEVEL_VERBOSE);
     if( ! Serveur::solving(slot) ) return;
@@ -430,6 +435,11 @@ bool Serveur::confirmClientGrid(Client *slot) {
 //---------------------------------------------------------------------------------------------------------------------------------//
 //                                               process                                                                           //
 //---------------------------------------------------------------------------------------------------------------------------------//
+bool Serveur::prepareGrid(Client *slot) {
+    ((Game*)slot->output)->prepareGrid();
+    slot->state=STATE_PREPARED_GRID;
+    return true;
+}
 bool Serveur::solving(Client *slot) {
     unsigned char* path;
     try{

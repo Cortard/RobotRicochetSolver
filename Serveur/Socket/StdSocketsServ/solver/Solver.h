@@ -9,12 +9,6 @@
 
 #define MAX_DEPTH 32
 
-#define NORTH 0x01 // 0b00000001 1
-#define EAST  0x02 // 0b00000010 2
-#define SOUTH 0x04 // 0b00000100 4
-#define WEST  0x08 // 0b00001000 8
-#define ROBOT 0x10 // 0b00010000 16
-
 #define HAS_WALL(x, wall) (x & wall) // x & wall = 1 si x contient wall (et bit à bit)
 #define HAS_ROBOT(x) (x & ROBOT) // x & ROBOT = 1 si x contient ROBOT (0b0001 0000) (et bit à bit)
 #define SET_ROBOT(x) (x |= ROBOT) // -> x = x | ROBOT -> x = x | 0b0001 0000 ( x= ou bit à bit)

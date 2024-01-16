@@ -22,7 +22,7 @@
 
 #include <opencv2/opencv.hpp>
 
-bool picture = true;
+bool picture = false;
 
 int main() {
     #if defined (WIN32)
