@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,7 +31,6 @@ public class PictureActivity extends AppCompatActivity {
 
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
-
 
         bHelp.setOnClickListener(v -> {
 
@@ -120,6 +117,8 @@ public class PictureActivity extends AppCompatActivity {
             Toast.makeText(this, "Photo Valide", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, PictureVerifyActivity.class);
             intent.setData(image_uri);
+            int[] tab = getIntent().getIntArrayExtra("tabPos");
+            intent.putExtra("tabPos", tab);
             startActivity(intent);
             finish();
         }
@@ -129,6 +128,8 @@ public class PictureActivity extends AppCompatActivity {
             Toast.makeText(this, "Photo Valide", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, PictureVerifyActivity.class);
             intent.setData(image_uri);
+            int[] tab = getIntent().getIntArrayExtra("tabPos");
+            intent.putExtra("tabPos", tab);
             startActivity(intent);
             finish();
         }

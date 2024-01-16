@@ -51,6 +51,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
     Button bCancel;
     Button bVld;
 
+    int[] tab;
 
     Uri image_uri;
 
@@ -65,6 +66,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         bVld = findViewById(R.id.btnValide);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
+
+        tab = getIntent().getIntArrayExtra("tabPos");
 
         image_uri = getIntent().getData();
         if (image_uri != null) {
@@ -198,16 +201,10 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         }
                         dataOutputStream.flush();
 
-                        txt.setText(width * height * 3 + " 1");
-
-
                         DataInputStream dataInputStreamLong = new DataInputStream(socket.getInputStream());
                         long responseSize = dataInputStreamLong.read();
 
-                        txt.setText(width * height * 3 + " 2");
-
                         if (width * height * 3 > 0) {
-
 
                             Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -218,8 +215,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                             for(int i=0;i < imageInByte.length;i++){
                                 convertedChar[i]=(char)imageInByte[i];
                             }
-
-                            //char[] imageData = readFileToCharArray(filePath);
 
                             txt.setText(width * height * 3 + " 3");
 
@@ -240,31 +235,33 @@ public class PictureVerifyActivity extends AppCompatActivity {
                             txt.setText(size + " 5");
 
                             // Attente de la confirmation de la réception
-                            int responseConfirm = dataInputStream.readInt();
+                            char responseConfirm = dataInputStream.readChar();
 
                             txt.setText((int) responseConfirm + " 5");
 
-                            if ((int)responseConfirm == 1) { // confirm state
+                            if ((int)responseConfirm == 0) { // confirm state
                                 // Envoie du FLAG au serveur : 1
-                                dataOutputStream.writeChar(1);
+                                int nbRobot = tab.length - 1;
+                                txt.setText(nbRobot);
+
+                                dataOutputStream.writeChar(nbRobot);
                                 dataOutputStream.flush();
 
                                 // Attente de la réponse du serveur avec timeout
                                 char confirmFlag = dataInputStream.readChar();
 
-                                if ((int)confirmFlag == 1) {
+                                if ((int)confirmFlag == nbRobot) {
+
+                                    for(int i = 1 ; i<nbRobot ; i++){
+                                        dataOutputStream.writeInt(tab[i]);
+                                    }
+
+                                    txt.setText(tab[tab.length]);
+                                    dataOutputStream.writeInt(tab[tab.length]);
+                                    dataOutputStream.flush();
+
+
                                     Thread.sleep(TIMEOUT);
-
-                                    // Envoie des informations sur l'état
-                                    dataOutputStream.writeChar(1);
-                                    dataOutputStream.flush();
-
-                                    int depth = dataInputStream.readInt();
-                                    int duration = dataInputStream.readInt();
-
-                                    // Envoie du FLAG au serveur : 1
-                                    dataOutputStream.writeChar(1);
-                                    dataOutputStream.flush();
 
                                     // Attente de la réponse du serveur avec timeout
                                     char finalFlag = dataInputStream.readChar();
@@ -366,7 +363,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         throw new RuntimeException(ex);
                     }
                     e.printStackTrace();
-                    txt.setText(e + " io");
+                    //txt.setText(e + " io");
                 } catch (Exception e) {
 //                    Intent intent = new Intent(answer, PictureActivity.class);
 //                    startActivity(intent);
@@ -383,21 +380,5 @@ public class PictureVerifyActivity extends AppCompatActivity {
             }
         });
         th.start();
-    }
-
-    private char[] readFileToCharArray(String file) {
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            char[] data = new char[(int) file.length()];
-            int bytesRead;
-            for (int i = 0; (bytesRead = fileInputStream.read()) != -1; i++) {
-                data[i] = (char) bytesRead;
-            }
-            fileInputStream.close();
-            return data;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

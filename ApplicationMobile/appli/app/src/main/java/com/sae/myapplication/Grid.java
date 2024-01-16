@@ -102,15 +102,15 @@ public class Grid extends View {
     private int getCouleurSuivante(int couleurActuelle) {
         switch (couleurActuelle) {
             case 0:
-                return Color.GRAY;
-            case 1:
                 return Color.RED;
-            case 2:
+            case 1:
                 return Color.BLUE;
-            case 3:
+            case 2:
                 return Color.GREEN;
-            case 4:
+            case 3:
                 return Color.YELLOW;
+            case 4:
+                return Color.GRAY;
             default:
                 return Color.BLACK; // DÃ©faut vers la couleur rouge si la couleur actuelle n'est pas gÃ©rÃ©e
         }
@@ -125,21 +125,54 @@ public class Grid extends View {
         }
     }
 
-    public boolean getCases(String dest){
-        objectif = cases[0];
-        int save = 0;
+    public int[] getCases(String dest){
+        int[] rep = new int [NB];
 
-            if(dest == "objectifr1" || dest == "objectifr2" || dest == "objectifr3" || dest == "objectifr4"){
-                //rouge
-
-            }else if(dest == "objectifb1" || dest == "objectifb2" || dest == "objectifb3" || dest == "objectifb4"){
-                //bleu
-            }else if(dest == "objectifv1" || dest == "objectifv2" || dest == "objectifv3" || dest == "objectifv4"){
-                //bleu
-            }else if(dest == "objectifj1" || dest == "objectifj2" || dest == "objectifj3" || dest == "objectifj4"){
-                //bleu
-            }else {
-                //tout
+        if(dest == "objectifr1" || dest == "objectifr2" || dest == "objectifr3" || dest == "objectifr4"){
+            rep[0] = cases[0];
+            for(int i = 1 ; i<NB ; i++){
+                if(i!=0){
+                    rep[i] = cases[i];
+                }
             }
+            //rouge
+
+        }else if(dest == "objectifb1" || dest == "objectifb2" || dest == "objectifb3" || dest == "objectifb4"){
+            rep[0] = cases[1];
+            for(int i = 1 ; i<NB ; i++){
+                if(i!=1){
+                    rep[i] = cases[i];
+                }else{
+                    rep[i] = cases[0];
+                }
+            }
+            //bleu
+        }else if(dest == "objectifv1" || dest == "objectifv2" || dest == "objectifv3" || dest == "objectifv4"){
+            rep[0] = cases[2];
+            for(int i = 1 ; i<NB ; i++){
+                if(i!=2){
+                    rep[i] = cases[i];
+                }else{
+                    rep[i] = cases[0];
+                }
+            }
+            //vert
+        }else if(dest == "objectifj1" || dest == "objectifj2" || dest == "objectifj3" || dest == "objectifj4"){
+            rep[0] = cases[3];
+            for(int i = 1 ; i<NB ; i++){
+                if(i!=3){
+                    rep[i] = cases[i];
+                }else{
+                    rep[i] = cases[0];
+                }
+            }
+            //jaune
+        }else {
+            for(int i = 0 ; i<NB ; i++){
+                rep[i] = cases[i];
+            }
+            //tout
+        }
+        return rep;
     }
 }
