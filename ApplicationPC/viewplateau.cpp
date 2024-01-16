@@ -192,6 +192,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
     for (const auto& robot : board->robots) {
         if (robot.second == board->objectives[board->objJeu]) {
             robotId = robot.first;
+            victoire();
             break;
         }
     }
@@ -199,6 +200,15 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
     if (robotId==-1 || (board->objJeu >= 0 && board->objJeu <= 3 && robotId!=0) || (board->objJeu >= 4 && board->objJeu <= 7 && robotId!=1) || (board->objJeu >= 8 && board->objJeu <= 11 && robotId!=2) || (robotId != 3 && board->objJeu >= 12 && board->objJeu <= 15)) {
 
         if (mouseEvent->button() == Qt::LeftButton){
+
+            for (const auto& robot : board->robots) {
+                if (robot.second == board->objectives[board->objJeu]) {
+                    robotId = robot.first;
+                    victoire();
+                    break;
+                }
+            }
+
             QPointF mousePos = mouseEvent->scenePos();
 
             QGraphicsItem* clickedItem = itemAt(mousePos, QTransform());
@@ -256,9 +266,15 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         }else{
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
+                        for (const auto& robot : board->robots) {
+                            if (robot.second == board->objectives[board->objJeu]) {
+                                robotId = robot.first;
+                                victoire();
+                                break;
+                            }
+                        }
                         click = 0;
                         emit movementOccurred();
-                        victoire();
                         return;
                     }
                     else if (row2 == row && col2 > col)
@@ -290,6 +306,14 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                             (new ControllerMoveRobot(board))->control(id, targetPos-1);
                         }else{
                             (new ControllerMoveRobot(board))->control(id, compPos);
+                        }
+                        for (const auto& robot : board->robots) {
+                            if (robot.second == board->objectives[board->objJeu]) {
+                                robotId = robot.first;
+                                std::cout<<"win"<<std::endl;
+                                victoire();
+                                break;
+                            }
                         }
                         click = 0;
                         emit movementOccurred();
@@ -324,6 +348,13 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         }else{
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
+                        for (const auto& robot : board->robots) {
+                            if (robot.second == board->objectives[board->objJeu]) {
+                                robotId = robot.first;
+                                victoire();
+                                break;
+                            }
+                        }
                         click = 0;
                         emit movementOccurred();
                         return;
@@ -354,6 +385,13 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         }else{
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
+                        for (const auto& robot : board->robots) {
+                            if (robot.second == board->objectives[board->objJeu]) {
+                                robotId = robot.first;
+                                victoire();
+                                break;
+                            }
+                        }
                         click = 0;
                         emit movementOccurred();
                         return;
@@ -366,15 +404,6 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
             }
         }
     }
-
-    for (const auto& robot : board->robots) {
-        if (robot.second == board->objectives[board->objJeu]) {
-            robotId = robot.first;
-            break;
-        }
-    }
-
-
 
     update();
 
