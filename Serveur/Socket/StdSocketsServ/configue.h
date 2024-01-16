@@ -2,7 +2,7 @@
 #define STDSOCKETSSERVER_CONFIGUE_H
 
 
-#define DEV_MODE 0
+#define DEV_MODE 1
 
 #if DEV_MODE==0
 
@@ -10,6 +10,7 @@
     #define PORT 9090
     #define MAX_CLIENTS 5
     #define LOG_PATH "/home/ricochet/logs.txt"
+    #define PICTURE_PATH "/home/ricochet/temp_picture/"
 
 #else
 
@@ -17,6 +18,7 @@
     #define PORT 9090
     #define MAX_CLIENTS 5
     #define LOG_PATH "./logs.txt"
+    #define PICTURE_PATH "./picture/"
 
 #endif
 

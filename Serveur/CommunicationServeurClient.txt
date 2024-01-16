@@ -18,7 +18,8 @@ Serveur				                                             Client
    |                unsigned long : confirm_size (largeur*hauteur*3)            |
    |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
-   |             char[size] buffer : picture (size=largeur*hauteur*3)           |
+   |                          for i to hauteur :                                |
+   |                 char[size] buffer : picture (size=largeur*3)               |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
    |            unsigned char : confirmation reception {0(OK), 1(NO)            |

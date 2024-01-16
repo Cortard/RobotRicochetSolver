@@ -20,7 +20,9 @@
 #include <iostream>
 #include "configue.h"
 
-bool picture = false;
+#include <opencv2/opencv.hpp>
+
+bool picture = true;
 
 int main() {
     #if defined (WIN32)
@@ -63,7 +65,9 @@ int main() {
             return EXIT_FAILURE;
         }printf("Type de donnée reçu identique à celui envoyé\n");
 
-        unsigned int pictureSize[2] = {10, 10};
+        cv::Mat mat=cv::imread("./picture/default.jpg", cv::IMREAD_COLOR);
+        unsigned int pictureSize[2] = {static_cast<unsigned int>(mat.rows), static_cast<unsigned int>(mat.cols)};
+        std::cout<<pictureSize[0]<<" "<<pictureSize[1]<<std::endl;
         result = send(sockServ, (char *) &pictureSize, sizeof(pictureSize), 0);
         if (result == SOCKET_ERROR) {
             printf("Impossible d'envoyer la taille de l'image\n");
@@ -82,14 +86,25 @@ int main() {
             return EXIT_FAILURE;
         }printf("Taille de l'image reçu identique à celui envoyé\n");
 
-        unsigned char picture[pictureSize[0] * pictureSize[1] * 3];
-        for (int i = 0; i < pictureSize[0] * pictureSize[1] * 3; i++) {
-            picture[i] = i % 255;
-        }
-        result = send(sockServ, (char *) &picture, sizeof(picture), 0);
+        char* matTemp= reinterpret_cast<char *>(mat.data);
+
+
+        cv::Mat img = cv::Mat(static_cast<int>(pictureSize[0]), static_cast<int>(pictureSize[1]), CV_8UC3, (unsigned*)matTemp);
+        cv::imwrite("./test.jpg", img);
+        /*
+        result = send(sockServ, matTemp, pictureSize[0] * pictureSize[1] * 3, 0);
         if (result == SOCKET_ERROR) {
             printf("Impossible d'envoyer l'image\n");
             return EXIT_FAILURE;
+        }printf("Image envoyé\n");
+         */
+
+        for(int i=0;i<pictureSize[0];++i) {
+            int res=send(sockServ, matTemp+i*pictureSize[1]*3, pictureSize[1] * 3, 0);
+            if (res == SOCKET_ERROR) {
+                printf("Impossible d'envoyer l'image\n");
+                return EXIT_FAILURE;
+            }
         }printf("Image envoyé\n");
 
         unsigned char confirm;

@@ -154,7 +154,7 @@ void Serveur::processLoop(Client* slot){
 
             // STATE_SENT_TYPE_PICTURE_CONFIRMATION:
             slot->state = STATE_Process1;
-            slot->clearOutput<char>();
+            slot->clearOutput<std::string>();
             Logs::write("Slot " + std::to_string(slot->slotNum) + " is ready to process",LOG_LEVEL_VERBOSE);
             //TODO
             return;
@@ -287,18 +287,32 @@ bool Serveur::confirmClientPictureSize(Client *slot) {
 bool Serveur::getClientPicture(Client *slot) {
     auto* size=static_cast<unsigned int*>(slot->output);
     slot->output=new char[size[0]*size[1]*3];
-    int result = recv(slot->socket, (char*)slot->output, sizeof(char)*size[0]*size[1]*3, 0);
+    /*
+    int result = recv(slot->socket, (char*)slot->output, size[0]*size[1]*3, 0);
     if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
-    //TODO put real picture object in slot->output
+     */
+    for(int i=0;i<size[0];++i){
+        int result = recv(slot->socket, (char*)slot->output+i*size[1]*3, size[1]*3, 0);
+        if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
+    }
+    Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received",LOG_LEVEL_DEBUG);
+
+    auto* picturePath = new std::string();
+    *picturePath=PICTURE_PATH;
+    *picturePath+="slot"+std::to_string(slot->slotNum)+".jpg";
+    JPEGBuilder::build((char*)slot->output,(int)(size[0]),(int)(size[1]),*picturePath);
+    Logs::write("Slot " + std::to_string(slot->slotNum) + " picture saved at " + *picturePath,LOG_LEVEL_DEBUG);
+
     delete[] size;
+    delete[] static_cast<char*>(slot->output);
+    slot->output=picturePath;
     slot->state=STATE_RECEIVED_PICTURE;
     return true;
 }
 bool Serveur::confirmClientPicture(Client *slot) {
     char confirm=0;
     int result = send(slot->socket, (char*)&confirm, sizeof(char), 0);
-    if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return false;
-    //TODO change char for type of picture on the previous line
+    if(verifySocketOutput<std::string>(slot,true,result)==EXIT_FAILURE) return false;
     slot->state=STATE_SENT_TYPE_PICTURE_CONFIRMATION;
     return true;
 }

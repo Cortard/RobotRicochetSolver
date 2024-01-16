@@ -5,8 +5,9 @@
 #include "solver/Solver.h"
 #include "clients/Client.h"
 #include "configue.h"
+#include "jpegBuilder/jpegBuilder.h"
 
-#define MAX_PICTURE_SIZE 1000000
+#define MAX_PICTURE_SIZE 1000000000
 
 class Serveur {
 public:
