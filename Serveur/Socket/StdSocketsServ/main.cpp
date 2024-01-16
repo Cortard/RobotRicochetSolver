@@ -46,6 +46,7 @@ int main() {
     #if DEV_MODE!=0
         signal(SIGINT, signalHandler);
         signal(SIGPIPE, signalHandler);
+        signal(SIGABRT, signalHandler);
     #endif
 
     if(!Logs::write("Start Server",LOG_LEVEL_INFO)) return EXIT_FAILURE;
