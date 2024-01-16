@@ -43,10 +43,10 @@ Serveur				                                             Client
 			     	Cas 1(GRID) :
 Serveur				                                             Client
    |                                                                            |
-   |         char : type (0b0000 00[x][y] => [x+4=nbRobots][y=murDeTravers?]    |
+   | char : type (0b 0[z][x][y] => [globalGoal?][x+4=nbRobots][y=murDeTravers?] |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |         char : type (0b0000 00[x][y] => [x+4=nbRobots][y=murDeTravers?]    |
+   | char : type (0b 0[z][x][y] => [globalGoal?][x+4=nbRobots][y=murDeTravers?] |
    |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
    |                          unsigned int grid[256]                            |

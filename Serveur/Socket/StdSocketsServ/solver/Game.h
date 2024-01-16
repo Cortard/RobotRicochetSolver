@@ -12,9 +12,11 @@ public:
     int nbRobots; //nombre de robots
     bool coloredWalls; //tableau des murs colorés
     unsigned int token; //goal
+    bool globalToken; //All robots can reach the goal
     unsigned int last; //dernier mouvement
 
-    Game(int nbRobots, bool coloredWalls) : nbRobots(nbRobots), coloredWalls(coloredWalls) {
+    Game(int nbRobots, bool coloredWalls, bool globalGoal) : nbRobots(nbRobots), coloredWalls(coloredWalls), globalToken(globalGoal)
+    {
         //memset(moves, 0xff, sizeof(moves)); useless because of the precompute_minimum_moves function
         memset(grid, 0, sizeof(grid));
         robots = new unsigned int[nbRobots];

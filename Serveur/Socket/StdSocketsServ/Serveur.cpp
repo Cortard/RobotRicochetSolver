@@ -343,7 +343,7 @@ bool Serveur::confirmClientPicture(Client *slot) {
 bool Serveur::buildBoard(Client *slot) {
     auto* picturePath = static_cast<std::string*>(slot->output);
     Board board=BoardBuilder::constructBoard(*picturePath,BOARD_PATH);
-    Game* game=new Game(4,false);
+    Game* game=new Game(4,false,false);
     for(int i=0;i<256;++i){
         game->grid[i]=board.cases[i];
     }
@@ -397,7 +397,7 @@ bool Serveur::confirmClientGridType(Client *slot) {
 }
 bool Serveur::getClientGrid(Client *slot) {
     char* type=static_cast<char*>(slot->output);
-    slot->output=new Game(((type[0]&2)>>1) + 4,type[0]&1);
+    slot->output=new Game(((type[0]&2)>>1) + 4,type[0]&1,(type[0]&4)>>2);
 
     int result = recv(slot->socket, (char*)((Game*)slot->output)->grid, sizeof(unsigned int[256]), 0);
     if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
