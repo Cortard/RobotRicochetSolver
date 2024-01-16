@@ -7,7 +7,7 @@
 #include <QScreen>
 #include <QtGlobal>
 #include <QTime>
-
+#include "socketconnection.h"
 
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
@@ -137,6 +137,7 @@ void MainWindow::on_pushPlateau_clicked()
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
+    SocketConnection::getSolution(board);
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
