@@ -35,8 +35,6 @@ private:
     int selectedCol = -1;
     QList<QGraphicsRectItem*> selectionSquares;
     int robotId = -1;
-    bool win = false;
-
 
 public:
     viewPlateau(Board* = nullptr);

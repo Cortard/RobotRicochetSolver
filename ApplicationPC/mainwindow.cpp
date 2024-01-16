@@ -53,10 +53,6 @@ void MainWindow::on_Retour_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
-void MainWindow::on_Home_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
-}
 void MainWindow::on_Retour_3_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagejouer);
@@ -115,13 +111,6 @@ void MainWindow::on_pushRobot_clicked()
         ControllerAddRobot(board).control();
     }
 }
-
-
-void MainWindow::on_Retour_2_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
-}
-
 
 void MainWindow::on_pushTrain_2_clicked()
 {
@@ -428,5 +417,22 @@ void MainWindow::on_buttonhistoire1_clicked()
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
     ui->stackedWidget->setCurrentWidget(ui->plateau);
+}
+
+
+void MainWindow::on_Home_4_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
+}
+
+void MainWindow::on_Retour_15_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
+}
+
+
+void MainWindow::on_Retour_17_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 

@@ -455,7 +455,7 @@ void viewPlateau::clearSelectionSquares()
 
 void viewPlateau::victoire(){
     QGraphicsTextItem* textItem = new QGraphicsTextItem();
-    textItem->setPlainText(QString("Victoire").arg(id));
+    textItem->setPlainText(QString("Victoire"));
     textItem->setDefaultTextColor(Qt::yellow);
     QFont font = textItem->font();
     font.setPointSize(32);  // Taille du texte

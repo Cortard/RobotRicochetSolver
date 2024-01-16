@@ -294,6 +294,43 @@ QPushButton#pushButton_22:pressed {
         </property>
         <item row="1" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="Home_3">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Home_3 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Home_3:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Home_3:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
           <property name="text">
            <string>Home</string>
           </property>
@@ -301,6 +338,43 @@ QPushButton#pushButton_22:pressed {
         </item>
         <item row="2" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="Retour_4">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Retour_4 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_4:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_4:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
           <property name="text">
            <string>Retour</string>
           </property>
@@ -509,66 +583,6 @@ QPushButton#pushPlateau:pressed {
       </widget>
      </widget>
      <widget class="QWidget" name="pagehistoire">
-      <widget class="QWidget" name="verticalLayoutWidget_2">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>1261</width>
-         <height>1108</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_5">
-        <property name="leftMargin">
-         <number>100</number>
-        </property>
-        <property name="rightMargin">
-         <number>100</number>
-        </property>
-        <property name="bottomMargin">
-         <number>900</number>
-        </property>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>100</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>30</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(194, 167, 225);</string>
-          </property>
-          <property name="text">
-           <string>Histoire</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0" alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="Retour_3">
-          <property name="text">
-           <string>Retour</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="Home">
-          <property name="text">
-           <string>Home</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
       <widget class="QPushButton" name="buttonhistoire1">
        <property name="geometry">
         <rect>
@@ -673,6 +687,137 @@ QPushButton#pushPlateau:pressed {
         <string>8</string>
        </property>
       </widget>
+      <widget class="QWidget" name="verticalLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>1261</width>
+         <height>701</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <property name="leftMargin">
+         <number>100</number>
+        </property>
+        <property name="rightMargin">
+         <number>100</number>
+        </property>
+        <property name="bottomMargin">
+         <number>500</number>
+        </property>
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="font">
+           <font>
+            <pointsize>30</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(194, 167, 225);</string>
+          </property>
+          <property name="text">
+           <string>Jouer</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="Retour_14">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Retour_14 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_14:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_14:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
+          <property name="text">
+           <string>Retour</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="Retour_3">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Retour_3{
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_3:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_3:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
+          <property name="text">
+           <string>Home</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
      <widget class="QWidget" name="pagetrain">
       <widget class="QWidget" name="verticalLayoutWidget_3">
@@ -696,6 +841,43 @@ QPushButton#pushPlateau:pressed {
         </property>
         <item row="1" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="Retour_5">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Retour_5 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_5:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_5:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
           <property name="text">
            <string>Retour</string>
           </property>
@@ -703,6 +885,43 @@ QPushButton#pushPlateau:pressed {
         </item>
         <item row="0" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="Home_2">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Home_2 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Home_2:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Home_2:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
           <property name="text">
            <string>Home</string>
           </property>
@@ -713,7 +932,7 @@ QPushButton#pushPlateau:pressed {
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>200</height>
+            <height>150</height>
            </size>
           </property>
           <property name="font">
@@ -753,18 +972,21 @@ QPushButton#pushPlateau:pressed {
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>40</y>
                <width>351</width>
-               <height>421</height>
+               <height>261</height>
               </rect>
              </property>
+             <property name="styleSheet">
+              <string notr="true">border:none;</string>
+             </property>
              <property name="title">
-              <string>Générer Plateau</string>
+              <string/>
              </property>
              <widget class="QRadioButton" name="radioButton">
               <property name="geometry">
                <rect>
-                <x>10</x>
+                <x>80</x>
                 <y>30</y>
                 <width>106</width>
                 <height>22</height>
@@ -780,7 +1002,7 @@ QPushButton#pushPlateau:pressed {
              <widget class="QRadioButton" name="radioButton_2">
               <property name="geometry">
                <rect>
-                <x>10</x>
+                <x>80</x>
                 <y>60</y>
                 <width>106</width>
                 <height>22</height>
@@ -796,7 +1018,7 @@ QPushButton#pushPlateau:pressed {
              <widget class="QRadioButton" name="radioButton_3">
               <property name="geometry">
                <rect>
-                <x>10</x>
+                <x>80</x>
                 <y>90</y>
                 <width>106</width>
                 <height>22</height>
@@ -812,14 +1034,52 @@ QPushButton#pushPlateau:pressed {
              <widget class="QPushButton" name="pushButton_5">
               <property name="geometry">
                <rect>
-                <x>140</x>
+                <x>80</x>
                 <y>130</y>
-                <width>83</width>
-                <height>24</height>
+                <width>200</width>
+                <height>50</height>
                </rect>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Quicksand Medium</family>
+                <pointsize>20</pointsize>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton#pushButton_5 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#pushButton_5:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#pushButton_5:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+              </property>
               <property name="text">
-               <string>PushButton</string>
+               <string>Generer</string>
               </property>
              </widget>
             </widget>
@@ -831,32 +1091,70 @@ QPushButton#pushPlateau:pressed {
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>50</y>
                <width>351</width>
-               <height>421</height>
+               <height>231</height>
               </rect>
              </property>
              <property name="title">
-              <string>Charger Plateau</string>
+              <string/>
              </property>
              <widget class="QListWidget" name="listWidget">
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>20</y>
+                <y>0</y>
                 <width>351</width>
-                <height>361</height>
+                <height>231</height>
                </rect>
               </property>
              </widget>
              <widget class="QPushButton" name="pushButton_4">
               <property name="geometry">
                <rect>
-                <x>140</x>
-                <y>390</y>
-                <width>83</width>
-                <height>24</height>
+                <x>80</x>
+                <y>120</y>
+                <width>200</width>
+                <height>50</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Quicksand Medium</family>
+                <pointsize>20</pointsize>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton#pushButton_4 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#pushButton_4:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#pushButton_4:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
               </property>
               <property name="text">
                <string>PushButton</string>
@@ -892,7 +1190,7 @@ QPushButton#pushPlateau:pressed {
          <height>701</height>
         </rect>
        </property>
-       <layout class="QGridLayout" name="gridLayout_3">
+       <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0">
         <property name="leftMargin">
          <number>100</number>
         </property>
@@ -903,6 +1201,25 @@ QPushButton#pushPlateau:pressed {
          <number>200</number>
         </property>
         <item row="3" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="font">
+           <font>
+            <pointsize>30</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(194, 167, 225);</string>
+          </property>
+          <property name="text">
+           <string>Jouer</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="spacing">
            <number>150</number>
@@ -959,27 +1276,89 @@ QPushButton#pushPlateau:pressed {
           </item>
          </layout>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_2">
+        <item row="1" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="Retour">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <pointsize>30</pointsize>
+            <family>Quicksand Medium</family>
             <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">color:rgb(194, 167, 225);</string>
+           <string notr="true">QPushButton#Retour{
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
           </property>
           <property name="text">
-           <string>Jouer</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
+           <string>Home</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="Retour">
+        <item row="2" column="0">
+         <widget class="QPushButton" name="Retour_9">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Retour_9 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_9:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_9:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
           <property name="text">
            <string>Retour</string>
           </property>
@@ -992,45 +1371,71 @@ QPushButton#pushPlateau:pressed {
       <widget class="QWidget" name="verticalLayoutWidget_5">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>0</y>
+         <x>10</x>
+         <y>10</y>
          <width>1261</width>
-         <height>701</height>
+         <height>601</height>
         </rect>
        </property>
-       <layout class="QGridLayout" name="gridLayout_4">
+       <layout class="QGridLayout" name="gridLayout_4" columnstretch="0">
         <property name="leftMargin">
-         <number>100</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
          <number>100</number>
         </property>
         <property name="bottomMargin">
-         <number>200</number>
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>6</number>
         </property>
         <item row="1" column="0" alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="Retour_2">
-          <property name="text">
-           <string>Retour</string>
+         <widget class="QPushButton" name="Retour_15">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
           </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QFrame" name="frame_5">
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">background : url(:/img/edition.png) center center no-repeat;
-border:none;</string>
+           <string notr="true">QPushButton#Retour_15{
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_15:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_15:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
           </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+          <property name="text">
+           <string>Home</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item row="4" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
           <property name="spacing">
            <number>150</number>
           </property>
@@ -1038,7 +1443,10 @@ border:none;</string>
            <number>100</number>
           </property>
           <property name="rightMargin">
-           <number>100</number>
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>50</number>
           </property>
           <item>
            <widget class="QPushButton" name="pushHistoire_2">
@@ -1054,12 +1462,30 @@ border:none;</string>
               <height>350</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <family>Quicksand Medium</family>
+              <pointsize>35</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/charger.png) center center;
-border:none;</string>
+             <string notr="true">QPushButton#pushHistoire_2{
+	background : url(:/img/charger.png) center center;
+	border:none;
+	border-radius: 25px;
+	padding:10px;
+	color:rgb(255, 255, 255);
+}
+
+QPushButton#pushHistoire_2:hover {
+	color:rgb(194, 167, 225);
+}
+
+</string>
             </property>
             <property name="text">
-             <string>Ouvrir</string>
+             <string>Charger</string>
             </property>
            </widget>
           </item>
@@ -1077,9 +1503,27 @@ border:none;</string>
               <height>350</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <family>Quicksand Medium</family>
+              <pointsize>35</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/creer.jpg) center center;
-border:none;</string>
+             <string notr="true">QPushButton#pushTrain_2{
+	background : url(:/img/creer.jpg) center center;
+	border:none;
+	border-radius: 25px;
+	padding:10px;
+	color:rgb(255, 255, 255);
+}
+
+QPushButton#pushTrain_2:hover {
+	color:rgb(194, 167, 225);
+}
+
+</string>
             </property>
             <property name="text">
              <string>Creer</string>
@@ -1087,6 +1531,71 @@ border:none;</string>
            </widget>
           </item>
          </layout>
+        </item>
+        <item row="3" column="0">
+         <widget class="QFrame" name="frame_8">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background : url(:/img/edition.png) no-repeat;
+margin-left:400px;
+border:none;</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="Retour_16">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Retour_16{
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_16:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_16:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
+          <property name="text">
+           <string>Retour</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -1113,6 +1622,43 @@ border:none;</string>
         </property>
         <item row="1" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="Home_5">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Home_5 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Home_5:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Home_5:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
           <property name="text">
            <string>Home</string>
           </property>
@@ -1120,6 +1666,43 @@ border:none;</string>
         </item>
         <item row="2" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="Retour_7">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Retour_7 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_7:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_7:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
           <property name="text">
            <string>Retour</string>
           </property>
@@ -1174,7 +1757,7 @@ border:none;</string>
                 <font>
                  <family>Quicksand Medium</family>
                  <pointsize>15</pointsize>
-                 <bold>false</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
@@ -1248,27 +1831,74 @@ QPushButton#pushObjective_3:pressed {
       </widget>
      </widget>
      <widget class="QWidget" name="choixplateau">
-      <widget class="QWidget" name="verticalLayoutWidget_7">
+      <widget class="QWidget" name="verticalLayoutWidget_9">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>10</y>
          <width>1261</width>
-         <height>701</height>
+         <height>601</height>
         </rect>
        </property>
-       <layout class="QGridLayout" name="gridLayout_8">
+       <layout class="QGridLayout" name="gridLayout_14" columnstretch="0">
         <property name="leftMargin">
-         <number>100</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
          <number>100</number>
         </property>
         <property name="bottomMargin">
-         <number>200</number>
+         <number>0</number>
         </property>
-        <item row="3" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <item row="1" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="Retour_17">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Retour_17{
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_17:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_17:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
+          <property name="text">
+           <string>Home</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_15">
           <property name="spacing">
            <number>150</number>
           </property>
@@ -1276,7 +1906,10 @@ QPushButton#pushObjective_3:pressed {
            <number>100</number>
           </property>
           <property name="rightMargin">
-           <number>100</number>
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>50</number>
           </property>
           <item>
            <widget class="QPushButton" name="pushHistoire_3">
@@ -1292,11 +1925,30 @@ QPushButton#pushObjective_3:pressed {
               <height>350</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <family>Quicksand Medium</family>
+              <pointsize>35</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/histoire.jpg) center center;</string>
+             <string notr="true">QPushButton#pushHistoire_3{
+	background : url(:/img/histoire.jpg) center center;
+	border:none;
+	border-radius: 25px;
+	padding:10px;
+	color:rgb(255, 255, 255);
+}
+
+QPushButton#pushHistoire_3:hover {
+	color:rgb(194, 167, 225);
+}
+
+</string>
             </property>
             <property name="text">
-             <string>Officiel</string>
+             <string>Charger</string>
             </property>
            </widget>
           </item>
@@ -1314,37 +1966,95 @@ QPushButton#pushObjective_3:pressed {
               <height>350</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <family>Quicksand Medium</family>
+              <pointsize>35</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/train.png) center center;</string>
+             <string notr="true">QPushButton#pushTrain_3{
+	background : url(:/img/train.png) center center;
+	border:none;
+	border-radius: 25px;
+	padding:10px;
+	color:rgb(255, 255, 255);
+}
+
+QPushButton#pushTrain_3:hover {
+	color:rgb(194, 167, 225);
+}
+
+</string>
             </property>
             <property name="text">
-             <string>Libre</string>
+             <string>Creer</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
+        <item row="3" column="0">
+         <widget class="QFrame" name="frame_9">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background : url(:/img/edition.png) no-repeat;
+margin-left:400px;
+border:none;</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="0">
-         <widget class="QLabel" name="label_3">
+         <widget class="QPushButton" name="Retour_18">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <pointsize>30</pointsize>
+            <family>Quicksand Medium</family>
             <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">color:rgb(194, 167, 225);</string>
+           <string notr="true">QPushButton#Retour_18{
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_18:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_18:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
           </property>
-          <property name="text">
-           <string>Edition</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="Retour_6">
           <property name="text">
            <string>Retour</string>
           </property>
@@ -1360,7 +2070,7 @@ QPushButton#pushObjective_3:pressed {
          <x>10</x>
          <y>10</y>
          <width>1501</width>
-         <height>639</height>
+         <height>651</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_10">
@@ -1399,7 +2109,8 @@ QPushButton#pushObjective_3:pressed {
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/Fond2.png) center center no-repeat;</string>
+             <string notr="true">background : url(:/img/Fond2.png) center center no-repeat;
+border:none;</string>
             </property>
            </widget>
           </item>
@@ -1407,6 +2118,43 @@ QPushButton#pushObjective_3:pressed {
         </item>
         <item row="1" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="Home_4">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Home_4 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Home_4:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Home_4:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
           <property name="text">
            <string>Home</string>
           </property>
@@ -1414,6 +2162,44 @@ QPushButton#pushObjective_3:pressed {
         </item>
         <item row="2" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="Retour_8">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <pointsize>10</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#Retour_8 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(216, 113, 255, 255), stop:0.489712 rgba(255, 255, 255, 255), stop:1 rgba(121, 253, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#Retour_8:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#Retour_8:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
           <property name="text">
            <string>Retour</string>
           </property>
