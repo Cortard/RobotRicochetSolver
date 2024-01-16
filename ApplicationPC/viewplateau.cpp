@@ -258,6 +258,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         }
                         click = 0;
                         emit movementOccurred();
+                        victoire();
                         return;
                     }
                     else if (row2 == row && col2 > col)
@@ -366,6 +367,14 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
         }
     }
 
+    for (const auto& robot : board->robots) {
+        if (robot.second == board->objectives[board->objJeu]) {
+            robotId = robot.first;
+            break;
+        }
+    }
+
+
 
     update();
 
@@ -415,3 +424,14 @@ void viewPlateau::clearSelectionSquares()
     selectionSquares.clear();
 }
 
+void viewPlateau::victoire(){
+    QGraphicsTextItem* textItem = new QGraphicsTextItem();
+    textItem->setPlainText(QString("Victoire").arg(id));
+    textItem->setDefaultTextColor(Qt::yellow);
+    QFont font = textItem->font();
+    font.setPointSize(32);  // Taille du texte
+    font.setBold(true);     // Texte en gras
+    textItem->setFont(font);
+    textItem->setPos(100,160);  // Position du texte par rapport à l'objet cliqué
+    addItem(textItem);
+}

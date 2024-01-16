@@ -407,3 +407,25 @@ void MainWindow::on_pushButton_5_clicked()
     }
 }
 
+
+void MainWindow::on_buttonhistoire1_clicked()
+{
+    viewPlateauOfficiel->constructPart13(this->board, 0);
+    viewPlateauOfficiel->constructPart15(this->board, 1);
+    viewPlateauOfficiel->constructPart2(this->board, 2);
+    viewPlateauOfficiel->constructPart3(this->board, 3);
+    this->board->addRobot(0,2);
+    this->board->addRobot(1,250);
+    this->board->addRobot(2,55);
+    this->board->addRobot(3,86);
+    this->board->objJeu=0;
+
+    if (viewPlato == nullptr) {
+        viewPlato = new viewPlateau(board);
+        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
+        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
+        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+    }
+    ui->stackedWidget->setCurrentWidget(ui->plateau);
+}
+
