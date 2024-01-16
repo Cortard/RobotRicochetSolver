@@ -38,6 +38,8 @@ public:
     int mouvement=0;
     int objJeu=-1;
 
+    void reset();
+
 private:
     static const int BOARD_SIZE = 16;
 };

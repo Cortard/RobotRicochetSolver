@@ -65,6 +65,8 @@ private slots:
 
     void on_Retour_17_clicked();
 
+    void on_pushButton_12_clicked();
+
 private:
     Ui::MainWindow *ui;
     Board* board;

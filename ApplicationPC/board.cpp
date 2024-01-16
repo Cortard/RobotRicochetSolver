@@ -125,3 +125,37 @@ void Board::moveRobot(int id, int pos)
     this->robots.at(id)=pos;
     notifyObserver();
 }
+
+void Board::reset(){
+    mouvement=0;
+    objJeu=-1;
+    for(int i=0;i<255;i++){
+        DEL_WALL(cases[i], NORTH);
+        DEL_WALL(cases[i], SOUTH);
+        DEL_WALL(cases[i], EAST);
+        DEL_WALL(cases[i], WEST);
+    }
+
+    for(int i=0;i<16;i++){
+        SET_WALL(cases[i], NORTH);
+        SET_WALL(cases[i+16*15], SOUTH);
+        SET_WALL(cases[i*16], WEST);
+        SET_WALL(cases[i*16+15], EAST);
+    }
+    SET_WALL(cases[151],NORTH);
+    SET_WALL(cases[152],NORTH);
+    SET_WALL(cases[103],SOUTH);
+    SET_WALL(cases[104],SOUTH);
+    SET_WALL(cases[118],EAST);
+    SET_WALL(cases[134],EAST);
+    SET_WALL(cases[121],WEST);
+    SET_WALL(cases[137],WEST);
+
+    for(int i=0;i<17;i++){
+        this->objectives.at(i)=-1;
+    }
+    for(int i=0;i<5;i++){
+        this->robots.at(i)=-1;
+    }
+    notifyObserver();
+}

@@ -310,7 +310,6 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         for (const auto& robot : board->robots) {
                             if (robot.second == board->objectives[board->objJeu]) {
                                 robotId = robot.first;
-                                std::cout<<"win"<<std::endl;
                                 victoire();
                                 break;
                             }

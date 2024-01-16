@@ -581,6 +581,19 @@ QPushButton#pushPlateau:pressed {
         </item>
        </layout>
       </widget>
+      <widget class="QPushButton" name="pushButton_12">
+       <property name="geometry">
+        <rect>
+         <x>1080</x>
+         <y>470</y>
+         <width>83</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="pagehistoire">
       <widget class="QPushButton" name="buttonhistoire1">
@@ -1948,7 +1961,7 @@ QPushButton#pushHistoire_3:hover {
 </string>
             </property>
             <property name="text">
-             <string>Charger</string>
+             <string>Officiel</string>
             </property>
            </widget>
           </item>
@@ -1989,7 +2002,7 @@ QPushButton#pushTrain_3:hover {
 </string>
             </property>
             <property name="text">
-             <string>Creer</string>
+             <string>Libre</string>
             </property>
            </widget>
           </item>
@@ -2070,7 +2083,7 @@ QPushButton#Retour_18:pressed {
          <x>10</x>
          <y>10</y>
          <width>1501</width>
-         <height>651</height>
+         <height>706</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_10">
@@ -2083,6 +2096,51 @@ QPushButton#Retour_18:pressed {
         <property name="bottomMargin">
          <number>100</number>
         </property>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="pushButton">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Quicksand Medium</family>
+            <pointsize>15</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#pushButton {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#pushButton:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#pushButton:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+          </property>
+          <property name="text">
+           <string>Jouer</string>
+          </property>
+         </widget>
+        </item>
         <item row="3" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <property name="spacing">
@@ -2205,46 +2263,20 @@ QPushButton#Retour_8:pressed {
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QPushButton" name="pushButton">
-          <property name="maximumSize">
-           <size>
-            <width>200</width>
-            <height>100</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Quicksand Medium</family>
-            <pointsize>15</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton#pushButton {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
-	padding:10px;
-	color : #70bfcb;
-}
-
-QPushButton#pushButton:hover {
-    background-color: #9c2579;
-}
-
-QPushButton#pushButton:pressed {
-    background-color: #9c2579;     
-}
-
-</string>
-          </property>
-          <property name="text">
-           <string>Jouer</string>
-          </property>
-         </widget>
-        </item>
        </layout>
+      </widget>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>1110</x>
+         <y>460</y>
+         <width>83</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>PushButton</string>
+       </property>
       </widget>
      </widget>
     </widget>

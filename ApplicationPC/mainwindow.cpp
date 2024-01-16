@@ -436,3 +436,9 @@ void MainWindow::on_Retour_17_clicked()
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 
+
+void MainWindow::on_pushButton_12_clicked()
+{
+    this->board->reset();
+}
+

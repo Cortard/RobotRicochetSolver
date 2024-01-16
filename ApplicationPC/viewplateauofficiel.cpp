@@ -47,14 +47,10 @@ void ViewPlateauOfficiel::updateModel(){
 void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) {
     if (mouseEvent->button() == Qt::LeftButton) {
         QPointF mousePos = mouseEvent->scenePos();
-        std::cout << "x" << mousePos.x() << std::endl;
-        std::cout << "y" << mousePos.y() << std::endl;
 
         if(click==0){
             it = imagePositions.end();
         }
-
-        cout<<click<<endl;
 
         if(click==0){
             it = std::find_if(imagePositions.begin(), imagePositions.end(), [&](const auto& pair) {
@@ -65,8 +61,6 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
                         mousePos.y() <= position.y() + 30;
             });
         }
-
-        cout<<click<<endl;
 
         if (it != imagePositions.end()) {
             if (it == imagePositions.begin() ||
@@ -97,11 +91,8 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
             click++;
         }
 
-        cout<<"col" << col<<endl;
-
         if(click==2){
             if (it != imagePositions.end()) {
-                std::cout << "Image should appear" << std::endl;
                 QPixmap pixmap(it->second);
                 QGraphicsPixmapItem* item = new QGraphicsPixmapItem(pixmap);
                 if(secondClickPos.x()<730 && secondClickPos.y()<210 && secondClickPos.y()>10 && secondClickPos.x()>530){
@@ -279,7 +270,6 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
             }
             click++;
         }
-        cout<<click<<endl;
         if(click==3){
             click=0;
         }
