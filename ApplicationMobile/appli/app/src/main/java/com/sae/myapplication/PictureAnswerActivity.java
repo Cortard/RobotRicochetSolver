@@ -1,18 +1,13 @@
 package com.sae.myapplication;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class PictureAnswerActivity extends AppCompatActivity {

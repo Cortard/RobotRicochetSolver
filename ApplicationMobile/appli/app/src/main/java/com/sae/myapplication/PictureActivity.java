@@ -127,7 +127,7 @@ public class PictureActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && data != null && galery){
             image_uri = data.getData();
             Toast.makeText(this, "Photo Valide", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, RobotCorrectionActivity.class);
+            Intent intent = new Intent(this, PictureVerifyActivity.class);
             intent.setData(image_uri);
             startActivity(intent);
             finish();

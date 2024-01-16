@@ -271,7 +271,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                                     if ((int)finalFlag == 1) {
                                         // Processus terminé avec succès
-                                        Intent intent = new Intent(answer, RobotCorrectionActivity.class);
+                                        Intent intent = new Intent(answer, PictureAnswerActivity.class);
                                         startActivity(intent);
                                     } else {
                                         Log.d("denied", "Pas de réponse serveur : finalFlag");
@@ -316,7 +316,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                         dataInputStream.readFully(correction);
 
                                         // Processus terminé avec succès
-                                        Intent intent = new Intent(answer, RobotCorrectionActivity.class);
+                                        Intent intent = new Intent(answer, PictureAnswerActivity.class);
                                         startActivity(intent);
                                     } else {
                                         Log.d("denied", "Pas de réponse serveur : confirmFlag : Correction");

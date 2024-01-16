@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -21,31 +20,17 @@ public class RobotCorrectionActivity extends AppCompatActivity {
 
     List<String> states;
     Spinner spinner;
-    EditText text1;
-    EditText text2;
-    EditText text3;
-    EditText text4;
-    EditText text5;
-    EditText text6;
-    EditText text7;
-    EditText text8;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robot_position);
 
         Button bValide = findViewById(R.id.btnRobotCor);
+        Button bReset = findViewById(R.id.btnRobotCorReset);
+
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
-
-        text1 = findViewById(R.id.editTextNumber9);
-        text2 = findViewById(R.id.editTextNumber2);
-        text3 = findViewById(R.id.editTextNumber10);
-        text4 = findViewById(R.id.editTextNumber11);
-        text5 = findViewById(R.id.editTextNumber5);
-        text6 = findViewById(R.id.editTextNumber6);
-        text7 = findViewById(R.id.editTextNumber7);
-        text8 = findViewById(R.id.editTextNumber8);
 
 
         bHelp.setOnClickListener(v -> {
@@ -62,21 +47,24 @@ public class RobotCorrectionActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Grid grid = findViewById(R.id.grid);
 
         bValide.setOnClickListener(v -> {
 
-            EditText[] editTextArray = {
-                    text1, text2, text3, text4,
-                    text5, text6, text7, text8
-            };
-
-            if (validateEditTexts(editTextArray)) {
-                Intent intent = new Intent(this, PictureAnswerActivity.class);
+            if (grid.getCasesValide()) {
+                Intent intent = new Intent(this, PictureActivity.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(this, "Veuillez remplir toutes les cases (0 à 16 seulement) !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Veuillez placer tout les robots !", Toast.LENGTH_SHORT).show();
             }
         });
+
+        bReset.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RobotCorrectionActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
 
         bReturn.setOnClickListener(v -> {
 
@@ -104,34 +92,11 @@ public class RobotCorrectionActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 newItem = states.get(i);
-                Toast.makeText(getApplicationContext(), "You selected: " + newItem, Toast.LENGTH_LONG).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
 
-    }
-
-    public boolean validateEditTexts(EditText[] editTexts) {
-        for (EditText editText : editTexts) {
-            String inputValue = editText.getText().toString().trim();
-
-            if (inputValue.isEmpty()) {
-                // L'EditText est vide
-                return false;
-            }
-
-            try {
-                int value = Integer.parseInt(inputValue);
-
-                if (value < 0 || value > 16) {
-                    return false;
-                }
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-        return true;
     }
 
 }
