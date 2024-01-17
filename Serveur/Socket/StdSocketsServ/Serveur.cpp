@@ -155,7 +155,7 @@ void Serveur::processLoop(Client* slot){
             // STATE_SENT_TYPE_PICTURE_CONFIRMATION:
             slot->state = STATE_BUILDING_BOARD;
             Logs::write("Building board on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            Serveur::buildBoard(slot);
+            //Serveur::buildBoard(slot);
 
             // STATE_BUILT_BOARD:
             slot->state = STATE_RECEIVING_NB_ROBOTS;
@@ -176,6 +176,31 @@ void Serveur::processLoop(Client* slot){
             slot->state = RECEIVING_TOKEN;
             Logs::write("Receiving token from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
             if( ! Serveur::getClientToken(slot) ) return;
+
+            //Temp
+            {
+            slot->clearOutput<Game>();
+            slot->state = STATE_SENDING_PATH;
+            slot->output=new unsigned char[32]{1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
+            for(int i=0;i<20;++i){
+                char flag=1;
+                int result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
+                if(verifySocketOutput<Game>(&slots[0],true,result)==EXIT_FAILURE) return;
+
+                int message[2]={i,i*2};
+                result = send(slots[0].socket, (char*)message, sizeof(int[2]), 0);
+                if(verifySocketOutput<Game>(&slots[0],true,result)==EXIT_FAILURE) return;
+            }
+            char flag=3;
+            int result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
+            if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
+            result = send(slot->socket,(char*)slot->output, sizeof(unsigned char) * 32, 0);
+            if(verifySocketOutput<unsigned char>(slot,true,result)==EXIT_FAILURE) return ;
+            char confirm;
+            result = recv(slot->socket, (char*)&confirm, sizeof(char),MSG_WAITALL);
+            if(verifySocketOutput<unsigned char>(slot,false,result)==EXIT_FAILURE) return ;
+            slot->clearOutput<unsigned char>();
+            return;}
 
         case 1:
             slot->clearOutput<char>();
