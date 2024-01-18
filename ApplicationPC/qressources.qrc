@@ -50,6 +50,7 @@
         <file>part15.jpg</file>
         <file>part16.jpg</file>
         <file>Fond2.png</file>
+        <file>reset.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

@@ -581,17 +581,42 @@ QPushButton#pushPlateau:pressed {
         </item>
        </layout>
       </widget>
-      <widget class="QPushButton" name="pushButton_12">
+      <widget class="QPushButton" name="resetPlateau">
        <property name="geometry">
         <rect>
-         <x>1080</x>
-         <y>470</y>
-         <width>83</width>
-         <height>24</height>
+         <x>1070</x>
+         <y>450</y>
+         <width>50</width>
+         <height>50</height>
         </rect>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#resetPlateau {
+    background : url(:/img/reset.png) center center no-repeat;
+	border:none;
+	border-radius: 25px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#resetPlateau:hover {
+    background-color: #9c2579;
+}</string>
+       </property>
        <property name="text">
-        <string>PushButton</string>
+        <string/>
        </property>
       </widget>
      </widget>
@@ -600,10 +625,42 @@ QPushButton#pushPlateau:pressed {
        <property name="geometry">
         <rect>
          <x>120</x>
-         <y>220</y>
-         <width>83</width>
-         <height>24</height>
+         <y>200</y>
+         <width>70</width>
+         <height>70</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#buttonhistoire1 {
+    border:none;
+	border-radius: 35px;
+	padding:10px;
+	color: rgb(255, 255, 255);
+	background-color: rgb(194, 167, 225);
+}
+
+QPushButton#buttonhistoire1:hover {
+    background-color: #9c2579;
+}
+</string>
        </property>
        <property name="text">
         <string>1</string>
@@ -613,10 +670,36 @@ QPushButton#pushPlateau:pressed {
        <property name="geometry">
         <rect>
          <x>260</x>
-         <y>310</y>
-         <width>83</width>
-         <height>24</height>
+         <y>260</y>
+         <width>70</width>
+         <height>70</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none;
+border-radius: 35px;
+padding:10px;
+color: rgb(255, 255, 255);
+background-color: rgb(194, 167, 225);
+</string>
        </property>
        <property name="text">
         <string>2</string>
@@ -626,10 +709,36 @@ QPushButton#pushPlateau:pressed {
        <property name="geometry">
         <rect>
          <x>410</x>
-         <y>260</y>
-         <width>83</width>
-         <height>24</height>
+         <y>210</y>
+         <width>70</width>
+         <height>70</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none;
+border-radius: 35px;
+padding:10px;
+color: rgb(255, 255, 255);
+background-color: rgb(194, 167, 225);
+</string>
        </property>
        <property name="text">
         <string>3</string>
@@ -639,10 +748,36 @@ QPushButton#pushPlateau:pressed {
        <property name="geometry">
         <rect>
          <x>550</x>
-         <y>350</y>
-         <width>83</width>
-         <height>24</height>
+         <y>300</y>
+         <width>70</width>
+         <height>70</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none;
+border-radius: 35px;
+padding:10px;
+color: rgb(255, 255, 255);
+background-color: rgb(194, 167, 225);
+</string>
        </property>
        <property name="text">
         <string>4</string>
@@ -652,10 +787,36 @@ QPushButton#pushPlateau:pressed {
        <property name="geometry">
         <rect>
          <x>610</x>
-         <y>460</y>
-         <width>83</width>
-         <height>24</height>
+         <y>410</y>
+         <width>70</width>
+         <height>70</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none;
+border-radius: 35px;
+padding:10px;
+color: rgb(255, 255, 255);
+background-color: rgb(194, 167, 225);
+</string>
        </property>
        <property name="text">
         <string>5</string>
@@ -665,10 +826,36 @@ QPushButton#pushPlateau:pressed {
        <property name="geometry">
         <rect>
          <x>750</x>
-         <y>550</y>
-         <width>83</width>
-         <height>24</height>
+         <y>500</y>
+         <width>70</width>
+         <height>70</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none;
+border-radius: 35px;
+padding:10px;
+color: rgb(255, 255, 255);
+background-color: rgb(194, 167, 225);
+</string>
        </property>
        <property name="text">
         <string>6</string>
@@ -678,10 +865,36 @@ QPushButton#pushPlateau:pressed {
        <property name="geometry">
         <rect>
          <x>880</x>
-         <y>410</y>
-         <width>83</width>
-         <height>24</height>
+         <y>360</y>
+         <width>70</width>
+         <height>70</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none;
+border-radius: 35px;
+padding:10px;
+color: rgb(255, 255, 255);
+background-color: rgb(194, 167, 225);
+</string>
        </property>
        <property name="text">
         <string>7</string>
@@ -691,10 +904,36 @@ QPushButton#pushPlateau:pressed {
        <property name="geometry">
         <rect>
          <x>1020</x>
-         <y>500</y>
-         <width>83</width>
-         <height>24</height>
+         <y>450</y>
+         <width>70</width>
+         <height>70</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none;
+border-radius: 35px;
+padding:10px;
+color: rgb(255, 255, 255);
+background-color: rgb(194, 167, 225);
+</string>
        </property>
        <property name="text">
         <string>8</string>
@@ -734,7 +973,7 @@ QPushButton#pushPlateau:pressed {
            <string notr="true">color:rgb(194, 167, 225);</string>
           </property>
           <property name="text">
-           <string>Jouer</string>
+           <string>Histoire</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -831,6 +1070,15 @@ QPushButton#Retour_3:pressed {
         </item>
        </layout>
       </widget>
+      <zorder>verticalLayoutWidget_2</zorder>
+      <zorder>pushButton_7</zorder>
+      <zorder>pushButton_6</zorder>
+      <zorder>pushButton_11</zorder>
+      <zorder>pushButton_10</zorder>
+      <zorder>pushButton_9</zorder>
+      <zorder>pushButton_8</zorder>
+      <zorder>pushButton_3</zorder>
+      <zorder>buttonhistoire1</zorder>
      </widget>
      <widget class="QWidget" name="pagetrain">
       <widget class="QWidget" name="verticalLayoutWidget_3">
@@ -1813,6 +2061,19 @@ QPushButton#pushObjective_3:pressed {
                </property>
                <property name="text">
                 <string>0</string>
+               </property>
+              </widget>
+              <widget class="QPushButton" name="pushButton_12">
+               <property name="geometry">
+                <rect>
+                 <x>140</x>
+                 <y>270</y>
+                 <width>83</width>
+                 <height>24</height>
+                </rect>
+               </property>
+               <property name="text">
+                <string>PushButton</string>
                </property>
               </widget>
              </widget>

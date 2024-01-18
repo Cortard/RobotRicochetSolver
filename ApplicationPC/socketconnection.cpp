@@ -164,6 +164,10 @@ int SocketConnection::getSolution(Board* board) {
         return EXIT_FAILURE;
     }printf("Confirmation envoyée\n");
 
+    for(int i=0;i<32;i++){
+        board->path[i]=path[i];
+    }
+
     for(unsigned char& i : path){
         printf("%d, ", i);
     }

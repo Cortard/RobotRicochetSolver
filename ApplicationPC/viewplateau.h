@@ -35,6 +35,7 @@ private:
     int selectedCol = -1;
     QList<QGraphicsRectItem*> selectionSquares;
     int robotId = -1;
+    int pathid=0;
 
 public:
     viewPlateau(Board* = nullptr);
@@ -45,6 +46,7 @@ public:
     void drawSelectionSquare(int row, int col, int id);
     void clearSelectionSquares();
     void victoire();
+    static int solution;
 signals:
     void movementOccurred();
 

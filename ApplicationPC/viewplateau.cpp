@@ -2,6 +2,9 @@
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <iostream>
+#include <QThread>
+
+int viewPlateau::solution=0;
 
 viewPlateau::viewPlateau(Board* board) : QGraphicsScene(), Observer()
 {
@@ -226,6 +229,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                 drawSelectionSquare(selectedRow, selectedCol, id);
             }
             int pos = col + row * 16;
+            //Cherche si il
             auto it = std::find_if(board->robots.begin(), board->robots.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
 

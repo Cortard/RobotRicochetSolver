@@ -8,6 +8,7 @@
 #include <QtGlobal>
 #include <QTime>
 #include "socketconnection.h"
+#include <QThread>
 
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
@@ -126,7 +127,8 @@ void MainWindow::on_pushPlateau_clicked()
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
-    //SocketConnection::getSolution(board);
+    SocketConnection::getSolution(board);
+    board->robots2=board->robots;
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
@@ -437,8 +439,165 @@ void MainWindow::on_Retour_17_clicked()
 }
 
 
-void MainWindow::on_pushButton_12_clicked()
+void MainWindow::on_resetPlateau_clicked()
 {
     this->board->reset();
+}
+
+
+void MainWindow::on_pushObjective_3_clicked()
+{
+    board->robots=board->robots2;
+    board->notifyObserver();
+}
+
+void MainWindow::on_pushButton_12_clicked()
+{
+    if(GET_DIRECTION(board->path[solutionid])==1){
+        direction="NORTH";
+    }else if(GET_DIRECTION(board->path[solutionid])==2){
+        direction="EAST";
+    }else if(GET_DIRECTION(board->path[solutionid])==4){
+        direction="SOUTH";
+    }else if(GET_DIRECTION(board->path[solutionid])==8){
+        direction="WEST";
+    }
+
+    if(GET_ROBOT(board->path[solutionid])==0){
+        rbt=0;
+    }else if(GET_ROBOT(board->path[solutionid])==1){
+        rbt=1;
+    }else if(GET_ROBOT(board->path[solutionid])==2){
+        rbt=2;
+    }else if(GET_ROBOT(board->path[solutionid])==3){
+        rbt=3;
+    }
+
+    int col = board->robots.at(rbt) % 16;
+    int row = board->robots.at(rbt) / 16;
+
+    int compPos=-1;
+
+
+    if(direction=="NORTH"){
+        for(int i=row;i>=0;i--){
+            if (HAS_WALL(board->cases[col + i * 16], NORTH) == 1){
+                compPos = (col + i * 16);
+                break;
+            }
+        }
+
+        int targetRow = -1;
+        int targetCol = col;
+
+        for (int i = 0; i < row ; i++){
+            int pos = col + i * 16;
+            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                   [pos](const auto& pair) { return pair.second == pos; });
+            if (it != board->robots.end()){
+                targetRow = i;
+            }
+        }
+        int targetPos = targetCol + targetRow * 16;
+        if(compPos <= targetPos+16){
+            board->moveRobot(rbt,targetPos+16);
+        }else{
+            board->moveRobot(rbt,compPos);
+        }
+    }
+    if(direction=="EAST"){
+        for(int i=col;i<16;i++){
+            if (HAS_WALL(board->cases[i + row * 16], EAST) == 2){
+                compPos = (i + row * 16);
+                break;
+            }
+        }
+
+        int targetRow = row;
+        int targetCol = -1;
+
+        for (int i = col+1 ; i <= 16 ; i++){
+            int pos = i + row * 16;
+
+            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                   [pos](const auto& pair) { return pair.second == pos; });
+            if (it != board->robots.end()){
+                targetCol = i;
+                break;
+            }
+        }
+
+        int targetPos = targetCol + targetRow * 16;
+
+        if(targetPos <= compPos && targetCol!=-1 ){
+            board->moveRobot(rbt,targetPos-1);
+        }else{
+            board->moveRobot(rbt,compPos);
+        }
+    }
+    if(direction=="SOUTH"){
+        for(int i=row;i<=16;i++){
+            if (HAS_WALL(board->cases[col + i * 16], SOUTH) == 4){
+                compPos = (col + i * 16);
+                break;
+            }
+        }
+
+        int targetRow = -1;
+        int targetCol = col;
+
+        for (int i = row+1 ; i <= 16 ; i++){
+            int pos = col + i * 16;
+            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                   [pos](const auto& pair) { return pair.second == pos; });
+            if (it != board->robots.end()){
+                targetRow = i;
+                break;
+            }
+        }
+
+        int targetPos = targetCol + targetRow * 16;
+
+        if(targetPos <= compPos && targetRow!=-1 ){
+            board->moveRobot(rbt,targetPos-16);
+        }else{
+            board->moveRobot(rbt,compPos);
+        }
+    }
+    if(direction=="WEST"){
+        for(int i=col;i>=0;i--){
+            if (HAS_WALL(board->cases[i + row * 16], WEST) == 8){
+                compPos = (i + row * 16);
+                break;
+            }
+        }
+
+        int targetRow = row;
+        int targetCol = -1;
+
+        for (int i = col-1 ; i >= 0 ; i--){
+            int pos = i + row * 16;
+            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                                   [pos](const auto& pair) { return pair.second == pos; });
+            if (it != board->robots.end()){
+                targetCol = i;
+                break;
+            }
+        }
+
+        int targetPos = targetCol + targetRow * 16;
+
+        if(targetPos >= compPos && targetCol!=-1 ){
+            board->moveRobot(rbt,targetPos+1);
+        }else{
+            board->moveRobot(rbt,compPos);
+        }
+    }
+
+    board->notifyObserver();
+    std::cout<<"Path de solution id : "<<GET_DIRECTION(board->path[0])<<std::endl;
+    std::cout<<"Direction : "<<GET_DIRECTION(board->path[solutionid])<<std::endl;
+
+    solutionid++;
 }
 
