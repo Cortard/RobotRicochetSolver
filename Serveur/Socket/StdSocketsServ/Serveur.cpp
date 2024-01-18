@@ -105,137 +105,143 @@ void Serveur::acceptLoop() {
 //                                                 processLoop                                                                     //
 //---------------------------------------------------------------------------------------------------------------------------------//
 void Serveur::processLoop(Client* slot){
-    Logs::write("Process loop start on slot" + std::to_string(slot->slotNum),LOG_LEVEL_DEBUG);
-    // STATE_NEW_CONNECTED:
-    slot->state = STATE_RECEIVING_TYPE_DATA;
-    Logs::write("Receiving type from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-    if( ! Serveur::getClientDataType(slot) ) return;
+    try{
+        Logs::write("Process loop start on slot" + std::to_string(slot->slotNum),LOG_LEVEL_DEBUG);
+        // STATE_NEW_CONNECTED:
+        slot->state = STATE_RECEIVING_TYPE_DATA;
+        Logs::write("Receiving type from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::getClientDataType(slot) ) return;
 
-    // STATE_RECEIVED_TYPE_DATE:
-    slot->state = STATE_SENDING_TYPE_DATA_CONFIRMATION;
-    Logs::write("Sending typeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-    if( ! Serveur::confirmClientDataType(slot) ) return;
+        // STATE_RECEIVED_TYPE_DATE:
+        slot->state = STATE_SENDING_TYPE_DATA_CONFIRMATION;
+        Logs::write("Sending typeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::confirmClientDataType(slot) ) return;
 
-    // STATE_SENT_TYPE_DATA_CONFIRMATION:
-    switch (((char*)slot->output)[0]){
-        case 1:
-            slot->clearOutput<char>();
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_DETAILS);
+        // STATE_SENT_TYPE_DATA_CONFIRMATION:
+        switch (((char*)slot->output)[0]){
+            case 1:
+                slot->clearOutput<char>();
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_DETAILS);
 
-            //Picture Part ------------------------------------------------------------------------------------------
+                //Picture Part ------------------------------------------------------------------------------------------
 
-            slot->state = STATE_RECEIVING_PICTURE_SIZE;
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
-            if( ! Serveur::getClientPictureSize(slot) ) return;
+                slot->state = STATE_RECEIVING_PICTURE_SIZE;
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
+                if( ! Serveur::getClientPictureSize(slot) ) return;
 
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size : " + std::to_string(((unsigned int*)slot->output)[0]) + " x " + std::to_string(((unsigned int*)slot->output)[1]),LOG_LEVEL_DETAILS);
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size : " + std::to_string(((unsigned int*)slot->output)[0]) + " x " + std::to_string(((unsigned int*)slot->output)[1]),LOG_LEVEL_DETAILS);
 
-            if(((unsigned int*)slot->output)[0]*((unsigned int*)slot->output)[1]>MAX_PICTURE_SIZE){
-                Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size is too big",LOG_LEVEL_WARNING);
-                slot->clearOutput<unsigned int>();
+                if(((unsigned int*)slot->output)[0]*((unsigned int*)slot->output)[1]>MAX_PICTURE_SIZE){
+                    Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size is too big",LOG_LEVEL_WARNING);
+                    slot->clearOutput<unsigned int>();
+                    slot->disconnect();
+                    return;
+                }
+
+                // STATE_RECEIVED_PICTURE_SIZE:
+                slot->state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
+                Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                if( ! Serveur::confirmClientPictureSize(slot) ) return;
+
+                // STATE_SENT_PICTURE_SIZE_CONFIRMATION:
+                slot->state = STATE_RECEIVING_PICTURE;
+                Logs::write("Receiving picture from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                if( ! Serveur::getClientPicture(slot) ) return;
+
+                // STATE_RECEIVED_PICTURE:
+                slot->state = STATE_SENDING_PICTURE_CONFIRMATION;
+                Logs::write("Sending pictureConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                if( ! Serveur::confirmClientPicture(slot) ) return;
+
+                // STATE_SENT_TYPE_PICTURE_CONFIRMATION:
+                slot->state = STATE_BUILDING_BOARD;
+                Logs::write("Building board on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                Serveur::buildBoard(slot);
+
+                // STATE_BUILT_BOARD:
+                slot->state = STATE_RECEIVING_NB_ROBOTS;
+                Logs::write("Receiving nbRobots from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                if( ! Serveur::getClientNbRobots(slot) ) return;
+
+                // STATE_RECEIVED_NB_ROBOTS:
+                slot->state = STATE_SENDING_NB_ROBOTS_CONFIRMATION;
+                Logs::write("Sending nbRobotsConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                if( ! Serveur::confirmClientNbRobots(slot) ) return;
+
+                // STATE_SENT_NB_ROBOTS_CONFIRMATION:
+                slot->state = STATE_RECEIVING_ROBOTS;
+                Logs::write("Receiving robots from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                if( ! Serveur::getClientRobots(slot) ) return;
+
+                // RECEIVED_ROBOTS:
+                slot->state = RECEIVING_TOKEN;
+                Logs::write("Receiving token from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                if( ! Serveur::getClientToken(slot) ) return;
+                break;
+            case 2:
+                slot->clearOutput<char>();
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_DETAILS);
+
+                //Grid Part ------------------------------------------------------------------------------------------
+
+                slot->state = STATE_RECEIVING_GRIP_TYPE;
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
+                if( ! Serveur::getClientGridType(slot) ) return;
+
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " nbRobot : " + std::to_string(((((char*)slot->output)[0]&2)>>1) + 4) + " mur de travers : " + std::to_string(((char*)slot->output)[0]&1),LOG_LEVEL_DETAILS);
+
+                // STATE_RECEIVED_GRIP_TYPE:
+                slot->state = STATE_SENDING_GRIP_TYPE_CONFIRMATION;
+                Logs::write("Sending gridTypeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                if( ! Serveur::confirmClientGridType(slot) ) return;
+
+                // STATE_SENT_TYPE_GRIP_TYPE_CONFIRMATION:
+                slot->state = STATE_RECEIVING_GRID;
+                Logs::write("Receiving grid from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+                if( ! Serveur::getClientGrid(slot) ) return;
+                break;
+
+            default:
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " send us a wrong choice",LOG_LEVEL_WARNING);
+                slot->clearOutput<char>();
                 slot->disconnect();
                 return;
-            }
+        }
 
-            // STATE_RECEIVED_PICTURE_SIZE:
-            slot->state = STATE_SENDING_PICTURE_SIZE_CONFIRMATION;
-            Logs::write("Sending pictureSizeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::confirmClientPictureSize(slot) ) return;
+        // STATE_RECEIVED_GRID OR RECEIVED_TOKEN:
+        slot->state = STATE_SENDING_PROCESS_TIME;
+        Logs::write("Sending time to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( !Serveur::setProcessTime(slot) ) return;
 
-            // STATE_SENT_PICTURE_SIZE_CONFIRMATION:
-            slot->state = STATE_RECEIVING_PICTURE;
-            Logs::write("Receiving picture from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::getClientPicture(slot) ) return;
+        // STATE_SENT_TYPE_PROCESS_TIME:
+        slot->state = STATE_PREPARING_GRID;
+        Logs::write("Preparing grid on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        Serveur::prepareGrid(slot);
 
-            // STATE_RECEIVED_PICTURE:
-            slot->state = STATE_SENDING_PICTURE_CONFIRMATION;
-            Logs::write("Sending pictureConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::confirmClientPicture(slot) ) return;
+        // STATE_PREPARED_GRID:
+        slot->state = STATE_SOLVING;
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " begin to solve",LOG_LEVEL_VERBOSE);
+        if( ! Serveur::solving(slot) ) return;
 
-            // STATE_SENT_TYPE_PICTURE_CONFIRMATION:
-            slot->state = STATE_BUILDING_BOARD;
-            Logs::write("Building board on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            Serveur::buildBoard(slot);
+        mutexProcessTime.lock();
+        if(totalNbProcess!=0)
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " is solved, totalNbProcess : " + std::to_string(totalNbProcess) + " totalProcessTime : " + std::to_string(totalProcessTime.count()) + " time per process : " + std::to_string(totalProcessTime.count()/totalNbProcess),LOG_LEVEL_DETAILS);
+        mutexProcessTime.unlock();
 
-            // STATE_BUILT_BOARD:
-            slot->state = STATE_RECEIVING_NB_ROBOTS;
-            Logs::write("Receiving nbRobots from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::getClientNbRobots(slot) ) return;
+        // STATE_SOLVED:
+        slot->state = STATE_SENDING_PATH;
+        Logs::write("Sending path to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::sendPath(slot) ) return;
 
-            // STATE_RECEIVED_NB_ROBOTS:
-            slot->state = STATE_SENDING_NB_ROBOTS_CONFIRMATION;
-            Logs::write("Sending nbRobotsConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::confirmClientNbRobots(slot) ) return;
-
-            // STATE_SENT_NB_ROBOTS_CONFIRMATION:
-            slot->state = STATE_RECEIVING_ROBOTS;
-            Logs::write("Receiving robots from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::getClientRobots(slot) ) return;
-
-            // RECEIVED_ROBOTS:
-            slot->state = RECEIVING_TOKEN;
-            Logs::write("Receiving token from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::getClientToken(slot) ) return;
-            break;
-        case 2:
-            slot->clearOutput<char>();
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_DETAILS);
-
-            //Grid Part ------------------------------------------------------------------------------------------
-
-            slot->state = STATE_RECEIVING_GRIP_TYPE;
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
-            if( ! Serveur::getClientGridType(slot) ) return;
-
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " nbRobot : " + std::to_string(((((char*)slot->output)[0]&2)>>1) + 4) + " mur de travers : " + std::to_string(((char*)slot->output)[0]&1),LOG_LEVEL_DETAILS);
-
-            // STATE_RECEIVED_GRIP_TYPE:
-            slot->state = STATE_SENDING_GRIP_TYPE_CONFIRMATION;
-            Logs::write("Sending gridTypeConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::confirmClientGridType(slot) ) return;
-
-            // STATE_SENT_TYPE_GRIP_TYPE_CONFIRMATION:
-            slot->state = STATE_RECEIVING_GRID;
-            Logs::write("Receiving grid from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::getClientGrid(slot) ) return;
-            break;
-
-        default:
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " send us a wrong choice",LOG_LEVEL_WARNING);
-            slot->clearOutput<char>();
-            slot->disconnect();
-            return;
+        // STATE_SENT_TYPE_PATH:
+        Logs::write("Client process on slot " + std::to_string(slot->slotNum) + " is done",LOG_LEVEL_DETAILS);
+        shutdown(slot->socket, 2);
+        slot->disconnect();
+    } catch (const std::exception& e) {
+        Logs::write("Error on slot " + std::to_string(slot->slotNum) + " : " + e.what(),LOG_LEVEL_ERROR);
+        slot->output= nullptr;
+        slot->disconnect();
     }
-
-    // STATE_RECEIVED_GRID OR RECEIVED_TOKEN:
-    slot->state = STATE_SENDING_PROCESS_TIME;
-    Logs::write("Sending time to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-    if( !Serveur::setProcessTime(slot) ) return;
-
-    // STATE_SENT_TYPE_PROCESS_TIME:
-    slot->state = STATE_PREPARING_GRID;
-    Logs::write("Preparing grid on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-    Serveur::prepareGrid(slot);
-
-    // STATE_PREPARED_GRID:
-    slot->state = STATE_SOLVING;
-    Logs::write("Slot " + std::to_string(slot->slotNum) + " begin to solve",LOG_LEVEL_VERBOSE);
-    if( ! Serveur::solving(slot) ) return;
-
-    mutexProcessTime.lock();
-    if(totalNbProcess!=0)
-        Logs::write("Slot " + std::to_string(slot->slotNum) + " is solved, totalNbProcess : " + std::to_string(totalNbProcess) + " totalProcessTime : " + std::to_string(totalProcessTime.count()) + " time per process : " + std::to_string(totalProcessTime.count()/totalNbProcess),LOG_LEVEL_DETAILS);
-    mutexProcessTime.unlock();
-
-    // STATE_SOLVED:
-    slot->state = STATE_SENDING_PATH;
-    Logs::write("Sending path to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-    if( ! Serveur::sendPath(slot) ) return;
-
-    // STATE_SENT_TYPE_PATH:
-    Logs::write("Client process on slot " + std::to_string(slot->slotNum) + " is done",LOG_LEVEL_DETAILS);
-    shutdown(slot->socket, 2);
-    slot->disconnect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------//
