@@ -202,7 +202,7 @@ void Serveur::processLoop(Client* slot){
                 break;
 
             default:
-                Logs::write("Slot " + std::to_string(slot->slotNum) + " send us a wrong choice",LOG_LEVEL_WARNING);
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " send us a wrong choice : " + std::to_string((int)(((char*)slot->output)[0])),LOG_LEVEL_WARNING);
                 slot->clearOutput<char>();
                 slot->disconnect();
                 return;
