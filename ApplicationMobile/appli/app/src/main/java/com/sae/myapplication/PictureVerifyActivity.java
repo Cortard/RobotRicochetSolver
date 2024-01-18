@@ -34,10 +34,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class PictureVerifyActivity extends AppCompatActivity {
 
@@ -155,7 +157,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
         return filePath;
     }
 
-
     public void sendImage(String serverIp, int serverPort, String filePath, PictureVerifyActivity answer) {
         Thread th = new Thread(new Runnable() {
             @Override
@@ -191,20 +192,17 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     byte[] byteTab = new byte[8];
 
                     // Attente de la réponse du serveur avec timeouts
-                    DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-
+                    DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                     dataInputStream.read(byteTab);
 
                     if(byteTab[0] == 1) {
                         Log.d("bug", width + " " + height);
-                        byte[] widthByte = ByteBuffer.allocate(4).putInt(width).array();
-                        byte[] heightByte = ByteBuffer.allocate(4).putInt(height).array();
-                        for(int i = 0 ; i< widthByte.length ; ++i)
-                        {
-                            Log.d("bug", widthByte[i] + " " + heightByte[i]);
-                        }
-                        dataOutputStream.writeInt(10000);
-                        dataOutputStream.writeInt(10002);
+
+                        ByteBuffer byteBuffer = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
+                        byteBuffer.putInt(width);
+                        byteBuffer.putInt(height);
+
+                        dataOutputStream.write(byteBuffer.array());
                         dataOutputStream.flush();
 
                         long responseSize = dataInputStream.read();
@@ -215,16 +213,10 @@ public class PictureVerifyActivity extends AppCompatActivity {
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] imageInByte = baos.toByteArray();
 
-                            Log.d("bug", "1");
-
-
-                            // Envoyer le tableau de chars
-                            for(int i=0; i<height; ++i) {
-                                byte[] line_pixel = new byte[width];
-                                for(int y=0; y<width; ++y) {
-                                    line_pixel[y] = imageInByte[i*width + y];
-                                }
-                                dataOutputStream.writeBytes(line_pixel.toString());
+                            for (int i = 0; i < height; ++i) {
+                                byte[] linePixel = new byte[width];
+                                System.arraycopy(imageInByte, i * width, linePixel, 0, width);
+                                dataOutputStream.write(linePixel);
                                 dataOutputStream.flush();
                             }
 
@@ -233,11 +225,12 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
 
                             // Attente de la confirmation de la réception
-                            char responseConfirm = dataInputStream.readChar();
+                            byte[] byteTab2 = new byte[8];
+                            dataInputStream.read(byteTab2);
 
-                            txt.setText((int) responseConfirm + " 5");
+                            Log.d("bug", "4");
 
-                            if ((int) responseConfirm == 0) { // confirm state
+                            if (byteTab2[0] == 1) { // confirm state
                                 // Envoie du FLAG au serveur : 1
                                 int nbRobot = tab.length - 2;
                                 txt.setText(nbRobot);
@@ -253,6 +246,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                     for (int i = 1; i < nbRobot; i++) {
                                         dataOutputStream.writeInt(tab[i]);
                                     }
+                                    dataOutputStream.flush();
+
 
                                     txt.setText(tab[tab.length-2]);
                                     dataOutputStream.writeInt(tab[tab.length-2]);
@@ -279,12 +274,12 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                     txt.setText("Pas de réponse serveur : confirmFlag");
 
                                 }
-                            } else if (responseConfirm == 2) { // not found
+                            } else if (byteTab2[0] == 2) { // not found
                                 // Cas où la communication est interrompue
                                 Log.d("info", "Cas NOTFOUND - communication shutdown");
                                 txt.setText("Cas NOTFOUND - communication shutdown");
 
-                            } else if (responseConfirm == 3) { // solved
+                            } else if (byteTab2[0] == 3) { // solved
                                 // Attendre la confirmation du serveur
                                 char confirmFlag = dataInputStream.readChar();
 
