@@ -208,6 +208,24 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         long responseSize = dataInputStream.read();
 
                         if (width * height * 3 > 0) {
+
+//                            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+//                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                            byte[] imageInByte = baos.toByteArray();
+//
+//                            Log.d("bug", "1");
+//
+//                            // Envoyer le tableau de chars
+//                            for(int i=0; i<height; ++i) {
+//                                byte[] line_pixel = new byte[width];
+//                                for(int y=0; y<width; ++y) {
+//                                    line_pixel[y] = imageInByte[i*width + y];
+//                                }
+//                                dataOutputStream.writeBytes(line_pixel.toString());
+//                                dataOutputStream.flush();
+//                            }
+
                             Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
