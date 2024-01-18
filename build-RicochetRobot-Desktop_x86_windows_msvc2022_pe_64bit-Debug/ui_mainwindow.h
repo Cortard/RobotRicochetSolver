@@ -59,11 +59,17 @@ public:
     QWidget *pagehistoire;
     QWidget *verticalLayoutWidget_2;
     QGridLayout *gridLayout_5;
-    QHBoxLayout *horizontalLayout_3;
-    QGraphicsView *graphicsView;
-    QPushButton *Retour_3;
     QLabel *label_4;
+    QPushButton *Retour_3;
     QPushButton *Home;
+    QPushButton *buttonhistoire1;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_6;
+    QPushButton *pushButton_7;
+    QPushButton *pushButton_8;
+    QPushButton *pushButton_9;
+    QPushButton *pushButton_10;
+    QPushButton *pushButton_11;
     QWidget *pagetrain;
     QWidget *verticalLayoutWidget_3;
     QGridLayout *gridLayout_7;
@@ -383,29 +389,13 @@ public:
         pagehistoire->setObjectName("pagehistoire");
         verticalLayoutWidget_2 = new QWidget(pagehistoire);
         verticalLayoutWidget_2->setObjectName("verticalLayoutWidget_2");
-        verticalLayoutWidget_2->setGeometry(QRect(10, 10, 1261, 701));
+        verticalLayoutWidget_2->setGeometry(QRect(10, 10, 1261, 1108));
         gridLayout_5 = new QGridLayout(verticalLayoutWidget_2);
         gridLayout_5->setObjectName("gridLayout_5");
-        gridLayout_5->setContentsMargins(100, 0, 100, 200);
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setSpacing(150);
-        horizontalLayout_3->setObjectName("horizontalLayout_3");
-        horizontalLayout_3->setContentsMargins(100, -1, 100, -1);
-        graphicsView = new QGraphicsView(verticalLayoutWidget_2);
-        graphicsView->setObjectName("graphicsView");
-
-        horizontalLayout_3->addWidget(graphicsView);
-
-
-        gridLayout_5->addLayout(horizontalLayout_3, 4, 0, 1, 1);
-
-        Retour_3 = new QPushButton(verticalLayoutWidget_2);
-        Retour_3->setObjectName("Retour_3");
-
-        gridLayout_5->addWidget(Retour_3, 2, 0, 1, 1, Qt::AlignLeft);
-
+        gridLayout_5->setContentsMargins(100, 0, 100, 900);
         label_4 = new QLabel(verticalLayoutWidget_2);
         label_4->setObjectName("label_4");
+        label_4->setMaximumSize(QSize(16777215, 100));
         QFont font3;
         font3.setPointSize(30);
         font3.setBold(true);
@@ -415,11 +405,40 @@ public:
 
         gridLayout_5->addWidget(label_4, 3, 0, 1, 1);
 
+        Retour_3 = new QPushButton(verticalLayoutWidget_2);
+        Retour_3->setObjectName("Retour_3");
+
+        gridLayout_5->addWidget(Retour_3, 2, 0, 1, 1, Qt::AlignLeft);
+
         Home = new QPushButton(verticalLayoutWidget_2);
         Home->setObjectName("Home");
 
         gridLayout_5->addWidget(Home, 1, 0, 1, 1, Qt::AlignLeft);
 
+        buttonhistoire1 = new QPushButton(pagehistoire);
+        buttonhistoire1->setObjectName("buttonhistoire1");
+        buttonhistoire1->setGeometry(QRect(120, 220, 83, 24));
+        pushButton_3 = new QPushButton(pagehistoire);
+        pushButton_3->setObjectName("pushButton_3");
+        pushButton_3->setGeometry(QRect(260, 310, 83, 24));
+        pushButton_6 = new QPushButton(pagehistoire);
+        pushButton_6->setObjectName("pushButton_6");
+        pushButton_6->setGeometry(QRect(410, 260, 83, 24));
+        pushButton_7 = new QPushButton(pagehistoire);
+        pushButton_7->setObjectName("pushButton_7");
+        pushButton_7->setGeometry(QRect(550, 350, 83, 24));
+        pushButton_8 = new QPushButton(pagehistoire);
+        pushButton_8->setObjectName("pushButton_8");
+        pushButton_8->setGeometry(QRect(610, 460, 83, 24));
+        pushButton_9 = new QPushButton(pagehistoire);
+        pushButton_9->setObjectName("pushButton_9");
+        pushButton_9->setGeometry(QRect(750, 550, 83, 24));
+        pushButton_10 = new QPushButton(pagehistoire);
+        pushButton_10->setObjectName("pushButton_10");
+        pushButton_10->setGeometry(QRect(880, 410, 83, 24));
+        pushButton_11 = new QPushButton(pagehistoire);
+        pushButton_11->setObjectName("pushButton_11");
+        pushButton_11->setGeometry(QRect(1020, 500, 83, 24));
         stackedWidget->addWidget(pagehistoire);
         pagetrain = new QWidget();
         pagetrain->setObjectName("pagetrain");
@@ -797,9 +816,17 @@ public:
         pushRobot->setText(QCoreApplication::translate("MainWindow", "Robots", nullptr));
         pushObjective->setText(QCoreApplication::translate("MainWindow", "Objectives", nullptr));
         pushPlateau->setText(QCoreApplication::translate("MainWindow", "Jouer", nullptr));
-        Retour_3->setText(QCoreApplication::translate("MainWindow", "Retour", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Histoire", nullptr));
+        Retour_3->setText(QCoreApplication::translate("MainWindow", "Retour", nullptr));
         Home->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
+        buttonhistoire1->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
+        pushButton_6->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
+        pushButton_7->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
+        pushButton_8->setText(QCoreApplication::translate("MainWindow", "5", nullptr));
+        pushButton_9->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
+        pushButton_10->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
+        pushButton_11->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
         Retour_5->setText(QCoreApplication::translate("MainWindow", "Retour", nullptr));
         Home_2->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "Entrainement", nullptr));
