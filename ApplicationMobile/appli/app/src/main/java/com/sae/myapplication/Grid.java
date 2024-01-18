@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -84,6 +85,7 @@ public class Grid extends View {
                 if (modificationsEffectuees < NOMBRE_MAX_MODIFICATIONS) {
                     changerCouleur(colonne, ligne);
                     invalidate(); // Redessiner la grille
+                    Log.d("debug pos",(ligne*TAILLE_GRILLE)+colonne + " x : " + ligne + " y : " + colonne);
                     modificationsEffectuees++;
                 }
                 return true;
@@ -93,7 +95,7 @@ public class Grid extends View {
     }
 
     private void changerCouleur(int colonne, int ligne) {
-        cases[id] = (colonne+1)*(ligne+1);
+        cases[id] = (ligne)*TAILLE_GRILLE+(colonne);
         int nouvelleCouleur = getCouleurSuivante(id);
         id++;
         grid[colonne][ligne] = nouvelleCouleur;
@@ -126,10 +128,12 @@ public class Grid extends View {
     }
 
     public int[] getCases(String dest){
-        int[] rep = new int [NB];
+        int[] rep = new int [NB+1];
+        int couleur = 0;
 
         if(dest == "objectifr1" || dest == "objectifr2" || dest == "objectifr3" || dest == "objectifr4"){
             rep[0] = cases[0];
+            couleur = 1;
             for(int i = 1 ; i<NB ; i++){
                 if(i!=0){
                     rep[i] = cases[i];
@@ -139,6 +143,7 @@ public class Grid extends View {
 
         }else if(dest == "objectifb1" || dest == "objectifb2" || dest == "objectifb3" || dest == "objectifb4"){
             rep[0] = cases[1];
+            couleur = 2;
             for(int i = 1 ; i<NB ; i++){
                 if(i!=1){
                     rep[i] = cases[i];
@@ -149,6 +154,7 @@ public class Grid extends View {
             //bleu
         }else if(dest == "objectifv1" || dest == "objectifv2" || dest == "objectifv3" || dest == "objectifv4"){
             rep[0] = cases[2];
+            couleur = 3;
             for(int i = 1 ; i<NB ; i++){
                 if(i!=2){
                     rep[i] = cases[i];
@@ -159,6 +165,7 @@ public class Grid extends View {
             //vert
         }else if(dest == "objectifj1" || dest == "objectifj2" || dest == "objectifj3" || dest == "objectifj4"){
             rep[0] = cases[3];
+            couleur = 4;
             for(int i = 1 ; i<NB ; i++){
                 if(i!=3){
                     rep[i] = cases[i];
@@ -173,6 +180,8 @@ public class Grid extends View {
             }
             //tout
         }
+
+        rep[NB] = couleur;
         return rep;
     }
 }

@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -36,6 +37,7 @@ import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.nio.ByteBuffer;
 
 public class PictureVerifyActivity extends AppCompatActivity {
 
@@ -97,9 +99,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
             }, 50);
             finish();
         });
-
-
-        txt.setText("test");
 
         bCancel = findViewById(R.id.btnCancel);
         bCancel.setOnClickListener(v -> {
@@ -166,6 +165,9 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 BufferedOutputStream bufferedOutputStream = null;
 
                 txt.setText(filePath);
+                int width = 0;
+                int height = 0;
+                int x = 0;
 
                 try {
                     BitmapFactory.Options options = new BitmapFactory.Options();
@@ -173,75 +175,71 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                     BitmapFactory.decodeFile(filePath, options);
 
-                    int width = options.outWidth;
-                    int height = options.outHeight;
+                    width = options.outWidth;
+                    height = options.outHeight;
 
                     socket = new Socket();
                     socket.connect(new InetSocketAddress(serverIp, serverPort), TIMEOUT);
-                    fileInputStream = new FileInputStream(new File(filePath));
+                    fileInputStream = new FileInputStream(filePath);
                     bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
                     DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
 
-
                     // Envoie du FLAG au serveur : 1
-                    dataOutputStream.writeChar(0);
+                    dataOutputStream.writeByte(1);
                     dataOutputStream.flush();
 
-                    // Attente de la réponse du serveur avec timeout
-                    socket.setSoTimeout(TIMEOUT);
-                    DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                    char response = dataInputStream.readChar();
+                    byte[] byteTab = new byte[8];
 
-                    txt.setText(String.valueOf((int)response));
+                    // Attente de la réponse du serveur avec timeouts
+                    DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 
-                    if ((int)response == 0) {
-                        int[] dimensions = {width, height};
-                        for (int dimension : dimensions) {
-                            dataOutputStream.writeInt(dimension);
+                    dataInputStream.read(byteTab);
+
+                    if(byteTab[0] == 1) {
+                        Log.d("bug", width + " " + height);
+                        byte[] widthByte = ByteBuffer.allocate(4).putInt(width).array();
+                        byte[] heightByte = ByteBuffer.allocate(4).putInt(height).array();
+                        for(int i = 0 ; i< widthByte.length ; ++i)
+                        {
+                            Log.d("bug", widthByte[i] + " " + heightByte[i]);
                         }
+                        dataOutputStream.writeInt(10000);
+                        dataOutputStream.writeInt(10002);
                         dataOutputStream.flush();
 
-                        DataInputStream dataInputStreamLong = new DataInputStream(socket.getInputStream());
-                        long responseSize = dataInputStreamLong.read();
+                        long responseSize = dataInputStream.read();
 
                         if (width * height * 3 > 0) {
-
                             Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] imageInByte = baos.toByteArray();
 
-                            char[] convertedChar = new char[imageInByte.length];
-                            for(int i=0;i < imageInByte.length;i++){
-                                convertedChar[i]=(char)imageInByte[i];
-                            }
+                            Log.d("bug", "1");
 
-                            txt.setText(width * height * 3 + " 3");
-
-                            // Envoyer la taille du tableau
-                            int size = convertedChar.length;
-
-                            txt.setText(size + " 3.5");
-
-                            dataOutputStream.writeInt(size);
-
-                            txt.setText(size + " 4");
 
                             // Envoyer le tableau de chars
-                            for (char c : convertedChar) {
-                                dataOutputStream.writeChar(c);
+                            for(int i=0; i<height; ++i) {
+                                byte[] line_pixel = new byte[width];
+                                for(int y=0; y<width; ++y) {
+                                    line_pixel[y] = imageInByte[i*width + y];
+                                }
+                                dataOutputStream.writeBytes(line_pixel.toString());
+                                dataOutputStream.flush();
                             }
 
-                            txt.setText(size + " 5");
+
+                            Log.d("bug", "3");
+
 
                             // Attente de la confirmation de la réception
                             char responseConfirm = dataInputStream.readChar();
 
                             txt.setText((int) responseConfirm + " 5");
 
-                            if ((int)responseConfirm == 0) { // confirm state
+                            if ((int) responseConfirm == 0) { // confirm state
                                 // Envoie du FLAG au serveur : 1
-                                int nbRobot = tab.length - 1;
+                                int nbRobot = tab.length - 2;
                                 txt.setText(nbRobot);
 
                                 dataOutputStream.writeChar(nbRobot);
@@ -250,14 +248,14 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 // Attente de la réponse du serveur avec timeout
                                 char confirmFlag = dataInputStream.readChar();
 
-                                if ((int)confirmFlag == nbRobot) {
+                                if ((int) confirmFlag == nbRobot) {
 
-                                    for(int i = 1 ; i<nbRobot ; i++){
+                                    for (int i = 1; i < nbRobot; i++) {
                                         dataOutputStream.writeInt(tab[i]);
                                     }
 
-                                    txt.setText(tab[tab.length]);
-                                    dataOutputStream.writeInt(tab[tab.length]);
+                                    txt.setText(tab[tab.length-2]);
+                                    dataOutputStream.writeInt(tab[tab.length-2]);
                                     dataOutputStream.flush();
 
 
@@ -266,9 +264,10 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                     // Attente de la réponse du serveur avec timeout
                                     char finalFlag = dataInputStream.readChar();
 
-                                    if ((int)finalFlag == 1) {
+                                    if ((int) finalFlag == 1) {
                                         // Processus terminé avec succès
                                         Intent intent = new Intent(answer, PictureAnswerActivity.class);
+                                        intent.putExtra("tabPos", tab);
                                         startActivity(intent);
                                     } else {
                                         Log.d("denied", "Pas de réponse serveur : finalFlag");
@@ -289,7 +288,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 // Attendre la confirmation du serveur
                                 char confirmFlag = dataInputStream.readChar();
 
-                                if ((int)confirmFlag == 1) {
+                                if ((int) confirmFlag == 1) {
                                     Thread.sleep(TIMEOUT);
 
                                     // Envoie des informations sur l'état
@@ -301,7 +300,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                     dataInputStream.readFully(path);
 
 
-                                    if ((int)confirmFlag == 1) {
+                                    if ((int) confirmFlag == 1) {
                                         Thread.sleep(TIMEOUT);
 
                                         // Envoie des informations sur l'état
@@ -314,6 +313,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                                         // Processus terminé avec succès
                                         Intent intent = new Intent(answer, PictureAnswerActivity.class);
+                                        intent.putExtra("tabPos", tab);
                                         startActivity(intent);
                                     } else {
                                         Log.d("denied", "Pas de réponse serveur : confirmFlag : Correction");
@@ -344,38 +344,21 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 } catch (SocketTimeoutException e) {
 //                    Intent intent = new Intent(answer, PictureActivity.class);
 //                    startActivity(intent);
-                    try {
-                        fileInputStream.close();
-                        bufferedOutputStream.close();
-                        socket.close();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
+
                     txt.setText(e.toString());
-                } catch (IOException | InterruptedException e) {
+                } catch (IOException e) {
 //                    Intent intent = new Intent(answer, PictureActivity.class);
 //                    startActivity(intent);
-                    try {
-                        fileInputStream.close();
-                        bufferedOutputStream.close();
-                        socket.close();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    e.printStackTrace();
-                    //txt.setText(e + " io");
+
+                    Log.d("bug", e.toString());
+
+                    //txt.setText(x + " io");
+                    //txt.setText(e.toString());
                 } catch (Exception e) {
 //                    Intent intent = new Intent(answer, PictureActivity.class);
 //                    startActivity(intent);
-                    try {
-                        fileInputStream.close();
-                        bufferedOutputStream.close();
-                        socket.close();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
+
                     e.printStackTrace();
-                    txt.setText(e + " exept");
                 }
             }
         });

@@ -28,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.971" />
+        app:layout_constraintVertical_bias="0.759" />
 
     <ImageView
         android:id="@+id/header2"
@@ -128,6 +128,18 @@
         app:layout_constraintVertical_bias="0.518" />
 
 
+    <com.sae.myapplication.MyCanvas
+        android:id="@+id/canva"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        app:layout_constraintBottom_toBottomOf="@+id/surfaceView"
+        app:layout_constraintEnd_toEndOf="@+id/surfaceView"
+        app:layout_constraintStart_toStartOf="@+id/surfaceView"
+        app:layout_constraintTop_toTopOf="@+id/surfaceView"
+        app:layout_constraintVertical_bias="0.518">
+
+    </com.sae.myapplication.MyCanvas>
+
     <ImageView
         android:id="@+id/surfaceView"
         android:layout_width="342dp"
@@ -142,18 +154,6 @@
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.74" />
-
-    <com.sae.myapplication.MyCanvas
-        android:id="@+id/canva"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
-        app:layout_constraintBottom_toBottomOf="@+id/surfaceView"
-        app:layout_constraintEnd_toEndOf="@+id/surfaceView"
-        app:layout_constraintStart_toStartOf="@+id/surfaceView"
-        app:layout_constraintTop_toTopOf="@+id/surfaceView"
-        app:layout_constraintVertical_bias="0.518">
-
-    </com.sae.myapplication.MyCanvas>
+        app:layout_constraintVertical_bias="0.338" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

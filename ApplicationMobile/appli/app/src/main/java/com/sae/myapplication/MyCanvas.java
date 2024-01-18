@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class MyCanvas extends View {
@@ -35,9 +36,9 @@ public class MyCanvas extends View {
         correctionHandler = new Handler();
     }
 
-    public void setGridData(int[] gridData, int[] initialRobotPositions, int goalPosition) {
+    public void setGridData(int[] gridData, int[] initialRobotPositions) {
         this.gridData = gridData;
-        placeGoal(goalPosition);
+        placeGoal(initialRobotPositions[initialRobotPositions.length-2]);
         initializeRobots(initialRobotPositions);
         invalidate();
     }
@@ -72,24 +73,39 @@ public class MyCanvas extends View {
         float centerY = (y + 0.5f) * cellSize;
         float radius = 0.4f * cellSize;
 
-        paint.setColor(getRobotColor(robotNumber));
+        paint.setColor(getRobotColor(robots[robotNumber].getColor()));
         canvas.drawCircle(centerX, centerY, radius, paint);
     }
 
     private void initializeRobots(int[] initialRobotPositions) {
-        if (initialRobotPositions.length > 0) {
+        if (initialRobotPositions.length-2 > 0) {
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
                     gridData[i * 16 + j] &= ~ROBOT;
                 }
             }
 
-            robots = new Robot[initialRobotPositions.length];
-            for (int i = 0; i < initialRobotPositions.length; i++) {
+            robots = new Robot[initialRobotPositions.length-2];
+            for (int i = 0; i < initialRobotPositions.length-2; i++) {
+
                 int x = initialRobotPositions[i] % 16;
                 int y = initialRobotPositions[i] / 16;
+                Log.d("debug pos",initialRobotPositions[i] + " x : " + x + " y : " + y);
+
+                int robotColor = -1;
+                if(i==0 && initialRobotPositions[initialRobotPositions.length - 1] == 1){
+                    robotColor = 0;
+                }else if(i==0 && initialRobotPositions[initialRobotPositions.length - 1] == 2){
+                    robotColor = 1;
+                }else if(i==0 && initialRobotPositions[initialRobotPositions.length - 1] == 3){
+                    robotColor = 2;
+                }else if(i==0 && initialRobotPositions[initialRobotPositions.length - 1] == 4){
+                    robotColor = 3;
+                }else {
+                    robotColor = -1;
+                }
+
                 int robotNumber = i;
-                int robotColor = getRobotColor(robotNumber);
                 robots[i] = new Robot(x, y, robotNumber, robotColor);
                 gridData[y * 16 + x] |= ROBOT;
             }
@@ -193,17 +209,18 @@ public class MyCanvas extends View {
         return null;
     }
 
-    private void drawCell(Canvas canvas, int x, int y, int value) {
-        float centerX = (x + 0.5f) * cellSize;
-        float centerY = (y + 0.5f) * cellSize;
-        float radius = 0.4f * cellSize;
 
+    private void drawCell(Canvas canvas, int x, int y, int value) {
+
+        paint.setStrokeWidth(2);
         paint.setColor(Color.WHITE);
         canvas.drawRect(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint);
 
         if ((value & GOAL) == GOAL) {
             paint.setColor(Color.GRAY);
-            canvas.drawCircle(centerX, centerY, radius, paint);
+            paint.setStrokeWidth(5);
+            canvas.drawLine(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint); // Premier segment
+            canvas.drawLine((x + 1) * cellSize, y * cellSize, x * cellSize, (y + 1) * cellSize, paint); // Deuxième segment
         }
 
         paint.setColor(Color.BLACK);
@@ -221,6 +238,7 @@ public class MyCanvas extends View {
             canvas.drawLine(x * cellSize, y * cellSize, x * cellSize, (y + 1) * cellSize, paint); // WEST
         }
     }
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
