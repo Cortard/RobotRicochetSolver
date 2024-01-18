@@ -2,14 +2,14 @@ Serveur				                                             Client
    |                             connect                                        |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |                      char : flag {0(PICTURE),1(GRID)}                      |
+   |                      char : flag {1(PICTURE),2(GRID)}                      |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |           char : confirm_flag {-1(DENIED),0(PICTURE),1(GRID),}             |
+   |           char : confirm_flag {-1(DENIED),1(PICTURE),2(GRID),}             |
    |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
 
-			        Cas 0(PICTURE) :
+			        Cas 1(PICTURE) :
 Serveur				                                             Client
    |                                                                            |
    |                  unsigned int[2] : hauteur,largeur                         |
@@ -22,13 +22,13 @@ Serveur				                                             Client
    |                 char[size] buffer : picture (size=largeur*3)               |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |            unsigned char : confirmation reception {0(OK), 1(NO)            |
+   |               char : confirmation reception {1(OK), Other(NO)}             |
    |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
-   |                              char : nbRobots                               |
+   |                               int : nbRobots                               |
    |<<<<<<<<<<<-----------------------------------------------------------------|
    |                                                                            |
-   |                              char : nbRobots                               |
+   |                               int : nbRobots                               |
    |----------------------------------------------------------------->>>>>>>>>>>|
    |                                                                            |
    |                       unsigned int robots[nbRobots]                        |
@@ -40,7 +40,7 @@ Serveur				                                             Client
    |                         begin TRAITEMENT                                   |
    |                                                                            |
 
-			     	Cas 1(GRID) :
+			     	Cas 2(GRID) :
 Serveur				                                             Client
    |                                                                            |
    | char : type (0b 0[z][x][y] => [globalGoal?][x+4=nbRobots][y=murDeTravers?] |

@@ -2,7 +2,7 @@
 #define STDSOCKETSSERVER_CONFIGUE_H
 
 
-#define DEV_MODE 0
+#define DEV_MODE 1
 
 #if DEV_MODE==0
 

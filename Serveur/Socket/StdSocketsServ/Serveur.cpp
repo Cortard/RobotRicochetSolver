@@ -118,7 +118,7 @@ void Serveur::processLoop(Client* slot){
 
     // STATE_SENT_TYPE_DATA_CONFIRMATION:
     switch (((char*)slot->output)[0]){
-        case 0:
+        case 1:
             slot->clearOutput<char>();
             Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_DETAILS);
 
@@ -128,7 +128,7 @@ void Serveur::processLoop(Client* slot){
             Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a picture",LOG_LEVEL_VERBOSE);
             if( ! Serveur::getClientPictureSize(slot) ) return;
 
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size : " + std::to_string(((unsigned int*)slot->output)[0]) + "x" + std::to_string(((unsigned int*)slot->output)[1]),LOG_LEVEL_DETAILS);
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size : " + std::to_string(((unsigned int*)slot->output)[0]) + " x " + std::to_string(((unsigned int*)slot->output)[1]),LOG_LEVEL_DETAILS);
 
             if(((unsigned int*)slot->output)[0]*((unsigned int*)slot->output)[1]>MAX_PICTURE_SIZE){
                 Logs::write("Slot " + std::to_string(slot->slotNum) + " picture size is too big",LOG_LEVEL_WARNING);
@@ -155,7 +155,7 @@ void Serveur::processLoop(Client* slot){
             // STATE_SENT_TYPE_PICTURE_CONFIRMATION:
             slot->state = STATE_BUILDING_BOARD;
             Logs::write("Building board on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            //Serveur::buildBoard(slot);
+            Serveur::buildBoard(slot);
 
             // STATE_BUILT_BOARD:
             slot->state = STATE_RECEIVING_NB_ROBOTS;
@@ -179,12 +179,19 @@ void Serveur::processLoop(Client* slot){
 
             //Temp
             {
+            mutexProcessTime.lock();
+            int lastTime;
+            if(totalNbProcess==0) lastTime=35;
+            else lastTime=static_cast<int>(totalProcessTime.count())/totalNbProcess;
+            mutexProcessTime.unlock();
+            int result = send(slot->socket, (char*)&lastTime, sizeof(lastTime), 0);
+            if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
             slot->clearOutput<Game>();
             slot->state = STATE_SENDING_PATH;
             slot->output=new unsigned char[32]{1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
             for(int i=0;i<20;++i){
                 char flag=1;
-                int result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
+                result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
                 if(verifySocketOutput<Game>(&slots[0],true,result)==EXIT_FAILURE) return;
 
                 int message[2]={i,i*2};
@@ -192,7 +199,7 @@ void Serveur::processLoop(Client* slot){
                 if(verifySocketOutput<Game>(&slots[0],true,result)==EXIT_FAILURE) return;
             }
             char flag=3;
-            int result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
+            result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
             if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
             result = send(slot->socket,(char*)slot->output, sizeof(unsigned char) * 32, 0);
             if(verifySocketOutput<unsigned char>(slot,true,result)==EXIT_FAILURE) return ;
@@ -202,7 +209,7 @@ void Serveur::processLoop(Client* slot){
             slot->clearOutput<unsigned char>();
             return;}
 
-        case 1:
+        case 2:
             slot->clearOutput<char>();
             Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_DETAILS);
 
@@ -351,7 +358,7 @@ bool Serveur::getClientPicture(Client *slot) {
     delete[] size;
     delete[] static_cast<char*>(slot->output);
     slot->output=picturePath;
-
+    /*
     if(BoardIsolation::getBoard(*picturePath,*picturePath)){
         Logs::write("Slot " + std::to_string(slot->slotNum) + " board not isolated",LOG_LEVEL_WARNING);
         slot->clearOutput<std::string>();
@@ -359,12 +366,12 @@ bool Serveur::getClientPicture(Client *slot) {
         slot->disconnect();
         return false;
     }
-
+    */
     slot->state=STATE_RECEIVED_PICTURE;
     return true;
 }
 bool Serveur::confirmClientPicture(Client *slot) {
-    char confirm=0;
+    char confirm=1;
     int result = send(slot->socket, (char*)&confirm, sizeof(char), 0);
     if(verifySocketOutput<std::string>(slot,true,result)==EXIT_FAILURE) return false;
     slot->state=STATE_SENT_TYPE_PICTURE_CONFIRMATION;
@@ -383,16 +390,22 @@ bool Serveur::buildBoard(Client *slot) {
     return true;
 }
 bool Serveur::getClientNbRobots(Client *slot) {
-    char nbRobots;
-    int result = recv(slot->socket, (char*)&nbRobots, sizeof(char), 0);
+    int nbRobots=0;
+    int result = recv(slot->socket, (char*)&nbRobots, sizeof(int), 0);
     if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
     slot->state=STATE_RECEIVED_NB_ROBOTS;
+    if(nbRobots<1) {
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " nbRobots is too small",LOG_LEVEL_WARNING);
+        slot->clearOutput<Game>();
+        slot->disconnect();
+        return false;
+    }
     ((Game*)slot->output)->setNbRobots((int)nbRobots);
     return true;
 }
 bool Serveur::confirmClientNbRobots(Client *slot) {
-    char nbRobots=((Game*)slot->output)->nbRobots;
-    int result = send(slot->socket, (char*)&nbRobots, sizeof(char), 0);
+    int nbRobots=((Game*)slot->output)->nbRobots;
+    int result = send(slot->socket, (char*)&nbRobots, sizeof(int), 0);
     if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
     slot->state=STATE_SENT_NB_ROBOTS_CONFIRMATION;
     return true;

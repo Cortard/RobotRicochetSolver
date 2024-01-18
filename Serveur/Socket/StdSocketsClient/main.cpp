@@ -22,7 +22,7 @@
 
 #include <opencv2/opencv.hpp>
 
-bool picture = false;
+bool picture = true;
 
 int main() {
     #if defined (WIN32)
@@ -46,7 +46,7 @@ int main() {
     printf("Connecté a %s:%d\n", inet_ntoa(sockAddrInter.sin_addr), htons(sockAddrInter.sin_port));
 
     if(picture) {
-        char typeDate = 0;
+        char typeDate = 1;
         int result = send(sockServ, (char *) &typeDate, sizeof(typeDate), 0);
         if (result == SOCKET_ERROR) {
             printf("Impossible d'envoyer le type de donnée\n");
@@ -99,6 +99,7 @@ int main() {
         }printf("Image envoyé\n");
          */
 
+        std::cout<<pictureSize[0]<<" "<<pictureSize[1]<<std::endl;
         for(int i=0;i<pictureSize[0];++i) {
             int res=send(sockServ, matTemp+i*pictureSize[1]*3, pictureSize[1] * 3, 0);
             if (res == SOCKET_ERROR) {
@@ -107,26 +108,26 @@ int main() {
             }
         }printf("Image envoyé\n");
 
-        unsigned char confirm;
+        char confirm;
         result = recv(sockServ, (char *) &confirm, sizeof(confirm), 0);
         if (result == SOCKET_ERROR) {
             printf("Impossible de recevoir la confirmation de l'image\n");
             return EXIT_FAILURE;
         }printf("Confirmation de l'image reçu\n");
 
-        if (confirm != 0) {
+        if (confirm != 1) {
             printf("Confirmation de l'image pas ok\n");
             return EXIT_FAILURE;
         }printf("Confirmation de l'image ok\n");
 
-        char nbRobots=4;
+        int nbRobots=4;
         result = send(sockServ, &nbRobots, sizeof(nbRobots), 0);
         if(result == SOCKET_ERROR){
             printf("Impossible d'envoyer le nombre de robots\n");
             return EXIT_FAILURE;
         }printf("Nombre de robots envoyé\n");
 
-        char nbRobotsReceive;
+        int  nbRobotsReceive;
         result = recv(sockServ, &nbRobotsReceive, sizeof(nbRobots), 0);
         if(result == SOCKET_ERROR){
             printf("Impossible de recevoir le nombre de robots\n");
@@ -153,7 +154,7 @@ int main() {
         }printf("Goal envoyé\n");
 
     }else{//grille*******************************************************************************************************
-        char typeDate = 1;
+        char typeDate = 2;
         int result = send(sockServ, (char *) &typeDate, sizeof(typeDate), 0);
         if (result == SOCKET_ERROR) {
             printf("Impossible d'envoyer le type de donnée\n");
