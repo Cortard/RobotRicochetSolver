@@ -307,7 +307,7 @@ bool Serveur::getClientPictureSize(Client *slot) {
     return true;
 }
 bool Serveur::confirmClientPictureSize(Client *slot) {
-    auto* size=static_cast<unsigned int*>(slot->output);
+    auto* size=static_cast<int*>(slot->output);
     long confirmSize=static_cast<long>(size[0])*static_cast<long>(size[1])*3;
     int result = send(slot->socket, (char*)&confirmSize, sizeof(long), 0);
     if(verifySocketOutput<unsigned int>(slot,false,result)==EXIT_FAILURE) return false;
