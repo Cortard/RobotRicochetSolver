@@ -176,39 +176,7 @@ void Serveur::processLoop(Client* slot){
             slot->state = RECEIVING_TOKEN;
             Logs::write("Receiving token from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
             if( ! Serveur::getClientToken(slot) ) return;
-
-            //Temp
-            {
-            mutexProcessTime.lock();
-            int lastTime;
-            if(totalNbProcess==0) lastTime=35;
-            else lastTime=static_cast<int>(totalProcessTime.count())/totalNbProcess;
-            mutexProcessTime.unlock();
-            int result = send(slot->socket, (char*)&lastTime, sizeof(lastTime), 0);
-            if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
-            slot->clearOutput<Game>();
-            slot->state = STATE_SENDING_PATH;
-            slot->output=new unsigned char[32]{1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
-            for(int i=0;i<20;++i){
-                char flag=1;
-                result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
-                if(verifySocketOutput<Game>(&slots[0],true,result)==EXIT_FAILURE) return;
-
-                int message[2]={i,i*2};
-                result = send(slots[0].socket, (char*)message, sizeof(int[2]), 0);
-                if(verifySocketOutput<Game>(&slots[0],true,result)==EXIT_FAILURE) return;
-            }
-            char flag=3;
-            result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
-            if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return;
-            result = send(slot->socket,(char*)slot->output, sizeof(unsigned char) * 32, 0);
-            if(verifySocketOutput<unsigned char>(slot,true,result)==EXIT_FAILURE) return ;
-            char confirm;
-            result = recv(slot->socket, (char*)&confirm, sizeof(char),MSG_WAITALL);
-            if(verifySocketOutput<unsigned char>(slot,false,result)==EXIT_FAILURE) return ;
-            slot->clearOutput<unsigned char>();
-            return;}
-
+            break;
         case 2:
             slot->clearOutput<char>();
             Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_DETAILS);
@@ -230,12 +198,8 @@ void Serveur::processLoop(Client* slot){
             slot->state = STATE_RECEIVING_GRID;
             Logs::write("Receiving grid from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
             if( ! Serveur::getClientGrid(slot) ) return;
-
-            // STATE_RECEIVED_GRID:
-            slot->state = STATE_SENDING_GRID_CONFIRMATION;
-            Logs::write("Sending gridConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
-            if( ! Serveur::confirmClientGrid(slot) ) return;
             break;
+
         default:
             Logs::write("Slot " + std::to_string(slot->slotNum) + " send us a wrong choice",LOG_LEVEL_WARNING);
             slot->clearOutput<char>();
@@ -243,7 +207,12 @@ void Serveur::processLoop(Client* slot){
             return;
     }
 
-    // STATE_SENT_TYPE_GRID_CONFIRMATION OR RECEIVED_TOKEN:
+    // STATE_RECEIVED_GRID OR RECEIVED_TOKEN:
+    slot->state = STATE_SENDING_PROCESS_TIME;
+    Logs::write("Sending time to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+    if( !Serveur::setProcessTime(slot) ) return;
+
+    // STATE_SENT_TYPE_PROCESS_TIME:
     slot->state = STATE_PREPARING_GRID;
     Logs::write("Preparing grid on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
     Serveur::prepareGrid(slot);
@@ -358,7 +327,7 @@ bool Serveur::getClientPicture(Client *slot) {
     delete[] size;
     delete[] static_cast<char*>(slot->output);
     slot->output=picturePath;
-    /*
+
     if(BoardIsolation::getBoard(*picturePath,*picturePath)){
         Logs::write("Slot " + std::to_string(slot->slotNum) + " board not isolated",LOG_LEVEL_WARNING);
         slot->clearOutput<std::string>();
@@ -366,7 +335,7 @@ bool Serveur::getClientPicture(Client *slot) {
         slot->disconnect();
         return false;
     }
-    */
+
     slot->state=STATE_RECEIVED_PICTURE;
     return true;
 }
@@ -458,7 +427,7 @@ bool Serveur::getClientGrid(Client *slot) {
     return true;
 }
 
-bool Serveur::confirmClientGrid(Client *slot) {
+bool Serveur::setProcessTime(Client *slot) {
     mutexProcessTime.lock();
     int lastTime;
     if(totalNbProcess==0) lastTime=35;
@@ -466,7 +435,7 @@ bool Serveur::confirmClientGrid(Client *slot) {
     mutexProcessTime.unlock();
     int result = send(slot->socket, (char*)&lastTime, sizeof(lastTime), 0);
     if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
-    slot->state=STATE_SENT_TYPE_GRID_CONFIRMATION;
+    slot->state=STATE_SENT_TYPE_PROCESS_TIME;
     return true;
 }
 

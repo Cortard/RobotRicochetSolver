@@ -54,9 +54,9 @@ private:
     static bool getClientGridType(Client* slot);
     static bool confirmClientGridType(Client* slot);
     static bool getClientGrid(Client* slot);
-    static bool confirmClientGrid(Client* slot);
 
     //Process
+    static bool setProcessTime(Client* slot);
     static bool prepareGrid(Client* slot);
     static bool solving(Client* slot);
     static bool callbackSolver(unsigned int max_depth, std::chrono::seconds duration);
