@@ -43,7 +43,7 @@ int SocketConnection::getSolution(Board* board) {
     }
     std::cout << "Connecte a " << inet_ntoa(sockAddrInter.sin_addr) << ":" << htons(sockAddrInter.sin_port) << std::endl;
 
-    char typeDate = 1;
+    char typeDate = 2;
     int result = send(sockServ, (char *) &typeDate, sizeof(typeDate), 0);
     if (result == SOCKET_ERROR) {
         std::cout << "Impossible d envoyer le type de donnee" << std::endl;
