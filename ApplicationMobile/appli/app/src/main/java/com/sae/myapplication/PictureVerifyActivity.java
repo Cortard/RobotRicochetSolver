@@ -41,6 +41,7 @@ import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
+import java.util.concurrent.Semaphore;
 
 public class PictureVerifyActivity extends AppCompatActivity {
 
@@ -210,57 +211,35 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                         if (width * height * 3 > 0) {
 
-//                            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-//                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//                            byte[] imageInByte = baos.toByteArray();
-//
-//                            Log.d("bug", "2");
-//
-                            int cpt = 0;
-//                            for (int i = 0; i < imageInByte.length; i += width) {
-//                                byte[] line = Arrays.copyOfRange(imageInByte, i, i + width);
-//                                for (byte b : line) {
-//                                    dataOutputStream.writeByte(b);
-//                                    dataOutputStream.flush();
-//                                }
-//
-//                                // Afficher la ligne dans les logs
-//                                Log.d("bug", " "+ cpt++);
-//                            }
+                            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] imageInByte = baos.toByteArray();
+
+                            Log.d("bug", "2");
 
                             try {
-                                byte[] buffer = new byte[width*height*3];
+
                                 for (int i = 0; i < height; ++i) {
                                     for (int j = 0; j < width; ++j) {
                                         for (int k = 0; k < 3; ++k) {
-                                            dataOutputStream.writeByte(buffer[i * width * 3 + j * 3 + k]);
+                                            // Envoie de chaque valeur de pixel
+                                            dataOutputStream.writeByte(imageInByte[i * width * 3 + j * 3 + k]);
                                             dataOutputStream.flush();
                                         }
                                     }
                                 }
                             } catch (IOException e) {
+                                fileInputStream.close();
+                                bufferedOutputStream.close();
+                                socket.close();
                                 e.printStackTrace();
                             }
-
-//                            try {
-//                                byte[] buffer = new byte[width*height*3];  // Taille du tampon, ajuste selon tes besoins
-//
-//                                for(int i = 0; i < buffer.length; ++i) {
-//                                    for (int i = 0; i )
-//                                    dataOutputStream.write(buffer, 0, bytesRead);
-//                                    dataOutputStream.flush();
-//                                }
-//
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            }
-
-
 
                             Log.d("bug", "3");
 
                             // Attente de la confirmation de la réception
+                            Thread.sleep(TIMEOUT);
                             byte[] byteTab2 = new byte[8];
                             dataInputStream.read(byteTab2);
 
