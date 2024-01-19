@@ -201,8 +201,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         Log.d("bug", width + " " + height);
 
                         ByteBuffer byteBuffer = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
-                        byteBuffer.putInt(width);
                         byteBuffer.putInt(height);
+                        byteBuffer.putInt(width);
 
                         dataOutputStream.write(byteBuffer.array());
                         dataOutputStream.flush();
@@ -212,19 +212,17 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         if (width * height * 3 > 0) {
 
                             Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                            byte[] imageInByte = baos.toByteArray();
 
                             Log.d("bug", "2");
+                            Log.d("bug", bitmap.toString());
 
                             try {
-
                                 for (int i = 0; i < height; ++i) {
                                     for (int j = 0; j < width; ++j) {
+                                        int pixel = bitmap.getPixel(j, i);
                                         for (int k = 0; k < 3; ++k) {
                                             // Envoie de chaque valeur de pixel
-                                            dataOutputStream.writeByte(imageInByte[i * width * 3 + j * 3 + k]);
+                                            dataOutputStream.writeByte((bitmap.getPixel(j, i) >> k) & 0xFF);
                                             dataOutputStream.flush();
                                         }
                                     }
