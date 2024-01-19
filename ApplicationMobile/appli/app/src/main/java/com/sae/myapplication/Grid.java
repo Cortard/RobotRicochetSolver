@@ -13,7 +13,7 @@ public class Grid extends View {
     int id = 0;
     private int[] cases;
     private static final int TAILLE_GRILLE = 16;
-    private static final int NB = 6;
+    private static final int NB = 5;
     private static final int NOMBRE_MAX_MODIFICATIONS = NB;
     private Paint paint;
     private int[][] grid;
@@ -82,7 +82,7 @@ public class Grid extends View {
             if (colonne >= 0 && colonne < TAILLE_GRILLE && ligne >= 0 && ligne < TAILLE_GRILLE
                     && !((ligne==7 && colonne==7) || (ligne==7 && colonne==8) || (ligne==8 && colonne==7) || (ligne==8 && colonne==8))
                     && !(((colonne+1)*(ligne+1) == cases[0]) || ((colonne+1)*(ligne+1) == cases[1]) || ((colonne+1)*(ligne+1) == cases[2]) || ((colonne+1)*(ligne+1) == cases[3]) || ((colonne+1)*(ligne+1) == cases[4]))) {
-                if (modificationsEffectuees <= NOMBRE_MAX_MODIFICATIONS-1) {
+                if (modificationsEffectuees < NOMBRE_MAX_MODIFICATIONS) {
                     changerCouleur(colonne, ligne);
                     invalidate(); // Redessiner la grille
                     Log.d("debug pos",(ligne*TAILLE_GRILLE)+colonne + " x : " + ligne + " y : " + colonne);

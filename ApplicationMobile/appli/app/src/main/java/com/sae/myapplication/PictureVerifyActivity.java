@@ -219,10 +219,11 @@ public class PictureVerifyActivity extends AppCompatActivity {
                             try {
                                 for (int i = 0; i < height; ++i) {
                                     for (int j = 0; j < width; ++j) {
-                                        int pixel = bitmap.getPixel(j, i);
                                         for (int k = 0; k < 3; ++k) {
                                             // Envoie de chaque valeur de pixel
-                                            dataOutputStream.writeByte((bitmap.getPixel(j, i) >> k) & 0xFF);
+                                            dataOutputStream.writeByte(bitmap.getPixel(j, i));
+//                                            ByteBuffer byteImgBuffer = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
+//                                            byteImgBuffer.putInt(bitmap.getPixel(j, i));
                                             dataOutputStream.flush();
                                         }
                                     }
@@ -241,35 +242,44 @@ public class PictureVerifyActivity extends AppCompatActivity {
                             byte[] byteTab2 = new byte[8];
                             dataInputStream.read(byteTab2);
 
-                            Log.d("bug", "4");
+                            Log.d("bug", "4   " + byteTab2[0]);
 
-                            if (byteTab2[0] == 1) { // confirm state
+
                                 // Envoie du FLAG au serveur : 1
+
+                                Log.d("bug", "4.5");
+
                                 int nbRobot = tab.length - 2;
+
+                                ByteBuffer nbRobotByte = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
+                                nbRobotByte.putInt(nbRobot);
 
                                 Log.d("bug", "5");
 
-                                dataOutputStream.writeChar(nbRobot);
+                                dataOutputStream.write(nbRobotByte.array());
                                 dataOutputStream.flush();
 
                                 Log.d("bug", "6");
 
                                 // Attente de la réponse du serveur avec timeout
-                                char confirmFlag = dataInputStream.readChar();
+                                long confirmFlag = dataInputStream.read();
 
-                                if ((int) confirmFlag == nbRobot) {
+                                if (nbRobot > 3) {
+
+                                    Log.d("bug", "7");
 
                                     for (int i = 1; i < nbRobot; i++) {
                                         dataOutputStream.writeInt(tab[i]);
                                     }
                                     dataOutputStream.flush();
 
+                                    Log.d("bug", "8");
 
                                     txt.setText(tab[tab.length-2]);
                                     dataOutputStream.writeInt(tab[tab.length-2]);
                                     dataOutputStream.flush();
 
-
+                                    Log.d("bug", "9");
                                     Thread.sleep(TIMEOUT);
 
                                     // Attente de la réponse du serveur avec timeout
@@ -290,55 +300,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                     txt.setText("Pas de réponse serveur : confirmFlag");
 
                                 }
-                            } else if (byteTab2[0] == 2) { // not found
-                                // Cas où la communication est interrompue
-                                Log.d("info", "Cas NOTFOUND - communication shutdown");
-                                txt.setText("Cas NOTFOUND - communication shutdown");
 
-                            } else if (byteTab2[0] == 3) { // solved
-                                // Attendre la confirmation du serveur
-                                char confirmFlag = dataInputStream.readChar();
-
-                                if ((int) confirmFlag == 1) {
-                                    Thread.sleep(TIMEOUT);
-
-                                    // Envoie des informations sur l'état
-                                    dataOutputStream.writeChar(1);
-                                    dataOutputStream.flush();
-
-                                    // Lire le chemin depuis le serveur : grille
-                                    byte[] path = new byte[32];
-                                    dataInputStream.readFully(path);
-
-
-                                    if ((int) confirmFlag == 1) {
-                                        Thread.sleep(TIMEOUT);
-
-                                        // Envoie des informations sur l'état
-                                        dataOutputStream.writeChar(1);
-                                        dataOutputStream.flush();
-
-                                        // Lire le chemin depuis le serveur : correction
-                                        byte[] correction = new byte[32];
-                                        dataInputStream.readFully(correction);
-
-                                        // Processus terminé avec succès
-                                        Intent intent = new Intent(answer, PictureAnswerActivity.class);
-                                        intent.putExtra("tabPos", tab);
-                                        startActivity(intent);
-                                    } else {
-                                        Log.d("denied", "Pas de réponse serveur : confirmFlag : Correction");
-                                        txt.setText("Pas de réponse serveur : confirmFlag : Correction");
-                                    }
-                                } else {
-                                    Log.d("denied", "Pas de réponse serveur : confirmFlag : Grille");
-                                    txt.setText("Pas de réponse serveur : confirmFlag : Grille");
-
-                                }
-                            } else {
-                                Log.d("denied", "Pas de réponse serveur : responseConfirm");
-                                txt.setText("Pas de réponse serveur : confirmFlag : responseConfirm");
-                            }
                         } else {
                             Log.d("denied", "Pas de réponse serveur : confirm_size ");
                             //txt.setText("Pas de réponse serveur : confirmFlag : confirm_size");
