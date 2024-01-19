@@ -343,7 +343,10 @@ bool Serveur::getClientPicture(Client *slot) {
     delete[] static_cast<char*>(slot->output);
     slot->output=picturePath;
 
-    if(BoardIsolation::getBoard(*picturePath,*picturePath)){
+    auto* picturePathIsolated = new std::string();
+    *picturePathIsolated=PICTURE_PATH;
+    *picturePath+="slot"+std::to_string(slot->slotNum)+"_isolated.png";
+    if(BoardIsolation::getBoard(*picturePath,*picturePathIsolated)==-1){
         Logs::write("Slot " + std::to_string(slot->slotNum) + " board not isolated",LOG_LEVEL_WARNING);
         slot->clearOutput<std::string>();
         slot->output= nullptr;
