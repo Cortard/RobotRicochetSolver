@@ -282,19 +282,58 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                     Log.d("bug", "9");
                                     Thread.sleep(TIMEOUT);
 
-                                    // Attente de la réponse du serveur avec timeout
-                                    char finalFlag = dataInputStream.readChar();
+                                    boolean connectionOpen = true;
 
-                                    if ((int) finalFlag == 1) {
-                                        // Processus terminé avec succès
-                                        Intent intent = new Intent(answer, PictureAnswerActivity.class);
-                                        intent.putExtra("tabPos", tab);
-                                        startActivity(intent);
-                                    } else {
-                                        Log.d("denied", "Pas de réponse serveur : finalFlag");
-                                        txt.setText("Pas de réponse serveur : finalFlag");
+                                    while (connectionOpen) {
+                                        byte[] byteTab3 = new byte[8];
+                                        dataInputStream.read(byteTab3);
+                                        int serverFlag = byteTab3[0];
 
+                                        ByteBuffer flagByte = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
+
+                                        if (serverFlag == 1) { // Cas 1 (STATE)
+
+                                            flagByte.putInt(1);
+
+                                            Log.d("bug", "1111");
+
+                                            dataOutputStream.write(flagByte.array());
+                                            dataOutputStream.flush();
+
+                                            Thread.sleep(TIMEOUT);
+
+                                            long repInt = dataInputStream.read();
+                                            byte[] rep = new byte[8];
+                                            dataInputStream.read(rep);
+
+
+                                        } else if (serverFlag == 2) { // Cas 2 (NOTFOUND)
+                                            fileInputStream.close();
+                                            bufferedOutputStream.close();
+                                            socket.close();
+                                            connectionOpen = false;
+                                        } else if (serverFlag == 3) { // Cas 3 (SOLVED)
+                                            flagByte.putInt(3);
+
+                                            Log.d("bug", "2222");
+
+                                            dataOutputStream.write(flagByte.array());
+                                            dataOutputStream.flush();
+
+                                            byte[] pathBytes = new byte[32];
+                                            dataInputStream.readFully(pathBytes);
+
+                                            flagByte.putInt(90);
+                                            dataOutputStream.write(flagByte.array());
+                                            dataOutputStream.flush();
+
+                                        } else {
+                                            Log.d("denied", "Cas inattendu : " + serverFlag);
+                                            txt.setText("Cas inattendu : " + serverFlag);
+                                            connectionOpen = false; // Ferme la connexion en cas d'inattendu
+                                        }
                                     }
+                                    //...
                                 } else {
                                     Log.d("denied", "Pas de réponse serveur : confirmFlag");
                                     txt.setText("Pas de réponse serveur : confirmFlag");
@@ -307,31 +346,19 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         }
                     } else {
                         Log.d("denied", "Pas de réponse serveur : 1");
-                        txt.setText("Pas de réponse serveur : confirmFlag : 1");
+                        txt.setText("Pas de response serveur : confirmFlag : 1");
                         //txt.setText(response + " confirm flag 1");
 
                     }
                     fileInputStream.close();
                     bufferedOutputStream.close();
                     socket.close();
-                } catch (SocketTimeoutException e) {
-//                    Intent intent = new Intent(answer, PictureActivity.class);
-//                    startActivity(intent);
-
-                    txt.setText(e.toString());
-                } catch (IOException e) {
-//                    Intent intent = new Intent(answer, PictureActivity.class);
-//                    startActivity(intent);
+                } catch (Exception e) {
+                    Intent intent = new Intent(answer, PictureActivity.class);
+                    startActivity(intent);
 
                     Log.d("bug", e.toString());
-
-                    //txt.setText(x + " io");
-                    //txt.setText(e.toString());
-                } catch (Exception e) {
-//                    Intent intent = new Intent(answer, PictureActivity.class);
-//                    startActivity(intent);
-
-                    e.printStackTrace();
+                    txt.setText(e.toString());
                 }
             }
         });
