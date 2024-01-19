@@ -58,3 +58,19 @@ public:
     ControllerRemoveObj(Board* = nullptr);
     void control(int pos);
 };
+
+class ControllerRemoveWall
+{
+    Board* board;
+public :
+    ControllerRemoveWall(Board* = nullptr);
+    void control(int pos);
+};
+
+class ControllerReset
+{
+    Board* board;
+public :
+    ControllerReset(Board* = nullptr);
+    void control();
+};

@@ -31,6 +31,7 @@ public:
     void addObjective(int id, int pos);
     void addRobot(int id, int pos);
 
+    void removeWall(int pos);
     void removeRobot(int pos);
     void removeObj(int pos);
 
@@ -51,6 +52,7 @@ public:
     unsigned char path[32];
 
     void reset();
+    void resetPos(int postion);
 
 private:
     static const int BOARD_SIZE = 16;

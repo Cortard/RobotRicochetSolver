@@ -13,6 +13,8 @@ ViewPlateauOfficiel::ViewPlateauOfficiel(Board* board) : QGraphicsScene(), Obser
     this->board=board;
     board->addObserver(this);
 
+    (new ControllerReset(board))->control();
+
     imagePositions = std::map<QPointF, QString, std::function<bool(const QPointF&, const QPointF&)>>([&](const QPointF& p1, const QPointF& p2) {
         if (p1.x() < p2.x()) return true;
         if (p1.x() > p2.x()) return false;
@@ -96,6 +98,7 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
                 QPixmap pixmap(it->second);
                 QGraphicsPixmapItem* item = new QGraphicsPixmapItem(pixmap);
                 if(secondClickPos.x()<730 && secondClickPos.y()<210 && secondClickPos.y()>10 && secondClickPos.x()>530){
+                    deleteTopLeft(this->board);
                     item->setScale(0.65);
                     QPointF origin = item->transformOriginPoint();
                     item->setTransformOriginPoint(item->boundingRect().center());
@@ -119,29 +122,9 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
                     }
 
                     position = 0;
-
-                    //                    if(it == imagePositions.begin()){
-                    //                        constructPart1(this->board,0);
-                    //                    }else if(std::next(imagePositions.begin(), 1) == it){
-                    //                        constructPart5(this->board,0);
-                    //                    }else if(std::next(imagePositions.begin(), 2) == it){
-                    //                        constructPart9(this->board,0);
-                    //                    }else if(std::next(imagePositions.begin(), 3) == it){
-                    //                        constructPart13(this->board,0);
-                    //                    }
-                    //                    else if(std::next(imagePositions.begin(), 3) == it){
-                    //                        constructPart13(this->board,0);
-                    //                    }else if(std::next(imagePositions.begin(), 3) == it){
-                    //                        constructPart13(this->board,0);
-                    //                    }else if(std::next(imagePositions.begin(), 3) == it){
-                    //                        constructPart13(this->board,0);
-                    //                    }else if(std::next(imagePositions.begin(), 3) == it){
-                    //                        constructPart13(this->board,0);
-                    //                    }else if(std::next(imagePositions.begin(), 3) == it){
-                    //                        constructPart13(this->board,0);
-                    //                    }
                     addItem(item);
                 }else if(secondClickPos.x()<930 && secondClickPos.y()<210 && secondClickPos.y()>10 && secondClickPos.x()>730){
+                    deleteTopRight(this->board);
                     item->setScale(0.65);
                     QPointF origin = item->transformOriginPoint();
                     item->setTransformOriginPoint(item->boundingRect().center());
@@ -166,6 +149,7 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
                     addItem(item);
                     position = 1;
                 }else if(secondClickPos.x()<730 && secondClickPos.y()<410 && secondClickPos.y()>210 && secondClickPos.x()>530){
+                    deleteBotLeft(this->board);
                     item->setScale(0.65);
                     QPointF origin = item->transformOriginPoint();
                     item->setTransformOriginPoint(item->boundingRect().center());
@@ -190,6 +174,7 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
                     addItem(item);
                     position = 2;
                 }else if(secondClickPos.x()<930 && secondClickPos.y()<410 && secondClickPos.y()>210 && secondClickPos.x()>730){
+                    deleteBotRight(this->board);
                     item->setScale(0.65);
                     QPointF origin = item->transformOriginPoint();
                     item->setTransformOriginPoint(item->boundingRect().center());
@@ -282,7 +267,49 @@ int ViewPlateauOfficiel::posToId(int x, int y) {
     return x + y * 16;
 }
 
+void ViewPlateauOfficiel::deleteTopLeft(Board *board){
+    for(int i=0;i<8;i++){
+        for(int j=0;j<8;j++){
+            int cas = j + (i * 16);
+            (new ControllerRemoveObj(board))->control(cas);
+            (new ControllerRemoveWall(board))->control(cas);
+            std::cout<<cas<<std::endl;
+        }
+    }
+}
 
+void ViewPlateauOfficiel::deleteTopRight(Board *board){
+    for(int i=0;i<8;i++){
+        for(int j=0;j<8;j++){
+            int cas = (j + (i * 16))+8;
+            (new ControllerRemoveObj(board))->control(cas);
+            (new ControllerRemoveWall(board))->control(cas);
+            std::cout<<cas<<std::endl;
+        }
+    }
+}
+
+void ViewPlateauOfficiel::deleteBotLeft(Board *board){
+    for(int i=8;i<16;i++){
+        for(int j=0;j<8;j++){
+            int cas = j + (i * 16);
+            (new ControllerRemoveObj(board))->control(cas);
+            (new ControllerRemoveWall(board))->control(cas);
+            std::cout<<cas<<std::endl;
+        }
+    }
+}
+
+void ViewPlateauOfficiel::deleteBotRight(Board *board){
+    for(int i=8;i<16;i++){
+        for(int j=0;j<8;j++){
+            int cas = (j + (i * 16))+8;
+            (new ControllerRemoveObj(board))->control(cas);
+            (new ControllerRemoveWall(board))->control(cas);
+            std::cout<<cas<<std::endl;
+        }
+    }
+}
 
 void ViewPlateauOfficiel::constructPart1(Board* board, int pos) {
     if (pos == 0) {

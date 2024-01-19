@@ -127,7 +127,7 @@ void MainWindow::on_pushPlateau_clicked()
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
-    SocketConnection::getSolution(board);
+    //SocketConnection::getSolution(board);
     board->robots2=board->robots;
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
@@ -402,6 +402,7 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_buttonhistoire1_clicked()
 {
+    this->board->reset();
     viewPlateauOfficiel->constructPart13(this->board, 0);
     viewPlateauOfficiel->constructPart15(this->board, 1);
     viewPlateauOfficiel->constructPart2(this->board, 2);
@@ -411,6 +412,8 @@ void MainWindow::on_buttonhistoire1_clicked()
     this->board->addRobot(2,55);
     this->board->addRobot(3,86);
     this->board->objJeu=0;
+
+    this->board->robots2=this->board->robots;
 
     if (viewPlato == nullptr) {
         viewPlato = new viewPlateau(board);
@@ -447,12 +450,26 @@ void MainWindow::on_resetPlateau_clicked()
 
 void MainWindow::on_pushObjective_3_clicked()
 {
+
     board->robots=board->robots2;
+    solutionid=0;
     board->notifyObserver();
+    if (viewBoard == nullptr) {
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+    }
+    ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
 void MainWindow::on_pushButton_12_clicked()
 {
+    if(solutionid==0){
+        board->robots=board->robots2;
+        solutionid=0;
+        board->notifyObserver();
+    }
+
     if(GET_DIRECTION(board->path[solutionid])==1){
         direction="NORTH";
     }else if(GET_DIRECTION(board->path[solutionid])==2){
@@ -595,8 +612,6 @@ void MainWindow::on_pushButton_12_clicked()
     }
 
     board->notifyObserver();
-    std::cout<<"Path de solution id : "<<GET_DIRECTION(board->path[0])<<std::endl;
-    std::cout<<"Direction : "<<GET_DIRECTION(board->path[solutionid])<<std::endl;
 
     solutionid++;
 }

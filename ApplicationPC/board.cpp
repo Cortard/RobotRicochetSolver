@@ -13,6 +13,10 @@ Board::Board() {
         this->robots.insert(std::pair<int,int>(i,-1));
     }
 
+    for(int i=0;i<5;i++){
+        this->robots2.insert(std::pair<int,int>(i,-1));
+    }
+
     for(int i=0;i<16;i++){
         SET_WALL(cases[i], NORTH);
         SET_WALL(cases[i+16*15], SOUTH);
@@ -110,6 +114,41 @@ void Board::addWall(int x, int y, char dir) {
     notifyObserver();
 }
 
+void Board::removeWall(int pos){
+    if(HAS_WALL(cases[pos], NORTH)!=0){
+        DEL_WALL(cases[pos], NORTH);
+        DEL_WALL(cases[pos-16], SOUTH);
+    }
+    if(HAS_WALL(cases[pos], EAST)!=0){
+        DEL_WALL(cases[pos], EAST);
+        DEL_WALL(cases[pos+1], WEST);
+    }
+    if(HAS_WALL(cases[pos], SOUTH)!=0){
+        DEL_WALL(cases[pos], SOUTH);
+        DEL_WALL(cases[pos+16], NORTH);
+    }
+    if(HAS_WALL(cases[pos], WEST)!=0){
+        DEL_WALL(cases[pos], WEST);
+        DEL_WALL(cases[pos-1], EAST);
+    }
+
+    for(int i=0;i<16;i++){
+        SET_WALL(cases[i], NORTH);
+        SET_WALL(cases[i+16*15], SOUTH);
+        SET_WALL(cases[i*16], WEST);
+        SET_WALL(cases[i*16+15], EAST);
+    }
+    SET_WALL(cases[151],NORTH);
+    SET_WALL(cases[152],NORTH);
+    SET_WALL(cases[103],SOUTH);
+    SET_WALL(cases[104],SOUTH);
+    SET_WALL(cases[118],EAST);
+    SET_WALL(cases[134],EAST);
+    SET_WALL(cases[121],WEST);
+    SET_WALL(cases[137],WEST);
+}
+
+
 int Board::getBoardSize() {
     return BOARD_SIZE;
 }
@@ -158,4 +197,8 @@ void Board::reset(){
         this->robots.at(i)=-1;
     }
     notifyObserver();
+}
+
+void Board::resetPos(int position){
+
 }

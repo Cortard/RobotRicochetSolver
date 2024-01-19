@@ -56,7 +56,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Board* board;
-    Board* board2;
     ViewBoard *viewBoard;
     viewMainMenu *viewMenu;
     viewPlateau *viewPlato;

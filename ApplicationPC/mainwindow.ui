@@ -2041,7 +2041,7 @@ QPushButton#pushObjective_3:pressed {
 </string>
                </property>
                <property name="text">
-                <string>Solution</string>
+                <string>Rejouer</string>
                </property>
               </widget>
               <widget class="QLabel" name="label">
@@ -2066,14 +2066,52 @@ QPushButton#pushObjective_3:pressed {
               <widget class="QPushButton" name="pushButton_12">
                <property name="geometry">
                 <rect>
-                 <x>140</x>
-                 <y>270</y>
-                 <width>83</width>
-                 <height>24</height>
+                 <x>80</x>
+                 <y>280</y>
+                 <width>200</width>
+                 <height>40</height>
                 </rect>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Quicksand Medium</family>
+                 <pointsize>15</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton#pushButton_12 {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
+	border:none;
+	border-radius: 5px;
+	padding:10px;
+	color : #70bfcb;
+}
+
+QPushButton#pushButton_12:hover {
+    background-color: #9c2579;
+}
+
+QPushButton#pushButton_12:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+               </property>
                <property name="text">
-                <string>PushButton</string>
+                <string>Solution</string>
                </property>
               </widget>
              </widget>

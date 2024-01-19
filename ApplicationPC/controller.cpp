@@ -89,3 +89,22 @@ void ControllerRemoveObj::control(int pos){
 
     board->removeObj(pos);
 }
+
+
+ControllerRemoveWall::ControllerRemoveWall(Board *bd) : board(bd)
+{}
+
+void ControllerRemoveWall::control(int pos){
+    if(board == nullptr) return;
+
+    board->removeWall(pos);
+}
+
+ControllerReset::ControllerReset(Board *bd) : board(bd)
+{}
+
+void ControllerReset::control(){
+    if(board == nullptr) return;
+
+    board->reset();
+}

@@ -264,11 +264,9 @@ void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
             QGraphicsPixmapItem* pixmapItem = dynamic_cast<QGraphicsPixmapItem*>(clickedItem);
             if (pixmapItem->data(1).toInt() == QGraphicsPixmapItem::UserType + 2) {
                 int id = pixmapItem->data(0).toInt();
-                if(clickdroit==0){
-                    qDebug() << "Clic droit sur l'objectif avec l'ID : " << id;
-                    clickdroit++;
-                    board->objJeu=id;
-                }
+                qDebug() << "Clic droit sur l'objectif avec l'ID : " << id;
+                clickdroit++;
+                board->objJeu=id;
             }
         }
     }

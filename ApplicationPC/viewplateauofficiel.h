@@ -24,6 +24,11 @@ public:
     ViewPlateauOfficiel(Board* = nullptr);
     void updateModel();
 
+    void deleteTopRight(Board* board);
+    void deleteTopLeft(Board* board);
+    void deleteBotRight(Board* board);
+    void deleteBotLeft(Board* board);
+
     void constructPart1(Board* board, int pos);
     void constructPart2(Board* board, int pos);
     void constructPart3(Board* board, int pos);
