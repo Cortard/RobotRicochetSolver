@@ -100,8 +100,8 @@ int main() {
          */
 
         std::cout<<pictureSize[0]<<" "<<pictureSize[1]<<std::endl;
-        for(int i=0;i<pictureSize[0];++i) {
-            int res=send(sockServ, matTemp+i*pictureSize[1]*3, pictureSize[1] * 3, 0);
+        for(int i=0;i<pictureSize[0]*pictureSize[1] ;++i) {
+            int res=send(sockServ, matTemp+i*3, 3, 0);
             if (res == SOCKET_ERROR) {
                 printf("Impossible d'envoyer l'image\n");
                 return EXIT_FAILURE;
