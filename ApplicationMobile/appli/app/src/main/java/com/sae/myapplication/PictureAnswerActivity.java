@@ -27,7 +27,6 @@ public class PictureAnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_answer);
 
-        imageView = findViewById(R.id.imageRep);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
         ImageButton bReturn = findViewById(R.id.boutonReturn);
 

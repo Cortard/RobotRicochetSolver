@@ -34,7 +34,7 @@
         android:id="@+id/header2"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="@color/blueHeader"
+        android:src="@drawable/header"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintDimensionRatio="1:0"
@@ -50,7 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:accessibilityHeading="false"
-        android:background="@color/blueFooter"
+        android:src="@drawable/footer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:0"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
         style="@android:style/Widget.ImageButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/blueFooterBox"
+        android:background="#00FFFFFF"
         android:contentDescription="@string/boutonHelp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
@@ -80,7 +80,7 @@
         android:id="@+id/boutonReturn"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/blueFooterBox"
+        android:background="#00FFFFFF"
         android:contentDescription="@string/boutonExit"
         android:src="@drawable/_52473_return_icon"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -114,19 +114,6 @@
         app:layout_constraintTop_toTopOf="@+id/header2"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
-        android:id="@+id/imageRep"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
-        android:contentDescription="@string/imageRep"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/surfaceView"
-        app:layout_constraintEnd_toEndOf="@+id/surfaceView"
-        app:layout_constraintStart_toStartOf="@+id/surfaceView"
-        app:layout_constraintTop_toTopOf="@+id/surfaceView"
-        app:layout_constraintVertical_bias="0.518" />
-
 
     <com.sae.myapplication.MyCanvas
         android:id="@+id/canva"
@@ -148,7 +135,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="120dp"
-        android:background="@color/blueNorm"
+        android:src="@drawable/round"
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
