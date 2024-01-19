@@ -111,11 +111,6 @@ int main() {
                     }
                 }
             }
-            int res= recv(sockServ, (char *) &sonI, sizeof(sonI), 0);
-            if (res == SOCKET_ERROR) {
-                printf("Impossible de recevoir la confirmation de l'image\n");
-                return EXIT_FAILURE;
-            }
         }
         printf("i : %d\n", sonI);
 
