@@ -316,11 +316,16 @@ bool Serveur::confirmClientPictureSize(Client *slot) {
 }
 bool Serveur::getClientPicture(Client *slot) {
     auto* size=static_cast<unsigned int*>(slot->output);
-    slot->output=new char[size[0]*size[1]*3];
+    slot->output= new char[size[0]*size[1]*3];
 
-    for(int i=0;i<size[0]*size[1]*3;++i){
-        int result = recv(slot->socket, (char*)slot->output+i, sizeof(char), 0);
-        if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
+    for(int i=0;i<size[0];++i){
+        for(int j=0;j<size[1];++j){
+            for(int k=0;k<3;++k){
+                int result = recv(slot->socket, (char*)slot->output+(i*size[1]*3+j*3+k), sizeof(char), 0);
+                if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
+            }
+        }
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received " + std::to_string(i) + "/" + std::to_string(size[0]),LOG_LEVEL_DEBUG);
     }
     Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received",LOG_LEVEL_DEBUG);
 
