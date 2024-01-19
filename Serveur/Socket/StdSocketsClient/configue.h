@@ -3,7 +3,7 @@
 
 #define DEV_MODE 0
 
-#if DEV_MODE==0
+#if DEV_MODE==1
     #define IP "195.201.205.241"
     #define PORT 9090
 #else

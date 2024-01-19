@@ -22,6 +22,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/configue.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Serveur.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StdSocketsServ/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/configue.h" afterDir="false" />
@@ -125,7 +126,7 @@
       <workItem from="1705411406444" duration="5960000" />
       <workItem from="1705495113123" duration="1000" />
       <workItem from="1705567480300" duration="6829000" />
-      <workItem from="1705652982331" duration="4902000" />
+      <workItem from="1705652982331" duration="6871000" />
     </task>
     <servers />
   </component>

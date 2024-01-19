@@ -326,6 +326,8 @@ bool Serveur::getClientPicture(Client *slot) {
             }
         }
         Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received " + std::to_string(i) + "/" + std::to_string(size[0]),LOG_LEVEL_DEBUG);
+        int result = send(slot->socket, (char*)&i, sizeof(int), 0);
+        if(verifySocketOutput<char>(slot,true,result)==EXIT_FAILURE) return false;
     }
     Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received",LOG_LEVEL_DEBUG);
 

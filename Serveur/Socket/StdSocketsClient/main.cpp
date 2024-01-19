@@ -100,13 +100,24 @@ int main() {
          */
 
         std::cout<<pictureSize[0]<<" "<<pictureSize[1]<<std::endl;
-        for(int i=0;i<pictureSize[0]*pictureSize[1]*3 ;++i) {
-            int res=send(sockServ, matTemp+i, 1, 0);
+        int sonI;
+        for(int i=0;i<pictureSize[0];++i){
+            for(int j=0;j<pictureSize[1];++j){
+                for(int k=0;k<3;++k) {
+                    int res=send(sockServ, matTemp+i*pictureSize[1]*3+j*3+k, 1, 0);
+                    if (res == SOCKET_ERROR) {
+                        printf("Impossible d'envoyer l'image\n");
+                        return EXIT_FAILURE;
+                    }
+                }
+            }
+            int res= recv(sockServ, (char *) &sonI, sizeof(sonI), 0);
             if (res == SOCKET_ERROR) {
-                printf("Impossible d'envoyer l'image\n");
+                printf("Impossible de recevoir la confirmation de l'image\n");
                 return EXIT_FAILURE;
             }
-        }printf("Image envoyé\n");
+        }
+        printf("i : %d\n", sonI);
 
         char confirm;
         result = recv(sockServ, (char *) &confirm, sizeof(confirm), 0);
