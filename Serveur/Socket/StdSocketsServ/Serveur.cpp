@@ -318,6 +318,8 @@ bool Serveur::getClientPicture(Client *slot) {
     auto* size=static_cast<unsigned int*>(slot->output);
     slot->output= new char[size[0]*size[1]*3];
 
+    int percent=size[0]/100;
+    if(percent==0) percent=1;
     for(int i=0;i<size[0];++i){
         for(int j=0;j<size[1];++j){
             for(int k=0;k<3;++k){
@@ -325,7 +327,9 @@ bool Serveur::getClientPicture(Client *slot) {
                 if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
             }
         }
-        Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received " + std::to_string(i) + "/" + std::to_string(size[0]),LOG_LEVEL_DEBUG);
+        if(i%percent==0){
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received " + std::to_string(i) + "/" + std::to_string(size[0]) + "(" + std::to_string(i*100/size[0]) + "%)",LOG_LEVEL_DEBUG);
+        }
     }
     Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received",LOG_LEVEL_DEBUG);
 
