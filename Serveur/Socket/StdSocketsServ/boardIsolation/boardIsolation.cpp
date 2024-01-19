@@ -57,6 +57,8 @@ int BoardIsolation::getBoard(std::string src_img_path, std::string output_img_pa
 		cv::Mat warped_img;
 		cv::warpPerspective(scaled_img, warped_img, perspectiveMat, cv::Size(600, 600));
 
+        cv::flip(warped_img, warped_img, 1);
+
 		cv::imwrite(output_img_path, warped_img);
 
 		return 0;
