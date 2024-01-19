@@ -317,6 +317,7 @@ bool Serveur::confirmClientPictureSize(Client *slot) {
 bool Serveur::getClientPicture(Client *slot) {
     auto* size=static_cast<unsigned int*>(slot->output);
     slot->output=new char[size[0]*size[1]*3];
+    memset(slot->output,0,size[0]*size[1]*3);
 
     for(int i=0;i<size[0];++i){
         int result = recv(slot->socket, (char*)slot->output+i*size[1]*3, size[1]*3, 0);
