@@ -11,6 +11,7 @@ bool Logs::openLogs()
 
 bool Logs::write(const std::string &msg, int level)
 {
+    if(level==LOG_LEVEL_DEBUG && !DEBUG_OUTPUT) return true;
     std::unique_lock<std::mutex> lock(mutex);
     if(!Logs::file.is_open() && ! openLogs()) return false ;
 

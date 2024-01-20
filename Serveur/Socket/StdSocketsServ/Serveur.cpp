@@ -163,6 +163,8 @@ void Serveur::processLoop(Client* slot){
                 Logs::write("Receiving nbRobots from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
                 if( ! Serveur::getClientNbRobots(slot) ) return;
 
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " nbRobot : " + std::to_string(((Game*)slot->output)->nbRobots),LOG_LEVEL_DEBUG);
+
                 // STATE_RECEIVED_NB_ROBOTS:
                 slot->state = STATE_SENDING_NB_ROBOTS_CONFIRMATION;
                 Logs::write("Sending nbRobotsConfirm to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
@@ -172,6 +174,10 @@ void Serveur::processLoop(Client* slot){
                 slot->state = STATE_RECEIVING_ROBOTS;
                 Logs::write("Receiving robots from client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
                 if( ! Serveur::getClientRobots(slot) ) return;
+
+                for(int i=0;i<((Game*)slot->output)->nbRobots;++i){
+                    Logs::write("Slot " + std::to_string(slot->slotNum) + " robot " + std::to_string(i) + " : " + std::to_string(((Game*)slot->output)->robots[i]),LOG_LEVEL_DEBUG);
+                }
 
                 // RECEIVED_ROBOTS:
                 slot->state = RECEIVING_TOKEN;
@@ -188,7 +194,7 @@ void Serveur::processLoop(Client* slot){
                 Logs::write("Slot " + std::to_string(slot->slotNum) + " choose to send us a grid",LOG_LEVEL_VERBOSE);
                 if( ! Serveur::getClientGridType(slot) ) return;
 
-                Logs::write("Slot " + std::to_string(slot->slotNum) + " nbRobot : " + std::to_string(((((char*)slot->output)[0]&2)>>1) + 4) + " mur de travers : " + std::to_string(((char*)slot->output)[0]&1),LOG_LEVEL_DETAILS);
+                Logs::write("Slot " + std::to_string(slot->slotNum) + " nbRobot : " + std::to_string(((((char*)slot->output)[0]&2)>>1) + 4) + " mur de travers : " + std::to_string(((char*)slot->output)[0]&1),LOG_LEVEL_DEBUG);
 
                 // STATE_RECEIVED_GRIP_TYPE:
                 slot->state = STATE_SENDING_GRIP_TYPE_CONFIRMATION;
