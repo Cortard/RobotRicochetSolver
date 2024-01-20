@@ -251,11 +251,9 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                                 int nbRobot = tab.length - 2;
 
-                                ByteBuffer nbRobotByte = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
+                                ByteBuffer nbRobotByte = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
                                 nbRobotByte.putInt(nbRobot);
-
                                 Log.d("bug", "5");
-
                                 dataOutputStream.write(nbRobotByte.array());
                                 dataOutputStream.flush();
 
@@ -267,16 +265,20 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 if (nbRobot > 3) {
 
                                     Log.d("bug", "7");
-
-                                    for (int i = 1; i < nbRobot; i++) {
-                                        dataOutputStream.writeInt(tab[i]);
+                                    ByteBuffer robPosByte = ByteBuffer.allocate(16).order(ByteOrder.LITTLE_ENDIAN);
+                                    for (int i = 0; i < nbRobot; i++) {
+                                        robPosByte.putInt(tab[i]);
+                                        Log.d("bug", "posRob : "+ tab[i]);
                                     }
+                                    dataOutputStream.write(robPosByte.array());
                                     dataOutputStream.flush();
 
-                                    Log.d("bug", "8");
 
-                                    txt.setText(tab[tab.length-2]);
-                                    dataOutputStream.writeInt(tab[tab.length-2]);
+                                    Log.d("bug", "objectif : "+ tab[tab.length-2]);
+
+                                    ByteBuffer destiByte = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
+                                    destiByte.putInt(tab[tab.length-2]);
+                                    dataOutputStream.write(destiByte.array());
                                     dataOutputStream.flush();
 
                                     Log.d("bug", "9");
@@ -284,10 +286,18 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                                     boolean connectionOpen = true;
 
+                                    byte[] time = new byte[8];
+                                    dataInputStream.read(time);
+                                    Log.d("bug", "time : " + time[0]);
+
                                     while (connectionOpen) {
-                                        byte[] byteTab3 = new byte[8];
-                                        dataInputStream.read(byteTab3);
-                                        int serverFlag = byteTab3[0];
+                                        Log.d("bug", "10");
+
+                                        byte[] finalFlag = new byte[8];
+                                        dataInputStream.read(finalFlag);
+                                        int serverFlag = finalFlag[0];
+
+                                        Log.d("bug", "final flag : " + serverFlag);
 
                                         ByteBuffer flagByte = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
 
@@ -295,30 +305,27 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                                             flagByte.putInt(1);
 
-                                            Log.d("bug", "1111");
-
-                                            dataOutputStream.write(flagByte.array());
-                                            dataOutputStream.flush();
-
+                                            Log.d("bug", "1.1");
                                             Thread.sleep(TIMEOUT);
 
                                             long repInt = dataInputStream.read();
+                                            Log.d("bug", "1.2");
                                             byte[] rep = new byte[8];
                                             dataInputStream.read(rep);
-
+                                            Log.d("bug", "1.3");
 
                                         } else if (serverFlag == 2) { // Cas 2 (NOTFOUND)
                                             fileInputStream.close();
                                             bufferedOutputStream.close();
                                             socket.close();
                                             connectionOpen = false;
+                                            Intent intent = new Intent(answer, PictureActivity.class);
+                                            startActivity(intent);
+                                            finish();
                                         } else if (serverFlag == 3) { // Cas 3 (SOLVED)
                                             flagByte.putInt(3);
 
-                                            Log.d("bug", "2222");
-
-                                            dataOutputStream.write(flagByte.array());
-                                            dataOutputStream.flush();
+                                            Log.d("bug", "2");
 
                                             byte[] pathBytes = new byte[32];
                                             dataInputStream.readFully(pathBytes);
@@ -327,6 +334,9 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                             dataOutputStream.write(flagByte.array());
                                             dataOutputStream.flush();
 
+                                            Intent intent = new Intent(answer, PictureAnswerActivity.class);
+                                            startActivity(intent);
+                                            finish();
                                         } else {
                                             Log.d("denied", "Cas inattendu : " + serverFlag);
                                             txt.setText("Cas inattendu : " + serverFlag);
@@ -354,9 +364,9 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     bufferedOutputStream.close();
                     socket.close();
                 } catch (Exception e) {
-                    Intent intent = new Intent(answer, PictureActivity.class);
-                    startActivity(intent);
-
+//                    Intent intent = new Intent(answer, PictureActivity.class);
+//                    startActivity(intent);
+//                    finish();
                     Log.d("bug", e.toString());
                     txt.setText(e.toString());
                 }
