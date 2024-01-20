@@ -535,6 +535,7 @@ bool Serveur::callbackSolver(unsigned int max_depth, std::chrono::seconds durati
 bool Serveur::sendPath(Client *slot) {
     int result = send(slot->socket,(char*)((Game*)slot->output)->path, sizeof(unsigned char) * 32, 0);
     if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
+
     char confirm;
     result = recv(slot->socket, (char*)&confirm, sizeof(char),MSG_WAITALL);
     if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
@@ -544,9 +545,14 @@ bool Serveur::sendPath(Client *slot) {
     return true;
 }
 bool Serveur::sendGrid(Client *slot) {
+    Logs::write("Slot " + std::to_string(slot->slotNum) + " grid :" + std::to_string(((Game*)slot->output)->grid[0]) + " " + std::to_string(((Game*)slot->output)->grid[1]) + " " + std::to_string(((Game*)slot->output)->grid[2]) + " " + std::to_string(((Game*)slot->output)->grid[3]) + " " + std::to_string(((Game*)slot->output)->grid[4]) + " " + std::to_string(((Game*)slot->output)->grid[5]) + " " + std::to_string(((Game*)slot->output)->grid[6]) + " " + std::to_string(((Game*)slot->output)->grid[7]) + " " + std::to_string(((Game*)slot->output)->grid[8]) + " " + std::to_string(((Game*)slot->output)->grid[9]) + " " + std::to_string(((Game*)slot->output)->grid[10]) + " " + std::to_string(((Game*)slot->output)->grid[11]) + " " + std::to_string(((Game*)slot->output)->grid[12]) + " " + std::to_string(((Game*)slot->output)->grid[13]) + " " + std::to_string(((Game*)slot->output)->grid[14]) + " " + std::to_string(((Game*)slot->output)->grid[15]),LOG_LEVEL_DEBUG);
     int result = send(slot->socket,(char*)((Game*)slot->output)->grid, sizeof(unsigned int) * 256, 0);
     if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
-    Logs::write("Slot " + std::to_string(slot->slotNum) + " grid :" + std::to_string(((Game*)slot->output)->grid[0]) + " " + std::to_string(((Game*)slot->output)->grid[1]) + " " + std::to_string(((Game*)slot->output)->grid[2]) + " " + std::to_string(((Game*)slot->output)->grid[3]) + " " + std::to_string(((Game*)slot->output)->grid[4]) + " " + std::to_string(((Game*)slot->output)->grid[5]) + " " + std::to_string(((Game*)slot->output)->grid[6]) + " " + std::to_string(((Game*)slot->output)->grid[7]) + " " + std::to_string(((Game*)slot->output)->grid[8]) + " " + std::to_string(((Game*)slot->output)->grid[9]) + " " + std::to_string(((Game*)slot->output)->grid[10]) + " " + std::to_string(((Game*)slot->output)->grid[11]) + " " + std::to_string(((Game*)slot->output)->grid[12]) + " " + std::to_string(((Game*)slot->output)->grid[13]) + " " + std::to_string(((Game*)slot->output)->grid[14]) + " " + std::to_string(((Game*)slot->output)->grid[15]),LOG_LEVEL_DEBUG);
+
+    char confirm;
+    result = recv(slot->socket, (char*)&confirm, sizeof(char),MSG_WAITALL);
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
+
     slot->clearOutput<Game>();
     slot->state=STATE_SENT_GRID;
     return true;
