@@ -284,6 +284,12 @@ int main() {
     }printf("\n");
     printf("1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \n");
 
+    unsigned int grid2[256];
+    result = recv(sockServ, (char *) &grid2, sizeof(grid2), MSG_WAITALL);
+    if (result == SOCKET_ERROR) {
+        printf("Impossible de recevoir la grille\n");
+        return EXIT_FAILURE;
+    }printf("Grille reçu\n");
 
 
 #if defined (WIN32)

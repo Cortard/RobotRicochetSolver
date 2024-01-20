@@ -240,6 +240,11 @@ void Serveur::processLoop(Client* slot){
         if( ! Serveur::sendPath(slot) ) return;
 
         // STATE_SENT_TYPE_PATH:
+        slot->state = STATE_SENDING_GRID;
+        Logs::write("Sending grid to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+        if( ! Serveur::sendGrid(slot) ) return;
+
+        // STATE_SENT_GRID:
         Logs::write("Client process on slot " + std::to_string(slot->slotNum) + " is done",LOG_LEVEL_DETAILS);
         shutdown(slot->socket, 2);
         slot->disconnect();
@@ -508,8 +513,7 @@ bool Serveur::solving(Client *slot) {
     result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
     if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
 
-    slot->clearOutput<Game>();
-    slot->output=path;
+    ((Game*)slot->output)->path=path;
     slot->state=STATE_SOLVED;
     return true;
 }
@@ -529,13 +533,21 @@ bool Serveur::callbackSolver(unsigned int max_depth, std::chrono::seconds durati
     return true;
 }
 bool Serveur::sendPath(Client *slot) {
-    int result = send(slot->socket,(char*)slot->output, sizeof(unsigned char) * 32, 0);
-    if(verifySocketOutput<unsigned char>(slot,true,result)==EXIT_FAILURE) return false;
+    int result = send(slot->socket,(char*)((Game*)slot->output)->path, sizeof(unsigned char) * 32, 0);
+    if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
     char confirm;
     result = recv(slot->socket, (char*)&confirm, sizeof(char),MSG_WAITALL);
-    if(verifySocketOutput<unsigned char>(slot,false,result)==EXIT_FAILURE) return false;
+    if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
 
-    slot->clearOutput<unsigned char>();
+    slot->clearOutput<Game>();
     slot->state=STATE_SENT_TYPE_PATH;
+    return true;
+}
+bool Serveur::sendGrid(Client *slot) {
+    int result = send(slot->socket,(char*)((Game*)slot->output)->grid, sizeof(unsigned int) * 256, 0);
+    if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
+
+    slot->clearOutput<Game>();
+    slot->state=STATE_SENT_GRID;
     return true;
 }

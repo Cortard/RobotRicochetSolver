@@ -61,6 +61,7 @@ private:
     static bool solving(Client* slot);
     static bool callbackSolver(unsigned int max_depth, std::chrono::seconds duration);
     static bool sendPath(Client* slot);
+    static bool sendGrid(Client* slot);
 };
 
 

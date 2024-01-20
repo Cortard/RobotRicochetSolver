@@ -20,6 +20,7 @@ public:
     unsigned int token; //goal
     bool globalToken; //All robots can reach the goal
     unsigned int last; //dernier mouvement
+    unsigned char* path; //chemin
 
     Game(int nbRobots, bool coloredWalls, bool globalGoal) : nbRobots(nbRobots), coloredWalls(coloredWalls), globalToken(globalGoal)
     {
@@ -29,6 +30,7 @@ public:
         memset(robots, 0, sizeof(unsigned int) * nbRobots);
         token = 0;
         last = 0;
+        path = nullptr;
     }
 
     void setNbRobots(int nbRobots) {
@@ -71,6 +73,7 @@ public:
 
     ~Game() {
         delete[] robots;
+        delete[] path;
     }
 };
 

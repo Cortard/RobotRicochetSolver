@@ -18,7 +18,6 @@ void Client::connect(SOCKET client)
 template void Client::clearOutput<char>();
 template void Client::clearOutput<Game>();
 template void Client::clearOutput<unsigned int>();
-template void Client::clearOutput<unsigned char>();
 template void Client::clearOutput<std::string>();
 template <typename T>
 void Client::clearOutput() {

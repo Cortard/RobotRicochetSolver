@@ -1,9 +1,9 @@
 #ifndef STDSOCKETSCLIENT_CONFIGUE_H
 #define STDSOCKETSCLIENT_CONFIGUE_H
 
-#define DEV_MODE 1
+#define DEV_MODE 0
 
-#if DEV_MODE==1
+#if DEV_MODE==0
     #define IP "195.201.205.241"
     #define PORT 9090
 #else
