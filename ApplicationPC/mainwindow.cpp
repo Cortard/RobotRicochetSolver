@@ -9,6 +9,7 @@
 #include <QTime>
 #include "socketconnection.h"
 #include <QThread>
+#include <QFile>
 
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
@@ -413,6 +414,7 @@ void MainWindow::on_buttonhistoire1_clicked()
     this->board->addRobot(3,86);
     this->board->objJeu=0;
 
+    //SocketConnection::getSolution(board);
     this->board->robots2=this->board->robots;
 
     if (viewPlato == nullptr) {
@@ -450,7 +452,6 @@ void MainWindow::on_resetPlateau_clicked()
 
 void MainWindow::on_pushObjective_3_clicked()
 {
-
     board->robots=board->robots2;
     solutionid=0;
     board->notifyObserver();
@@ -466,7 +467,6 @@ void MainWindow::on_pushButton_12_clicked()
 {
     if(solutionid==0){
         board->robots=board->robots2;
-        solutionid=0;
         board->notifyObserver();
     }
 
@@ -614,5 +614,19 @@ void MainWindow::on_pushButton_12_clicked()
     board->notifyObserver();
 
     solutionid++;
+}
+
+
+void MainWindow::on_pushSave_clicked()
+{
+    QFile file("board.txt");
+    if(!file.open(QIODevice::WriteOnly)){
+        qCritical() << file.errorString();
+    }else{
+
+        QTextStream stream(&file);
+        stream<<board->robots.at(0)<< " ababbabbaba";
+        file.close();
+    }
 }
 

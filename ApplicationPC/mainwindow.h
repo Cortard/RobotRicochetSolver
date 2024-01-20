@@ -53,6 +53,8 @@ private slots:
     void on_pushObjective_3_clicked();
     void on_pushButton_12_clicked();
 
+    void on_pushSave_clicked();
+
 private:
     Ui::MainWindow *ui;
     Board* board;

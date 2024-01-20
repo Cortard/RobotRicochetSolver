@@ -2219,6 +2219,8 @@ void ViewPlateauOfficiel::constructPart15(Board* board, int pos) {
         SET_WALL(board->cases[posToId(15, 6)], NORTH);
         SET_WALL(board->cases[posToId(9, 7)], WEST);
         SET_WALL(board->cases[posToId(12, 7)], NORTH);
+        SET_WALL(board->cases[posToId(10,7)],SOUTH);
+
 
         return;
     }

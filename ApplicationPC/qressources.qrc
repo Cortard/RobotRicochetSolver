@@ -51,6 +51,9 @@
         <file>part16.jpg</file>
         <file>Fond2.png</file>
         <file>reset.png</file>
+        <file>histoire.png</file>
+        <file>entrainement.png</file>
+        <file>jouer.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
