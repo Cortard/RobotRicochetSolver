@@ -55,6 +55,7 @@ public class RobotCorrectionActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, PictureActivity.class);
                 intent.putExtra("tabPos", grid.getCases(newItem));
                 startActivity(intent);
+                finish();
             } else {
                 Toast.makeText(this, "Veuillez placer tout les robots !", Toast.LENGTH_SHORT).show();
             }
