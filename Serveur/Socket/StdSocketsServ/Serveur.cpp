@@ -545,6 +545,8 @@ bool Serveur::sendPath(Client *slot) {
     return true;
 }
 bool Serveur::sendGrid(Client *slot) {
+    Logs::write("Sending grid to client on slot " + std::to_string(slot->slotNum),LOG_LEVEL_VERBOSE);
+    Logs::write("grid first case : " + std::to_string(((Game*)slot->output)->grid[0]),LOG_LEVEL_DEBUG);
     int result = send(slot->socket,(char*)((Game*)slot->output)->grid, sizeof(unsigned int) * 256, 0);
     if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
 
