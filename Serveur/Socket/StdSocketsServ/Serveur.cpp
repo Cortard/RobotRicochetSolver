@@ -519,6 +519,7 @@ bool Serveur::callbackSolver(unsigned int max_depth, std::chrono::seconds durati
     char flag=1;
     int result = send(slots[0].socket, (char*)&flag, sizeof(char), 0);
     if(verifySocketOutput<Game>(&slots[0],true,result)==EXIT_FAILURE) return false;
+    Logs::write("slot " + std::to_string(slots[0].slotNum) + " flag 1",LOG_LEVEL_DEBUG);
 
     int message[2]={static_cast<int>(max_depth),static_cast<int>(duration.count())};
     result = send(slots[0].socket, (char*)message, sizeof(int[2]), 0);
