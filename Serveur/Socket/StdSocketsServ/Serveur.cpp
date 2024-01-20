@@ -540,7 +540,6 @@ bool Serveur::sendPath(Client *slot) {
     result = recv(slot->socket, (char*)&confirm, sizeof(char),MSG_WAITALL);
     if(verifySocketOutput<Game>(slot,false,result)==EXIT_FAILURE) return false;
 
-    slot->clearOutput<Game>();
     slot->state=STATE_SENT_TYPE_PATH;
     return true;
 }
