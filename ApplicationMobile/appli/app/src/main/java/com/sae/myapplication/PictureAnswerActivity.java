@@ -3,11 +3,14 @@ package com.sae.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Arrays;
 
 
 public class PictureAnswerActivity extends AppCompatActivity {
@@ -29,8 +32,6 @@ public class PictureAnswerActivity extends AppCompatActivity {
 
         ImageButton bHelp = findViewById(R.id.boutonHelp);
         ImageButton bReturn = findViewById(R.id.boutonReturn);
-
-
 
         initialRobotPositions = getIntent().getIntArrayExtra("tabPos");
         correctionData = getIntent().getIntArrayExtra("correctionGrid");
@@ -66,6 +67,10 @@ public class PictureAnswerActivity extends AppCompatActivity {
         //gridData = new int[]{9, 1, 5, 1, 3, 9, 1, 1, 1, 3, 9, 1, 1, 1, 1, 3, 8, 2, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 3, 8, 0, 0, 0, 0, 2, 12, 0, 2, 9, 0, 0, 0, 0, 4, 2, 12, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 10, 9, 0, 0, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 6, 8, 0, 0, 0, 0, 4, 4, 0, 0, 2, 12, 0, 0, 2, 8, 1, 0, 0, 0, 0, 2, 9, 3, 8, 0, 0, 1, 0, 0, 2, 8, 0, 4, 0, 2, 12, 2, 12, 6, 8, 0, 0, 0, 0, 0, 6, 8, 18, 9, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9, 0, 2, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 0, 0, 0, 2, 9, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 2, 12, 2, 8, 0, 0, 16, 3, 8, 0, 0, 0, 4, 0, 0, 0, 0, 1, 2, 8, 6, 8, 0, 0, 0, 0, 0, 0, 3, 8, 0, 0, 0, 16, 2, 12, 5, 4, 4, 4, 6, 12, 4, 4, 4, 4, 6, 12, 4, 4, 6};
         //correctionData = new int[]{1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 63};
 
+        Log.d("answer", "tab : " + Arrays.toString(initialRobotPositions));
+        Log.d("answer", "grid : " + Arrays.toString(gridData));
+        Log.d("answer", "corr : " + Arrays.toString(correctionData));
+
         myCanvas.setGridData(gridData,initialRobotPositions);
 
         Button btnCorrect = findViewById(R.id.btnCor);
@@ -74,6 +79,9 @@ public class PictureAnswerActivity extends AppCompatActivity {
             btnCorrect.setText("Recommencer");
             if (isCorrectionRunning) {
                 Intent intent = new Intent(this, PictureAnswerActivity.class);
+                intent.putExtra("correctionGrid", correctionData);
+                intent.putExtra("tabPos", initialRobotPositions);
+                intent.putExtra("grid", gridData);
                 startActivity(intent);
                 finish();
             }

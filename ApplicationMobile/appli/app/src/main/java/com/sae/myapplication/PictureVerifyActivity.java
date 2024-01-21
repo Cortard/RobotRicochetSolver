@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -21,32 +22,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigInteger;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
-import java.util.concurrent.Semaphore;
 
 public class PictureVerifyActivity extends AppCompatActivity {
 
     ImageView imageView;
-     static TextView txt;
+
     private static final int TIMEOUT = 10000;
 
     private static final int PERMISSION_CODE_FOLDER = 1234;
@@ -61,13 +55,13 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
     Uri image_uri;
 
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_verify);
 
         imageView = findViewById(R.id.imageVerif);
-        txt = findViewById(R.id.textView);
 
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         bVld = findViewById(R.id.btnValide);
@@ -83,30 +77,20 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
         bHelp.setOnClickListener(v -> {
             bHelp.setBackgroundColor(getColor(R.color.blueFooterBoxPress));
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    bHelp.setBackgroundColor(getColor(R.color.blueFooterBox));
-                }
-            }, 50);
+            new Handler().postDelayed(() -> bHelp.setBackgroundColor(getColor(R.color.blueFooterBox)), 50);
             Intent intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
         });
 
         bReturn.setOnClickListener(v -> {
             bReturn.setBackgroundColor(getColor(R.color.blueFooterBoxPress));
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    bReturn.setBackgroundColor(getColor(R.color.blueFooterBox));
-                }
-            }, 50);
+            new Handler().postDelayed(() -> bReturn.setBackgroundColor(getColor(R.color.blueFooterBox)), 50);
             finish();
         });
 
         bCancel = findViewById(R.id.btnCancel);
         bCancel.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PictureActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         });
@@ -133,25 +117,24 @@ public class PictureVerifyActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case PERMISSION_CODE_FOLDER:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    sendImage(MainActivity.ip, 9090, filePath, this);
-                    imageView.setVisibility(View.INVISIBLE);
-                    bCancel.setVisibility(View.INVISIBLE);
-                    bVld.setVisibility(View.INVISIBLE);
-                } else {
+        if (requestCode == PERMISSION_CODE_FOLDER) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                sendImage(MainActivity.ip, 9090, filePath, this);
+                imageView.setVisibility(View.INVISIBLE);
+                bCancel.setVisibility(View.INVISIBLE);
+                bVld.setVisibility(View.INVISIBLE);
+            } else {
                     Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-                }
-                break;
+            }
         }
     }
 
     public String getRealPathFromURI(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        assert cursor != null;
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         String filePath = cursor.getString(column_index);
@@ -160,218 +143,220 @@ public class PictureVerifyActivity extends AppCompatActivity {
     }
 
     public void sendImage(String serverIp, int serverPort, String filePath, PictureVerifyActivity answer) {
-        Thread th = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Socket socket = null;
-                FileInputStream fileInputStream = null;
-                BufferedOutputStream bufferedOutputStream = null;
+        Thread th = new Thread(() -> {
+            Socket socket = null;
+            FileInputStream fileInputStream = null;
+            BufferedOutputStream bufferedOutputStream = null;
 
-                txt.setText(filePath);
-                int width = 0;
-                int height = 0;
-                int x = 0;
+            int width;
+            int height;
 
-                try {
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inJustDecodeBounds = true;
+            try {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
 
-                    BitmapFactory.decodeFile(filePath, options);
+                BitmapFactory.decodeFile(filePath, options);
 
-                    width = options.outWidth;
-                    height = options.outHeight;
+                width = options.outWidth;
+                height = options.outHeight;
 
-                    socket = new Socket();
-                    socket.connect(new InetSocketAddress(serverIp, serverPort), TIMEOUT);
-                    fileInputStream = new FileInputStream(filePath);
-                    bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
-                    DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
+                socket = new Socket();
+                socket.connect(new InetSocketAddress(serverIp, serverPort), TIMEOUT);
+                fileInputStream = new FileInputStream(filePath);
+                bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
+                DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
 
-                    // Envoie du FLAG au serveur : 1
-                    dataOutputStream.writeByte(1);
+                // Envoie du FLAG au serveur : 1
+                dataOutputStream.writeByte(1);
+                dataOutputStream.flush();
+
+                byte[] byteTab = new byte[4];
+
+                // Attente de la réponse du serveur avec timeouts
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                dataInputStream.read(byteTab);
+
+                if(byteTab[0] == 1) {
+                    Log.d("bug", width + " " + height);
+
+                    ByteBuffer byteBuffer = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
+                    byteBuffer.putInt(height);
+                    byteBuffer.putInt(width);
+
+                    dataOutputStream.write(byteBuffer.array());
                     dataOutputStream.flush();
 
-                    byte[] byteTab = new byte[4];
+                    long responseSize = dataInputStream.read();
 
-                    // Attente de la réponse du serveur avec timeouts
-                    DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                    dataInputStream.read(byteTab);
+                    if (width * height * 3 > 0) {
 
-                    if(byteTab[0] == 1) {
-                        Log.d("bug", width + " " + height);
+                        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
-                        ByteBuffer byteBuffer = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
-                        byteBuffer.putInt(height);
-                        byteBuffer.putInt(width);
+                        Log.d("bug", "2");
+                        Log.d("bug", bitmap.toString());
 
-                        dataOutputStream.write(byteBuffer.array());
-                        dataOutputStream.flush();
+                        try {
+                            for (int i = 0; i < height; ++i) {
+                                for (int j = 0; j < width; ++j) {
+                                    int pixel = bitmap.getPixel(j, i);
 
-                        long responseSize = dataInputStream.read();
+                                    // Extraire les composantes RVB
+                                    int red = Color.red(pixel);
+                                    int green = Color.green(pixel);
+                                    int blue = Color.blue(pixel);
 
-                        if (width * height * 3 > 0) {
+                                    // Envoyer les composantes RVB
+                                    dataOutputStream.writeByte(blue);
+                                    dataOutputStream.writeByte(green);
+                                    dataOutputStream.writeByte(red);
 
-                            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-
-                            Log.d("bug", "2");
-                            Log.d("bug", bitmap.toString());
-
-                            try {
-                                for (int i = 0; i < height; ++i) {
-                                    for (int j = 0; j < width; ++j) {
-                                        for (int k = 0; k < 3; ++k) {
-                                            // Envoie de chaque valeur de pixel
-                                            dataOutputStream.writeByte(bitmap.getPixel(j, i));
-//                                            ByteBuffer byteImgBuffer = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
-//                                            byteImgBuffer.putInt(bitmap.getPixel(j, i));
-                                            dataOutputStream.flush();
-                                        }
-                                    }
+                                    dataOutputStream.flush();
                                 }
-                            } catch (IOException e) {
-                                fileInputStream.close();
-                                bufferedOutputStream.close();
-                                socket.close();
-                                e.printStackTrace();
                             }
 
-                            Log.d("bug", "3");
+                        } catch (IOException e) {
+                            fileInputStream.close();
+                            bufferedOutputStream.close();
+                            socket.close();
+                            e.printStackTrace();
+                        }
 
-                            // Attente de la confirmation de la réception
-                            Thread.sleep(TIMEOUT);
-                            byte[] byteTab2 = new byte[4];
-                            dataInputStream.read(byteTab2);
+
+                        // Attente de la confirmation de la réception
+                        Thread.sleep(TIMEOUT);
+                        byte[] byteTab2 = new byte[4];
+                        dataInputStream.read(byteTab2);
 
 
 
-                            // Envoie du FLAG au serveur : 1
-                            int nbRobot = tab.length - 2;
-                            ByteBuffer nbRobotByte = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
-                            nbRobotByte.putInt(nbRobot);
-                            dataOutputStream.write(nbRobotByte.array());
+                        // Envoie du FLAG au serveur : 1
+                        int nbRobot = tab.length - 2;
+                        ByteBuffer nbRobotByte = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
+                        nbRobotByte.putInt(nbRobot);
+                        dataOutputStream.write(nbRobotByte.array());
+                        dataOutputStream.flush();
+
+
+                        // Attente de la réponse du serveur avec timeout
+                        long confirmFlag = dataInputStream.read();
+
+                        if (nbRobot > 3) {
+
+                            Log.d("bug", "7");
+                            ByteBuffer robPosByte = ByteBuffer.allocate(16).order(ByteOrder.LITTLE_ENDIAN);
+                            for (int i = 0; i < nbRobot; i++) {
+                                robPosByte.putInt(tab[i]);
+                                Log.d("bug", "posRob : "+ tab[i]);
+                            }
+                            dataOutputStream.write(robPosByte.array());
+                            dataOutputStream.flush();
+
+                            Log.d("bug", "objectif : "+ tab[tab.length-2]);
+
+                            ByteBuffer destiByte = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
+                            destiByte.putInt(tab[tab.length-2]);
+                            dataOutputStream.write(destiByte.array());
                             dataOutputStream.flush();
 
 
-                            // Attente de la réponse du serveur avec timeout
-                            long confirmFlag = dataInputStream.read();
+                            int time = dataInputStream.readByte();
+                            Log.d("bug", "time : " + time);
 
-                            if (nbRobot > 3) {
+                            int flag;
 
-                                Log.d("bug", "7");
-                                ByteBuffer robPosByte = ByteBuffer.allocate(16).order(ByteOrder.LITTLE_ENDIAN);
-                                for (int i = 0; i < nbRobot; i++) {
-                                    robPosByte.putInt(tab[i]);
-                                    Log.d("bug", "posRob : "+ tab[i]);
+                            dataInputStream.read();
+
+                            do {
+
+                                flag = dataInputStream.readByte();
+                                Log.d("bug", "Flag reçu : " + flag);
+
+                                if (flag != 1) {
+                                    break;
                                 }
-                                dataOutputStream.write(robPosByte.array());
-                                dataOutputStream.flush();
 
-                                Log.d("bug", "objectif : "+ tab[tab.length-2]);
+                                int[] state = new int[2];
+                                state[0] = dataInputStream.readInt();
+                                state[1] = dataInputStream.readInt();
 
-                                ByteBuffer destiByte = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
-                                destiByte.putInt(tab[tab.length-2]);
-                                dataOutputStream.write(destiByte.array());
-                                dataOutputStream.flush();
+                                Log.d("bug", "Depth : " + state[0] + ", Time in seconds : " + state[1]);
+                            } while (flag == 1);
 
 
-                                int time = dataInputStream.readByte();
-                                Log.d("bug", "time : " + time);
+                            if (flag == 2) { // Cas 2 (NOTFOUND)
+                                fileInputStream.close();
+                                bufferedOutputStream.close();
+                                socket.close();
 
-                                int flag = 1;
+                                Toast.makeText(this, "Erreur : Pas de solution", Toast.LENGTH_SHORT).show();
 
-                                dataInputStream.read();
+                                Intent intent = new Intent(answer, PictureActivity.class);
+                                intent.putExtra("tabPos", tab);
+                                startActivity(intent);
+                                finish();
+                            } else if (flag == 3) { // Cas 3 (SOLVED)
 
-                                do {
+                                byte[] pathBytes = new byte[32];
+                                dataInputStream.readFully(pathBytes);
 
-                                    flag = dataInputStream.readByte();
-                                    Log.d("bug", "Flag reçu : " + flag);
+                                Log.d("correction ", "2.1 : " + Arrays.toString(pathBytes));
 
-                                    if (flag != 1) {
-                                        break;
-                                    }
-
-                                    int[] state = new int[2];
-                                    state[0] = dataInputStream.readInt();
-                                    state[1] = dataInputStream.readInt();
-
-                                    Log.d("bug", "Depth : " + state[0] + ", Time in seconds : " + state[1]);
-                                } while (flag == 1);
-
-
-                                if (flag == 2) { // Cas 2 (NOTFOUND)
-                                    fileInputStream.close();
-                                    bufferedOutputStream.close();
-                                    socket.close();
-
-                                    Intent intent = new Intent(answer, PictureActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else if (flag == 3) { // Cas 3 (SOLVED)
-                                    Log.d("bug", "2");
-
-                                    byte[] pathBytes = new byte[32];
-                                    dataInputStream.readFully(pathBytes);
-
-                                    Log.d("bug", "2.1 : " + Arrays.toString(pathBytes));
-
-                                    int[] pathChars = new int[pathBytes.length];
-                                    for (int i = 0; i < pathBytes.length; i++) {
-                                        pathChars[i] = pathBytes[i];
-                                    }
-                                    Log.d("bug", "2.2");
-
-//                                    ByteBuffer confirmGrid = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
-//                                    destiByte.putInt(1);
-//                                    dataOutputStream.write(confirmGrid.array());
-//                                    dataOutputStream.flush();
-//
-
-                                    Log.d("bug", "2.3");
-                                    byte[] byteGrid = new byte[256];
-                                    dataInputStream.readFully(byteGrid);
-
-                                    Log.d("bug", "2.4 : " + Arrays.toString(byteGrid));
-
-                                    int[] grid = new int[byteGrid.length];
-                                    for (int i = 0; i < byteGrid.length; i++) {
-                                        grid[i] = byteGrid[i];
-                                    }
-
-                                    Log.d("bug", "2.4");
-
-                                    Intent intent = new Intent(answer, PictureAnswerActivity.class);
-                                    intent.putExtra("correctionGrid", pathChars);
-                                    intent.putExtra("posRob", tab);
-                                    intent.putExtra("grid", grid);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Log.d("denied", "Cas inattendu : " + flag);
+                                int[] pathChars = new int[pathBytes.length];
+                                for (int i = 0; i < pathBytes.length; i++) {
+                                    pathChars[i] = pathBytes[i];
                                 }
+
+
+                                int[] grid = new int[256];
+                                byte[] byteGrid = new byte[256 * 4]; // Chaque entier occupe 4 octets
+
+                                dataInputStream.read(byteGrid);
+
+                                Log.d("bug", "byteGrid : " + Arrays.toString(byteGrid));
+
+
+                                ByteBuffer buffer = ByteBuffer.wrap(byteGrid).order(ByteOrder.LITTLE_ENDIAN);
+                                for (int i = 0; i < grid.length; i++) {
+                                    grid[i] = buffer.getInt();
+                                }
+
+                                Log.d("bug", "grid : " + Arrays.toString(grid));
+
+                                Log.d("bug", "tab : " + Arrays.toString(tab));
+
+                                Intent intent = new Intent(answer, PictureAnswerActivity.class);
+                                intent.putExtra("correctionGrid", pathChars);
+                                intent.putExtra("tabPos", tab);
+                                intent.putExtra("grid", grid);
+                                startActivity(intent);
+                                finish();
                             } else {
-                                Log.d("denied", "Pas de réponse serveur : confirmFlag");
-                                txt.setText("Pas de réponse serveur : confirmFlag");
+                                Log.d("denied", "Cas inattendu : " + flag);
                             }
                         } else {
-                            Log.d("denied", "Pas de réponse serveur : confirm_size ");
-                            //txt.setText("Pas de réponse serveur : confirmFlag : confirm_size");
+                            Log.d("denied", "Pas de réponse serveur : confirmFlag");
                         }
                     } else {
-                        Log.d("denied", "Pas de réponse serveur : 1");
-                        txt.setText("Pas de response serveur : confirmFlag : 1");
-                        //txt.setText(response + " confirm flag 1");
-
-                    }
+                        Log.d("denied", "Pas de réponse serveur : confirm_size ");}
+                } else {
+                    Log.d("denied", "Pas de réponse serveur : 1");
+                }
+                fileInputStream.close();
+                bufferedOutputStream.close();
+                socket.close();
+            } catch (Exception e) {
+                Intent intent = new Intent(answer, PictureActivity.class);
+                intent.putExtra("tabPos", tab);
+                startActivity(intent);
+                finish();
+                Toast.makeText(this, "Erreur : " + e, Toast.LENGTH_SHORT).show();
+                try {
                     fileInputStream.close();
                     bufferedOutputStream.close();
                     socket.close();
-                } catch (Exception e) {
-//                    Intent intent = new Intent(answer, PictureActivity.class);
-//                    startActivity(intent);
-//                    finish();
-                    Log.d("bug", e.toString());
-                    txt.setText(e.toString());
+                } catch (IOException ex) {
                 }
+                Log.d("bug", e.toString());
             }
         });
         th.start();

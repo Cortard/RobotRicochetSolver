@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 public class MyCanvas extends View {
 
     private int[] gridData;
@@ -36,7 +38,7 @@ public class MyCanvas extends View {
         correctionHandler = new Handler();
     }
 
-    public void setGridData(int[] gridData, int[] initialRobotPositions) {
+    public void setGridData(int[] gridData, @NonNull int[] initialRobotPositions) {
         this.gridData = gridData;
         placeGoal(initialRobotPositions[initialRobotPositions.length-2]);
         initializeRobots(initialRobotPositions);
@@ -108,6 +110,7 @@ public class MyCanvas extends View {
                 int robotNumber = i;
                 robots[i] = new Robot(x, y, robotNumber, robotColor);
                 gridData[y * 16 + x] |= ROBOT;
+                Log.d("placeGoal", "placeGoal: " + initialRobotPositions[i]);
             }
             invalidate();
         }
