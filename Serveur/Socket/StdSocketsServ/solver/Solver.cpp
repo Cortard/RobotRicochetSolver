@@ -24,7 +24,7 @@ int Solver::search(Game *game, unsigned char *path, bool (*callBack)(unsigned in
             result = _search(game, 0, max_depth, path, static_cast<std::map<unsigned long long, unsigned int>*>(set));
         if(result==0) callBackResult=callBack(max_depth, std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - start));//appel le callback
         if (result) {
-            for(int j=max_depth; j<MAX_DEPTH; j++) path[j]=0;//rempli le reste du path avec des 0
+            //for(int j=max_depth; j<MAX_DEPTH; j++) path[j]=0;//rempli le reste du path avec des 0
             break;
         }else if(! callBackResult) break;
     }
