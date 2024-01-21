@@ -17,7 +17,6 @@ SOURCES += \
     mainwindow.cpp \
     socketconnection.cpp \
     viewboard.cpp \
-    viewmainmenu.cpp \
     viewplateau.cpp \
     viewplateauofficiel.cpp
 
@@ -29,7 +28,6 @@ HEADERS += \
     observer.h \
     socketconnection.h \
     viewboard.h \
-    viewmainmenu.h \
     viewplateau.h \
     viewplateauofficiel.h
 

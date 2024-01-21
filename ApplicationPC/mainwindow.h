@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QWidget>
 #include "viewboard.h"
-#include "viewmainmenu.h"
 #include "viewplateau.h"
 #include "viewplateauofficiel.h"
 #include "QGridLayout"
@@ -55,11 +54,14 @@ private slots:
 
     void on_pushSave_clicked();
 
+    void on_pushHistoire_2_clicked();
+
+    void on_pushPlateau_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     Board* board;
     ViewBoard *viewBoard;
-    viewMainMenu *viewMenu;
     viewPlateau *viewPlato;
     ViewPlateauOfficiel *viewPlateauOfficiel;
 
@@ -68,6 +70,9 @@ private:
     int solutionid=0;
     QString direction;
     int rbt;
+    int fichier=0;
+    bool pass = true;
+    int wall=0;
 
 };
 #endif // MAINWINDOW_H

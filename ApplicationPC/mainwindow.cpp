@@ -13,8 +13,8 @@
 
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
-      ui(new Ui::MainWindow),
-      board(bd)
+    ui(new Ui::MainWindow),
+    board(bd)
 {
     ui->setupUi(this);
 
@@ -24,13 +24,9 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
     viewPlato = nullptr;
     viewPlateauOfficiel = nullptr;
 
-    viewMenu = new viewMainMenu(ui->stackedWidget->widget(1)->findChild<QWidget*>("mainmenuwindow"));
-
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect screenGeometry = screen->geometry();
     move((screenGeometry.width() - width()) / 2, (screenGeometry.height() - height()) / 2);
-
-    //connect(ui->graphicsView_5, SIGNAL(clicked(const QPointF&)), this, SLOT(onGraphicsViewClicked(const QPointF&)));
 }
 
 MainWindow::~MainWindow()
@@ -127,8 +123,14 @@ void MainWindow::on_pushPlateau_clicked()
         ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+    }else{
+        delete viewPlato;
+        viewPlato = new viewPlateau(board);
+        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
+        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
+        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
-    //SocketConnection::getSolution(board);
+    SocketConnection::getSolution(board);
     board->robots2=board->robots;
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
@@ -620,12 +622,118 @@ void MainWindow::on_pushButton_12_clicked()
 void MainWindow::on_pushSave_clicked()
 {
     QFile file("board.txt");
-    if(!file.open(QIODevice::WriteOnly)){
+    if(!file.open(QIODevice::Append)){
         qCritical() << file.errorString();
     }else{
 
         QTextStream stream(&file);
-        stream<<board->robots.at(0)<< " ababbabbaba";
+
+        stream<< "plateau "<<fichier << " ";
+
+        for(int i=0;i<5;i++){
+            stream<<board->robots2.at(i) << " ";
+        }
+        for(int i=0;i<17;i++){
+            stream<<board->objectives.at(i) << " " ;
+        }
+        stream<<board->objJeu << " " ;
+        for(int i=0;i<256;i++){
+            if(HAS_WALL(board->cases[i],NORTH)==1){
+                wall+=1;
+            }
+            if(HAS_WALL(board->cases[i],EAST)==2){
+                wall+=2;
+            }
+            if(HAS_WALL(board->cases[i],SOUTH)==4){
+                wall+=4;
+            }
+            if(HAS_WALL(board->cases[i],WEST)==8){
+                wall+=8;
+            }
+            stream<<wall << " " ;
+            wall=0;
+        }
+
+        stream << "\n";
+        fichier++;
+        file.close();
+    }
+}
+
+
+void MainWindow::on_pushHistoire_2_clicked()
+{
+    QFile file("board.txt");
+    if (!file.open(QIODevice::ReadOnly)) {
+        qCritical() << file.errorString();
+    } else {
+        QTextStream in(&file);
+
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            QStringList parts = line.split(" ");
+
+            if (parts.size() >= 2 && parts[0] == "plateau" && pass==true) {
+                QString fichier = parts[1];
+                ui->stackedWidget->widget(9)->findChild<QListWidget*>()->addItem("Plateau " + fichier);
+            }
+        }
+
+        file.close();
+    }
+    pass = false;
+    ui->stackedWidget->setCurrentWidget(ui->pagecharger);
+}
+
+
+void MainWindow::on_pushPlateau_2_clicked()
+{
+    QString selectedTex = ui->stackedWidget->widget(9)->findChild<QListWidget*>()->currentItem()->text();
+    QStringList part = selectedTex.split(" ");
+    QString fichier = part[1];
+    qDebug() << fichier;
+
+    QFile file("board.txt");
+    if (!file.open(QIODevice::ReadOnly)) {
+        qCritical() << file.errorString();
+    } else {
+        QTextStream in(&file);
+
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            QStringList parts = line.split(" ");
+
+            if (part[1]==parts[1]){
+
+                board->reset();
+                for(int i=0;i<5;i++){
+                    board->robots.at(i)=parts[i + 2].toInt();
+                }
+                for(int i=0;i<17;i++){
+                    board->objectives.at(i)=parts[i + 7].toInt();
+                }
+                for(int i=0;i<256;i++){
+                    if(parts[i + 24].toInt()>=8){
+                        SET_WALL(board->cases[i-1],WEST);
+                    }
+                    if((parts[i + 24].toInt()>=4 && parts[i + 24].toInt()<=7) || parts[i + 24].toInt()>=12){
+                        SET_WALL(board->cases[i-1],SOUTH);
+                    }
+                    if(parts[i + 24].toInt()==2 || parts[i + 24].toInt()==3 || parts[i + 24].toInt()==6 || parts[i + 24].toInt()==7 || parts[i + 24].toInt()==10 || parts[i + 24].toInt()==11 || parts[i + 24].toInt()>=14){
+                        SET_WALL(board->cases[i-1],EAST);
+                    }
+                    if(parts[i + 24].toInt()%2==1){
+                        SET_WALL(board->cases[i-1],NORTH);
+                    }
+                }
+
+                viewBoard = new ViewBoard(board);
+                ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
+                viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+                ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+            }
+        }
+
         file.close();
     }
 }
