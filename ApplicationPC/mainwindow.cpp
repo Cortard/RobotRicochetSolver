@@ -179,6 +179,8 @@ void MainWindow::on_pushButton_5_clicked()
 {
     if(ui->radioButton->isChecked()){
 
+        board->reset();
+
         int rand1 = rand() % 16;
         srand(QTime::currentTime().msec()+rand1);
         int rand2 = rand() % 16;
@@ -397,6 +399,12 @@ void MainWindow::on_pushButton_5_clicked()
             ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
             viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
             connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+        }else{
+            delete viewPlato;
+            viewPlato = new viewPlateau(board);
+            ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
+            viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
+            connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
         }
         ui->stackedWidget->setCurrentWidget(ui->plateau);
     }
@@ -416,10 +424,16 @@ void MainWindow::on_buttonhistoire1_clicked()
     this->board->addRobot(3,86);
     this->board->objJeu=0;
 
-    //SocketConnection::getSolution(board);
+    SocketConnection::getSolution(board);
     this->board->robots2=this->board->robots;
 
     if (viewPlato == nullptr) {
+        viewPlato = new viewPlateau(board);
+        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
+        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
+        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+    }else{
+        delete viewPlato;
         viewPlato = new viewPlateau(board);
         ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
@@ -726,6 +740,7 @@ void MainWindow::on_pushPlateau_2_clicked()
                         SET_WALL(board->cases[i-1],NORTH);
                     }
                 }
+                board->objJeu=parts[24].toInt();
 
                 viewBoard = new ViewBoard(board);
                 ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
