@@ -5,7 +5,7 @@
     <color name="blueHeader">#2CA6DD</color>
     <color name="blueNorm">#EDEDED</color>
     <color name="blueFooter">#2CA6DD</color>
-    <color name="blueFooterBox">#1A93CA</color>
+    <color name="blueFooterBox">#00FFFFFF</color>
     <color name="bluebBg">#FFFFFF</color>
     <color name="blueBtn">#CACACA</color>
     <color name="blueFooterBoxPress">#1F7AA3</color>
