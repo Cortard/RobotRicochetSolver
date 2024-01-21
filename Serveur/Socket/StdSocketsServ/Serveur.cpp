@@ -549,7 +549,7 @@ bool Serveur::sendGrid(Client *slot) {
     if(verifySocketOutput<Game>(slot,true,result)==EXIT_FAILURE) return false;
 
     for(int i=0;i<16;++i)
-        Logs::write(std::to_string(((Game*)slot->output)->grid[0])+std::to_string(((Game*)slot->output)->grid[1])+std::to_string(((Game*)slot->output)->grid[2])+std::to_string(((Game*)slot->output)->grid[3])+std::to_string(((Game*)slot->output)->grid[4])+std::to_string(((Game*)slot->output)->grid[5])+std::to_string(((Game*)slot->output)->grid[6])+std::to_string(((Game*)slot->output)->grid[7])+std::to_string(((Game*)slot->output)->grid[8])+std::to_string(((Game*)slot->output)->grid[9])+std::to_string(((Game*)slot->output)->grid[10])+std::to_string(((Game*)slot->output)->grid[11])+std::to_string(((Game*)slot->output)->grid[12])+std::to_string(((Game*)slot->output)->grid[13])+std::to_string(((Game*)slot->output)->grid[14])+std::to_string(((Game*)slot->output)->grid[15]),LOG_LEVEL_DEBUG);
+        Logs::write(std::to_string(((Game*)slot->output)->grid[0+i*16]+((Game*)slot->output)->grid[1+i*16]+((Game*)slot->output)->grid[2+i*16]+((Game*)slot->output)->grid[3+i*16]+((Game*)slot->output)->grid[4+i*16]+((Game*)slot->output)->grid[5+i*16]+((Game*)slot->output)->grid[6+i*16]+((Game*)slot->output)->grid[7+i*16]+((Game*)slot->output)->grid[8+i*16]+((Game*)slot->output)->grid[9+i*16]+((Game*)slot->output)->grid[10+i*16]+((Game*)slot->output)->grid[11+i*16]+((Game*)slot->output)->grid[12+i*16]+((Game*)slot->output)->grid[13+i*16]+((Game*)slot->output)->grid[14+i*16]+((Game*)slot->output)->grid[15+i*16]),LOG_LEVEL_DEBUG);
 
     char confirm;
     result = recv(slot->socket, (char*)&confirm, sizeof(char),MSG_WAITALL);
