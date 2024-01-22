@@ -4,7 +4,7 @@ int BoardIsolation::getBoard(std::string src_img_path, std::string output_img_pa
 	// -- Scale image --
 	cv::Mat src_img = cv::imread(src_img_path);
 	cv::Mat scaled_img;
-	float scale_factor = 600.0 / src_img.cols;
+	float scale_factor = 500.0 / src_img.cols;
 	cv::resize(src_img, scaled_img, cv::Size(), scale_factor, scale_factor, cv::INTER_LINEAR);
 
 	// -- Adptative threshold --
