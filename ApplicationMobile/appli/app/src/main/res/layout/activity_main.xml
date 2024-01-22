@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bluebBg"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/header2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:src="@drawable/header"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintDimensionRatio="1:0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/footer"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:accessibilityHeading="false"
+        android:src="@drawable/footer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <ImageButton
+        android:id="@+id/boutonHelp"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/boutonHelp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/footer"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/footer"
+        app:layout_constraintTop_toTopOf="@+id/footer"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/_11758_help_icon" />
+
+
+    <ImageButton
+        android:id="@+id/boutonExit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/boutonExit"
+        app:layout_constraintBottom_toBottomOf="@+id/footer"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/footer"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/footer"
+        app:layout_constraintTop_toTopOf="@+id/footer"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/_931185_door_enter_exit_leave_out_icon"/>
+
+    <TextView
+        android:id="@+id/ricochet_robot"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="24sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:padding="10sp"
+        android:text="@string/titreMain"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/fontColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/header2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/header2"
+        app:layout_constraintTop_toTopOf="@+id/header2" />
+
+    <ImageView
+        android:id="@+id/surfaceView5"
+        android:layout_width="336dp"
+        android:layout_height="273dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/round"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.628"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header2" />
+
+    <TextView
+        android:id="@+id/ip"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:autoSizeMaxTextSize="80sp"
+        android:autoSizeMinTextSize="24sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/ip"
+        android:textAlignment="center"
+        android:textColor="@color/fontColor"
+        app:layout_constraintBottom_toBottomOf="@+id/surfaceView5"
+        app:layout_constraintEnd_toEndOf="@+id/surfaceView5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/surfaceView5"
+        app:layout_constraintTop_toTopOf="@+id/surfaceView5"
+        app:layout_constraintVertical_bias="0.087" />
+
+    <EditText
+        android:id="@+id/ipInput"
+        android:layout_width="261dp"
+        android:layout_height="48dp"
+        android:autoSizeTextType="uniform"
+        android:autofillHints=""
+        android:textColor="@color/fontColor"
+        android:ems="10"
+        android:fontFamily="@font/poppins_regular"
+        android:inputType="text"
+        android:text="195.201.205.241"
+        app:layout_constraintBottom_toBottomOf="@+id/surfaceView5"
+        app:layout_constraintEnd_toEndOf="@+id/surfaceView5"
+        app:layout_constraintStart_toStartOf="@+id/surfaceView5"
+        app:layout_constraintTop_toTopOf="@+id/surfaceView5"
+        app:layout_constraintVertical_bias="0.442" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blueBtn"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/fontColor"
+        android:shadowColor="#292626"
+        android:text="@string/boutonTest"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/surfaceView5"
+        app:layout_constraintEnd_toEndOf="@+id/surfaceView5"
+        app:layout_constraintStart_toStartOf="@+id/surfaceView5"
+        app:layout_constraintTop_toTopOf="@+id/surfaceView5"
+        app:layout_constraintVertical_bias="0.853" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

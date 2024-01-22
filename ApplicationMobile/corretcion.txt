@@ -1,0 +1,213 @@
+package com.sae.myapplication;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.view.View;
+
+import android.os.Handler;
+
+public class MyCanvas extends View {
+
+    private int[] gridData;
+    private Paint paint;
+    private int cellSize;
+
+    private int correctionIndex = 0;
+
+    private static final int NORTH = 0x01; // 0b00000001
+    private static final int EAST = 0x02;  // 0b00000010
+    private static final int SOUTH = 0x04; // 0b00000100
+    private static final int WEST = 0x08;  // 0b00001000
+    private static final int ROBOT = 0x10; // 0b00010000
+    private static final int GOAL = 0x20; // 0b00100000
+
+
+
+    private Handler correctionHandler;
+
+    public MyCanvas(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.BLACK);
+
+        correctionHandler = new Handler();
+    }
+
+    public void setGridData(int[] gridData, int[] initialRobotPositions, int goalPosition) {
+        this.gridData = gridData;
+        placeInitialRobots(initialRobotPositions);
+        placeGoal(goalPosition);
+        invalidate();
+    }
+
+    private void placeGoal(int goalPosition) {
+        if (goalPosition >= 0 && goalPosition < 256) {
+            int x = goalPosition % 16;
+            int y = goalPosition / 16;
+            // Assurez-vous que la case d'arrivée n'est pas déjà occupée par un robot
+            if ((gridData[y * 16 + x] & ROBOT) == 0) {
+                gridData[y * 16 + x] |= GOAL;
+            }
+        }
+    }
+
+
+    private void placeInitialRobots(int[] initialRobotPositions) {
+        if (initialRobotPositions.length > 0) {
+            // Réinitialiser les positions précédentes des robots
+            for (int i = 0; i < 16; i++) {
+                for (int j = 0; j < 16; j++) {
+                    gridData[i * 16 + j] &= ~ROBOT;
+                }
+            }
+
+            // Placer les robots aux positions initiales spécifiées
+            for (int position : initialRobotPositions) {
+                int x = position % 16;
+                int y = position / 16;
+                gridData[y * 16 + x] |= ROBOT;
+            }
+        }
+    }
+
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        if (gridData == null || gridData.length != 256) {
+            return;
+        }
+
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                int value = gridData[i * 16 + j];
+                drawCell(canvas, j, i, value);
+            }
+        }
+
+    }
+
+    public void startCorrection(int[] correctionGrid) {
+        if (correctionIndex < correctionGrid.length) {
+            int correctionValue = correctionGrid[correctionIndex];
+            int robot = (correctionValue >> 4) & 0x0F;  // Extraire les 4 bits du robot
+            int direction = correctionValue & 0x0F;       // Extraire les 4 bits de la direction
+            moveRobot(robot, direction);
+            correctionIndex++;
+
+            // Répéter le mouvement après un délai de 500 millisecondes (modifiable)
+            correctionHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startCorrection(correctionGrid);
+                }
+            }, 500);
+        }
+    }
+
+    private void moveRobot(int robot, int direction) {
+        int robotX = -1;
+        int robotY = -1;
+
+        // Recherche de la position actuelle du robot dans la grille
+        outerLoop:
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                // Utilisez le masque pour obtenir les 4 bits supérieurs
+                if ((gridData[i * 16 + j] & 0xF0) == (robot << 4)) {
+                    robotX = j;
+                    robotY = i;
+                    break outerLoop;
+                }
+            }
+        }
+
+        if (robotX == -1 || robotY == -1) {
+            // Le robot n'a pas été trouvé, traitement d'erreur
+            return;
+        }
+
+        gridData[robotY * 16 + robotX] &= ~ROBOT;
+
+        switch (direction) {
+            case NORTH:
+                while (robotY > 0 && (gridData[(robotY - 1) * 16 + robotX] & (SOUTH | ROBOT)) == 0) {
+                    robotY--;
+                }
+                break;
+            case EAST:
+                while (robotX < 15 && (gridData[robotY * 16 + robotX + 1] & (WEST | ROBOT)) == 0) {
+                    robotX++;
+                }
+                break;
+            case SOUTH:
+                while (robotY < 15 && (gridData[(robotY + 1) * 16 + robotX] & (NORTH | ROBOT)) == 0) {
+                    robotY++;
+                }
+                break;
+            case WEST:
+                while (robotX > 0 && (gridData[robotY * 16 + robotX - 1] & (EAST | ROBOT)) == 0) {
+                    robotX--;
+                }
+                break;
+        }
+
+        gridData[robotY * 16 + robotX] |= (robot << 4) | ROBOT;
+        invalidate();
+    }
+
+
+    private void drawCell(Canvas canvas, int x, int y, int value) {
+        float centerX = (x + 0.5f) * cellSize;
+        float centerY = (y + 0.5f) * cellSize;
+        float radius = 0.4f * cellSize; // Ajustez la taille du cercle selon vos préférences
+
+        if ((value & GOAL) == GOAL) {
+            paint.setColor(Color.WHITE); // Cellule vide
+            canvas.drawRect(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint);
+            paint.setColor(Color.GREEN);
+            canvas.drawCircle(centerX, centerY, radius, paint);
+            paint.setColor(Color.BLACK);
+            return; // Pas besoin de dessiner les murs pour la case d'arrivée
+        }
+
+        // Vérifiez si le robot est présent avant de le dessiner
+        if ((value & ROBOT) == ROBOT) {
+            paint.setColor(Color.WHITE); // Cellule vide
+            canvas.drawRect(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint);
+            paint.setColor(Color.RED);
+            canvas.drawCircle(centerX, centerY, radius, paint);
+        } else {
+            paint.setColor(Color.WHITE); // Cellule vide
+            canvas.drawRect(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint);
+
+            paint.setColor(Color.BLACK);
+
+            // Dessiner les murs seulement si la cellule est vide
+            if ((value & NORTH) == NORTH) {
+                canvas.drawLine(x * cellSize, y * cellSize, (x + 1) * cellSize, y * cellSize, paint); // NORTH
+            }
+            if ((value & EAST) == EAST) {
+                canvas.drawLine((x + 1) * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint); // EAST
+            }
+            if ((value & SOUTH) == SOUTH) {
+                canvas.drawLine(x * cellSize, (y + 1) * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint); // SOUTH
+            }
+            if ((value & WEST) == WEST) {
+                canvas.drawLine(x * cellSize, y * cellSize, x * cellSize, (y + 1) * cellSize, paint); // WEST
+            }
+        }
+    }
+
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        cellSize = w / 16;
+    }
+}

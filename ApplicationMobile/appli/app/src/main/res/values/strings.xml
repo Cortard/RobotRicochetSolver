@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Ricochet Robot</string>
+    <string name="boutonHelp">Ouvre les paramètres</string>
+    <string name="boutonExit">Fermer l\'application</string>
+    <string name="boutonReturn">Revient en arrière</string>
+
+    <!--Page Main-->
+    <string name="titreMain">Ricochet Robot</string>
+    <string name="boutonTest">Commencer</string>
+    <string name="ip"><u>Entrer l\'IP</u></string>
+    <string name="ipInput">IP...</string>
+
+    <!--Page Photo-->
+    <string name="titrePhoto">Valider la photo</string>
+    <string name="textPic"><b>1</b> - Placez l\'objectif au centre du plateau
+                                \n<b>2</b> - Prennez en photo le plateau de manière à ce que l\'on voit la totalité du plateau
+                                \n<b>3</b> - Assurez vous que aucun pions ne soit visible sur l\'image</string>
+
+    <!--Page Help-->
+    <string name="titreHelp">Aide</string>
+    <string name="textHelp"><b>1</b> - Entrez l\'addresse IP du serveur
+                                \n<b>2</b> - Entrez la position des pions et de l\'objectif dans la grille, validez
+                                \n<b>3</b> - Assurez vous que aucun pions ne soit visible sur l\'image
+                                \n<b>4</b> - Prennez en photo le plateau de manière à ce que l\'on voit la totalité du plateau
+                                \n<b>5</b> - Si tout est bon vous pouvez envoyer la photo
+                                \n<b>6</b> - Et voilà votre reponse</string>
+
+
+
+    <string name="recomencer">Recomencer</string>
+    <string name="valider">Valider</string>
+    <string name="imagefin">imagefin</string>
+    <string name="correction">Correction</string>
+    <string name="save">Enregistrer</string>
+    <string name="imageRep">Reponse du serveur image</string>
+    <string name="IP">195.201.205.241</string>
+    <string name="titreRobotCor">Position des Robots</string>
+    <string name="btnRobotCor">Valider</string>
+
+</resources>
