@@ -71,6 +71,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
         bVld = findViewById(R.id.btnValide);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
         progressBar = findViewById(R.id.progressBar);
+        //progressBar.setVisibility(View.INVISIBLE);
 
         tab = getIntent().getIntArrayExtra("tabPos");
 
@@ -147,29 +148,13 @@ public class PictureVerifyActivity extends AppCompatActivity {
         return filePath;
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-
-        // Create a matrix for the manipulation
-        Matrix matrix = new Matrix();
-
-        // Resize the bit map
-        matrix.postScale(scaleWidth, scaleHeight);
-
-        // Recreate the new Bitmap
-        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-        return resizedBitmap;
-
-    }
-
     public void sendImage(String serverIp, int serverPort, String filePath, PictureVerifyActivity answer) {
         Thread th = new Thread(() -> {
             Socket socket = null;
             FileInputStream fileInputStream = null;
             BufferedOutputStream bufferedOutputStream = null;
+
+            //progressBar.setVisibility(View.VISIBLE);
 
             int width;
             int height;
@@ -189,11 +174,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                 width = options.outWidth;
                 height = options.outHeight;
-
-                height = height*500/width;
-                width = 500;
-
-                Bitmap.createScaledBitmap(bitmap, width, height, false);
 
 
                 // Envoie du FLAG au serveur : 1
