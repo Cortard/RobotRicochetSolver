@@ -13,8 +13,8 @@
 
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    board(bd)
+      ui(new Ui::MainWindow),
+      board(bd)
 {
     ui->setupUi(this);
 
@@ -115,7 +115,6 @@ void MainWindow::on_pushTrain_2_clicked()
     ui->stackedWidget->setCurrentWidget(ui->choixplateau);
 }
 
-
 void MainWindow::on_pushPlateau_clicked()
 {
     if (viewPlato == nullptr) {
@@ -135,12 +134,10 @@ void MainWindow::on_pushPlateau_clicked()
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
-
 void MainWindow::on_Home_5_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
-
 
 void MainWindow::on_pushTrain_3_clicked()
 {
@@ -148,10 +145,14 @@ void MainWindow::on_pushTrain_3_clicked()
         viewBoard = new ViewBoard(board);
         ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
         viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+    }else{
+        delete viewBoard;
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
     }
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
-
 
 void MainWindow::on_pushHistoire_3_clicked()
 {
@@ -163,17 +164,20 @@ void MainWindow::on_pushHistoire_3_clicked()
     ui->stackedWidget->setCurrentWidget(ui->plateauofficiel);
 }
 
-
 void MainWindow::on_pushButton_clicked()
 {
     if (viewBoard == nullptr) {
         viewBoard = new ViewBoard(board);
         ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
         viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+    }else{
+        delete viewBoard;
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
     }
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
-
 
 void MainWindow::on_pushButton_5_clicked()
 {
@@ -410,7 +414,6 @@ void MainWindow::on_pushButton_5_clicked()
     }
 }
 
-
 void MainWindow::on_buttonhistoire1_clicked()
 {
     this->board->reset();
@@ -442,7 +445,6 @@ void MainWindow::on_buttonhistoire1_clicked()
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
-
 void MainWindow::on_Home_4_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
@@ -453,18 +455,15 @@ void MainWindow::on_Retour_15_clicked()
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 
-
 void MainWindow::on_Retour_17_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 
-
 void MainWindow::on_resetPlateau_clicked()
 {
     this->board->reset();
 }
-
 
 void MainWindow::on_pushObjective_3_clicked()
 {
@@ -472,6 +471,11 @@ void MainWindow::on_pushObjective_3_clicked()
     solutionid=0;
     board->notifyObserver();
     if (viewBoard == nullptr) {
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+    }else{
+        delete viewBoard;
         viewBoard = new ViewBoard(board);
         ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
         viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
@@ -632,7 +636,6 @@ void MainWindow::on_pushButton_12_clicked()
     solutionid++;
 }
 
-
 void MainWindow::on_pushSave_clicked()
 {
     QFile file("board.txt");
@@ -674,7 +677,6 @@ void MainWindow::on_pushSave_clicked()
     }
 }
 
-
 void MainWindow::on_pushHistoire_2_clicked()
 {
     QFile file("board.txt");
@@ -698,7 +700,6 @@ void MainWindow::on_pushHistoire_2_clicked()
     pass = false;
     ui->stackedWidget->setCurrentWidget(ui->pagecharger);
 }
-
 
 void MainWindow::on_pushPlateau_2_clicked()
 {
@@ -742,14 +743,28 @@ void MainWindow::on_pushPlateau_2_clicked()
                 }
                 board->objJeu=parts[24].toInt();
 
-                viewBoard = new ViewBoard(board);
-                ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-                viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-                ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+                if(viewBoard==nullptr){
+                    viewBoard = new ViewBoard(board);
+                    ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
+                    viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+                    ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+                }else{
+                    delete viewBoard;
+                    viewBoard = new ViewBoard(board);
+                    ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
+                    viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
+                    ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+                }
             }
         }
 
         file.close();
     }
+}
+
+
+void MainWindow::on_Home_6_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 

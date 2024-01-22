@@ -58,6 +58,8 @@ private slots:
 
     void on_pushPlateau_2_clicked();
 
+    void on_Home_6_clicked();
+
 private:
     Ui::MainWindow *ui;
     Board* board;

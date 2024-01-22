@@ -2663,19 +2663,6 @@ QPushButton#Retour_8:pressed {
         </item>
        </layout>
       </widget>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="geometry">
-        <rect>
-         <x>1110</x>
-         <y>460</y>
-         <width>83</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
      </widget>
      <widget class="QWidget" name="pagecharger">
       <widget class="QWidget" name="verticalLayoutWidget_10">
