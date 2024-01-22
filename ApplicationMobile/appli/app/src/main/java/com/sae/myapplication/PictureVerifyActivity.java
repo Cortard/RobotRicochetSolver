@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
     Button bCancel;
     Button bVld;
 
+    ProgressBar progressBar;
+
     int[] tab;
 
     Uri image_uri;
@@ -66,6 +70,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         bVld = findViewById(R.id.btnValide);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
+        progressBar = findViewById(R.id.progressBar);
 
         tab = getIntent().getIntArrayExtra("tabPos");
 
@@ -142,6 +147,24 @@ public class PictureVerifyActivity extends AppCompatActivity {
         return filePath;
     }
 
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        // Create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+
+        // Resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // Recreate the new Bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        return resizedBitmap;
+
+    }
+
     public void sendImage(String serverIp, int serverPort, String filePath, PictureVerifyActivity answer) {
         Thread th = new Thread(() -> {
             Socket socket = null;
@@ -152,19 +175,26 @@ public class PictureVerifyActivity extends AppCompatActivity {
             int height;
 
             try {
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inJustDecodeBounds = true;
-
-                BitmapFactory.decodeFile(filePath, options);
-
-                width = options.outWidth;
-                height = options.outHeight;
-
                 socket = new Socket();
                 socket.connect(new InetSocketAddress(serverIp, serverPort), TIMEOUT);
                 fileInputStream = new FileInputStream(filePath);
                 bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
                 DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+
+                Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+                BitmapFactory.decodeFile(filePath, options);
+
+                width = options.outWidth;
+                height = options.outHeight;
+
+                height = height*500/width;
+                width = 500;
+
+                Bitmap.createScaledBitmap(bitmap, width, height, false);
+
 
                 // Envoie du FLAG au serveur : 1
                 dataOutputStream.writeByte(1);
@@ -190,10 +220,12 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
                     if (width * height * 3 > 0) {
 
-                        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                        //Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
-                        Log.d("bug", "2");
                         Log.d("bug", bitmap.toString());
+
+                        progressBar.setMax(width * height);
+                        int cpt=0;
 
                         try {
                             for (int i = 0; i < height; ++i) {
@@ -210,6 +242,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                     dataOutputStream.writeByte(green);
                                     dataOutputStream.writeByte(red);
 
+                                    cpt++;
+                                    progressBar.setProgress(cpt);
                                     dataOutputStream.flush();
                                 }
                             }
@@ -241,8 +275,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         long confirmFlag = dataInputStream.read();
 
                         if (nbRobot > 3) {
-
-                            Log.d("bug", "7");
                             ByteBuffer robPosByte = ByteBuffer.allocate(16).order(ByteOrder.LITTLE_ENDIAN);
                             for (int i = 0; i < nbRobot; i++) {
                                 robPosByte.putInt(tab[i]);
@@ -287,8 +319,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 fileInputStream.close();
                                 bufferedOutputStream.close();
                                 socket.close();
-
-                                Toast.makeText(this, "Erreur : Pas de solution", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(answer, PictureActivity.class);
                                 intent.putExtra("tabPos", tab);
@@ -349,7 +379,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 intent.putExtra("tabPos", tab);
                 startActivity(intent);
                 finish();
-                Toast.makeText(this, "Erreur : " + e, Toast.LENGTH_SHORT).show();
                 try {
                     fileInputStream.close();
                     bufferedOutputStream.close();
