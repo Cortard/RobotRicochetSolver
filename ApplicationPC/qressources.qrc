@@ -1,0 +1,59 @@
+<RCC>
+    <qresource prefix="/img">
+        <file alias="galaxy.png">galaxy.png</file>
+        <file>tennis.png</file>
+        <file>balle.png</file>
+        <file>etoilerouge.png</file>
+        <file>lunerouge.png</file>
+        <file>satelliterouge.png</file>
+        <file>trianglerouge.png</file>
+        <file>etoilebleu.png</file>
+        <file>etoilejaune.png</file>
+        <file>etoilevert.png</file>
+        <file>lunebleu.png</file>
+        <file>lunejaune.png</file>
+        <file>lunevert.png</file>
+        <file>planetebleu.png</file>
+        <file>planetejaune.png</file>
+        <file>planetevert.png</file>
+        <file>trianglebleu.png</file>
+        <file>trianglejaune.png</file>
+        <file>trianglevert.png</file>
+        <file>robotbleu.png</file>
+        <file>robotjaune.png</file>
+        <file>robotnoir.png</file>
+        <file>robotrouge.png</file>
+        <file>robotvert.png</file>
+        <file>portail.png</file>
+        <file>nom.png</file>
+        <file>sol.jpg</file>
+        <file>fond.png</file>
+        <file>edition.png</file>
+        <file>charger.png</file>
+        <file>creer.jpg</file>
+        <file>histoire.jpg</file>
+        <file>train.png</file>
+        <file>part1.jpg</file>
+        <file>part2.jpg</file>
+        <file>part3.jpg</file>
+        <file>part4.jpg</file>
+        <file>part5.jpg</file>
+        <file>part6.jpg</file>
+        <file>part7.jpg</file>
+        <file>part8.jpg</file>
+        <file>part9.jpg</file>
+        <file>part10.jpg</file>
+        <file>part11.jpg</file>
+        <file>part12.jpg</file>
+        <file>part13.jpg</file>
+        <file>part14.jpg</file>
+        <file>part15.jpg</file>
+        <file>part16.jpg</file>
+        <file>Fond2.png</file>
+        <file>reset.png</file>
+        <file>histoire.png</file>
+        <file>entrainement.png</file>
+        <file>jouer.png</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>
