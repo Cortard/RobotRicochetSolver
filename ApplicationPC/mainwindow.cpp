@@ -39,44 +39,19 @@ void MainWindow::handleMovement() {
     ui->label->setText(QString::number(board->mouvement));
 }
 
-void MainWindow::on_pushButtonJouer_clicked()
+void MainWindow::on_ModeJouer_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagejouer);
 }
-void MainWindow::on_pushHistoire_clicked()
+void MainWindow::on_ModeHistoire_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagehistoire);
 }
-void MainWindow::on_Retour_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
-}
-void MainWindow::on_Retour_3_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pagejouer);
-}
-void MainWindow::on_Home_2_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
-}
-void MainWindow::on_Retour_5_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pagejouer);
-}
-void MainWindow::on_pushTrain_clicked()
+void MainWindow::on_ModeEntrainement_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagetrain);
 }
-void MainWindow::on_Home_3_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
-}
-void MainWindow::on_Retour_4_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pagetrain);
-}
-
-void MainWindow::on_pushObjective_clicked()
+void MainWindow::on_AddObj_clicked()
 {
     bool found = false;
     for (const auto& pair : board->objectives) {
@@ -91,12 +66,12 @@ void MainWindow::on_pushObjective_clicked()
 
 }
 
-void MainWindow::on_pushButton_21_clicked()
+void MainWindow::on_ModeEdition_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->edition);
 }
 
-void MainWindow::on_pushRobot_clicked()
+void MainWindow::on_AddRbt_clicked()
 {
     bool found = false;
     for (const auto& pair : board->robots) {
@@ -110,12 +85,12 @@ void MainWindow::on_pushRobot_clicked()
     }
 }
 
-void MainWindow::on_pushTrain_2_clicked()
+void MainWindow::on_ModeCreer_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->choixplateau);
 }
 
-void MainWindow::on_pushPlateau_clicked()
+void MainWindow::on_Jouer_clicked()
 {
     if (viewPlato == nullptr) {
         viewPlato = new viewPlateau(board);
@@ -129,17 +104,12 @@ void MainWindow::on_pushPlateau_clicked()
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
-    SocketConnection::getSolution(board);
+    //SocketConnection::getSolution(board);
     board->robots2=board->robots;
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
-void MainWindow::on_Home_5_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
-}
-
-void MainWindow::on_pushTrain_3_clicked()
+void MainWindow::on_ModeLibre_clicked()
 {
     if (viewBoard == nullptr) {
         viewBoard = new ViewBoard(board);
@@ -154,7 +124,7 @@ void MainWindow::on_pushTrain_3_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
-void MainWindow::on_pushHistoire_3_clicked()
+void MainWindow::on_ModeOfficiel_clicked()
 {
     if (viewPlateauOfficiel == nullptr) {
         viewPlateauOfficiel = new ViewPlateauOfficiel(board);
@@ -164,7 +134,7 @@ void MainWindow::on_pushHistoire_3_clicked()
     ui->stackedWidget->setCurrentWidget(ui->plateauofficiel);
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_JouerOfficiel_clicked()
 {
     if (viewBoard == nullptr) {
         viewBoard = new ViewBoard(board);
@@ -179,7 +149,7 @@ void MainWindow::on_pushButton_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
-void MainWindow::on_pushButton_5_clicked()
+void MainWindow::on_GenererAleatoire_clicked()
 {
     if(ui->radioButton->isChecked()){
 
@@ -427,7 +397,7 @@ void MainWindow::on_buttonhistoire1_clicked()
     this->board->addRobot(3,86);
     this->board->objJeu=0;
 
-    SocketConnection::getSolution(board);
+    //SocketConnection::getSolution(board);
     this->board->robots2=this->board->robots;
 
     if (viewPlato == nullptr) {
@@ -445,27 +415,12 @@ void MainWindow::on_buttonhistoire1_clicked()
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
-void MainWindow::on_Home_4_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
-}
-
-void MainWindow::on_Retour_15_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
-}
-
-void MainWindow::on_Retour_17_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
-}
-
 void MainWindow::on_resetPlateau_clicked()
 {
     this->board->reset();
 }
 
-void MainWindow::on_pushObjective_3_clicked()
+void MainWindow::on_Rejouer_clicked()
 {
     board->robots=board->robots2;
     solutionid=0;
@@ -483,7 +438,7 @@ void MainWindow::on_pushObjective_3_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
-void MainWindow::on_pushButton_12_clicked()
+void MainWindow::on_Solution_clicked()
 {
     if(solutionid==0){
         board->robots=board->robots2;
@@ -636,7 +591,7 @@ void MainWindow::on_pushButton_12_clicked()
     solutionid++;
 }
 
-void MainWindow::on_pushSave_clicked()
+void MainWindow::on_Sauvegarder_clicked()
 {
     QFile file("board.txt");
     if(!file.open(QIODevice::Append)){
@@ -677,7 +632,7 @@ void MainWindow::on_pushSave_clicked()
     }
 }
 
-void MainWindow::on_pushHistoire_2_clicked()
+void MainWindow::on_ModeCharger_clicked()
 {
     QFile file("board.txt");
     if (!file.open(QIODevice::ReadOnly)) {
@@ -701,7 +656,7 @@ void MainWindow::on_pushHistoire_2_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pagecharger);
 }
 
-void MainWindow::on_pushPlateau_2_clicked()
+void MainWindow::on_BtnCharger_clicked()
 {
     QString selectedTex = ui->stackedWidget->widget(9)->findChild<QListWidget*>()->currentItem()->text();
     QStringList part = selectedTex.split(" ");
@@ -762,8 +717,7 @@ void MainWindow::on_pushPlateau_2_clicked()
     }
 }
 
-
-void MainWindow::on_Home_6_clicked()
+void MainWindow::on_Home_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }

@@ -24,41 +24,29 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButtonJouer_clicked();
-    void on_pushHistoire_clicked();
-    void on_Retour_clicked();
-    void on_Retour_3_clicked();
-    void on_Home_2_clicked();
-    void on_Retour_5_clicked();
-    void on_pushTrain_clicked();
-    void on_Home_3_clicked();
-    void on_Retour_4_clicked();
-    void on_pushObjective_clicked();
-    void on_pushButton_21_clicked();
-    void on_pushRobot_clicked();
-    void on_pushTrain_2_clicked();
-    void on_pushPlateau_clicked();
-    void on_Home_5_clicked();
-    void handleMovement();
-    void on_pushTrain_3_clicked();
-    void on_pushHistoire_3_clicked();
-    void on_pushButton_clicked();
-    void on_pushButton_5_clicked();
     void on_buttonhistoire1_clicked();
-    void on_Home_4_clicked();
-    void on_Retour_15_clicked();
-    void on_Retour_17_clicked();
+
+    void handleMovement();
+
     void on_resetPlateau_clicked();
-    void on_pushObjective_3_clicked();
-    void on_pushButton_12_clicked();
-
-    void on_pushSave_clicked();
-
-    void on_pushHistoire_2_clicked();
-
-    void on_pushPlateau_2_clicked();
-
-    void on_Home_6_clicked();
+    void on_Sauvegarder_clicked();
+    void on_Home_clicked();
+    void on_ModeOfficiel_clicked();
+    void on_ModeLibre_clicked();
+    void on_ModeCharger_clicked();
+    void on_ModeCreer_clicked();
+    void on_ModeJouer_clicked();
+    void on_ModeEdition_clicked();
+    void on_BtnCharger_clicked();
+    void on_JouerOfficiel_clicked();
+    void on_Solution_clicked();
+    void on_Rejouer_clicked();
+    void on_ModeHistoire_clicked();
+    void on_ModeEntrainement_clicked();
+    void on_GenererAleatoire_clicked();
+    void on_AddObj_clicked();
+    void on_AddRbt_clicked();
+    void on_Jouer_clicked();
 
 private:
     Ui::MainWindow *ui;
