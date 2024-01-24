@@ -23,6 +23,7 @@ SOURCES += \
 HEADERS += \
     board.h \
     configure.h \
+    construct.h \
     controller.h \
     mainwindow.h \
     observer.h \

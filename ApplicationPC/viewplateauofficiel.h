@@ -16,8 +16,6 @@ private:
     QPointF secondClickPos;
     int col=-1;
 
-    int posToId(int x, int y);
-
     int position=-1;
 
 public:
