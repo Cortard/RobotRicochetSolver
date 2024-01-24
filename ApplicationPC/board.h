@@ -21,6 +21,8 @@ class Board : public Observable{
 public:
     Board();
 
+    #include "construct.h"
+
     static int getBoardSize();
     int getIndex(int x, int y) const;
 

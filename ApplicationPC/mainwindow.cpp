@@ -166,205 +166,205 @@ void MainWindow::on_GenererAleatoire_clicked()
 
         switch (rand1) {
         case 0:
-            viewPlateauOfficiel->constructPart1(this->board, 0);
+            board->constructPart1(this->board, 0);
             break;
         case 1:
-            viewPlateauOfficiel->constructPart5(this->board, 0);
+            board->constructPart5(this->board, 0);
             break;
         case 2:
-            viewPlateauOfficiel->constructPart9(this->board, 0);
+            board->constructPart9(this->board, 0);
             break;
         case 3:
-            viewPlateauOfficiel->constructPart13(this->board, 0);
+            board->constructPart13(this->board, 0);
             break;
         case 4:
-            viewPlateauOfficiel->constructPart2(this->board, 0);
+            board->constructPart2(this->board, 0);
             break;
         case 5:
-            viewPlateauOfficiel->constructPart6(this->board, 0);
+            board->constructPart6(this->board, 0);
             break;
         case 6:
-            viewPlateauOfficiel->constructPart10(this->board, 0);
+            board->constructPart10(this->board, 0);
             break;
         case 7:
-            viewPlateauOfficiel->constructPart14(this->board, 0);
+            board->constructPart14(this->board, 0);
             break;
         case 8:
-            viewPlateauOfficiel->constructPart3(this->board, 0);
+            board->constructPart3(this->board, 0);
             break;
         case 9:
-            viewPlateauOfficiel->constructPart7(this->board, 0);
+            board->constructPart7(this->board, 0);
             break;
         case 10:
-            viewPlateauOfficiel->constructPart11(this->board, 0);
+            board->constructPart11(this->board, 0);
             break;
         case 11:
-            viewPlateauOfficiel->constructPart15(this->board, 0);
+            board->constructPart15(this->board, 0);
             break;
         case 12:
-            viewPlateauOfficiel->constructPart4(this->board, 0);
+            board->constructPart4(this->board, 0);
             break;
         case 13:
-            viewPlateauOfficiel->constructPart8(this->board, 0);
+            board->constructPart8(this->board, 0);
             break;
         case 14:
-            viewPlateauOfficiel->constructPart12(this->board, 0);
+            board->constructPart12(this->board, 0);
             break;
         case 15:
-            viewPlateauOfficiel->constructPart16(this->board, 0);
+            board->constructPart16(this->board, 0);
             break;
         }
 
         switch (rand2) {
         case 0:
-            viewPlateauOfficiel->constructPart1(this->board, 1);
+            board->constructPart1(this->board, 1);
             break;
         case 1:
-            viewPlateauOfficiel->constructPart5(this->board, 1);
+            board->constructPart5(this->board, 1);
             break;
         case 2:
-            viewPlateauOfficiel->constructPart9(this->board, 1);
+            board->constructPart9(this->board, 1);
             break;
         case 3:
-            viewPlateauOfficiel->constructPart13(this->board, 1);
+            board->constructPart13(this->board, 1);
             break;
         case 4:
-            viewPlateauOfficiel->constructPart2(this->board, 1);
+            board->constructPart2(this->board, 1);
             break;
         case 5:
-            viewPlateauOfficiel->constructPart6(this->board, 1);
+            board->constructPart6(this->board, 1);
             break;
         case 6:
-            viewPlateauOfficiel->constructPart10(this->board, 1);
+            board->constructPart10(this->board, 1);
             break;
         case 7:
-            viewPlateauOfficiel->constructPart14(this->board, 1);
+            board->constructPart14(this->board, 1);
             break;
         case 8:
-            viewPlateauOfficiel->constructPart3(this->board, 1);
+            board->constructPart3(this->board, 1);
             break;
         case 9:
-            viewPlateauOfficiel->constructPart7(this->board, 1);
+            board->constructPart7(this->board, 1);
             break;
         case 10:
-            viewPlateauOfficiel->constructPart11(this->board, 1);
+            board->constructPart11(this->board, 1);
             break;
         case 11:
-            viewPlateauOfficiel->constructPart15(this->board, 1);
+            board->constructPart15(this->board, 1);
             break;
         case 12:
-            viewPlateauOfficiel->constructPart4(this->board, 1);
+            board->constructPart4(this->board, 1);
             break;
         case 13:
-            viewPlateauOfficiel->constructPart8(this->board, 1);
+            board->constructPart8(this->board, 1);
             break;
         case 14:
-            viewPlateauOfficiel->constructPart12(this->board, 1);
+            board->constructPart12(this->board, 1);
             break;
         case 15:
-            viewPlateauOfficiel->constructPart16(this->board, 1);
+            board->constructPart16(this->board, 1);
             break;
         }
 
         switch (rand3) {
         case 0:
-            viewPlateauOfficiel->constructPart1(this->board, 2);
+            board->constructPart1(this->board, 2);
             break;
         case 1:
-            viewPlateauOfficiel->constructPart5(this->board, 2);
+            board->constructPart5(this->board, 2);
             break;
         case 2:
-            viewPlateauOfficiel->constructPart9(this->board, 2);
+            board->constructPart9(this->board, 2);
             break;
         case 3:
-            viewPlateauOfficiel->constructPart13(this->board, 2);
+            board->constructPart13(this->board, 2);
             break;
         case 4:
-            viewPlateauOfficiel->constructPart2(this->board, 2);
+            board->constructPart2(this->board, 2);
             break;
         case 5:
-            viewPlateauOfficiel->constructPart6(this->board, 2);
+            board->constructPart6(this->board, 2);
             break;
         case 6:
-            viewPlateauOfficiel->constructPart10(this->board, 2);
+            board->constructPart10(this->board, 2);
             break;
         case 7:
-            viewPlateauOfficiel->constructPart14(this->board, 2);
+            board->constructPart14(this->board, 2);
             break;
         case 8:
-            viewPlateauOfficiel->constructPart3(this->board, 2);
+            board->constructPart3(this->board, 2);
             break;
         case 9:
-            viewPlateauOfficiel->constructPart7(this->board, 2);
+            board->constructPart7(this->board, 2);
             break;
         case 10:
-            viewPlateauOfficiel->constructPart11(this->board, 2);
+            board->constructPart11(this->board, 2);
             break;
         case 11:
-            viewPlateauOfficiel->constructPart15(this->board, 2);
+            board->constructPart15(this->board, 2);
             break;
         case 12:
-            viewPlateauOfficiel->constructPart4(this->board, 2);
+            board->constructPart4(this->board, 2);
             break;
         case 13:
-            viewPlateauOfficiel->constructPart8(this->board, 2);
+            board->constructPart8(this->board, 2);
             break;
         case 14:
-            viewPlateauOfficiel->constructPart12(this->board, 2);
+            board->constructPart12(this->board, 2);
             break;
         case 15:
-            viewPlateauOfficiel->constructPart16(this->board, 2);
+            board->constructPart16(this->board, 2);
             break;
         }
 
         switch (rand4) {
         case 0:
-            viewPlateauOfficiel->constructPart1(this->board, 3);
+            board->constructPart1(this->board, 3);
             break;
         case 1:
-            viewPlateauOfficiel->constructPart5(this->board, 3);
+            board->constructPart5(this->board, 3);
             break;
         case 2:
-            viewPlateauOfficiel->constructPart9(this->board, 3);
+            board->constructPart9(this->board, 3);
             break;
         case 3:
-            viewPlateauOfficiel->constructPart13(this->board, 3);
+            board->constructPart13(this->board, 3);
             break;
         case 4:
-            viewPlateauOfficiel->constructPart2(this->board, 3);
+            board->constructPart2(this->board, 3);
             break;
         case 5:
-            viewPlateauOfficiel->constructPart6(this->board, 3);
+            board->constructPart6(this->board, 3);
             break;
         case 6:
-            viewPlateauOfficiel->constructPart10(this->board, 3);
+            board->constructPart10(this->board, 3);
             break;
         case 7:
-            viewPlateauOfficiel->constructPart14(this->board, 3);
+            board->constructPart14(this->board, 3);
             break;
         case 8:
-            viewPlateauOfficiel->constructPart3(this->board, 3);
+            board->constructPart3(this->board, 3);
             break;
         case 9:
-            viewPlateauOfficiel->constructPart7(this->board, 3);
+            board->constructPart7(this->board, 3);
             break;
         case 10:
-            viewPlateauOfficiel->constructPart11(this->board, 3);
+            board->constructPart11(this->board, 3);
             break;
         case 11:
-            viewPlateauOfficiel->constructPart15(this->board, 3);
+            board->constructPart15(this->board, 3);
             break;
         case 12:
-            viewPlateauOfficiel->constructPart4(this->board, 3);
+            board->constructPart4(this->board, 3);
             break;
         case 13:
-            viewPlateauOfficiel->constructPart8(this->board, 3);
+            board->constructPart8(this->board, 3);
             break;
         case 14:
-            viewPlateauOfficiel->constructPart12(this->board, 3);
+            board->constructPart12(this->board, 3);
             break;
         case 15:
-            viewPlateauOfficiel->constructPart16(this->board, 3);
+            board->constructPart16(this->board, 3);
             break;
         }
 
@@ -387,10 +387,10 @@ void MainWindow::on_GenererAleatoire_clicked()
 void MainWindow::on_buttonhistoire1_clicked()
 {
     this->board->reset();
-    viewPlateauOfficiel->constructPart13(this->board, 0);
-    viewPlateauOfficiel->constructPart15(this->board, 1);
-    viewPlateauOfficiel->constructPart2(this->board, 2);
-    viewPlateauOfficiel->constructPart3(this->board, 3);
+    board->constructPart13(this->board, 0);
+    board->constructPart15(this->board, 1);
+    board->constructPart2(this->board, 2);
+    board->constructPart3(this->board, 3);
     this->board->addRobot(0,2);
     this->board->addRobot(1,250);
     this->board->addRobot(2,55);
