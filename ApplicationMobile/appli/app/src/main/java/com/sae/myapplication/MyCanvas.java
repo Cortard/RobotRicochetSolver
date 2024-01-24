@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 public class MyCanvas extends View {
 
     private int[] gridData;
-    private Paint paint;
+    private final Paint paint;
     private int cellSize;
 
     private int correctionIndex = 0;
@@ -26,7 +26,7 @@ public class MyCanvas extends View {
     private static final int ROBOT = 0x10; // 0b00010000
     private static final int GOAL = 0x20; // 0b00100000
 
-    private Handler correctionHandler;
+    private final Handler correctionHandler;
 
     private Robot[] robots;
 
@@ -94,7 +94,7 @@ public class MyCanvas extends View {
                 int y = initialRobotPositions[i] / 16;
                 Log.d("debug pos",initialRobotPositions[i] + " x : " + x + " y : " + y);
 
-                int robotColor = -1;
+                int robotColor;
                 if(i==0 && initialRobotPositions[initialRobotPositions.length - 1] == 1){
                     robotColor = 0;
                 }else if(i==0 && initialRobotPositions[initialRobotPositions.length - 1] == 2){
@@ -107,8 +107,7 @@ public class MyCanvas extends View {
                     robotColor = -1;
                 }
 
-                int robotNumber = i;
-                robots[i] = new Robot(x, y, robotNumber, robotColor);
+                robots[i] = new Robot(x, y, i, robotColor);
                 gridData[y * 16 + x] |= ROBOT;
                 Log.d("placeGoal", "placeGoal: " + initialRobotPositions[i]);
             }
@@ -145,12 +144,7 @@ public class MyCanvas extends View {
             moveRobot(robotNumber, direction);
             correctionIndex++;
 
-            correctionHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    startCorrection(correctionGrid);
-                }
-            }, 500);
+            correctionHandler.postDelayed(() -> startCorrection(correctionGrid), 500);
         }
     }
 
@@ -222,8 +216,8 @@ public class MyCanvas extends View {
         if ((value & GOAL) == GOAL) {
             paint.setColor(Color.GRAY);
             paint.setStrokeWidth(5);
-            canvas.drawLine(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint); // Premier segment
-            canvas.drawLine((x + 1) * cellSize, y * cellSize, x * cellSize, (y + 1) * cellSize, paint); // Deuxième segment
+            canvas.drawLine(x * cellSize, y * cellSize, (x + 1) * cellSize, (y + 1) * cellSize, paint); // 1er segment
+            canvas.drawLine((x + 1) * cellSize, y * cellSize, x * cellSize, (y + 1) * cellSize, paint); // 2eme segment
         }
 
         paint.setColor(Color.BLACK);

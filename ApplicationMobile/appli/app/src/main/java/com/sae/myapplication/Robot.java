@@ -3,8 +3,8 @@ package com.sae.myapplication;
 public class Robot {
     private int x;
     private int y;
-    private int color;
-    private int number;
+    private final int color;
+    private final int number;
 
     public Robot(int x, int y, int number, int color) {
         this.x = x;

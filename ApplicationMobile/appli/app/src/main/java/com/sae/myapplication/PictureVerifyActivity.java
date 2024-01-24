@@ -7,8 +7,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -150,9 +147,9 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
     public void sendImage(String serverIp, int serverPort, String filePath, PictureVerifyActivity answer) {
         Thread th = new Thread(() -> {
-            Socket socket = null;
-            FileInputStream fileInputStream = null;
-            BufferedOutputStream bufferedOutputStream = null;
+            Socket socket;
+            FileInputStream fileInputStream;
+            BufferedOutputStream bufferedOutputStream;
 
             //progressBar.setVisibility(View.VISIBLE);
 
@@ -196,7 +193,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     dataOutputStream.write(byteBuffer.array());
                     dataOutputStream.flush();
 
-                    long responseSize = dataInputStream.read();
+                    dataInputStream.read();
 
                     if (width * height * 3 > 0) {
 
@@ -251,8 +248,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         dataOutputStream.flush();
 
 
-                        // Attente de la réponse du serveur avec timeout
-                        long confirmFlag = dataInputStream.read();
+                        dataInputStream.read();
 
                         if (nbRobot > 3) {
                             ByteBuffer robPosByte = ByteBuffer.allocate(16).order(ByteOrder.LITTLE_ENDIAN);
@@ -359,12 +355,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 intent.putExtra("tabPos", tab);
                 startActivity(intent);
                 finish();
-                try {
-                    fileInputStream.close();
-                    bufferedOutputStream.close();
-                    socket.close();
-                } catch (IOException ex) {
-                }
                 Log.d("bug", e.toString());
             }
         });
