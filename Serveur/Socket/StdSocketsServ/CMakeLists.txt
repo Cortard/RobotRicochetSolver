@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(StdSocketsServer)
+project(RicochetSocketsServer)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -14,23 +14,8 @@ MESSAGE(STATUS "Include dirs ${OpenCV_INCLUDE_DIRS}")
 MESSAGE(STATUS "LINK LIBRARIES ${OpenCV_LIBS}")
 
 add_executable(RicochetSocketServer.exe main.cpp
-        logs/Logs.cpp
-        logs/Logs.h
-        clients/Client.cpp
-        clients/Client.h
-        configue.h
-        Serveur.cpp
-        Serveur.h
-        solver/Solver.cpp
-        solver/Solver.h
-        solver/Game.h
-        boardBuilder/boardBuilder.h
-        boardBuilder/boardBuilder.cpp
-        boardIsolation/boardIsolation.h
-        boardIsolation/boardIsolation.cpp
-        jpegBuilder/jpegBuilder.h
-        jpegBuilder/jpegBuilder.cpp
-        boardBuilder/board.h
+        Server/Server.cpp
+        Server/Server.h
 )
 
 target_link_libraries(RicochetSocketServer.exe ${OpenCV_LIBS})

@@ -4,7 +4,7 @@
 #include <fstream>
 #include <ctime>
 #include <mutex>
-#include "../configue.h"
+#include "../../configue.h"
 
 #define LOG_LEVEL_ERROR 0
 #define LOG_LEVEL_WARNING 1

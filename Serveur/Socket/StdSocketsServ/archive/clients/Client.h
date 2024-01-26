@@ -23,7 +23,7 @@
 #include <mutex>
 #include <stdexcept>
 #include <thread>
-#include "../configue.h"
+#include "../../configue.h"
 #include "../logs/Logs.h"
 
 // if state is odd, the slot is processing or disconnected

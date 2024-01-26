@@ -1,38 +1,11 @@
-#if defined (WIN32)
-    #include <winsock2.h>
-    typedef int socklen_t;
-#elif defined (linux)
-    #include <sys/types.h>
-    #include <sys/socket.h>
-    #include <netinet/in.h>
-    #include <arpa/inet.h>
-    #include <unistd.h>
-
-    #define INVALID_SOCKET -1
-    #define SOCKET_ERROR -1
-    #define closesocket(s) close (s)
-
-    typedef int SOCKET;
-    typedef struct sockaddr_in SOCKADDR_IN;
-    typedef struct sockaddr SOCKADDR;
-#endif
-
-#include <thread>
-#include <mutex>
 #include <csignal>
 
-#include "Serveur.h"
-#include "clients/Client.h"
-#include "logs/Logs.h"
-#include "configue.h"
+#include <iostream>
 
-void signalHandler(int signum) {
-    Serveur::end();
-    #if defined (WIN32)
-        WSACleanup();
-    #endif
-    Logs::write("Server shutdown",LOG_LEVEL_INFO);
-    exit(EXIT_SUCCESS);
+#include "Server/Server.h"
+
+void stopServer(int signum) {
+    Server::stop();
 }
 
 int main() {
@@ -42,30 +15,18 @@ int main() {
         if(_erreur) return EXIT_FAILURE;
     #endif
 
-    signal(SIGTERM, signalHandler);
-    #if DEV_MODE!=0
-        signal(SIGINT, signalHandler);
-        signal(SIGPIPE, signalHandler);
-        signal(SIGABRT, signalHandler);
-    #endif
+    signal(SIGTERM, stopServer);
+    signal(SIGINT, stopServer);
+    signal(SIGPIPE, stopServer);
+    signal(SIGABRT, stopServer);
 
-    if(!Logs::write("Start Server",LOG_LEVEL_INFO)) return EXIT_FAILURE;
-
-    if(Serveur::init()) return EXIT_FAILURE;
-
-    Client clients[MAX_CLIENTS];
-
-    std::thread acceptThread(Serveur::acceptLoop);
-
-    acceptThread.join();
-
-    Serveur::end();
+    std::cout << "Start Server" << std::endl;
+    Server::run();
+    std::cout << "Server shutdown" << std::endl;
 
     #if defined (WIN32)
         WSACleanup();
     #endif
-
-    Logs::write("Server shutdown",LOG_LEVEL_INFO);
 
     return 0;
 }
