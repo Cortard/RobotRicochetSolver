@@ -76,7 +76,7 @@ void Server::loop() {
         if(clientSocket == INVALID_SOCKET) {
             if(running) Logs::write("Error while accepting client", LOG_LEVEL_WARNING);
             continue;
-        }Logs::write("Client accepted IP: "+std::string(inet_ntoa(clientAddressInternet.sin_addr)) + " PORT: " + std::to_string(ntohs(clientAddressInternet.sin_port)), LOG_LEVEL_DETAILS);
+        }
 
         int slot = foundEmptySlot();
         if(slot == -1) {
@@ -85,7 +85,7 @@ void Server::loop() {
             continue;
         }
 
-        Logs::write("New client (IP: "+std::string(inet_ntoa(clientAddressInternet.sin_addr)) + " PORT: " + std::to_string(ntohs(clientAddressInternet.sin_port))+") added with id : "+std::to_string(nextClientId), LOG_LEVEL_DETAILS);
+        Logs::write("New client (IP: "+std::string(inet_ntoa(clientAddressInternet.sin_addr)) + " PORT: " + std::to_string(ntohs(clientAddressInternet.sin_port))+") added with id: "+std::to_string(nextClientId), LOG_LEVEL_DETAILS);
         clients[slot] = new Client(clientSocket, nextClientId++);
         clients[slot]->startProcess();
     }

@@ -22,10 +22,12 @@ private:
     bool shouldStop;
 
     void processLoop() const { //TODO: implement
-        while (!shouldStop) {
+        int i=0;
+        while (!shouldStop && i<5) {
             sleep(1);
+            ++i;
         }
-        Logs::write("Client process stopped id: "+std::to_string(id),LOG_LEVEL_DEBUG);
+        if(shouldStop) Logs::write("Client process stopped id: "+std::to_string(id),LOG_LEVEL_WARNING);
     }
 };
 

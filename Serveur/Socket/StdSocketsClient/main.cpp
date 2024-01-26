@@ -42,9 +42,9 @@ int main() {
         printf("Impossible de se connecter\n");
         return EXIT_FAILURE;
     }
-    printf("Connecté a %s:%d\n", inet_ntoa(sockAddrInter.sin_addr), htons(sockAddrInter.sin_port));
+    printf("Connecte a %s:%d\n", inet_ntoa(sockAddrInter.sin_addr), htons(sockAddrInter.sin_port));
 
-    sleep(10);
+    sleep(5);
     printf("Fermeture de la connexion\n");
     closesocket(sockServ);
 
