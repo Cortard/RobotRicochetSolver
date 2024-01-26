@@ -9,17 +9,24 @@ SOCKADDR_IN Server::addressInternet;
 Client* Server::clients[MAX_CLIENTS];
 
 int Server::run() {
-    if(init()) return EXIT_FAILURE;
+    if(init()) {
+        Logs::write("Error while initializing server", LOG_LEVEL_ERROR);
+        return EXIT_FAILURE;
+    }Logs::write("Server initialized", LOG_LEVEL_INFO);
+
     loop();
+
     return 0;
 }
 
 void Server::stop() {
+    Logs::write("Stopping server", LOG_LEVEL_INFO);
     running = false;
     closesocket(sock);
 }
 
 int Server::init() {
+    Logs::write("Initializing server", LOG_LEVEL_INFO);
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock == INVALID_SOCKET) {
         return EXIT_FAILURE;
@@ -31,12 +38,14 @@ int Server::init() {
 
     socklen_t sockAddrInterSize = sizeof(addressInternet);
     if( bind(sock,(SOCKADDR*)&addressInternet,sockAddrInterSize) != 0  ) {
+        Logs::write("Error while binding socket", LOG_LEVEL_ERROR);
         return EXIT_FAILURE;
-    }
+    }Logs::write("Socket binded", LOG_LEVEL_DETAILS);
 
     if(listen(sock, MAX_CLIENTS) != 0) {
+        Logs::write("Error while listening socket", LOG_LEVEL_ERROR);
         return EXIT_FAILURE;
-    }
+    }Logs::write("Socket listening", LOG_LEVEL_DETAILS);
 
     memset(clients, 0, sizeof(clients));
 
@@ -44,6 +53,7 @@ int Server::init() {
 }
 
 void Server::loop() {
+    Logs::write("Server loop started", LOG_LEVEL_INFO);
     running = true;
     while(running) {
         SOCKET clientSocket;
@@ -52,15 +62,18 @@ void Server::loop() {
 
         clientSocket = accept(sock, (SOCKADDR*)&clientAddressInternet, &clientAddrInterSize);
         if(clientSocket == INVALID_SOCKET) {
+            Logs::write("Error while accepting client", LOG_LEVEL_WARNING);
             continue;
-        }
+        }Logs::write("Client accepted IP: "+std::string(inet_ntoa(clientAddressInternet.sin_addr)) + " PORT: " + std::to_string(ntohs(clientAddressInternet.sin_port)), LOG_LEVEL_DETAILS);
 
         int slot = foundEmptySlot();
         if(slot == -1) {
+            Logs::write("No empty slot for new client (IP: "+std::string(inet_ntoa(clientAddressInternet.sin_addr)) + " PORT: " + std::to_string(ntohs(clientAddressInternet.sin_port))+")", LOG_LEVEL_WARNING);
             closesocket(clientSocket);
             continue;
         }
 
+        Logs::write("New client (IP: "+std::string(inet_ntoa(clientAddressInternet.sin_addr)) + " PORT: " + std::to_string(ntohs(clientAddressInternet.sin_port))+") added to slot "+std::to_string(slot), LOG_LEVEL_DETAILS);
         clients[slot] = new Client(clientSocket, clientAddressInternet);
     }
 }

@@ -2,9 +2,11 @@
 #define STDSOCKETSSERVER_CONFIGUE_H
 
 #define DEBUG_OUTPUT 1
-#define DEV_MODE 0
+#define LOG_IN_CONSOLE 1
+#define LOG_IN_FILE 1
+#define LOCAL 1
 
-#if DEV_MODE==0
+#if LOCAL!=1
 
     #define IP "195.201.205.241"
     #define PORT 9090

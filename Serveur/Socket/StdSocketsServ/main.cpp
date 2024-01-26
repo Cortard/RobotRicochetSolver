@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "Logs/Logs.h"
 #include "Server/Server.h"
 
 void stopServer(int signum) {
@@ -20,9 +21,8 @@ int main() {
     signal(SIGPIPE, stopServer);
     signal(SIGABRT, stopServer);
 
-    std::cout << "Start Server" << std::endl;
+    if(!Logs::write("Start Server",LOG_LEVEL_INFO)) return EXIT_FAILURE;
     Server::run();
-    std::cout << "Server shutdown" << std::endl;
 
     #if defined (WIN32)
         WSACleanup();

@@ -2,12 +2,10 @@
 #define STDSOCKETSSERVER_SERVER_H
 
 #include <thread>
-#include "../socket.h"
+#include "../configue.h"
 #include "../Client/Client.h"
-
-#define IP "127.0.0.1"
-#define PORT 9090
-#define MAX_CLIENTS 5
+#include "../Logs/Logs.h"
+#include "../socket.h"
 
 class Server {
 public:

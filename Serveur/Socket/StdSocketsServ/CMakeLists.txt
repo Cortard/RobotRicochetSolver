@@ -16,6 +16,8 @@ MESSAGE(STATUS "LINK LIBRARIES ${OpenCV_LIBS}")
 add_executable(RicochetSocketServer.exe main.cpp
         Client/Client.cpp
         Client/Client.h
+        Logs/Logs.cpp
+        Logs/Logs.h
         Server/Server.cpp
         Server/Server.h
         socket.h
