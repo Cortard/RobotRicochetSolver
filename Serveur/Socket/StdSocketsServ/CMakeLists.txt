@@ -14,8 +14,11 @@ MESSAGE(STATUS "Include dirs ${OpenCV_INCLUDE_DIRS}")
 MESSAGE(STATUS "LINK LIBRARIES ${OpenCV_LIBS}")
 
 add_executable(RicochetSocketServer.exe main.cpp
+        Client/Client.cpp
+        Client/Client.h
         Server/Server.cpp
         Server/Server.h
+        socket.h
 )
 
 target_link_libraries(RicochetSocketServer.exe ${OpenCV_LIBS})
