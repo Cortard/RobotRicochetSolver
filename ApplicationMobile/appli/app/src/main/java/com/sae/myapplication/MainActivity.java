@@ -12,6 +12,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Activité principale de l'application. Permet à l'utilisateur d'entrer une adresse IP
+ * pour se connecter au serveur et propose des options telles que le lancement de l'application
+ * et l'accès à la page d'aide.
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static String ip = "1.1.1.1";
@@ -64,7 +69,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Méthode de validation de l'adresse IP
+    /**
+     * Méthode appelée pour vérifier si une adresse IP est valide.
+     *
+     * @param ipAddress Adresse IP à valider.
+     * @return True si l'adresse IP est valide, false sinon.
+     */
     private boolean isValidIpAddress(String ipAddress) {
 
         String ipPattern = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +

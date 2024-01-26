@@ -16,7 +16,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-
+/**
+ * Activité permettant à l'utilisateur de choisir ou de prendre une photo.
+ */
 public class PictureActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1234;
     private static final int CAPTURE_CODE = 1001;
@@ -84,6 +86,9 @@ public class PictureActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Ouvre la caméra pour prendre une photo.
+     */
     private void openCamera() {
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE,"new image");
@@ -95,6 +100,13 @@ public class PictureActivity extends AppCompatActivity {
         startActivityForResult(camintent, CAPTURE_CODE);
     }
 
+    /**
+     * Gère la réponse à la demande de permissions.
+     *
+     * @param requestCode  Code de la demande de permission.
+     * @param permissions  Tableau de permissions demandées.
+     * @param grantResults Résultats de la demande de permissions.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -109,6 +121,13 @@ public class PictureActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Gère le résultat de l'activité de sélection ou de prise de photo.
+     *
+     * @param requestCode Code de la requête.
+     * @param resultCode  Code de résultat indiquant le succès ou l'échec de l'opération.
+     * @param data        Intent contenant les données résultantes.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -11,6 +11,9 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Custom View pour afficher une grille et effectuer la correction des robots.
+ */
 public class MyCanvas extends View {
 
     private int[] gridData;
@@ -38,12 +41,19 @@ public class MyCanvas extends View {
         correctionHandler = new Handler();
     }
 
+    /**
+     * Définit les données de la grille et les positions initiales des robots.
+     *
+     * @param gridData               Données de la grille.
+     * @param initialRobotPositions Positions initiales des robots.
+     */
     public void setGridData(int[] gridData, @NonNull int[] initialRobotPositions) {
         this.gridData = gridData;
         placeGoal(initialRobotPositions[initialRobotPositions.length-2]);
         initializeRobots(initialRobotPositions);
         invalidate();
     }
+
 
     private int getRobotColor(int robotNumber) {
         switch (robotNumber) {
@@ -60,6 +70,11 @@ public class MyCanvas extends View {
         }
     }
 
+    /**
+     * Place l'objectif (goal) sur la grille à la position spécifiée.
+     *
+     * @param goalPosition Position de l'objectif.
+     */
     private void placeGoal(int goalPosition) {
         if (goalPosition >= 0 && goalPosition < 256) {
             int x = goalPosition % 16;
@@ -70,6 +85,14 @@ public class MyCanvas extends View {
         }
     }
 
+    /**
+     * Dessine un robot sur le canvas à la position spécifiée.
+     *
+     * @param canvas      Canvas sur lequel dessiner.
+     * @param x           Position horizontale du robot.
+     * @param y           Position verticale du robot.
+     * @param robotNumber Numéro du robot.
+     */
     private void drawRobot(Canvas canvas, int x, int y, int robotNumber) {
         float centerX = (x + 0.5f) * cellSize;
         float centerY = (y + 0.5f) * cellSize;
@@ -79,6 +102,11 @@ public class MyCanvas extends View {
         canvas.drawCircle(centerX, centerY, radius, paint);
     }
 
+    /**
+     * Initialise la position des robots sur la grille.
+     *
+     * @param initialRobotPositions Positions initiales des robots.
+     */
     private void initializeRobots(int[] initialRobotPositions) {
         if (initialRobotPositions.length-2 > 0) {
             for (int i = 0; i < 16; i++) {
@@ -135,6 +163,11 @@ public class MyCanvas extends View {
         }
     }
 
+    /**
+     * Démarre la correction des mouvements des robots.
+     *
+     * @param correctionGrid Tableau de correction des mouvements.
+     */
     public void startCorrection(int[] correctionGrid) {
         if (correctionIndex < correctionGrid.length) {
             int correctionValue = correctionGrid[correctionIndex];
@@ -148,6 +181,15 @@ public class MyCanvas extends View {
         }
     }
 
+    /**
+     * Met à jour la position d'un robot sur la grille.
+     *
+     * @param oldX       Ancienne position horizontale.
+     * @param oldY       Ancienne position verticale.
+     * @param newX       Nouvelle position horizontale.
+     * @param newY       Nouvelle position verticale.
+     * @param robotNumber Numéro du robot.
+     */
     private void updateRobotPosition(int oldX, int oldY, int newX, int newY, int robotNumber) {
         gridData[oldY * 16 + oldX] &= ~ROBOT;
         gridData[newY * 16 + newX] |= ROBOT;
@@ -158,6 +200,12 @@ public class MyCanvas extends View {
         }
     }
 
+    /**
+     * Déplace un robot dans la direction spécifiée.
+     *
+     * @param robotNumber Numéro du robot.
+     * @param direction   Direction du déplacement.
+     */
     private void moveRobot(int robotNumber, int direction) {
         Robot currentRobot = findRobotByNumber(robotNumber);
 
@@ -195,6 +243,12 @@ public class MyCanvas extends View {
         invalidate();
     }
 
+    /**
+     * Recherche un robot par son numéro.
+     *
+     * @param robotNumber Numéro du robot à rechercher.
+     * @return Instance du robot trouvé, sinon null.
+     */
     private Robot findRobotByNumber(int robotNumber) {
         if (robots != null) {
             for (Robot robot : robots) {
@@ -206,7 +260,14 @@ public class MyCanvas extends View {
         return null;
     }
 
-
+    /**
+     * Dessine une cellule de la grille avec des lignes pour représenter les murs.
+     *
+     * @param canvas Canvas sur lequel dessiner.
+     * @param x      Position horizontale de la cellule.
+     * @param y      Position verticale de la cellule.
+     * @param value  Valeur de la cellule.
+     */
     private void drawCell(Canvas canvas, int x, int y, int value) {
 
         paint.setStrokeWidth(2);

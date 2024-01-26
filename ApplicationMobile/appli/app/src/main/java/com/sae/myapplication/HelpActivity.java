@@ -1,13 +1,14 @@
 package com.sae.myapplication;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Activité d'aide fournissant des informations sur le fonctionnement de l'application.
+ */
 public class HelpActivity extends AppCompatActivity {
 
 
