@@ -7,6 +7,7 @@ SOCKET Server::sock;
 SOCKADDR_IN Server::addressInternet;
 
 Client* Server::clients[MAX_CLIENTS];
+unsigned int Server::nextClientId = 0;
 
 int Server::run() {
     if(init()) {
@@ -21,6 +22,17 @@ int Server::run() {
 
 void Server::stop() {
     Logs::write("Stopping server", LOG_LEVEL_INFO);
+    for(auto & client : clients) {
+        if(client != nullptr) {
+            client->askStop();
+        }
+    }
+    for(auto & client : clients) {
+        if(client != nullptr) {
+            client->waitStop();
+            delete client;
+        }
+    }
     running = false;
     closesocket(sock);
 }
@@ -40,7 +52,7 @@ int Server::init() {
     if( bind(sock,(SOCKADDR*)&addressInternet,sockAddrInterSize) != 0  ) {
         Logs::write("Error while binding socket", LOG_LEVEL_ERROR);
         return EXIT_FAILURE;
-    }Logs::write("Socket binded", LOG_LEVEL_DETAILS);
+    }Logs::write("Socket bound", LOG_LEVEL_DETAILS);
 
     if(listen(sock, MAX_CLIENTS) != 0) {
         Logs::write("Error while listening socket", LOG_LEVEL_ERROR);
@@ -62,7 +74,7 @@ void Server::loop() {
 
         clientSocket = accept(sock, (SOCKADDR*)&clientAddressInternet, &clientAddrInterSize);
         if(clientSocket == INVALID_SOCKET) {
-            Logs::write("Error while accepting client", LOG_LEVEL_WARNING);
+            if(running) Logs::write("Error while accepting client", LOG_LEVEL_WARNING);
             continue;
         }Logs::write("Client accepted IP: "+std::string(inet_ntoa(clientAddressInternet.sin_addr)) + " PORT: " + std::to_string(ntohs(clientAddressInternet.sin_port)), LOG_LEVEL_DETAILS);
 
@@ -73,8 +85,9 @@ void Server::loop() {
             continue;
         }
 
-        Logs::write("New client (IP: "+std::string(inet_ntoa(clientAddressInternet.sin_addr)) + " PORT: " + std::to_string(ntohs(clientAddressInternet.sin_port))+") added to slot "+std::to_string(slot), LOG_LEVEL_DETAILS);
-        clients[slot] = new Client(clientSocket, clientAddressInternet);
+        Logs::write("New client (IP: "+std::string(inet_ntoa(clientAddressInternet.sin_addr)) + " PORT: " + std::to_string(ntohs(clientAddressInternet.sin_port))+") added with id : "+std::to_string(nextClientId), LOG_LEVEL_DETAILS);
+        clients[slot] = new Client(clientSocket, nextClientId++);
+        clients[slot]->startProcess();
     }
 }
 

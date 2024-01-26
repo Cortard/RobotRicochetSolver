@@ -1,5 +1,5 @@
-#ifndef STDSOCKETSSERVER_SERVER_H
-#define STDSOCKETSSERVER_SERVER_H
+#ifndef RICOCHETSOCKETSSERVER_SERVER_H
+#define RICOCHETSOCKETSSERVER_SERVER_H
 
 #include <thread>
 #include "../configue.h"
@@ -18,6 +18,7 @@ private:
     static SOCKADDR_IN addressInternet;
 
     static Client* clients[MAX_CLIENTS];
+    static unsigned int nextClientId;
 
     static int init();
     static void loop();
@@ -26,4 +27,4 @@ private:
 };
 
 
-#endif //STDSOCKETSSERVER_SERVER_H
+#endif //RICOCHETSOCKETSSERVER_SERVER_H

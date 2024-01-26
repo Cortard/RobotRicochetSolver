@@ -6,6 +6,7 @@
 #include "Server/Server.h"
 
 void stopServer(int signum) {
+    Logs::write("Received signal " + std::to_string(signum), LOG_LEVEL_INFO);
     Server::stop();
 }
 
