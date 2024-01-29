@@ -30,7 +30,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background : url(:/img/Img/galaxy.png) center center;</string>
+     <string notr="true">background : url(:/img/Img/galaxy.png) center center;
+</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -141,8 +142,8 @@ border:none;</string>
               </property>
               <property name="font">
                <font>
-                <family>Quicksand Medium</family>
-                <pointsize>25</pointsize>
+                <family>Segoe Print</family>
+                <pointsize>36</pointsize>
                 <italic>false</italic>
                 <bold>true</bold>
                 <underline>false</underline>
@@ -153,15 +154,15 @@ border:none;</string>
               </property>
               <property name="styleSheet">
                <string notr="true">QPushButton#ModeJouer {
-    background-color: #ba3f96;
-	border:none;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
 }
 
 QPushButton#ModeJouer:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#ModeJouer:pressed {
@@ -191,28 +192,29 @@ QPushButton#ModeJouer:pressed {
               </property>
               <property name="font">
                <font>
-                <family>Quicksand Medium</family>
-                <pointsize>25</pointsize>
+                <family>Segoe Print</family>
+                <pointsize>36</pointsize>
                 <bold>true</bold>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton#ModeEdition {
-    background-color: #ba3f96;
-	border:none;
-	border-radius: 25px;
-	padding:10px;
-	color : #70bfcb;
+               <string notr="true">#ModeEdition {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 107));
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 25px;
+    padding: 10px;
+    color: rgb(255, 255, 255);
 }
 
-QPushButton#ModeEdition:hover {
+#ModeEdition:hover {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));
+    /* Ajouter un effet de flou pour le survol */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+#ModeEdition:pressed {
     background-color: #9c2579;
 }
-
-QPushButton#ModeEdition:pressed {
-    background-color: #9c2579;     
-}
-
 </string>
               </property>
               <property name="text">
@@ -236,8 +238,8 @@ QPushButton#ModeEdition:pressed {
               </property>
               <property name="font">
                <font>
-                <family>Quicksand Medium</family>
-                <pointsize>25</pointsize>
+                <family>Segoe Print</family>
+                <pointsize>36</pointsize>
                 <bold>true</bold>
                </font>
               </property>
@@ -2024,14 +2026,14 @@ background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:1 rgba(0, 0, 0, 1
      <rect>
       <x>110</x>
       <y>10</y>
-      <width>70</width>
-      <height>70</height>
+      <width>100</width>
+      <height>100</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>70</width>
-      <height>70</height>
+      <width>100</width>
+      <height>100</height>
      </size>
     </property>
     <property name="maximumSize">
@@ -2048,9 +2050,9 @@ background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:1 rgba(0, 0, 0, 1
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton#Home{
-    background : url(:/img/Img/logoRRS2.png) center center no-repeat;
+    background : url(:/img/Img/logoRRS.png) center center no-repeat;
 	border:none;
-	border-radius: 35px;
+	border-radius: 50px;
 	color : #70bfcb;
 }
 

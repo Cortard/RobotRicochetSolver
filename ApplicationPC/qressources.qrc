@@ -54,9 +54,9 @@
         <file>Img/trianglejaune.png</file>
         <file>Img/trianglerouge.png</file>
         <file>Img/trianglevert.png</file>
-        <file>Img/logoRRS.png</file>
         <file>Img/logo2RRS.png</file>
         <file>Img/logoRRS2.png</file>
+        <file>Img/logoRRS.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
