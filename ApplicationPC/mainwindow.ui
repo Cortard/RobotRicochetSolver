@@ -1250,22 +1250,27 @@ border:none;</string>
             </property>
             <property name="font">
              <font>
-              <family>Quicksand Medium</family>
-              <pointsize>35</pointsize>
+              <family>Segoe Print</family>
+              <pointsize>36</pointsize>
               <bold>true</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton#ModeHistoire{
-	background : url(:/img/Img/histoire.jpg) center center;
-	border:none;
+             <string notr="true">#ModeHistoire {
+	background : url(:/img/Img/histoireicon.png) center cente no-repeat;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color:rgb(255, 255, 255);
+	color : rgb(255, 255, 255);
 }
 
-QPushButton#ModeHistoire:hover {
-	color:rgb(194, 167, 225);
+#ModeHistoire:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#ModeHistoire:pressed {
+    background-color: #9c2579;     
 }
 
 </string>
@@ -1291,22 +1296,27 @@ QPushButton#ModeHistoire:hover {
             </property>
             <property name="font">
              <font>
-              <family>Quicksand Medium</family>
-              <pointsize>35</pointsize>
+              <family>Segoe Print</family>
+              <pointsize>36</pointsize>
               <bold>true</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton#ModeEntrainement{
-	background : url(:/img/Img/train.png) center center;
-	border:none;
+             <string notr="true">#ModeEntrainement {
+	background : url(:/img/Img/entrainementicon.png) center cente no-repeat;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color:rgb(255, 255, 255);
+	color : rgb(255, 255, 255);
 }
 
-QPushButton#ModeEntrainement:hover {
-	color:rgb(194, 167, 225);
+#ModeEntrainement:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#ModeEntrainement:pressed {
+    background-color: #9c2579;     
 }
 
 </string>
@@ -1416,8 +1426,8 @@ border:none;</string>
             </property>
             <property name="font">
              <font>
-              <family>Quicksand Medium</family>
-              <pointsize>35</pointsize>
+              <family>Segoe Print</family>
+              <pointsize>36</pointsize>
               <bold>true</bold>
              </font>
             </property>
@@ -1435,6 +1445,7 @@ QPushButton#ModeCharger:hover {
 } */
 
 QPushButton#ModeCharger {
+	background : url(:/img/Img/chargericon.png) center center;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
@@ -1475,13 +1486,14 @@ QPushButton#ModeCharger:pressed {
             </property>
             <property name="font">
              <font>
-              <family>Quicksand Medium</family>
-              <pointsize>35</pointsize>
+              <family>Segoe Print</family>
+              <pointsize>36</pointsize>
               <bold>true</bold>
              </font>
             </property>
             <property name="styleSheet">
              <string notr="true">#ModeCreer {
+	background : url(:/img/Img/creericon.png) center center no-repeat;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
@@ -1830,13 +1842,14 @@ border:none;</string>
             </property>
             <property name="font">
              <font>
-              <family>Quicksand Medium</family>
-              <pointsize>35</pointsize>
+              <family>Segoe Print</family>
+              <pointsize>36</pointsize>
               <bold>true</bold>
              </font>
             </property>
             <property name="styleSheet">
              <string notr="true">#ModeOfficiel{
+	background : url(:/img/Img/officielicon.png) center cente no-repeat;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
@@ -1875,13 +1888,14 @@ border:none;</string>
             </property>
             <property name="font">
              <font>
-              <family>Quicksand Medium</family>
-              <pointsize>35</pointsize>
+              <family>Segoe Print</family>
+              <pointsize>36</pointsize>
               <bold>true</bold>
              </font>
             </property>
             <property name="styleSheet">
              <string notr="true">#ModeLibre {
+	background : url(:/img/Img/libreicon.png) center cente no-repeat;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;

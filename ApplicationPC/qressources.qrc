@@ -62,6 +62,12 @@
         <file>Img/lac.jpg</file>
         <file>Img/smooth.jpg</file>
         <file>Img/cadena.png</file>
+        <file>Img/chargericon.png</file>
+        <file>Img/creericon.png</file>
+        <file>Img/entrainementicon.png</file>
+        <file>Img/histoireicon.png</file>
+        <file>Img/libreicon.png</file>
+        <file>Img/officielicon.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
