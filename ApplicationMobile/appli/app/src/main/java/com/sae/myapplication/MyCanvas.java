@@ -33,6 +33,12 @@ public class MyCanvas extends View {
 
     private Robot[] robots;
 
+    /**
+     * Constructeur de la classe MyCanvas.
+     *
+     * @param context Contexte de l'application.
+     * @param attrs   Attributs de l'interface utilisateur.
+     */
     public MyCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();

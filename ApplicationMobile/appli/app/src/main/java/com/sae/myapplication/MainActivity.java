@@ -19,6 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Variable public de l'Ip écrite par l'utilisateur
+     */
     public static String ip = "1.1.1.1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
