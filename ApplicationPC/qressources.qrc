@@ -57,6 +57,11 @@
         <file>Img/logo2RRS.png</file>
         <file>Img/logoRRS2.png</file>
         <file>Img/logoRRS.png</file>
+        <file>Img/basic.jpg</file>
+        <file>Img/espace.jpg</file>
+        <file>Img/lac.jpg</file>
+        <file>Img/smooth.jpg</file>
+        <file>Img/cadena.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

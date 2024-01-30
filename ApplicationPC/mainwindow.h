@@ -23,7 +23,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_buttonhistoire1_clicked();
+    void on_Histoire1_clicked();
 
     void handleMovement();
 

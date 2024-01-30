@@ -52,6 +52,10 @@ void ViewBoard::updateModel()
         }
     }
 
+    if(board->objJeu!=-1){
+        drawObjectives(120, objImg[board->objJeu], board->objJeu);
+    }
+
     setSceneRect(0, 0, CellSize*16, CellSize*16);
     drawWall();
     update();
@@ -267,6 +271,7 @@ void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                 qDebug() << "Clic droit sur l'objectif avec l'ID : " << id;
                 clickdroit++;
                 board->objJeu=id;
+                drawObjectives(120, objImg[board->objJeu], board->objJeu);
             }
         }
     }

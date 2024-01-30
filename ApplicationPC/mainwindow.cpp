@@ -45,6 +45,9 @@ void MainWindow::on_ModeJouer_clicked()
 }
 void MainWindow::on_ModeHistoire_clicked()
 {
+    if(board->victoireHistoire>=2){
+        ui->Histoire2->setStyleSheet("#Histoire2{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
     ui->stackedWidget->setCurrentWidget(ui->pagehistoire);
 }
 void MainWindow::on_ModeEntrainement_clicked()
@@ -104,7 +107,7 @@ void MainWindow::on_Jouer_clicked()
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
-    SocketConnection::getSolution(board);
+    //SocketConnection::getSolution(board);
     board->robots2=board->robots;
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
@@ -384,7 +387,7 @@ void MainWindow::on_GenererAleatoire_clicked()
     }
 }
 
-void MainWindow::on_buttonhistoire1_clicked()
+void MainWindow::on_Histoire1_clicked()
 {
     this->board->reset();
     board->constructPart13(this->board, 0);
@@ -397,7 +400,7 @@ void MainWindow::on_buttonhistoire1_clicked()
     this->board->addRobot(3,86);
     this->board->objJeu=0;
 
-    SocketConnection::getSolution(board);
+    //SocketConnection::getSolution(board);
     this->board->robots2=this->board->robots;
 
     if (viewPlato == nullptr) {

@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background : url(:/img/Img/galaxy.png) center center;
+     <string notr="true">background : url(:/img/Img/lac.jpg) center center;
 </string>
     </property>
     <property name="frameShape">
@@ -244,20 +244,21 @@ QPushButton#ModeJouer:pressed {
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton#ModeParametre {
-    background-color: #ba3f96;
-	border:none;
-	border-radius: 25px;
-	padding:10px;
-	color : #70bfcb;
+               <string notr="true">#ModeParametre {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 107));
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 25px;
+    padding: 10px;
+    color: rgb(255, 255, 255);
 }
 
-QPushButton#ModeParametre:hover {
+#ModeParametre:hover {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+#ModeParametre:pressed {
     background-color: #9c2579;
-}
-
-QPushButton#ModeParametre:pressed {
-    background-color: #9c2579;     
 }
 
 </string>
@@ -281,11 +282,14 @@ QPushButton#ModeParametre:pressed {
          <x>10</x>
          <y>10</y>
          <width>1261</width>
-         <height>601</height>
+         <height>607</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_6">
         <property name="leftMargin">
+         <number>100</number>
+        </property>
+        <property name="topMargin">
          <number>100</number>
         </property>
         <property name="rightMargin">
@@ -535,19 +539,19 @@ QPushButton#resetPlateau:hover {
       </widget>
      </widget>
      <widget class="QWidget" name="pagehistoire">
-      <widget class="QPushButton" name="buttonhistoire1">
+      <widget class="QPushButton" name="Histoire1">
        <property name="geometry">
         <rect>
          <x>120</x>
          <y>200</y>
-         <width>70</width>
-         <height>70</height>
+         <width>80</width>
+         <height>80</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>70</height>
+         <width>80</width>
+         <height>80</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -563,36 +567,41 @@ QPushButton#resetPlateau:hover {
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton#buttonhistoire1 {
-    border:none;
-	border-radius: 35px;
+        <string notr="true">#Histoire1{
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 40px;
 	padding:10px;
-	color: rgb(255, 255, 255);
-	background-color: rgb(194, 167, 225);
+	color : rgb(255, 255, 255);
 }
 
-QPushButton#buttonhistoire1:hover {
-    background-color: #9c2579;
+#Histoire1:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
+
+#Histoire1:pressed {
+    background-color: #9c2579;     
+}
+
 </string>
        </property>
        <property name="text">
         <string>1</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="Histoire2">
        <property name="geometry">
         <rect>
          <x>260</x>
          <y>260</y>
-         <width>70</width>
-         <height>70</height>
+         <width>80</width>
+         <height>80</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>70</height>
+         <width>80</width>
+         <height>80</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -608,249 +617,27 @@ QPushButton#buttonhistoire1:hover {
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-border-radius: 35px;
-padding:10px;
-color: rgb(255, 255, 255);
-background-color: rgb(194, 167, 225);
+        <string notr="true">#Histoire2{
+	background : url(:/img/Img/cadena.png) center center no-repeat;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 40px;
+	padding:10px;
+	color : rgb(255, 255, 255);
+}
+
+#Histoire2:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#Histoire2:pressed {
+    background-color: #9c2579;     
+}
+
 </string>
        </property>
        <property name="text">
         <string>2</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_6">
-       <property name="geometry">
-        <rect>
-         <x>410</x>
-         <y>210</y>
-         <width>70</width>
-         <height>70</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-border-radius: 35px;
-padding:10px;
-color: rgb(255, 255, 255);
-background-color: rgb(194, 167, 225);
-</string>
-       </property>
-       <property name="text">
-        <string>3</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_7">
-       <property name="geometry">
-        <rect>
-         <x>550</x>
-         <y>300</y>
-         <width>70</width>
-         <height>70</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-border-radius: 35px;
-padding:10px;
-color: rgb(255, 255, 255);
-background-color: rgb(194, 167, 225);
-</string>
-       </property>
-       <property name="text">
-        <string>4</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_8">
-       <property name="geometry">
-        <rect>
-         <x>610</x>
-         <y>410</y>
-         <width>70</width>
-         <height>70</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-border-radius: 35px;
-padding:10px;
-color: rgb(255, 255, 255);
-background-color: rgb(194, 167, 225);
-</string>
-       </property>
-       <property name="text">
-        <string>5</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_9">
-       <property name="geometry">
-        <rect>
-         <x>750</x>
-         <y>500</y>
-         <width>70</width>
-         <height>70</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-border-radius: 35px;
-padding:10px;
-color: rgb(255, 255, 255);
-background-color: rgb(194, 167, 225);
-</string>
-       </property>
-       <property name="text">
-        <string>6</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_10">
-       <property name="geometry">
-        <rect>
-         <x>880</x>
-         <y>360</y>
-         <width>70</width>
-         <height>70</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-border-radius: 35px;
-padding:10px;
-color: rgb(255, 255, 255);
-background-color: rgb(194, 167, 225);
-</string>
-       </property>
-       <property name="text">
-        <string>7</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_11">
-       <property name="geometry">
-        <rect>
-         <x>1020</x>
-         <y>450</y>
-         <width>70</width>
-         <height>70</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-border-radius: 35px;
-padding:10px;
-color: rgb(255, 255, 255);
-background-color: rgb(194, 167, 225);
-</string>
-       </property>
-       <property name="text">
-        <string>8</string>
        </property>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -897,15 +684,321 @@ border:none;</string>
         </item>
        </layout>
       </widget>
+      <widget class="QPushButton" name="Histoire3">
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>210</y>
+         <width>80</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#Histoire3 {
+	background : url(:/img/Img/cadena.png) center center no-repeat;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 40px;
+	padding:10px;
+	color : rgb(255, 255, 255);
+}
+
+#Histoire3:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#Histoire3:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+       </property>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Histoire4">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>290</y>
+         <width>80</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#Histoire4 {
+	background : url(:/img/Img/cadena.png) center center no-repeat;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 40px;
+	padding:10px;
+	color : rgb(255, 255, 255);
+}
+
+#Histoire4:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#Histoire4:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+       </property>
+       <property name="text">
+        <string>4</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Histoire5">
+       <property name="geometry">
+        <rect>
+         <x>600</x>
+         <y>400</y>
+         <width>80</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#Histoire5 {
+	background : url(:/img/Img/cadena.png) center center no-repeat;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 40px;
+	padding:10px;
+	color : rgb(255, 255, 255);
+}
+
+#Histoire5:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#Histoire5:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+       </property>
+       <property name="text">
+        <string>5</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Histoire6">
+       <property name="geometry">
+        <rect>
+         <x>740</x>
+         <y>490</y>
+         <width>80</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#Histoire6 {
+	background : url(:/img/Img/cadena.png) center center no-repeat;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 40px;
+	padding:10px;
+	color : rgb(255, 255, 255);
+}
+
+#Histoire6:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#Histoire6:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+       </property>
+       <property name="text">
+        <string>6</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Histoire7">
+       <property name="geometry">
+        <rect>
+         <x>880</x>
+         <y>360</y>
+         <width>80</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#Histoire7 {
+	background : url(:/img/Img/cadena.png) center center no-repeat;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 40px;
+	padding:10px;
+	color : rgb(255, 255, 255);
+}
+
+#Histoire7:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#Histoire7:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+       </property>
+       <property name="text">
+        <string>7</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Histoire8">
+       <property name="geometry">
+        <rect>
+         <x>1010</x>
+         <y>440</y>
+         <width>80</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#Histoire8 {
+	background : url(:/img/Img/cadena.png) center center no-repeat;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 40px;
+	padding:10px;
+	color : rgb(255, 255, 255);
+}
+
+#Histoire8:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#Histoire8:pressed {
+    background-color: #9c2579;     
+}
+
+</string>
+       </property>
+       <property name="text">
+        <string>8</string>
+       </property>
+      </widget>
       <zorder>verticalLayoutWidget_2</zorder>
-      <zorder>pushButton_7</zorder>
-      <zorder>pushButton_6</zorder>
-      <zorder>pushButton_11</zorder>
-      <zorder>pushButton_10</zorder>
-      <zorder>pushButton_9</zorder>
-      <zorder>pushButton_8</zorder>
-      <zorder>pushButton_3</zorder>
-      <zorder>buttonhistoire1</zorder>
+      <zorder>Histoire2</zorder>
+      <zorder>Histoire1</zorder>
+      <zorder>Histoire3</zorder>
+      <zorder>Histoire4</zorder>
+      <zorder>Histoire5</zorder>
+      <zorder>Histoire6</zorder>
+      <zorder>Histoire7</zorder>
+      <zorder>Histoire8</zorder>
      </widget>
      <widget class="QWidget" name="pagetrain">
       <widget class="QWidget" name="verticalLayoutWidget_3">
@@ -1329,7 +1422,7 @@ border:none;</string>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton#ModeCharger{
+             <string notr="true">/*QPushButton#ModeCharger{
 	background : url(:/img/Img/charger.png) center center;
 	border:none;
 	border-radius: 25px;
@@ -1339,7 +1432,25 @@ border:none;</string>
 
 QPushButton#ModeCharger:hover {
 	color:rgb(194, 167, 225);
+} */
+
+QPushButton#ModeCharger {
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
+	padding:10px;
+	color : rgb(255, 255, 255);
 }
+
+QPushButton#ModeCharger:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+QPushButton#ModeCharger:pressed {
+    background-color: #9c2579;     
+}
+
+
 
 </string>
             </property>
@@ -1370,16 +1481,20 @@ QPushButton#ModeCharger:hover {
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton#ModeCreer{
-	background : url(:/img/Img/creer.jpg) center center;
-	border:none;
+             <string notr="true">#ModeCreer {
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color:rgb(255, 255, 255);
+	color : rgb(255, 255, 255);
 }
 
-QPushButton#ModeCreer:hover {
-	color:rgb(194, 167, 225);
+#ModeCreer:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#ModeCreer:pressed {
+    background-color: #9c2579;     
 }
 
 </string>
@@ -1401,11 +1516,14 @@ QPushButton#ModeCreer:hover {
          <x>10</x>
          <y>10</y>
          <width>1261</width>
-         <height>601</height>
+         <height>607</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_9">
         <property name="leftMargin">
+         <number>100</number>
+        </property>
+        <property name="topMargin">
          <number>100</number>
         </property>
         <property name="rightMargin">
@@ -1718,16 +1836,20 @@ border:none;</string>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton#ModeOfficiel{
-	background : url(:/img/Img/histoire.jpg) center center;
-	border:none;
+             <string notr="true">#ModeOfficiel{
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color:rgb(255, 255, 255);
+	color : rgb(255, 255, 255);
 }
 
-QPushButton#ModeOfficiel:hover {
-	color:rgb(194, 167, 225);
+#ModeOfficiel:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#ModeOfficiel:pressed {
+    background-color: #9c2579;     
 }
 
 </string>
@@ -1759,16 +1881,20 @@ QPushButton#ModeOfficiel:hover {
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton#ModeLibre{
-	background : url(:/img/Img/train.png) center center;
-	border:none;
+             <string notr="true">#ModeLibre {
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color:rgb(255, 255, 255);
+	color : rgb(255, 255, 255);
 }
 
-QPushButton#ModeLibre:hover {
-	color:rgb(194, 167, 225);
+#ModeLibre:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#ModeLibre:pressed {
+    background-color: #9c2579;     
 }
 
 </string>
@@ -2009,7 +2135,7 @@ QPushButton#BtnCharger:pressed {
      </property>
      <property name="styleSheet">
       <string notr="true">background:none;
-background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:1 rgba(0, 0, 0, 100));</string>
+background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:1 rgba(0, 0, 0, 0));</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>

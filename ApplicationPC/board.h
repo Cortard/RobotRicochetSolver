@@ -45,6 +45,8 @@ public:
     int mouvement=0;
     int objJeu=-1;
 
+    int victoireHistoire=1;
+
     //unsigned char path[32] = {1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 63};
 
     unsigned char path[32];

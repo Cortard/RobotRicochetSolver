@@ -54,6 +54,10 @@ void viewPlateau::updateModel()
         }
     }
 
+    if(board->objJeu!=-1){
+        drawObjectives(120, objImg[board->objJeu], board->objJeu);
+    }
+
     setSceneRect(0, 0, CellSize*16, CellSize*16);
     drawWall();
     update();
@@ -195,6 +199,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
     for (const auto& robot : board->robots) {
         if (robot.second == board->objectives[board->objJeu]) {
             robotId = robot.first;
+            board->victoireHistoire++;
             victoire();
             break;
         }
@@ -207,6 +212,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
             for (const auto& robot : board->robots) {
                 if (robot.second == board->objectives[board->objJeu]) {
                     robotId = robot.first;
+                    board->victoireHistoire++;
                     victoire();
                     break;
                 }
@@ -273,6 +279,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         for (const auto& robot : board->robots) {
                             if (robot.second == board->objectives[board->objJeu]) {
                                 robotId = robot.first;
+                                board->victoireHistoire++;
                                 victoire();
                                 break;
                             }
@@ -314,6 +321,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         for (const auto& robot : board->robots) {
                             if (robot.second == board->objectives[board->objJeu]) {
                                 robotId = robot.first;
+                                board->victoireHistoire++;
                                 victoire();
                                 break;
                             }
@@ -354,6 +362,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         for (const auto& robot : board->robots) {
                             if (robot.second == board->objectives[board->objJeu]) {
                                 robotId = robot.first;
+                                board->victoireHistoire++;
                                 victoire();
                                 break;
                             }
@@ -391,6 +400,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         for (const auto& robot : board->robots) {
                             if (robot.second == board->objectives[board->objJeu]) {
                                 robotId = robot.first;
+                                board->victoireHistoire++;
                                 victoire();
                                 break;
                             }
@@ -465,5 +475,5 @@ void viewPlateau::victoire(){
     font.setBold(true);     // Texte en gras
     textItem->setFont(font);
     textItem->setPos(100,160);  // Position du texte par rapport à l'objet cliqué
-    addItem(textItem);
+    addItem(textItem);    
 }
