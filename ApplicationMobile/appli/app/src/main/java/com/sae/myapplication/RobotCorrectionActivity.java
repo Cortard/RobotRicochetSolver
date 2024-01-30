@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Activité pour la correction de la position des robots sur la grille.
+ */
 public class RobotCorrectionActivity extends AppCompatActivity {
     String newItem;
 

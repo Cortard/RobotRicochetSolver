@@ -36,6 +36,9 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
 
+/**
+ * Activité permettant de vérifier une image et de la transmettre au serveur pour correction.
+ */
 public class PictureVerifyActivity extends AppCompatActivity {
 
     ImageView imageView;
@@ -119,6 +122,13 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Gestionnaire d'autorisations pour l'accès aux images du média.
+     *
+     * @param requestCode  Code de la demande d'autorisation.
+     * @param permissions  Tableau des autorisations demandées.
+     * @param grantResults Résultats de la demande d'autorisation.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -134,6 +144,12 @@ public class PictureVerifyActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Méthode pour obtenir le chemin réel d'une URI d'image.
+     *
+     * @param contentUri URI de l'image.
+     * @return Chemin réel de l'image.
+     */
     public String getRealPathFromURI(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
@@ -145,6 +161,14 @@ public class PictureVerifyActivity extends AppCompatActivity {
         return filePath;
     }
 
+    /**
+     * Méthode pour envoyer l'image au serveur pour correction.
+     *
+     * @param serverIp Adresse IP du serveur.
+     * @param serverPort Port du serveur.
+     * @param filePath  Chemin du fichier image.
+     * @param answer    Activité courante.
+     */
     public void sendImage(String serverIp, int serverPort, String filePath, PictureVerifyActivity answer) {
         Thread th = new Thread(() -> {
             Socket socket;

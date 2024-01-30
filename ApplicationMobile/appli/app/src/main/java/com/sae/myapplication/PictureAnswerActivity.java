@@ -12,10 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Arrays;
 
-
+/**
+ * Activité qui affiche la grille et sa correction après avoir sélectionné ou pris une photo.
+ */
 public class PictureAnswerActivity extends AppCompatActivity {
-
-    ImageView imageView;
 
     int[] gridData;
     int[] correctionData;

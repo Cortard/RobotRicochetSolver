@@ -15,48 +15,78 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
+/**
+ * ArrayAdapter personnalisé pour afficher une liste déroulante avec du texte et des images.
+ */
 class SpinnerAdapter extends ArrayAdapter<String> {
 
-    Context context;
-    List<String> statesList;
+    private Context context;
+    private List<String> statesList;
 
-    // Constructor accepts Context (from MainActivity) and a list of state abbreviations
+    /**
+     * Constructeur de SpinnerAdapter.
+     *
+     * @param context    Le contexte de l'activité appelante.
+     * @param states     Liste des abréviations d'État à afficher dans la liste déroulante.
+     */
     public SpinnerAdapter(Context context, List<String> states) {
         super(context, R.layout.my_selected_item, states);
         this.context = context;
         this.statesList = states;
     }
 
-    // Override these methods and instead return our custom view (with image and text)
+    /**
+     * Remplace la méthode pour retourner une vue personnalisée pour chaque élément de la liste déroulante.
+     *
+     * @param position       La position de l'élément dans l'ensemble de données de l'adaptateur.
+     * @param convertView    L'ancienne vue à réutiliser, si possible.
+     * @param parent         Le parent auquel cette vue sera éventuellement attachée.
+     * @return               La vue correspondant aux données à la position spécifiée.
+     */
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
+
+    /**
+     * Remplace la méthode pour retourner une vue personnalisée pour l'élément sélectionné dans la liste déroulante.
+     *
+     * @param position       La position de l'élément dans l'ensemble de données de l'adaptateur.
+     * @param convertView    L'ancienne vue à réutiliser, si possible.
+     * @param parent         Le parent auquel cette vue sera éventuellement attachée.
+     * @return               La vue correspondant aux données à la position spécifiée.
+     */
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
 
-    // Function to return our custom View (View with an image and text)
+    /**
+     * Retourne une vue personnalisée pour l'élément de la liste déroulante.
+     *
+     * @param position       La position de l'élément dans l'ensemble de données de l'adaptateur.
+     * @param convertView    L'ancienne vue à réutiliser, si possible.
+     * @param parent         Le parent auquel cette vue sera éventuellement attachée.
+     * @return               La vue personnalisée avec à la fois une image et du texte.
+     */
     public View getCustomView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.my_dropdown_item, parent, false);
 
-        // Image and TextViews
+        // Image et TextViews
         TextView state = row.findViewById(R.id.text);
         ImageView flag = row.findViewById(R.id.img);
 
-        // Get flag image from drawables folder
+        // Obtenir l'image du drapeau depuis le dossier drawables
         Resources res = context.getResources();
-        String drawableName = statesList.get(position).toLowerCase(); // tx
+        String drawableName = statesList.get(position).toLowerCase();
         int resId = res.getIdentifier(drawableName, "drawable", context.getPackageName());
         Drawable drawable = res.getDrawable(resId);
 
-        //Set state abbreviation and state flag
+        // Définir l'abréviation de l'État et le drapeau de l'État
         state.setText(statesList.get(position));
         flag.setImageDrawable(drawable);
 
         return row;
     }
-
 }
