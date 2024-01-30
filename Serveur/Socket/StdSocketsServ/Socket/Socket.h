@@ -20,4 +20,28 @@
     typedef struct sockaddr SOCKADDR;
 #endif
 
+#include <cstdlib>
+#include <stdexcept>
+
+class Socket {
+private:
+    SOCKET sock;
+    SOCKADDR_IN addressInternet;
+public:
+    static bool isClassInit;
+    [[nodiscard]] static int init();
+    static void clear();
+
+    Socket(const char* ip, unsigned short port);
+    Socket(SOCKET sock, SOCKADDR_IN addressInternet);
+    ~Socket();
+
+    Socket* accept();
+
+    [[nodiscard]] std::string toString() const;
+
+    [[nodiscard]] SOCKET getSock() const;
+    [[nodiscard]] SOCKADDR_IN getAddressInternet() const;
+};
+
 #endif //RICOCHETSOCKETSSERVER_SOCKET_H

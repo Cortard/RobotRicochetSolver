@@ -1,6 +1,6 @@
 #include "Client.h"
 
-Client::Client(SOCKET &socket, unsigned int id) : socket(socket), id(id), shouldStop(false) {
+Client::Client(Socket* socket, unsigned int id) : socket(socket), id(id), shouldStop(false) {
 }
 
 void Client::startProcess() {
@@ -16,5 +16,5 @@ void Client::waitStop() {
 }
 
 Client::~Client() {
-    closesocket(socket);
+    delete socket;
 }

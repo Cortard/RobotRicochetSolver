@@ -2,12 +2,12 @@
 #define RICOCHETSOCKETSSERVER_CLIENT_H
 
 #include <thread>
-#include "../socket.h"
+#include "../Socket/Socket.h"
 #include "../Logs/Logs.h"
 
 class Client {
 public:
-    Client(SOCKET &socket, unsigned int id);
+    Client(Socket* socket, unsigned int id);
 
     void startProcess();
     void askStop();
@@ -16,7 +16,7 @@ public:
     ~Client();
 
 private:
-    SOCKET socket;
+    Socket* socket;
     unsigned int id;
     std::thread processThread;
     bool shouldStop;

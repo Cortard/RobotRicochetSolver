@@ -20,7 +20,8 @@ add_executable(RicochetSocketServer.exe main.cpp
         Logs/Logs.h
         Server/Server.cpp
         Server/Server.h
-        socket.h
+        Socket/Socket.h
+        Socket/Socket.cpp
 )
 
 target_link_libraries(RicochetSocketServer.exe ${OpenCV_LIBS})

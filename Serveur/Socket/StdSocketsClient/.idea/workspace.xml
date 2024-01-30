@@ -21,11 +21,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../StdSocketsServ/Socket/Socket.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/configue.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Client/Client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Client/Client.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Client/Client.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Client/Client.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Server/Server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Server/Server.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/Server/Server.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Server/Server.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/socket.h" beforeDir="false" afterPath="$PROJECT_DIR$/../StdSocketsServ/Socket/Socket.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +138,8 @@
       <workItem from="1706277945167" duration="620000" />
       <workItem from="1706278571209" duration="14000" />
       <workItem from="1706278697921" duration="119000" />
-      <workItem from="1706287326328" duration="667000" />
+      <workItem from="1706287326328" duration="827000" />
+      <workItem from="1706602278103" duration="786000" />
     </task>
     <servers />
   </component>

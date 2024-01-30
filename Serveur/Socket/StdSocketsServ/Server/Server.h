@@ -5,7 +5,7 @@
 #include "../configue.h"
 #include "../Client/Client.h"
 #include "../Logs/Logs.h"
-#include "../socket.h"
+#include "../Socket/Socket.h"
 
 class Server {
 public:
@@ -14,8 +14,7 @@ public:
 
 private:
     static bool running;
-    static SOCKET sock;
-    static SOCKADDR_IN addressInternet;
+    static Socket* socket;
 
     static Client* clients[MAX_CLIENTS];
     static unsigned int nextClientId;
