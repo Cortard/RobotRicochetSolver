@@ -267,6 +267,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         // Envoie du FLAG au serveur : 1
                         int nbRobot = tab.length - 2;
                         ByteBuffer nbRobotByte = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
+                        Log.d("bug", "nb : "+ nbRobot);
+
                         nbRobotByte.putInt(nbRobot);
                         dataOutputStream.write(nbRobotByte.array());
                         dataOutputStream.flush();
@@ -275,7 +277,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         dataInputStream.read();
 
                         if (nbRobot > 3) {
-                            ByteBuffer robPosByte = ByteBuffer.allocate(16).order(ByteOrder.LITTLE_ENDIAN);
+                            ByteBuffer robPosByte = ByteBuffer.allocate(20).order(ByteOrder.LITTLE_ENDIAN);
                             for (int i = 0; i < nbRobot; i++) {
                                 robPosByte.putInt(tab[i]);
                                 Log.d("bug", "posRob : "+ tab[i]);

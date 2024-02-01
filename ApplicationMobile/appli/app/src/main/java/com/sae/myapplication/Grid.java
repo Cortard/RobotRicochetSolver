@@ -16,8 +16,10 @@ public class Grid extends View {
     private int id = 0;
     private int[] cases;
     private static final int TAILLE_GRILLE = 16;
-    private static final int NB = 5;
-    private static final int NOMBRE_MAX_MODIFICATIONS = NB;
+    //private static final int NB = 5;
+
+    public int robot = 5;
+    private int NOMBRE_MAX_MODIFICATIONS = robot;
     private Paint paint;
     private int[][] grid;
     private int modificationsEffectuees = 0;
@@ -44,12 +46,23 @@ public class Grid extends View {
     }
 
     /**
+     * Choix du nombre de robot 4 ou 5.
+     *
+     * @param r Nombre de robots.
+     */
+    public void choseRobots(int r){
+        robot = r+1;
+        NOMBRE_MAX_MODIFICATIONS = robot;
+        cases = new int[robot];
+    }
+
+    /**
      * Initialisation des composants de la vue.
      */
     private void init() {
         paint = new Paint();
         grid = new int[TAILLE_GRILLE][TAILLE_GRILLE];
-        cases = new int[NB];
+        cases = new int[robot];
     }
 
     /**
@@ -145,19 +158,36 @@ public class Grid extends View {
      * @return Couleur suivante.
      */
     private int getCouleurSuivante(int couleurActuelle) {
-        switch (couleurActuelle) {
-            case 0:
-                return Color.RED;
-            case 1:
-                return Color.BLUE;
-            case 2:
-                return Color.GREEN;
-            case 3:
-                return Color.YELLOW;
-            case 4:
-                return Color.GRAY;
-            default:
-                return Color.BLACK; // Défaut vers la couleur rouge si la couleur actuelle n'est pas gérée
+        if (robot == 6){
+            switch (couleurActuelle) {
+                case 0:
+                    return Color.RED;
+                case 1:
+                    return Color.BLUE;
+                case 2:
+                    return Color.GREEN;
+                case 3:
+                    return Color.YELLOW;
+                case 4:
+                    return Color.BLACK;
+                default:
+                    return Color.GRAY; // Défaut vers la couleur rouge si la couleur actuelle n'est pas gérée
+            }
+        }else{
+            switch (couleurActuelle) {
+                case 0:
+                    return Color.RED;
+                case 1:
+                    return Color.BLUE;
+                case 2:
+                    return Color.GREEN;
+                case 3:
+                    return Color.YELLOW;
+                case 4:
+                    return Color.GRAY;
+                default:
+                    return Color.BLACK; // Défaut vers la couleur rouge si la couleur actuelle n'est pas gérée
+            }
         }
     }
 
@@ -167,7 +197,7 @@ public class Grid extends View {
      * @return Vrai si le nombre de cases validées est suffisant, sinon faux.
      */
     public boolean getCasesValide() {
-        return id >= NB;
+        return id >= robot;
     }
 
     /**
@@ -179,13 +209,13 @@ public class Grid extends View {
      * @return Tableau d'indices des cases avec la couleur correspondante en dernière position.
      */
     public int[] getCases(String dest) {
-        int[] rep = new int[NB + 1];
+        int[] rep = new int[robot + 1];
         int couleur = 0;
 
         if (dest.equals("objectifr1") || dest.equals("objectifr2") || dest.equals("objectifr3") || dest.equals("objectifr4")) {
             rep[0] = cases[0];
             couleur = 1;
-            for (int i = 1; i < NB; i++) {
+            for (int i = 1; i < robot; i++) {
                 if (i != 0) {
                     rep[i] = cases[i];
                 }
@@ -194,7 +224,7 @@ public class Grid extends View {
         } else if (dest.equals("objectifb1") || dest.equals("objectifb2") || dest.equals("objectifb3") || dest.equals("objectifb4")) {
             rep[0] = cases[1];
             couleur = 2;
-            for (int i = 1; i < NB; i++) {
+            for (int i = 1; i < robot; i++) {
                 if (i != 1) {
                     rep[i] = cases[i];
                 } else {
@@ -205,7 +235,7 @@ public class Grid extends View {
         } else if (dest.equals("objectifv1") || dest.equals("objectifv2") || dest.equals("objectifv3") || dest.equals("objectifv4")) {
             rep[0] = cases[2];
             couleur = 3;
-            for (int i = 1; i < NB; i++) {
+            for (int i = 1; i < robot; i++) {
                 if (i != 2) {
                     rep[i] = cases[i];
                 } else {
@@ -216,7 +246,7 @@ public class Grid extends View {
         } else if (dest.equals("objectifj1") || dest.equals("objectifj2") || dest.equals("objectifj3") || dest.equals("objectifj4")) {
             rep[0] = cases[3];
             couleur = 4;
-            for (int i = 1; i < NB; i++) {
+            for (int i = 1; i < robot; i++) {
                 if (i != 3) {
                     rep[i] = cases[i];
                 } else {
@@ -225,13 +255,13 @@ public class Grid extends View {
             }
             // Jaune
         } else {
-            for (int i = 0; i < NB; i++) {
+            for (int i = 0; i < robot; i++) {
                 rep[i] = cases[i];
             }
             // Tout
         }
 
-        rep[NB] = couleur;
+        rep[robot] = couleur;
         return rep;
     }
 }

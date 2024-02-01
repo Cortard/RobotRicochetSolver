@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class RobotCorrectionActivity extends AppCompatActivity {
 
     List<String> states;
     Spinner spinner;
+    int robot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class RobotCorrectionActivity extends AppCompatActivity {
         ImageButton bReturn = findViewById(R.id.boutonReturn);
         ImageButton bHelp = findViewById(R.id.boutonHelp);
 
+        robot = getIntent().getIntExtra("robot",4);
 
         bHelp.setOnClickListener(v -> {
 
@@ -51,6 +54,7 @@ public class RobotCorrectionActivity extends AppCompatActivity {
         });
 
         Grid grid = findViewById(R.id.grid);
+        grid.choseRobots(robot);
 
         bValide.setOnClickListener(v -> {
 
@@ -66,6 +70,7 @@ public class RobotCorrectionActivity extends AppCompatActivity {
 
         bReset.setOnClickListener(v -> {
             Intent intent = new Intent(this, RobotCorrectionActivity.class);
+            intent.putExtra("robot",robot);
             startActivity(intent);
             finish();
         });

@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (isValidIpAddress(ipAddress)) {
                 ip = ipAddress;
-                Intent intent = new Intent(this, RobotCorrectionActivity.class);
+                Intent intent = new Intent(this, PickRobotActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, "Adresse IP invalide. Veuillez entrer une adresse IP valide.", Toast.LENGTH_SHORT).show();
