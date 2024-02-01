@@ -68,6 +68,9 @@
         <file>Img/histoireicon.png</file>
         <file>Img/libreicon.png</file>
         <file>Img/officielicon.png</file>
+        <file>Img/Poppins-Regular.ttf</file>
+        <file>Img/RubikGlitchPop-Regular.ttf</file>
+        <file>Img/Poppins-Bold.ttf</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

@@ -11,6 +11,8 @@
 #include <QThread>
 #include <QFile>
 
+#include <QFontDatabase>
+
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
@@ -23,6 +25,21 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
     viewBoard = nullptr;
     viewPlato = nullptr;
     viewPlateauOfficiel = nullptr;
+
+//    QFontDatabase db;
+//      for(int i=0; i<db.families().size(); i++)
+//      {
+//        qDebug() << db.families().at(i);
+//      }
+
+    QFont font = QFont("Poppins", 20);
+
+    ui->stackedWidget->setFont(font);
+
+    QList<QPushButton *> allBt = ui->stackedWidget->findChildren<QPushButton *>();
+    for(QPushButton * button : allBt){
+        button->setFont(font);
+    }
 
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect screenGeometry = screen->geometry();

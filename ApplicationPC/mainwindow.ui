@@ -142,7 +142,7 @@ border:none;</string>
               </property>
               <property name="font">
                <font>
-                <family>Segoe Print</family>
+                <family>Poppins-Regular</family>
                 <pointsize>36</pointsize>
                 <italic>false</italic>
                 <bold>true</bold>
@@ -159,6 +159,7 @@ border:none;</string>
 	border-radius: 25px;
 	padding:10px;
 	color : rgb(255, 255, 255);
+	font:(&quot;Poppins&quot;,50);
 }
 
 QPushButton#ModeJouer:hover {
