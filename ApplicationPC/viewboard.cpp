@@ -8,29 +8,29 @@ ViewBoard::ViewBoard(Board* board) : QGraphicsScene(), Observer()
     this->board=board;
     board->addObserver(this);
     temp=0;
-    objImg[0]=":/img/lunerouge.png";
-    objImg[1]=":/img/trianglerouge.png";
-    objImg[2]=":/img/satelliterouge.png";
-    objImg[3]=":/img/etoilerouge.png";
-    objImg[4]=":/img/lunevert.png";
-    objImg[5]=":/img/trianglevert.png";
-    objImg[6]=":/img/planetevert.png";
-    objImg[7]=":/img/etoilevert.png";
-    objImg[8]=":/img/lunebleu.png";
-    objImg[9]=":/img/trianglebleu.png";
-    objImg[10]=":/img/planetebleu.png";
-    objImg[11]=":/img/etoilebleu.png";
-    objImg[12]=":/img/lunejaune.png";
-    objImg[13]=":/img/trianglejaune.png";
-    objImg[14]=":/img/planetejaune.png";
-    objImg[15]=":/img/etoilejaune.png";
-    objImg[16]=":/img/portail.png";
+    objImg[0]=":/img/Img/lunerouge.png";
+    objImg[1]=":/img/Img/trianglerouge.png";
+    objImg[2]=":/img/Img/satelliterouge.png";
+    objImg[3]=":/img/Img/etoilerouge.png";
+    objImg[4]=":/img/Img/lunevert.png";
+    objImg[5]=":/img/Img/trianglevert.png";
+    objImg[6]=":/img/Img/planetevert.png";
+    objImg[7]=":/img/Img/etoilevert.png";
+    objImg[8]=":/img/Img/lunebleu.png";
+    objImg[9]=":/img/Img/trianglebleu.png";
+    objImg[10]=":/img/Img/planetebleu.png";
+    objImg[11]=":/img/Img/etoilebleu.png";
+    objImg[12]=":/img/Img/lunejaune.png";
+    objImg[13]=":/img/Img/trianglejaune.png";
+    objImg[14]=":/img/Img/planetejaune.png";
+    objImg[15]=":/img/Img/etoilejaune.png";
+    objImg[16]=":/img/Img/portail.png";
 
-    robotImg[0]=":/img/robotrouge.png";
-    robotImg[1]=":/img/robotvert.png";
-    robotImg[2]=":/img/robotbleu.png";
-    robotImg[3]=":/img/robotjaune.png";
-    robotImg[4]=":/img/robotnoir.png";
+    robotImg[0]=":/img/Img/robotrouge.png";
+    robotImg[1]=":/img/Img/robotvert.png";
+    robotImg[2]=":/img/Img/robotbleu.png";
+    robotImg[3]=":/img/Img/robotjaune.png";
+    robotImg[4]=":/img/Img/robotnoir.png";
 
     drawWall();
     updateModel();
@@ -50,6 +50,10 @@ void ViewBoard::updateModel()
         if(board->robots.at(i)!=-1){
             drawRobot(board->robots.at(i), robotImg[i], i);
         }
+    }
+
+    if(board->objJeu!=-1){
+        drawObjectives(120, objImg[board->objJeu], board->objJeu);
     }
 
     setSceneRect(0, 0, CellSize*16, CellSize*16);
@@ -267,6 +271,7 @@ void ViewBoard::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                 qDebug() << "Clic droit sur l'objectif avec l'ID : " << id;
                 clickdroit++;
                 board->objJeu=id;
+                drawObjectives(120, objImg[board->objJeu], board->objJeu);
             }
         }
     }

@@ -22,22 +22,22 @@ ViewPlateauOfficiel::ViewPlateauOfficiel(Board* board) : QGraphicsScene(), Obser
     });
 
 
-    imagePositions[QPointF(95, 70)] = ":/img/part1.jpg";
-    imagePositions[QPointF(190, 70)] = ":/img/part2.jpg";
-    imagePositions[QPointF(285, 70)] = ":/img/part3.jpg";
-    imagePositions[QPointF(380, 70)] = ":/img/part4.jpg";
-    imagePositions[QPointF(95, 165)] = ":/img/part5.jpg";
-    imagePositions[QPointF(190, 165)] = ":/img/part6.jpg";
-    imagePositions[QPointF(285, 165)] = ":/img/part7.jpg";
-    imagePositions[QPointF(380, 165)] = ":/img/part8.jpg";
-    imagePositions[QPointF(95, 260)] = ":/img/part9.jpg";
-    imagePositions[QPointF(190, 260)] = ":/img/part10.jpg";
-    imagePositions[QPointF(285, 260)] = ":/img/part11.jpg";
-    imagePositions[QPointF(380, 260)] = ":/img/part12.jpg";
-    imagePositions[QPointF(95, 355)] = ":/img/part13.jpg";
-    imagePositions[QPointF(190, 355)] = ":/img/part14.jpg";
-    imagePositions[QPointF(285, 355)] = ":/img/part15.jpg";
-    imagePositions[QPointF(380, 355)] = ":/img/part16.jpg";
+    imagePositions[QPointF(95, 70)] = ":/img/Img/part1.jpg";
+    imagePositions[QPointF(190, 70)] = ":/img/Img/part2.jpg";
+    imagePositions[QPointF(285, 70)] = ":/img/Img/part3.jpg";
+    imagePositions[QPointF(380, 70)] = ":/img/Img/part4.jpg";
+    imagePositions[QPointF(95, 165)] = ":/img/Img/part5.jpg";
+    imagePositions[QPointF(190, 165)] = ":/img/Img/part6.jpg";
+    imagePositions[QPointF(285, 165)] = ":/img/Img/part7.jpg";
+    imagePositions[QPointF(380, 165)] = ":/img/Img/part8.jpg";
+    imagePositions[QPointF(95, 260)] = ":/img/Img/part9.jpg";
+    imagePositions[QPointF(190, 260)] = ":/img/Img/part10.jpg";
+    imagePositions[QPointF(285, 260)] = ":/img/Img/part11.jpg";
+    imagePositions[QPointF(380, 260)] = ":/img/Img/part12.jpg";
+    imagePositions[QPointF(95, 355)] = ":/img/Img/part13.jpg";
+    imagePositions[QPointF(190, 355)] = ":/img/Img/part14.jpg";
+    imagePositions[QPointF(285, 355)] = ":/img/Img/part15.jpg";
+    imagePositions[QPointF(380, 355)] = ":/img/Img/part16.jpg";
 
     updateModel();
 }
