@@ -47,6 +47,8 @@ private slots:
     void on_AddRbt_clicked();
     void on_Jouer_clicked();
 
+    void on_ModeParametre_clicked();
+
 private:
     Ui::MainWindow *ui;
     Board* board;

@@ -2138,6 +2138,7 @@ QPushButton#BtnCharger:pressed {
        </layout>
       </widget>
      </widget>
+     <widget class="QWidget" name="utilisation"/>
     </widget>
     <widget class="QFrame" name="frame_19">
      <property name="geometry">
