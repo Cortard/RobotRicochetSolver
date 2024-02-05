@@ -1,7 +1,5 @@
 #include <csignal>
 
-#include <iostream>
-
 #include "Logs/Logs.h"
 #include "Server/Server.h"
 #include "Socket/Socket.h"

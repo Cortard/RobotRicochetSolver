@@ -2,7 +2,7 @@
 #define RICOCHETSOCKETSSERVER_SERVER_H
 
 #include <thread>
-#include "../configue.h"
+#include "../config.h"
 #include "../Client/Client.h"
 #include "../Logs/Logs.h"
 #include "../Socket/Socket.h"

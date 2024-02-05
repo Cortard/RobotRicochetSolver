@@ -11,8 +11,8 @@
     #include <arpa/inet.h>
     #include <unistd.h>
 
-    #define INVALID_SOCKET -1
-    #define SOCKET_ERROR -1
+    #define INVALID_SOCKET (-1)
+    #define SOCKET_ERROR (-1)
     #define closesocket(s) close (s)
 
     typedef int SOCKET;
@@ -26,7 +26,7 @@
 class Socket {
 private:
     SOCKET sock;
-    SOCKADDR_IN addressInternet;
+    SOCKADDR_IN sockAddrIn;
 public:
     static bool isClassInit;
     [[nodiscard]] static int init();
@@ -36,12 +36,13 @@ public:
     Socket(SOCKET sock, SOCKADDR_IN addressInternet);
     ~Socket();
 
-    Socket* accept();
+    [[nodiscard]] Socket* accept() const;
 
     [[nodiscard]] std::string toString() const;
 
-    [[nodiscard]] SOCKET getSock() const;
-    [[nodiscard]] SOCKADDR_IN getAddressInternet() const;
+    [[maybe_unused]] [[nodiscard]] SOCKET getSock() const;
+
+    [[maybe_unused]] [[nodiscard]] SOCKADDR_IN getAddressInternet() const;
 };
 
 #endif //RICOCHETSOCKETSSERVER_SOCKET_H

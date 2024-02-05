@@ -4,7 +4,7 @@
 #include <thread>
 #include "solver/Solver.h"
 #include "clients/Client.h"
-#include "../configue.h"
+#include "../config.h"
 #include "jpegBuilder/jpegBuilder.h"
 #include "boardBuilder/board.h"
 #include "boardBuilder/boardBuilder.h"
