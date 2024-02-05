@@ -742,3 +742,9 @@ void MainWindow::on_Home_clicked()
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 
+
+void MainWindow::on_ModeParametre_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->utilisation);
+}
+
