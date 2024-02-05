@@ -2,8 +2,9 @@
 #define RICOCHETSOCKETSSERVER_CLIENT_H
 
 #include <thread>
-#include "../Socket/Socket.h"
+#include "../MultipleTypePointer/MultipleTypePointer.h"
 #include "../Logs/Logs.h"
+#include "../Socket/Socket.h"
 
 class Client {
 public:
@@ -20,6 +21,8 @@ private:
     unsigned int id;
     std::thread processThread;
     bool shouldStop;
+
+    MultipleTypePointer output;
 
     void processLoop() const { //TODO: implement
         int i=0;
