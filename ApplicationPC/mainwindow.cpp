@@ -124,7 +124,7 @@ void MainWindow::on_Jouer_clicked()
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
-    //SocketConnection::getSolution(board);
+    SocketConnection::getSolution(board);
     board->robots2=board->robots;
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
@@ -417,7 +417,7 @@ void MainWindow::on_Histoire1_clicked()
     this->board->addRobot(3,86);
     this->board->objJeu=0;
 
-    //SocketConnection::getSolution(board);
+    SocketConnection::getSolution(board);
     this->board->robots2=this->board->robots;
 
     if (viewPlato == nullptr) {
