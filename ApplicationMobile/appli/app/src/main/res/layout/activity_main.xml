@@ -9,141 +9,157 @@
 
 
     <FrameLayout
+        android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="80dp"
+        android:layout_gravity="top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <FrameLayout
+        <ImageView
+            android:id="@+id/header2"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_gravity="top">
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/header" />
 
-            <ImageView
-                android:id="@+id/header2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/header" />
+        <TextView
+            android:id="@+id/ricochet_robot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="24sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:padding="10sp"
+            android:text="@string/titreMain"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/fontColor"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/ricochet_robot"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:autoSizeMaxTextSize="100sp"
-                android:autoSizeMinTextSize="24sp"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center"
-                android:padding="10sp"
-                android:text="@string/titreMain"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textColor="@color/fontColor"
-                android:textStyle="bold" />
+    </FrameLayout>
 
-        </FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
+        app:layout_constraintVertical_bias="0.0">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="180dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="180dp">
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/surfaceView5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
                 android:src="@drawable/round" />
 
-            <TextView
-                android:id="@+id/ip"
-                android:layout_width="288dp"
-                android:layout_height="76dp"
-                android:layout_gravity="center|top"
-                android:layout_marginTop="20dp"
-                android:autoSizeMaxTextSize="80sp"
-                android:autoSizeMinTextSize="24sp"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center"
-                android:text="@string/ip"
-                android:textAlignment="center"
-                android:textColor="@color/fontColor" />
-
-            <EditText
-                android:id="@+id/ipInput"
-                android:layout_width="287dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:autofillHints=""
-                android:ems="10"
-                android:fontFamily="@font/poppins_regular"
-                android:inputType="text"
-                android:text="195.201.205.241"
-                android:textColor="@color/fontColor" />
-
-            <Button
-                android:id="@+id/button"
-                style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginBottom="40dp"
-                android:backgroundTint="@color/blueBtn"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center_vertical"
-                android:shadowColor="#292626"
-                android:text="@string/boutonTest"
-                android:textAlignment="center"
-                android:textColor="@color/fontColor"
-                android:textSize="34sp"
-                android:textStyle="bold"
-                android:typeface="normal" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_gravity="bottom">
-
-            <ImageView
-                android:id="@+id/footer"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:accessibilityHeading="false"
-                android:src="@drawable/footer" />
+                android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/boutonHelp"
-                style="@android:style/Widget.ImageButton"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:background="#00FFFFFF"
-                android:contentDescription="@string/boutonHelp"
-                app:srcCompat="@drawable/_11758_help_icon" />
+                <TextView
+                    android:id="@+id/ip"
+                    android:layout_width="288dp"
+                    android:layout_height="76dp"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:autoSizeMaxTextSize="80sp"
+                    android:autoSizeMinTextSize="24sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="@string/ip"
+                    android:textAlignment="center"
+                    android:textColor="@color/fontColor" />
 
-            <ImageButton
-                android:id="@+id/boutonExit"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:background="#00FFFFFF"
-                android:contentDescription="@string/boutonExit"
-                app:srcCompat="@drawable/_931185_door_enter_exit_leave_out_icon" />
+                <EditText
+                    android:id="@+id/ipInput"
+                    android:layout_width="287dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="40dp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="text"
+                    android:text="195.201.205.241"
+                    android:textColor="@color/fontColor" />
+
+                <Button
+                    android:id="@+id/button"
+                    style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="70dp"
+                    android:backgroundTint="@color/blueBtn"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center_vertical"
+                    android:shadowColor="#292626"
+                    android:text="@string/boutonTest"
+                    android:textAlignment="center"
+                    android:textColor="@color/fontColor"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
+                    android:typeface="normal" />
+            </LinearLayout>
+
         </FrameLayout>
+    </ScrollView>
 
+    <FrameLayout
+        android:id="@+id/frameLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:accessibilityHeading="false"
+            android:src="@drawable/footer" />
+
+        <ImageButton
+            android:id="@+id/boutonHelp"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/boutonHelp"
+            app:srcCompat="@drawable/_11758_help_icon" />
+
+        <ImageButton
+            android:id="@+id/boutonExit"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/boutonExit"
+            app:srcCompat="@drawable/_931185_door_enter_exit_leave_out_icon" />
     </FrameLayout>
 
 
