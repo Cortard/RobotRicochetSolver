@@ -22,15 +22,19 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Variable public de l'Ip écrite par l'utilisateur
      */
+
+    Button bStart;
+    ImageButton bExit;
+    ImageButton bHelp;
     public static String ip = "1.1.1.1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button bStart = findViewById(R.id.button);
-        ImageButton bExit = findViewById(R.id.boutonExit);
-        ImageButton bHelp = findViewById(R.id.boutonHelp);
+        bStart = findViewById(R.id.button);
+        bExit = findViewById(R.id.boutonExit);
+        bHelp = findViewById(R.id.boutonHelp);
 
         bHelp.setOnClickListener(v -> {
 
