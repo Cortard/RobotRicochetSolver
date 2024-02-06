@@ -48,35 +48,33 @@
 
         </FrameLayout>
 
-        <ImageView
-            android:id="@+id/surfaceView5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="200dp"
-            android:src="@drawable/round" />
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="180dp">
+
+            <ImageView
+                android:id="@+id/surfaceView5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/round" />
 
             <TextView
                 android:id="@+id/ip"
-                android:layout_width="283dp"
-                android:layout_height="110dp"
-                android:layout_marginBottom="30dp"
+                android:layout_width="288dp"
+                android:layout_height="76dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="20dp"
                 android:autoSizeMaxTextSize="80sp"
                 android:autoSizeMinTextSize="24sp"
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:padding="20dp"
                 android:text="@string/ip"
                 android:textAlignment="center"
                 android:textColor="@color/fontColor" />
@@ -85,7 +83,7 @@
                 android:id="@+id/ipInput"
                 android:layout_width="287dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
+                android:layout_gravity="center"
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:autofillHints=""
@@ -100,8 +98,11 @@
                 style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="40dp"
                 android:backgroundTint="@color/blueBtn"
                 android:fontFamily="@font/poppins_regular"
+                android:gravity="center_vertical"
                 android:shadowColor="#292626"
                 android:text="@string/boutonTest"
                 android:textAlignment="center"
@@ -109,7 +110,7 @@
                 android:textSize="34sp"
                 android:textStyle="bold"
                 android:typeface="normal" />
-        </LinearLayout>
+        </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
