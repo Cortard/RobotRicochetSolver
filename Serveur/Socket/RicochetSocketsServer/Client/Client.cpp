@@ -4,10 +4,9 @@ Client::Client() : busy(false), socket(nullptr), id(0), shouldStop(false) {
 }
 
 void Client::startProcess(Socket* newSocket, unsigned int newId) {
-    setUp(newSocket, newId);
     if(processThread.joinable())
         processThread.join();
-    processThread = std::thread(&Client::process, this);
+    processThread = std::thread(&Client::process, this, newSocket, newId);
 }
 
 void Client::setUp(Socket* newSocket, unsigned int newId) {
@@ -17,7 +16,8 @@ void Client::setUp(Socket* newSocket, unsigned int newId) {
     this->shouldStop = false;
 }
 
-void Client::process(){
+void Client::process(Socket* newSocket, unsigned int newId){
+    setUp(newSocket, newId);
     processLoop();
     delete socket;
     socket = nullptr;
@@ -51,6 +51,8 @@ void Client::processLoop(){ //TODO: implement
     }
 
     delete[] buffer;
+
+    sleep(5);
 }
 
 void Client::askStop() {
@@ -59,6 +61,10 @@ void Client::askStop() {
 
 void Client::waitStop() {
     processThread.join();
+}
+
+bool Client::isBusy() {
+    return busy;
 }
 
 Client::~Client() {

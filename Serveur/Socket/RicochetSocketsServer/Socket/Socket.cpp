@@ -14,14 +14,14 @@ int Socket::init() {
     return EXIT_SUCCESS;
 }
 
-void Socket::clear() {
+void Socket::end() {
     #if defined (WIN32)
         WSACleanup();
     #endif
 }
 
 Socket::Socket(const char *ip, unsigned short port): sock(0), sockAddrIn() {
-    if(!isClassInit) throw std::runtime_error("Socket class not initialized");
+    if(!isClassInit && Socket::init() == EXIT_FAILURE) throw std::runtime_error("Socket class initialization failed");
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock == INVALID_SOCKET) throw std::runtime_error("Socket creation failed");
@@ -73,12 +73,4 @@ size_t Socket::receive(char *buffer, int length) const {
 
 std::string Socket::toString() const {
     return std::string(inet_ntoa(sockAddrIn.sin_addr)) + ":" + std::to_string(ntohs(sockAddrIn.sin_port));
-}
-
-[[maybe_unused]] SOCKET Socket::getSock() const {
-    return sock;
-}
-
-[[maybe_unused]] SOCKADDR_IN Socket::getAddressInternet() const {
-    return sockAddrIn;
 }

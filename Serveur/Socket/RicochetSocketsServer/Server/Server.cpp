@@ -22,10 +22,10 @@ int Server::run() {
 void Server::stop() {
     Logs::write("Stopping server", LOG_LEVEL_INFO);
     for(auto & client : clients)
-        if(client.busy) client.askStop();
+        if(client.isBusy()) client.askStop();
 
     for(auto & client : clients)
-        if(client.busy) client.waitStop();
+        if(client.isBusy()) client.waitStop();
 
     running = false;
     delete socket;
@@ -56,7 +56,6 @@ void Server::loop() {
         }
 
         int slot = foundEmptySlot();
-        Logs::write("Slot : "+std::to_string(slot), LOG_LEVEL_DEBUG);
         if(slot == -1) {
             Logs::write("No empty slot for new client ("+clientSocket->toString()+")", LOG_LEVEL_WARNING);
             delete clientSocket;
@@ -70,7 +69,7 @@ void Server::loop() {
 
 int Server::foundEmptySlot() {
     for(int i = 0; i < MAX_CLIENTS; i++) {
-        if(!clients[i].busy) {
+        if(!clients[i].isBusy()) {
             return i;
         }
     }

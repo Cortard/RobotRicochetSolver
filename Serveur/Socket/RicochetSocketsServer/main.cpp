@@ -23,7 +23,7 @@ int main() {
 
     Server::run();
 
-    Socket::clear();
+    Socket::end();
 
     return 0;
 }

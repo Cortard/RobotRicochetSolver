@@ -23,14 +23,15 @@
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Logs/Logs.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Logs/Logs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/MultipleTypePointer/MultipleTypePointer.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/MultipleTypePointer/MultipleTypePointer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Server/Server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Server/Server.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Server/Server.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Server/Server.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsServ/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +148,8 @@
       <workItem from="1707123173786" duration="19000" />
       <workItem from="1707227896150" duration="4750000" />
       <workItem from="1707915254533" duration="128000" />
-      <workItem from="1707915390170" duration="618000" />
+      <workItem from="1707915390170" duration="1004000" />
+      <workItem from="1707916423324" duration="1868000" />
     </task>
     <servers />
   </component>
