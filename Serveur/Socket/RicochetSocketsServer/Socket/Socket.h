@@ -25,10 +25,13 @@
 
 class Socket {
 private:
+    static bool isClassInit;
+    static int True;//For setsockopt
+
     SOCKET sock;
     SOCKADDR_IN sockAddrIn;
+
 public:
-    static bool isClassInit;
     [[nodiscard]] static int init();
     static void clear();
 
@@ -37,6 +40,9 @@ public:
     ~Socket();
 
     [[nodiscard]] Socket* accept() const;
+
+    [[nodiscard]] size_t send(const char* buffer, int length) const;
+    [[nodiscard]] size_t receive(char* buffer, int length) const;
 
     [[nodiscard]] std::string toString() const;
 

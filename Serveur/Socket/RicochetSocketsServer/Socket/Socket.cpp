@@ -2,6 +2,8 @@
 #include "../config.h"
 
 bool Socket::isClassInit = false;
+int Socket::True = 1;
+
 int Socket::init() {
     #if defined (WIN32)
         WSADATA WSAData;
@@ -23,6 +25,8 @@ Socket::Socket(const char *ip, unsigned short port): sock(0), sockAddrIn() {
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock == INVALID_SOCKET) throw std::runtime_error("Socket creation failed");
+
+    setsockopt(sock,SOL_SOCKET,SO_REUSEADDR,&True,sizeof(int));
 
     sockAddrIn.sin_addr.s_addr = inet_addr(ip);
     sockAddrIn.sin_family = AF_INET;
@@ -57,6 +61,14 @@ Socket *Socket::accept() const {
     }
 
     return new Socket(clientSocket, clientAddressInternet);
+}
+
+size_t Socket::send(const char *buffer, int length) const {
+    return ::send(sock, buffer, length, 0);
+}
+
+size_t Socket::receive(char *buffer, int length) const {
+    return ::recv(sock, buffer, length, 0);
 }
 
 std::string Socket::toString() const {
