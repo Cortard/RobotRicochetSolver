@@ -44,8 +44,26 @@ int main() {
     }
     printf("Connecte a %s:%d\n", inet_ntoa(sockAddrInter.sin_addr), htons(sockAddrInter.sin_port));
 
-    sleep(5);
-    printf("Fermeture de la connexion\n");
+    std::string reallyBigString = "Hello World! I am a really big string and I am going to be sent over the network because I am a client and I am going to send this string to the server. I hope the server is ready to receive me!";
+    int reallyBigStringSize = reallyBigString.size();
+    if (send(sockServ, (char*)&reallyBigStringSize, sizeof(int), 0) == SOCKET_ERROR) {
+        printf("Error while sending\n");
+        return EXIT_FAILURE;
+    }printf("Size sent\n");
+
+    if(send(sockServ, reallyBigString.c_str(), reallyBigString.size(), 0) == SOCKET_ERROR) {
+        printf("Error while sending\n");
+        return EXIT_FAILURE;
+    }printf("String sent\n");
+
+    sleep(10);
+
+    char buffer[reallyBigString.size()];
+    if(recv(sockServ, buffer, reallyBigString.size(), 0) == SOCKET_ERROR) {
+        printf("Error while receiving\n");
+        return EXIT_FAILURE;
+    }printf("Received: %s\n", std::string(buffer).c_str());
+
     closesocket(sockServ);
 
     #if defined (WIN32)
