@@ -16,7 +16,7 @@ private:
     static bool running;
     static Socket* socket;
 
-    static Client* clients[MAX_CLIENTS];
+    static Client clients[MAX_CLIENTS];
     static unsigned int nextClientId;
 
     static int init();

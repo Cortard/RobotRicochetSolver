@@ -5,8 +5,8 @@
 bool Server::running = false;
 Socket* Server::socket = nullptr;
 
-Client* Server::clients[MAX_CLIENTS];
-unsigned int Server::nextClientId = 0;
+Client Server::clients[MAX_CLIENTS];
+unsigned int Server::nextClientId = 1;
 
 int Server::run() {
     if(init()) {
@@ -21,17 +21,12 @@ int Server::run() {
 
 void Server::stop() {
     Logs::write("Stopping server", LOG_LEVEL_INFO);
-    for(auto & client : clients) {
-        if(client != nullptr) {
-            client->askStop();
-        }
-    }
-    for(auto & client : clients) {
-        if(client != nullptr) {
-            client->waitStop();
-            delete client;
-        }
-    }
+    for(auto & client : clients)
+        if(client.busy) client.askStop();
+
+    for(auto & client : clients)
+        if(client.busy) client.waitStop();
+
     running = false;
     delete socket;
 }
@@ -45,7 +40,6 @@ int Server::init() {
         Logs::write("Error while creating socket: "+std::string(e.what()), LOG_LEVEL_ERROR);
         return EXIT_FAILURE;
     }
-    memset(clients, 0, sizeof(clients));
 
     return 0;
 }
@@ -62,21 +56,21 @@ void Server::loop() {
         }
 
         int slot = foundEmptySlot();
+        Logs::write("Slot : "+std::to_string(slot), LOG_LEVEL_DEBUG);
         if(slot == -1) {
             Logs::write("No empty slot for new client ("+clientSocket->toString()+")", LOG_LEVEL_WARNING);
             delete clientSocket;
             continue;
         }
 
-        Logs::write("New client ("+clientSocket->toString()+")", LOG_LEVEL_DETAILS);
-        clients[slot] = new Client(clientSocket, nextClientId++);
-        clients[slot]->startProcess();
+        Logs::write("New client ("+clientSocket->toString()+") slot : "+std::to_string(slot)+" id : "+std::to_string(nextClientId), LOG_LEVEL_INFO);
+        clients[slot].startProcess(clientSocket, nextClientId++);
     }
 }
 
 int Server::foundEmptySlot() {
     for(int i = 0; i < MAX_CLIENTS; i++) {
-        if(clients[i] == nullptr) {
+        if(!clients[i].busy) {
             return i;
         }
     }

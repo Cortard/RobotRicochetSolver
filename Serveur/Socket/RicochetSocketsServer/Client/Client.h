@@ -8,9 +8,11 @@
 
 class Client {
 public:
-    Client(Socket* socket, unsigned int id);
+    bool busy;
 
-    void startProcess();
+    Client();
+
+    void startProcess(Socket* newSocket, unsigned int newId);
     void askStop();
     void waitStop();
 
@@ -24,14 +26,9 @@ private:
 
     MultipleTypePointer output;
 
-    void processLoop() const { //TODO: implement
-        int i=0;
-        while (!shouldStop && i<5) {
-            sleep(1);
-            ++i;
-        }
-        if(shouldStop) Logs::write("Client process stopped id: "+std::to_string(id),LOG_LEVEL_WARNING);
-    }
+    void setUp(Socket* newSocket, unsigned int newId);
+    void process();
+    void processLoop();
 };
 
 #endif //RICOCHETSOCKETSSERVER_CLIENT_H
