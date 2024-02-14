@@ -71,6 +71,13 @@
         <file>Img/Poppins-Regular.ttf</file>
         <file>Img/RubikGlitchPop-Regular.ttf</file>
         <file>Img/Poppins-Bold.ttf</file>
+        <file>Img/imgcharger.png</file>
+        <file>Img/imgcreer.png</file>
+        <file>Img/imgentrainement.png</file>
+        <file>Img/imghistoire.png</file>
+        <file>Img/imglibre.png</file>
+        <file>Img/imgofficiel.png</file>
+        <file>Img/fondfleche.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

@@ -61,105 +61,171 @@
          <height>631</height>
         </rect>
        </property>
-       <widget class="QWidget" name="gridLayoutWidget_2">
+       <widget class="QFrame" name="frame_3">
         <property name="geometry">
          <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1311</width>
-          <height>736</height>
+          <x>1</x>
+          <y>51</y>
+          <width>1301</width>
+          <height>150</height>
          </rect>
         </property>
-        <layout class="QGridLayout" name="gridLayout_11">
-         <item row="0" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout_10" stretch="0,0">
-           <property name="sizeConstraint">
-            <enum>QLayout::SetDefaultConstraint</enum>
-           </property>
-           <property name="leftMargin">
-            <number>320</number>
-           </property>
-           <property name="topMargin">
-            <number>50</number>
-           </property>
-           <property name="rightMargin">
-            <number>320</number>
-           </property>
-           <property name="bottomMargin">
-            <number>200</number>
-           </property>
-           <item>
-            <widget class="QFrame" name="frame_3">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background : url(:/img/Img/nom.png) center center no-repeat;
-border:none;</string>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_2">
-             <property name="styleSheet">
-              <string notr="true">border:none;</string>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <widget class="QPushButton" name="ModeJouer">
-              <property name="geometry">
-               <rect>
-                <x>50</x>
-                <y>50</y>
-                <width>571</width>
-                <height>71</height>
-               </rect>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>666666</width>
-                <height>100</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Poppins-Regular</family>
-                <pointsize>36</pointsize>
-                <italic>false</italic>
-                <bold>true</bold>
-                <underline>false</underline>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton#ModeJouer {
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>150</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>150</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="label_13">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>1301</width>
+           <height>100</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>RubikGlitchPop</family>
+           <pointsize>70</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #9c2579</string>
+         </property>
+         <property name="text">
+          <string>RICOCHET ROBOT</string>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_18">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>10</y>
+           <width>1291</width>
+           <height>100</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>RubikGlitchPop</family>
+           <pointsize>70</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>RICOCHET ROBOT</string>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QFrame" name="frame_2">
+        <property name="geometry">
+         <rect>
+          <x>321</x>
+          <y>208</y>
+          <width>669</width>
+          <height>370</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border:none;</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QPushButton" name="ModeJouer">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>50</y>
+           <width>571</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>666666</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins-Regular</family>
+           <pointsize>45</pointsize>
+           <italic>false</italic>
+           <bold>true</bold>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton#ModeJouer {
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
 	color : rgb(255, 255, 255);
-	font:(&quot;Poppins&quot;,50);
 }
 
 QPushButton#ModeJouer:hover {
@@ -171,35 +237,35 @@ QPushButton#ModeJouer:pressed {
 }
 
 </string>
-              </property>
-              <property name="text">
-               <string>Jouer</string>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="ModeEdition">
-              <property name="geometry">
-               <rect>
-                <x>50</x>
-                <y>150</y>
-                <width>571</width>
-                <height>71</height>
-               </rect>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>100</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Segoe Print</family>
-                <pointsize>36</pointsize>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">#ModeEdition {
+         </property>
+         <property name="text">
+          <string>Jouer</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="ModeEdition">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>150</y>
+           <width>571</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe Print</family>
+           <pointsize>36</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#ModeEdition {
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 107));
     border: 1px solid rgb(255, 255, 255);
     border-radius: 25px;
@@ -217,35 +283,35 @@ QPushButton#ModeJouer:pressed {
     background-color: #9c2579;
 }
 </string>
-              </property>
-              <property name="text">
-               <string>Edition</string>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="ModeParametre">
-              <property name="geometry">
-               <rect>
-                <x>48</x>
-                <y>249</y>
-                <width>571</width>
-                <height>71</height>
-               </rect>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>100</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Segoe Print</family>
-                <pointsize>36</pointsize>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">#ModeParametre {
+         </property>
+         <property name="text">
+          <string>Edition</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="ModeParametre">
+         <property name="geometry">
+          <rect>
+           <x>48</x>
+           <y>249</y>
+           <width>571</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe Print</family>
+           <pointsize>36</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#ModeParametre {
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 107));
     border: 1px solid rgb(255, 255, 255);
     border-radius: 25px;
@@ -263,16 +329,11 @@ QPushButton#ModeJouer:pressed {
 }
 
 </string>
-              </property>
-              <property name="text">
-               <string>Paramètres</string>
-              </property>
-             </widget>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
+         </property>
+         <property name="text">
+          <string>Paramètres</string>
+         </property>
+        </widget>
        </widget>
       </widget>
      </widget>
@@ -347,20 +408,21 @@ QPushButton#ModeJouer:pressed {
                <property name="font">
                 <font>
                  <family>Quicksand Medium</family>
-                 <pointsize>15</pointsize>
+                 <pointsize>-1</pointsize>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton#AddRbt {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
+	font-size: 20px;
 }
 
 QPushButton#AddRbt:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#AddRbt:pressed {
@@ -397,20 +459,21 @@ QPushButton#AddRbt:pressed {
                <property name="font">
                 <font>
                  <family>Quicksand Medium</family>
-                 <pointsize>15</pointsize>
+                 <pointsize>-1</pointsize>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton#AddObj {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
+	font-size: 20px;
 }
 
 QPushButton#AddObj:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#AddObj:pressed {
@@ -447,20 +510,21 @@ QPushButton#AddObj:pressed {
                <property name="font">
                 <font>
                  <family>Quicksand Medium</family>
-                 <pointsize>15</pointsize>
+                 <pointsize>-1</pointsize>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton#Jouer {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
+	font-size: 20px;
 }
 
 QPushButton#Jouer:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#Jouer:pressed {
@@ -492,7 +556,7 @@ QPushButton#Jouer:pressed {
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/Img/fond.png) center center;</string>
+             <string notr="true">background : url(:/img/Img/fondfleche.png) center center;</string>
             </property>
            </widget>
           </item>
@@ -664,23 +728,96 @@ QPushButton#resetPlateau:hover {
          <number>6</number>
         </property>
         <item row="1" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="font">
-           <font>
-            <pointsize>30</pointsize>
-            <bold>true</bold>
-           </font>
+         <widget class="QFrame" name="frame_9">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>100</height>
+           </size>
           </property>
-          <property name="styleSheet">
-           <string notr="true">background : url(:/img/Img/histoire.png) center center no-repeat;
-border:none;</string>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
           </property>
-          <property name="text">
-           <string/>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
+          <widget class="QLabel" name="label_14">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>-10</y>
+             <width>1061</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: #9c2579</string>
+           </property>
+           <property name="text">
+            <string>HISTOIRE</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_15">
+           <property name="geometry">
+            <rect>
+             <x>-10</x>
+             <y>-20</y>
+             <width>1061</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>HISTOIRE</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -1021,6 +1158,106 @@ border:none;</string>
         <property name="bottomMargin">
          <number>0</number>
         </property>
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame_10">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>150</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QLabel" name="label_19">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>20</y>
+             <width>1061</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>RubikGlitchPop</family>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>GENERER</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_20">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>30</y>
+             <width>1081</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>RubikGlitchPop</family>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: #9c2579</string>
+           </property>
+           <property name="text">
+            <string>GENERER</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <zorder>label_20</zorder>
+          <zorder>label_19</zorder>
+         </widget>
+        </item>
         <item row="1" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <property name="spacing">
@@ -1047,8 +1284,14 @@ border:none;</string>
               </rect>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:none;
-background-color: rgb(255, 255, 255);</string>
+              <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(100, 100, 100, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 5px;
+	padding:5px;
+color : rgb(255, 255, 255);
+
+
+</string>
              </property>
              <property name="title">
               <string/>
@@ -1058,9 +1301,37 @@ background-color: rgb(255, 255, 255);</string>
                <rect>
                 <x>80</x>
                 <y>30</y>
-                <width>106</width>
-                <height>22</height>
+                <width>201</width>
+                <height>31</height>
                </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">#radioButton {
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 5px;
+	padding:5px;
+	color : rgb(255, 255, 255);
+}
+
+#radioButton:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#radioButton:pressed {
+    background-color: #9c2579;     
+}
+
+
+
+
+</string>
               </property>
               <property name="text">
                <string>4 Robots</string>
@@ -1073,10 +1344,38 @@ background-color: rgb(255, 255, 255);</string>
               <property name="geometry">
                <rect>
                 <x>80</x>
-                <y>60</y>
-                <width>106</width>
-                <height>22</height>
+                <y>70</y>
+                <width>201</width>
+                <height>31</height>
                </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">#radioButton_2 {
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 5px;
+	padding:5px;
+	color : rgb(255, 255, 255);
+}
+
+#radioButton_2:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#radioButton_2:pressed {
+    background-color: #9c2579;     
+}
+
+
+
+
+</string>
               </property>
               <property name="text">
                <string>Robot noir</string>
@@ -1089,10 +1388,38 @@ background-color: rgb(255, 255, 255);</string>
               <property name="geometry">
                <rect>
                 <x>80</x>
-                <y>90</y>
-                <width>106</width>
-                <height>22</height>
+                <y>110</y>
+                <width>201</width>
+                <height>31</height>
                </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">#radioButton_3 {
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 5px;
+	padding:5px;
+	color : rgb(255, 255, 255);
+}
+
+#radioButton_3:hover {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
+}
+
+#radioButton_3:pressed {
+    background-color: #9c2579;     
+}
+
+
+
+
+</string>
               </property>
               <property name="text">
                <string>Mur biais</string>
@@ -1105,41 +1432,41 @@ background-color: rgb(255, 255, 255);</string>
               <property name="geometry">
                <rect>
                 <x>80</x>
-                <y>130</y>
+                <y>160</y>
                 <width>200</width>
-                <height>50</height>
+                <height>41</height>
                </rect>
               </property>
               <property name="minimumSize">
                <size>
                 <width>200</width>
-                <height>50</height>
+                <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
                 <width>200</width>
-                <height>50</height>
+                <height>100</height>
                </size>
               </property>
               <property name="font">
                <font>
                 <family>Quicksand Medium</family>
-                <pointsize>20</pointsize>
-                <bold>true</bold>
+                <pointsize>-1</pointsize>
                </font>
               </property>
               <property name="styleSheet">
                <string notr="true">QPushButton#GenererAleatoire {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
+	font-size: 20px;
 }
 
 QPushButton#GenererAleatoire:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#GenererAleatoire:pressed {
@@ -1156,32 +1483,6 @@ QPushButton#GenererAleatoire:pressed {
            </widget>
           </item>
          </layout>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_6">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>150</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>30</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background : url(:/img/Img/entrainement.png) center center no-repeat;
-border:none;</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>
@@ -1213,7 +1514,7 @@ border:none;</string>
          <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>100</number>
+         <number>0</number>
         </property>
         <property name="bottomMargin">
          <number>0</number>
@@ -1221,7 +1522,7 @@ border:none;</string>
         <property name="spacing">
          <number>6</number>
         </property>
-        <item row="2" column="0">
+        <item row="1" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_16">
           <property name="spacing">
            <number>150</number>
@@ -1258,12 +1559,12 @@ border:none;</string>
             </property>
             <property name="styleSheet">
              <string notr="true">#ModeHistoire {
-	background : url(:/img/Img/histoireicon.png) center cente no-repeat;
+	background : url(:/img/Img/imghistoire.png) center cente no-repeat;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color : rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
 }
 
 #ModeHistoire:hover {
@@ -1304,12 +1605,12 @@ border:none;</string>
             </property>
             <property name="styleSheet">
              <string notr="true">#ModeEntrainement {
-	background : url(:/img/Img/entrainementicon.png) center cente no-repeat;
+	background : url(:/img/Img/imgentrainement.png) center cente no-repeat;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color : rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
 }
 
 #ModeEntrainement:hover {
@@ -1329,18 +1630,13 @@ border:none;</string>
           </item>
          </layout>
         </item>
-        <item row="1" column="0">
-         <widget class="QFrame" name="frame_10">
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame_12">
           <property name="maximumSize">
            <size>
             <width>16777215</width>
             <height>100</height>
            </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background : url(:/img/Img/jouer.png) center center no-repeat;
-margin-left:100px;
-border:none;</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -1348,6 +1644,85 @@ border:none;</string>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <widget class="QLabel" name="label_16">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>1011</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>JOUER</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_17">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>1011</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: #9c2579</string>
+           </property>
+           <property name="text">
+            <string>JOUER</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <zorder>label_17</zorder>
+          <zorder>label_16</zorder>
          </widget>
         </item>
        </layout>
@@ -1368,7 +1743,7 @@ border:none;</string>
          <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>100</number>
+         <number>0</number>
         </property>
         <property name="bottomMargin">
          <number>0</number>
@@ -1378,6 +1753,12 @@ border:none;</string>
         </property>
         <item row="1" column="0">
          <widget class="QFrame" name="frame_8">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>100</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -1385,9 +1766,7 @@ border:none;</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">background : url(:/img/Img/edition.png) no-repeat;
-margin-left:400px;
-border:none;</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -1395,6 +1774,83 @@ border:none;</string>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <widget class="QLabel" name="label_8">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>10</y>
+             <width>821</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: #9c2579</string>
+           </property>
+           <property name="text">
+            <string>EDITION</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_11">
+           <property name="geometry">
+            <rect>
+             <x>-10</x>
+             <y>0</y>
+             <width>821</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>EDITION</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
          </widget>
         </item>
         <item row="2" column="0">
@@ -1403,7 +1859,7 @@ border:none;</string>
            <number>150</number>
           </property>
           <property name="leftMargin">
-           <number>100</number>
+           <number>0</number>
           </property>
           <property name="rightMargin">
            <number>0</number>
@@ -1433,25 +1889,13 @@ border:none;</string>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">/*QPushButton#ModeCharger{
-	background : url(:/img/Img/charger.png) center center;
-	border:none;
-	border-radius: 25px;
-	padding:10px;
-	color:rgb(255, 255, 255);
-}
-
-QPushButton#ModeCharger:hover {
-	color:rgb(194, 167, 225);
-} */
-
-QPushButton#ModeCharger {
-	background : url(:/img/Img/chargericon.png) center center;
+             <string notr="true">QPushButton#ModeCharger {
+	background : url(:/img/Img/imgcharger.png) center center no-repeat;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color : rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
 }
 
 QPushButton#ModeCharger:hover {
@@ -1494,12 +1938,12 @@ QPushButton#ModeCharger:pressed {
             </property>
             <property name="styleSheet">
              <string notr="true">#ModeCreer {
-	background : url(:/img/Img/creericon.png) center center no-repeat;
+	background : url(:/img/Img/imgcreer.png) center center no-repeat;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
 	padding:10px;
-	color : rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
 }
 
 #ModeCreer:hover {
@@ -1593,21 +2037,22 @@ QPushButton#ModeCharger:pressed {
                <property name="font">
                 <font>
                  <family>Quicksand Medium</family>
-                 <pointsize>15</pointsize>
+                 <pointsize>-1</pointsize>
                  <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton#Rejouer {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
+	font-size: 20px;
 }
 
 QPushButton#Rejouer:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#Rejouer:pressed {
@@ -1663,21 +2108,22 @@ QPushButton#Rejouer:pressed {
                <property name="font">
                 <font>
                  <family>Quicksand Medium</family>
-                 <pointsize>15</pointsize>
+                 <pointsize>-1</pointsize>
                  <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton#Solution {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
+	font-size: 20px;
 }
 
 QPushButton#Solution:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#Solution:pressed {
@@ -1714,21 +2160,22 @@ QPushButton#Solution:pressed {
                <property name="font">
                 <font>
                  <family>Quicksand Medium</family>
-                 <pointsize>15</pointsize>
+                 <pointsize>-1</pointsize>
                  <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton#Sauvegarder {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
+	font-size: 20px;
 }
 
 QPushButton#Sauvegarder:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#Sauvegarder:pressed {
@@ -1760,7 +2207,7 @@ QPushButton#Sauvegarder:pressed {
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background : url(:/img/Img/fond.png) center center;</string>
+             <string notr="true">background : url(:/img/Img/fondfleche.png) center center;</string>
             </property>
            </widget>
           </item>
@@ -1770,7 +2217,13 @@ QPushButton#Sauvegarder:pressed {
       </widget>
      </widget>
      <widget class="QWidget" name="choixplateau">
-      <widget class="QWidget" name="verticalLayoutWidget_9">
+      <property name="maximumSize">
+       <size>
+        <width>5555555</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <widget class="QWidget" name="gridLayoutWidget_3">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1779,50 +2232,14 @@ QPushButton#Sauvegarder:pressed {
          <height>601</height>
         </rect>
        </property>
-       <layout class="QGridLayout" name="gridLayout_14" columnstretch="0">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>100</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
+       <layout class="QGridLayout" name="gridLayout_13">
         <property name="spacing">
          <number>6</number>
         </property>
         <item row="1" column="0">
-         <widget class="QFrame" name="frame_9">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>100</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background : url(:/img/Img/edition.png) no-repeat;
-margin-left:400px;
-border:none;</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_15">
+         <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="spacing">
            <number>150</number>
-          </property>
-          <property name="leftMargin">
-           <number>100</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
           </property>
           <property name="bottomMargin">
            <number>50</number>
@@ -1850,7 +2267,7 @@ border:none;</string>
             </property>
             <property name="styleSheet">
              <string notr="true">#ModeOfficiel{
-	background : url(:/img/Img/officielicon.png) center cente no-repeat;
+	background : url(:/img/Img/imgofficiel.png) center cente no-repeat;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
@@ -1896,7 +2313,7 @@ border:none;</string>
             </property>
             <property name="styleSheet">
              <string notr="true">#ModeLibre {
-	background : url(:/img/Img/libreicon.png) center cente no-repeat;
+	background : url(:/img/Img/imglibre.png) center cente no-repeat;
 	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 25px;
@@ -1920,6 +2337,104 @@ border:none;</string>
            </widget>
           </item>
          </layout>
+        </item>
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame_11">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QLabel" name="label_7">
+           <property name="geometry">
+            <rect>
+             <x>-10</x>
+             <y>0</y>
+             <width>821</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>CREER</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_3">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>10</y>
+             <width>821</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>70</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: #9c2579</string>
+           </property>
+           <property name="text">
+            <string>CREER</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <zorder>label_3</zorder>
+          <zorder>label_7</zorder>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -1961,21 +2476,22 @@ border:none;</string>
           <property name="font">
            <font>
             <family>Quicksand Medium</family>
-            <pointsize>15</pointsize>
+            <pointsize>-1</pointsize>
             <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
            <string notr="true">QPushButton#JouerOfficiel {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
+	font-size: 20px;
 }
 
 QPushButton#JouerOfficiel:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#JouerOfficiel:pressed {
@@ -2039,6 +2555,9 @@ border:none;</string>
         <property name="leftMargin">
          <number>100</number>
         </property>
+        <property name="topMargin">
+         <number>100</number>
+        </property>
         <property name="rightMargin">
          <number>100</number>
         </property>
@@ -2093,20 +2612,21 @@ border:none;</string>
                <property name="font">
                 <font>
                  <family>Quicksand Medium</family>
-                 <pointsize>15</pointsize>
+                 <pointsize>-1</pointsize>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton#BtnCharger {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0.477, x2:1, y2:0.483, stop:0 rgba(232, 186, 255, 255), stop:1 rgba(170, 0, 255, 255));
-	border:none;
-	border-radius: 5px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 25px;
 	padding:10px;
-	color : #70bfcb;
+	color : rgb(255, 255, 255);
+	font-size: 20px;
 }
 
 QPushButton#BtnCharger:hover {
-    background-color: #9c2579;
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(255, 255, 255, 150));
 }
 
 QPushButton#BtnCharger:pressed {
@@ -2128,6 +2648,22 @@ QPushButton#BtnCharger:pressed {
                  <height>192</height>
                 </rect>
                </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(100, 100, 100, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 5px;
+	padding:5px;
+color : rgb(255, 255, 255);
+
+
+</string>
+               </property>
               </widget>
              </widget>
             </item>
@@ -2138,7 +2674,181 @@ QPushButton#BtnCharger:pressed {
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="utilisation"/>
+     <widget class="QWidget" name="utilisation">
+      <widget class="QFrame" name="frame_6">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>120</y>
+         <width>661</width>
+         <height>411</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#frame_6 {
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 			rgba(100, 100, 100, 107));
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 5px;
+	padding:5px;
+color : rgb(255, 255, 255);
+
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QWidget" name="gridLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>664</width>
+          <height>411</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="0">
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>20</number>
+           </property>
+           <property name="bottomMargin">
+            <number>20</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="maximumSize">
+              <size>
+               <width>660</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>20</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color : rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>Au niveau des affichages :</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="maximumSize">
+              <size>
+               <width>660</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>Clique gauche permet le déplacement ou ajout d'un robot ou objectif. 
+ Clique droit permet de définir l'objectif souhaité pour la partir. 
+ Clique molette permet la suppression 
+ d'un robot ou objectif durant la création du plateau.</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="0">
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>20</number>
+           </property>
+           <property name="bottomMargin">
+            <number>20</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_9">
+             <property name="maximumSize">
+              <size>
+               <width>660</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>20</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color : rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>Qu'est ce que Ricochet Robot ?</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_10">
+             <property name="maximumSize">
+              <size>
+               <width>660</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>Ricochet Robot est un jeu de plateau ayant pour but de trouver 
+ le plus court chemin jusqu'à l'objectif en déplaçant les robots. 
+ Les robots ne se déplacent qu'en ligne droite jusqu'a rencontrer un mur 
+ ou un autre objectif.</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
     </widget>
     <widget class="QFrame" name="frame_19">
      <property name="geometry">

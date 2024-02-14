@@ -124,6 +124,7 @@ void MainWindow::on_Jouer_clicked()
         viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
         connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
     }
+    solutionid=0;
     SocketConnection::getSolution(board);
     board->robots2=board->robots;
     ui->stackedWidget->setCurrentWidget(ui->plateau);
@@ -406,6 +407,7 @@ void MainWindow::on_GenererAleatoire_clicked()
 
 void MainWindow::on_Histoire1_clicked()
 {
+    solutionid=0;
     this->board->reset();
     board->constructPart13(this->board, 0);
     board->constructPart15(this->board, 1);
