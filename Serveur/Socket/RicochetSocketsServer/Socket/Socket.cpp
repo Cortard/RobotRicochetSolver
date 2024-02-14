@@ -1,5 +1,7 @@
+#include <random>
 #include "Socket.h"
 #include "../config.h"
+#include "../sha256/sha256.h"
 
 bool Socket::isClassInit = false;
 int Socket::True = 1;
@@ -68,7 +70,43 @@ size_t Socket::send(const char *buffer, int length) const {
 }
 
 size_t Socket::receive(char *buffer, int length) const {
-    return ::recv(sock, buffer, length, 0);
+    return receive(buffer, length, false);
+}
+
+size_t Socket::receive(char* buffer, int length, bool waitAll) const{
+    return ::recv(sock, buffer, length, waitAll ? MSG_WAITALL : 0);
+}
+
+int Socket::testConnection() const {
+    int buffer[1024*1024];
+    std::random_device random_device; // create object for seeding
+    std::mt19937 engine{random_device()}; // create engine and seed it
+    std::uniform_int_distribution dist(0,255); // create distribution for integers with [1; 9] range
+    for(int & i : buffer) i = dist(engine);
+
+    size_t bytesSent = send(reinterpret_cast<char*>(buffer), sizeof(buffer));
+    if (bytesSent != sizeof(buffer)) {
+        return -1;
+    }
+
+    size_t size;
+    if(receive(reinterpret_cast<char*>(&size), sizeof(size), true)!=sizeof(size)) {
+        return -1;
+    }
+
+    char* receiveBuffer = new char[size];
+    if(receive(receiveBuffer, (int)size)!=size) {
+        delete[] receiveBuffer;
+        return -1;
+    }
+    std::string receivedChecksum = std::string(receiveBuffer);
+    delete[] receiveBuffer;
+
+    SHA256 sha256;
+    auto checkSum = sha256(buffer, sizeof(buffer));
+
+    if(checkSum != receivedChecksum) return 1;
+    return 0;
 }
 
 std::string Socket::toString() const {

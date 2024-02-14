@@ -15,6 +15,8 @@ ENDIF()
 
 add_executable(StdSocketsClient main.cpp
         configue.h
+        sha256/sha256.h
+        sha256/sha256.cpp
 )
 
 target_link_libraries(StdSocketsClient ${OpenCV_LIBS})

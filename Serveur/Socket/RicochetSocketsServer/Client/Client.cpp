@@ -32,27 +32,7 @@ void Client::processLoop(){ //TODO: implement
         ++i;
     }
     if(shouldStop) Logs::write("Client process stopped id: "+std::to_string(id),LOG_LEVEL_WARNING);*/
-    int size;
-    if(socket->receive((char*)&size, sizeof(int))!=sizeof(int)) {
-        Logs::write("Error while receiving size",LOG_LEVEL_WARNING);
-        return;
-    }
-    char* buffer = new char[size];
-    if(socket->receive(buffer, size)!=size) {
-        Logs::write("Error while receiving buffer",LOG_LEVEL_WARNING);
-        delete[] buffer;
-        return;
-    }
-
-    Logs::write("Received: "+std::string(buffer),LOG_LEVEL_INFO);
-
-    if(socket->send(buffer, size)!=size) {
-        Logs::write("Error while sending buffer",LOG_LEVEL_WARNING);
-    }
-
-    delete[] buffer;
-
-    sleep(5);
+    Logs::write("Connection test with client id: "+std::to_string(id)+" result: "+std::to_string(socket->testConnection()),LOG_LEVEL_INFO);
 }
 
 void Client::askStop() {

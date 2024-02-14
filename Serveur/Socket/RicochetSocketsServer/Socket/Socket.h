@@ -80,6 +80,20 @@ public:
      * @return The number of bytes received
      */
     [[nodiscard]] size_t receive(char* buffer, int length) const;
+    /**
+     * @brief Receive a buffer of a given length with flags, the return value should not be ignored
+     * @param buffer The buffer to receive
+     * @param length The length of the buffer
+     * @param flags The flags to use
+     * @return The number of bytes received
+     */
+    [[nodiscard]] size_t receive(char* buffer, int length, bool waitAll) const;
+
+    /**
+     * @brief Test the connection with the socket, the return value should not be ignored
+     * @return 0 if the connection is successful, -1 if the connection is not successful and 1 if the connection is bad
+     */
+    [[nodiscard]] int testConnection() const;
 
     /**
      * @brief Convert the socket to a string, the return value should not be ignored
