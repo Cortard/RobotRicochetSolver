@@ -78,9 +78,11 @@ public class PictureActivity extends AppCompatActivity {
                     requestPermissions(permissions, PERMISSION_CODE);
                 } else {
                     openCamera();
+                    galery=false;
                 }
             } else {
                 openCamera();
+                galery=false;
             }
         });
 

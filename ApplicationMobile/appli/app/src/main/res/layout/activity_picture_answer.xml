@@ -8,139 +8,131 @@
     tools:context=".PictureAnswerActivity">
 
 
-    <Button
-        android:id="@+id/btnCor"
-        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
-        android:layout_width="156dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/blueBtn"
-        android:fontFamily="@font/poppins_regular"
-        android:shadowColor="#292626"
-        android:text="@string/correction"
-        android:textAlignment="center"
-        android:textColor="@color/fontColor"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.759" />
-
-    <ImageView
-        android:id="@+id/header2"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:src="@drawable/header"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
-        app:layout_constraintDimensionRatio="1:0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <ImageView
-        android:id="@+id/footer"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:accessibilityHeading="false"
-        android:src="@drawable/footer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageButton
-        android:id="@+id/boutonHelp"
-        style="@android:style/Widget.ImageButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/boutonHelp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@+id/footer"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/footer"
-        app:layout_constraintTop_toTopOf="@+id/footer"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/_11758_help_icon" />
-
-
-    <ImageButton
-        android:id="@+id/boutonReturn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/boutonExit"
-        android:src="@drawable/_52473_return_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/footer"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/footer"
-        app:layout_constraintTop_toTopOf="@+id/footer"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/titreRep"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="24sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/poppins_regular"
-        android:gravity="center"
-        android:padding="10sp"
-        android:text="@string/correction"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/fontColor"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/header2"
+        android:layout_height="match_parent"
+        android:paddingTop="80dp"
+        android:paddingBottom="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout12"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/header2"
-        app:layout_constraintTop_toTopOf="@+id/header2"
-        app:layout_constraintVertical_bias="1.0" />
-
-
-    <ImageView
-        android:id="@+id/surfaceView"
-        android:layout_width="342dp"
-        android:layout_height="347dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="120dp"
-        android:src="@drawable/round"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.338" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout11">
 
-    <com.sae.myapplication.MyCanvas
-        android:id="@+id/canva"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
-        app:layout_constraintBottom_toBottomOf="@+id/surfaceView"
-        app:layout_constraintEnd_toEndOf="@+id/surfaceView"
-        app:layout_constraintStart_toStartOf="@+id/surfaceView"
-        app:layout_constraintTop_toTopOf="@+id/surfaceView"
-        app:layout_constraintVertical_bias="0.518">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    </com.sae.myapplication.MyCanvas>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/surfaceView"
+                    android:layout_width="342dp"
+                    android:layout_height="347dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="50dp"
+                    android:src="@drawable/round" />
+
+                <com.sae.myapplication.MyCanvas
+                    android:id="@+id/canva"
+                    android:layout_width="320dp"
+                    android:layout_height="320dp"
+                    android:layout_gravity="center">
+
+                </com.sae.myapplication.MyCanvas>
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/btnCor"
+                style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
+                android:layout_width="156dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/blueBtn"
+                android:fontFamily="@font/poppins_regular"
+                android:shadowColor="#292626"
+                android:text="@string/correction"
+                android:textAlignment="center"
+                android:textColor="@color/fontColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/frameLayout12"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:accessibilityHeading="false"
+            android:src="@drawable/footer" />
+
+        <ImageButton
+            android:id="@+id/boutonHelp"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/boutonHelp"
+            app:srcCompat="@drawable/_11758_help_icon" />
+
+        <ImageButton
+            android:id="@+id/boutonReturn"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/boutonExit"
+            android:src="@drawable/_52473_return_icon" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/header2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/header" />
+
+        <TextView
+            android:id="@+id/titreRep"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="24sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:padding="10sp"
+            android:text="@string/correction"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/fontColor"
+            android:textStyle="bold" />
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
