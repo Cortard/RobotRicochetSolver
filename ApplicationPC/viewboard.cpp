@@ -47,8 +47,8 @@ void ViewBoard::updateModel()
         }
     }
     for(int i=0;i<5;i++){
-        if(board->robots.at(i)!=-1){
-            drawRobot(board->robots.at(i), robotImg[i], i);
+        if(board->robots_move.at(i)!=-1){
+            drawRobot(board->robots_move.at(i), robotImg[i], i);
         }
     }
 
