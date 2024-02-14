@@ -1,1 +1,0 @@
-CMakeLists.txt not found in C:\Users\cfaur\Documents\IUT\2y\sae\RobotRicochetSolver\Serveur\Socket\StdSocketsServ Select CMakeLists.txt
