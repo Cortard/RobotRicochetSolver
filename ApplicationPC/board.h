@@ -39,8 +39,8 @@ public:
 
     // premier int : id , deuxieme int : position du tableau
     std::map<int, int> objectives;
-    std::map<int, int> robots;
-    std::map<int, int> robots2;
+    std::map<int, int> robots_move;
+    std::map<int, int> robots_initial;
     unsigned int cases[256];
     int mouvement=0;
     int objJeu=-1;
@@ -52,7 +52,6 @@ public:
     unsigned char path[32];
 
     void reset();
-    void resetPos(int postion);
 
 private:
     static const int BOARD_SIZE = 16;

@@ -94,7 +94,7 @@ void MainWindow::on_ModeEdition_clicked()
 void MainWindow::on_AddRbt_clicked()
 {
     bool found = false;
-    for (const auto& pair : board->robots) {
+    for (const auto& pair : board->robots_move) {
         if (pair.second == 136) {
             found = true;
             break;
@@ -126,7 +126,7 @@ void MainWindow::on_Jouer_clicked()
     }
     solutionid=0;
     SocketConnection::getSolution(board);
-    board->robots2=board->robots;
+    board->robots_initial=board->robots_move;
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
@@ -420,7 +420,7 @@ void MainWindow::on_Histoire1_clicked()
     this->board->objJeu=0;
 
     SocketConnection::getSolution(board);
-    this->board->robots2=this->board->robots;
+    this->board->robots_initial=this->board->robots_move;
 
     if (viewPlato == nullptr) {
         viewPlato = new viewPlateau(board);
@@ -444,7 +444,7 @@ void MainWindow::on_resetPlateau_clicked()
 
 void MainWindow::on_Rejouer_clicked()
 {
-    board->robots=board->robots2;
+    board->robots_move=board->robots_initial;
     solutionid=0;
     board->notifyObserver();
     if (viewBoard == nullptr) {
@@ -463,7 +463,7 @@ void MainWindow::on_Rejouer_clicked()
 void MainWindow::on_Solution_clicked()
 {
     if(solutionid==0){
-        board->robots=board->robots2;
+        board->robots_move=board->robots_initial;
         board->notifyObserver();
     }
 
@@ -487,8 +487,8 @@ void MainWindow::on_Solution_clicked()
         rbt=3;
     }
 
-    int col = board->robots.at(rbt) % 16;
-    int row = board->robots.at(rbt) / 16;
+    int col = board->robots_move.at(rbt) % 16;
+    int row = board->robots_move.at(rbt) / 16;
 
     int compPos=-1;
 
@@ -506,9 +506,9 @@ void MainWindow::on_Solution_clicked()
 
         for (int i = 0; i < row ; i++){
             int pos = col + i * 16;
-            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
-            if (it != board->robots.end()){
+            if (it != board->robots_move.end()){
                 targetRow = i;
             }
         }
@@ -533,9 +533,9 @@ void MainWindow::on_Solution_clicked()
         for (int i = col+1 ; i <= 16 ; i++){
             int pos = i + row * 16;
 
-            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
-            if (it != board->robots.end()){
+            if (it != board->robots_move.end()){
                 targetCol = i;
                 break;
             }
@@ -562,9 +562,9 @@ void MainWindow::on_Solution_clicked()
 
         for (int i = row+1 ; i <= 16 ; i++){
             int pos = col + i * 16;
-            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
-            if (it != board->robots.end()){
+            if (it != board->robots_move.end()){
                 targetRow = i;
                 break;
             }
@@ -591,9 +591,9 @@ void MainWindow::on_Solution_clicked()
 
         for (int i = col-1 ; i >= 0 ; i--){
             int pos = i + row * 16;
-            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
-            if (it != board->robots.end()){
+            if (it != board->robots_move.end()){
                 targetCol = i;
                 break;
             }
@@ -625,7 +625,7 @@ void MainWindow::on_Sauvegarder_clicked()
         stream<< "plateau "<<fichier << " ";
 
         for(int i=0;i<5;i++){
-            stream<<board->robots2.at(i) << " ";
+            stream<<board->robots_initial.at(i) << " ";
         }
         for(int i=0;i<17;i++){
             stream<<board->objectives.at(i) << " " ;
@@ -699,7 +699,7 @@ void MainWindow::on_BtnCharger_clicked()
 
                 board->reset();
                 for(int i=0;i<5;i++){
-                    board->robots.at(i)=parts[i + 2].toInt();
+                    board->robots_move.at(i)=parts[i + 2].toInt();
                 }
                 for(int i=0;i<17;i++){
                     board->objectives.at(i)=parts[i + 7].toInt();

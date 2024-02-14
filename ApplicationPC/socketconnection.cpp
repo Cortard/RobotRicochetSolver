@@ -88,7 +88,7 @@ int SocketConnection::getSolution(Board* board) {
     unsigned int robots[4];
     std::map<int, int>::iterator it;
     int cpt = 1;
-    for(it = board->robots.begin(); it != board->robots.end(); ++it) {
+    for(it = board->robots_move.begin(); it != board->robots_move.end(); ++it) {
         if(board->objJeu / 4 == it->first) {
             robots[0] = it->second;
             grid[it->second] |= 0x10;
@@ -99,6 +99,7 @@ int SocketConnection::getSolution(Board* board) {
         ++cpt;
 
     }
+    grid[0] = 9;
     for(int i=0; i<256; ++i) {
         if(i % 16 == 0)
             std::cout << std::endl;

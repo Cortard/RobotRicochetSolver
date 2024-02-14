@@ -49,8 +49,8 @@ void viewPlateau::updateModel()
         }
     }
     for(int i=0;i<5;i++){
-        if(board->robots.at(i)!=-1){
-            drawRobot(board->robots.at(i), robotImg[i], i);
+        if(board->robots_move.at(i)!=-1){
+            drawRobot(board->robots_move.at(i), robotImg[i], i);
         }
     }
 
@@ -196,7 +196,7 @@ void viewPlateau::drawRobot(int targetCell, const QString& imagePath, int id)
 
 void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-    for (const auto& robot : board->robots) {
+    for (const auto& robot : board->robots_move) {
         if (robot.second == board->objectives[board->objJeu]) {
             robotId = robot.first;
             board->victoireHistoire++;
@@ -209,7 +209,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
         if (mouseEvent->button() == Qt::LeftButton){
 
-            for (const auto& robot : board->robots) {
+            for (const auto& robot : board->robots_move) {
                 if (robot.second == board->objectives[board->objJeu]) {
                     robotId = robot.first;
                     board->victoireHistoire++;
@@ -236,10 +236,10 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
             }
             int pos = col + row * 16;
             //Cherche si il
-            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
 
-            if (it != board->robots.end()) {
+            if (it != board->robots_move.end()) {
                 if (click == 2){
                     QPointF secondMouse = mouseEvent->scenePos();
                     clearSelectionSquares();
@@ -261,9 +261,9 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
                         for (int i = col-1 ; i >= 0 ; i--){
                             int pos = i + row * 16;
-                            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                                    [pos](const auto& pair) { return pair.second == pos; });
-                            if (it != board->robots.end()){
+                            if (it != board->robots_move.end()){
                                 targetCol = i;
                                 break;
                             }
@@ -276,7 +276,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         }else{
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
-                        for (const auto& robot : board->robots) {
+                        for (const auto& robot : board->robots_move) {
                             if (robot.second == board->objectives[board->objJeu]) {
                                 robotId = robot.first;
                                 board->victoireHistoire++;
@@ -303,9 +303,9 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         for (int i = col+1 ; i <= 16 ; i++){
                             int pos = i + row * 16;
 
-                            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                                    [pos](const auto& pair) { return pair.second == pos; });
-                            if (it != board->robots.end()){
+                            if (it != board->robots_move.end()){
                                 targetCol = i;
                                 break;
                             }
@@ -318,7 +318,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         }else{
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
-                        for (const auto& robot : board->robots) {
+                        for (const auto& robot : board->robots_move) {
                             if (robot.second == board->objectives[board->objJeu]) {
                                 robotId = robot.first;
                                 board->victoireHistoire++;
@@ -344,9 +344,9 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
                         for (int i = row+1 ; i <= 16 ; i++){
                             int pos = col + i * 16;
-                            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                                    [pos](const auto& pair) { return pair.second == pos; });
-                            if (it != board->robots.end()){
+                            if (it != board->robots_move.end()){
                                 targetRow = i;
                                 break;
                             }
@@ -359,7 +359,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         }else{
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
-                        for (const auto& robot : board->robots) {
+                        for (const auto& robot : board->robots_move) {
                             if (robot.second == board->objectives[board->objJeu]) {
                                 robotId = robot.first;
                                 board->victoireHistoire++;
@@ -385,9 +385,9 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
                         for (int i = 0; i < row ; i++){
                             int pos = col + i * 16;
-                            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+                            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                                    [pos](const auto& pair) { return pair.second == pos; });
-                            if (it != board->robots.end()){
+                            if (it != board->robots_move.end()){
                                 targetRow = i;
                             }
                         }
@@ -397,7 +397,7 @@ void viewPlateau::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                         }else{
                             (new ControllerMoveRobot(board))->control(id, compPos);
                         }
-                        for (const auto& robot : board->robots) {
+                        for (const auto& robot : board->robots_move) {
                             if (robot.second == board->objectives[board->objJeu]) {
                                 robotId = robot.first;
                                 board->victoireHistoire++;
