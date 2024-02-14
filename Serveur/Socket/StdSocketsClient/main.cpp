@@ -45,7 +45,7 @@ int main() {
     }
     printf("Connecte a %s:%d\n", inet_ntoa(sockAddrInter.sin_addr), htons(sockAddrInter.sin_port));
 
-    #define sizeBufferTest 8000000
+    #define sizeBufferTest 8000
     int buffer[sizeBufferTest];
     size_t bytesReceived = recv(sockServ, reinterpret_cast<char*>(buffer), sizeof(buffer), MSG_WAITALL);
     if (bytesReceived == SOCKET_ERROR) {
