@@ -21,6 +21,8 @@ add_executable(RicochetSocketServer.exe main.cpp
         Logs/Logs.h
         Server/Server.cpp
         Server/Server.h
+        sha256/sha256.h
+        sha256/sha256.cpp
         Socket/Socket.h
         Socket/Socket.cpp
 )
