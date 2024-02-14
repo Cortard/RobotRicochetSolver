@@ -44,9 +44,11 @@ Socket::Socket(const char *ip, unsigned short port): sock(0), sockAddrIn() {
         closesocket(sock);
         throw std::runtime_error("Socket listening failed");
     }
+
+    isServer = true;
 }
 
-Socket::Socket(SOCKET sock, SOCKADDR_IN addressInternet) : sock(sock), sockAddrIn(addressInternet) {}
+Socket::Socket(SOCKET sock, SOCKADDR_IN addressInternet, bool isServer): sock(sock), sockAddrIn(addressInternet), isServer(isServer) {}
 
 Socket::~Socket() {
     closesocket(sock);
@@ -62,23 +64,23 @@ Socket *Socket::accept() const {
         return nullptr;
     }
 
-    return new Socket(clientSocket, clientAddressInternet);
+    return new Socket(clientSocket, clientAddressInternet, false);
 }
 
-size_t Socket::send(const char *buffer, int length) const {
+ssize_t Socket::send(const char *buffer, int length) const {
     return ::send(sock, buffer, length, 0);
 }
 
-size_t Socket::receive(char *buffer, int length) const {
+ssize_t Socket::receive(char *buffer, int length) const {
     return receive(buffer, length, false);
 }
 
-size_t Socket::receive(char* buffer, int length, bool waitAll) const{
+ssize_t Socket::receive(char* buffer, int length, bool waitAll) const{
     return ::recv(sock, buffer, length, waitAll ? MSG_WAITALL : 0);
 }
 
 int Socket::testConnection() const {
-    #define sizeBufferTest 8000000
+    #define sizeBufferTest 8000
     int buffer[sizeBufferTest];
     std::random_device random_device; // create object for seeding
     std::mt19937 engine{random_device()}; // create engine and seed it

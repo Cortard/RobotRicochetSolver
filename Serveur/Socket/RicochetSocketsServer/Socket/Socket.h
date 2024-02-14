@@ -56,8 +56,9 @@ public:
      * @brief Create a client socket from the given socket and address
      * @param sock The socket to create the client socket from
      * @param addressInternet The address to create the client socket from
+     * @param isServer If the socket is a server or a client
      */
-    Socket(SOCKET sock, SOCKADDR_IN addressInternet);
+    Socket(SOCKET sock, SOCKADDR_IN addressInternet, bool isServer);
 
     /**
      * @brief Accept a client socket from a server socket, the return value should not be ignored
@@ -69,25 +70,25 @@ public:
      * @brief Send a buffer of a given length, the return value should not be ignored
      * @param buffer The buffer to send
      * @param length The length of the buffer
-     * @return The number of bytes sent
+     * @return The number of bytes sent, 0 if the connection is closed and -1 if the system call send fails
      */
-    [[nodiscard]] size_t send(const char* buffer, int length) const;
+    [[nodiscard]] ssize_t send(const char* buffer, int length) const;
 
     /**
      * @brief Receive a buffer of a given length, the return value should not be ignored
      * @param buffer The buffer to receive
      * @param length The length of the buffer
-     * @return The number of bytes received
+     * @return The number of bytes received, 0 if the connection is closed and -1 if the system call recv fails
      */
-    [[nodiscard]] size_t receive(char* buffer, int length) const;
+    [[nodiscard]] ssize_t receive(char* buffer, int length) const;
     /**
      * @brief Receive a buffer of a given length with flags, the return value should not be ignored
      * @param buffer The buffer to receive
      * @param length The length of the buffer
      * @param flags The flags to use
-     * @return The number of bytes received
+     * @return The number of bytes received, 0 if the connection is closed and -1 if the system call recv fails
      */
-    [[nodiscard]] size_t receive(char* buffer, int length, bool waitAll) const;
+    [[nodiscard]] ssize_t receive(char* buffer, int length, bool waitAll) const;
 
     /**
      * @brief Test the connection with the socket, the return value should not be ignored
@@ -125,6 +126,10 @@ private:
      * @brief The internet address
      */
     SOCKADDR_IN sockAddrIn;
+    /**
+     * @brief if the socket is a server or a client
+     */
+    bool isServer;
 };
 
 #endif //RICOCHETSOCKETSSERVER_SOCKET_H

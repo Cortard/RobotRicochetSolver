@@ -10,6 +10,9 @@ void stopServer(int signum) {
 }
 
 int main() {
+    #if DEBUG_OUTPUT==1
+        Logs::write("PID: " + std::to_string(getpid()), LOG_LEVEL_INFO);
+    #endif
     if(!Logs::write("Start Server",LOG_LEVEL_INFO)) return EXIT_FAILURE;
     signal(SIGTERM, stopServer);
     signal(SIGINT, stopServer);
