@@ -78,7 +78,8 @@ size_t Socket::receive(char* buffer, int length, bool waitAll) const{
 }
 
 int Socket::testConnection() const {
-    int buffer[1024*1024];
+    #define sizeBufferTest 8000000
+    int buffer[sizeBufferTest];
     std::random_device random_device; // create object for seeding
     std::mt19937 engine{random_device()}; // create engine and seed it
     std::uniform_int_distribution dist(0,255); // create distribution for integers with [1; 9] range
