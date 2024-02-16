@@ -102,8 +102,11 @@ ssize_t Socket::receive(char* buffer, bool waitAll) const{
             if (bytesReceived != sizeof(length)) return bytesReceived;
             return ::recv(sock, buffer, length, waitAll?MSG_WAITALL:0);
         }
-        case HeaderFlag::CONNECTION_TEST:
-            return testConnection(true);
+        case HeaderFlag::CONNECTION_TEST: {
+            Logs::write("Connection test received by " + toString(), LOG_LEVEL_VERBOSE);
+            int result = testConnection(true);
+            Logs::write("Connection test result: " + std::to_string(result), LOG_LEVEL_VERBOSE);
+        }
         default:
             return -1;
     }
@@ -150,13 +153,13 @@ ssize_t Socket::receiveData(char *buffer, size_t size, bool waitAll) const {
 }
 
 int Socket::sendConnectionTest() const {
-    //size_t size = 1024*1024;
-    size_t size = 1024;
-    char buffer[size];
+    size_t size = 16*1024*1024;
+    char* buffer = new char[size];
     std::random_device random_device; // create object for seeding
     std::mt19937 engine{random_device()}; // create engine and seed it
     std::uniform_int_distribution<unsigned char> dist(0,255); // create distribution for integers with [1, 100000] range
-    for(char& i : buffer) i = static_cast<char>(dist(engine));
+    for(size_t i = 0; i < size; ++i)
+        buffer[i] = static_cast<char>(dist(engine));
 
     if(send(buffer, size) == SOCKET_ERROR) return -1;
 
@@ -186,7 +189,7 @@ int Socket::receiveConnectionTest() const {
     size_t size;
     if(receiveDataSize(size) != sizeof(size)) return -1;
 
-    char buffer[size];
+    char* buffer = new char[size];
     if(receiveData(buffer, size) != size) return -1;
 
     SHA256 sha256;

@@ -32,7 +32,7 @@ void Client::processLoop(){ //TODO: implement
         ++i;
     }
     if(shouldStop) Logs::write("Client process stopped id: "+std::to_string(id),LOG_LEVEL_WARNING);*/
-    Logs::write("Connection test with client id: "+std::to_string(id)+" result: "+std::to_string(socket->receive(nullptr)),LOG_LEVEL_INFO);
+    socket->receive(nullptr);
 }
 
 void Client::askStop() {
