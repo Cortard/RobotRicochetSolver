@@ -21,12 +21,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Server/Server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Server/Server.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Server/Server.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Server/Server.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/configue.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,11 +79,6 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="StdSocketsClient" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="StdSocketsClient" TARGET_NAME="StdSocketsClient" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="StdSocketsClient" RUN_TARGET_NAME="StdSocketsClient">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -151,6 +149,9 @@
       <workItem from="1707915254533" duration="128000" />
       <workItem from="1707915390170" duration="1004000" />
       <workItem from="1707916423324" duration="1868000" />
+      <workItem from="1708089063478" duration="967000" />
+      <workItem from="1708090909044" duration="1592000" />
+      <workItem from="1708093668555" duration="3671000" />
     </task>
     <servers />
   </component>

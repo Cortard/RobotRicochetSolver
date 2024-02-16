@@ -17,6 +17,10 @@ add_executable(StdSocketsClient main.cpp
         configue.h
         sha256/sha256.h
         sha256/sha256.cpp
+        ../RicochetSocketsServer/Socket/Socket.h
+        ../RicochetSocketsServer/Socket/Socket.cpp
+        ../RicochetSocketsServer/Logs/Logs.h
+        ../RicochetSocketsServer/Logs/Logs.cpp
 )
 
 target_link_libraries(StdSocketsClient ${OpenCV_LIBS})
