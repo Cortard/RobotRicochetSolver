@@ -16,7 +16,7 @@
 /**
  * @brief Define if the socket should be created in localhost
  */
-#define LOCAL 1
+#define LOCAL 0
 
 /**
  * @brief Define all server configuration
