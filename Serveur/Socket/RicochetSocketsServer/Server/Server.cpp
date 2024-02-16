@@ -3,6 +3,7 @@
 #include <cstring>
 
 bool Server::running = false;
+bool Server::isStopping = false;
 Socket* Server::socket = nullptr;
 
 Client Server::clients[MAX_CLIENTS];
@@ -20,6 +21,8 @@ int Server::run() {
 }
 
 void Server::stop() {
+    if(isStopping) return;
+    isStopping = true;
     Logs::write("Stopping server", LOG_LEVEL_INFO);
     for(auto & client : clients)
         if(client.isBusy()) client.askStop();
@@ -35,7 +38,7 @@ int Server::init() {
     Logs::write("Initializing server", LOG_LEVEL_INFO);
 
     try {
-        socket = new Socket(IP,PORT);
+        socket = new Socket(IP,PORT,true);
     } catch (std::exception & e) {
         Logs::write("Error while creating socket: "+std::string(e.what()), LOG_LEVEL_ERROR);
         return EXIT_FAILURE;

@@ -32,7 +32,7 @@ void Client::processLoop(){ //TODO: implement
         ++i;
     }
     if(shouldStop) Logs::write("Client process stopped id: "+std::to_string(id),LOG_LEVEL_WARNING);*/
-    Logs::write("Connection test with client id: "+std::to_string(id)+" result: "+std::to_string(socket->testConnection()),LOG_LEVEL_INFO);
+    Logs::write("Connection test with client id: "+std::to_string(id)+" result: "+std::to_string(socket->receive(nullptr)),LOG_LEVEL_INFO);
 }
 
 void Client::askStop() {
@@ -43,7 +43,7 @@ void Client::waitStop() {
     processThread.join();
 }
 
-bool Client::isBusy() {
+bool Client::isBusy() const {
     return busy;
 }
 

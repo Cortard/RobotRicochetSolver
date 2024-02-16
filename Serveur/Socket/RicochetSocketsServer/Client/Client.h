@@ -38,7 +38,7 @@ public:
      * @brief Check if the client is busy
      * @return True if the client is busy, false otherwise
      */
-    bool isBusy();
+    bool isBusy() const;
 
     /**
      * @brief Destructor of the class

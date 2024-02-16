@@ -27,6 +27,10 @@ private:
      * @brief Server running status
      */
     static bool running;
+    /**
+     * @brief Server stopping status
+     */
+    static bool isStopping;
 
     /**
      * @brief Server socket
