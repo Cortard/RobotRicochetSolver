@@ -23,31 +23,29 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_Histoire1_clicked();
+    void onAddObjectivesButtonClick();
+    void onAddRobotButtonClick();
+    void onLoadButtonClick();
+    void onLoadModeButtonClick();
+    void onCreateModeButtonClick();
+    void onEditModeButtonClick();
+    void onTrainModeButtonClick();
+    void onHistoryModeButtonClick();
+    void onPlayModeButtonClick();
+    void onPlayButtonClick();
+    void onPlayOfficialButtonClick();
+    void onOfficialModeButtonClick();
+    void onFreeModeButtonClick();
+    void onSettingsModeButtonClick();
+    void onGenerateButtonClick();
+    void onHomeButtonClick();
+    void onPlayAgainButtonClick();
+    void onSaveButtonClick();
+    void onResetButtonClick();
+    void onSolveButtonClick();
+    void onHistory1ButtonClick();
 
     void handleMovement();
-
-    void on_resetPlateau_clicked();
-    void on_Sauvegarder_clicked();
-    void on_Home_clicked();
-    void on_ModeOfficiel_clicked();
-    void on_ModeLibre_clicked();
-    void on_ModeCharger_clicked();
-    void on_ModeCreer_clicked();
-    void on_ModeJouer_clicked();
-    void on_ModeEdition_clicked();
-    void on_BtnCharger_clicked();
-    void on_JouerOfficiel_clicked();
-    void on_Solution_clicked();
-    void on_Rejouer_clicked();
-    void on_ModeHistoire_clicked();
-    void on_ModeEntrainement_clicked();
-    void on_GenererAleatoire_clicked();
-    void on_AddObj_clicked();
-    void on_AddRbt_clicked();
-    void on_Jouer_clicked();
-
-    void on_ModeParametre_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QWidget>
-#include <iostream>
 
 #include <QGuiApplication>
 #include <QScreen>
@@ -19,6 +18,28 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
       board(bd)
 {
     ui->setupUi(this);
+
+    connect(ui->AddObj, SIGNAL(clicked()), this, SLOT(onAddObjectivesButtonClick()));
+    connect(ui->AddRbt, SIGNAL(clicked()), this, SLOT(onAddRobotButtonClick()));
+    connect(ui->BtnCharger, SIGNAL(clicked()), this, SLOT(onLoadButtonClick()));
+    connect(ui->ModeCharger, SIGNAL(clicked()), this, SLOT(onLoadModeButtonClick()));
+    connect(ui->ModeCreer, SIGNAL(clicked()), this, SLOT(onCreateModeButtonClick()));
+    connect(ui->ModeEdition, SIGNAL(clicked()), this, SLOT(onEditModeButtonClick()));
+    connect(ui->ModeEntrainement, SIGNAL(clicked()), this, SLOT(onTrainModeButtonClick()));
+    connect(ui->ModeHistoire, SIGNAL(clicked()), this, SLOT(onHistoryModeButtonClick()));
+    connect(ui->ModeJouer, SIGNAL(clicked()), this, SLOT(onPlayModeButtonClick()));
+    connect(ui->Jouer, SIGNAL(clicked()), this, SLOT(onPlayButtonClick()));
+    connect(ui->JouerOfficiel, SIGNAL(clicked()), this, SLOT(onPlayOfficialButtonClick()));
+    connect(ui->ModeOfficiel, SIGNAL(clicked()), this, SLOT(onOfficialModeButtonClick()));
+    connect(ui->ModeLibre, SIGNAL(clicked()), this, SLOT(onFreeModeButtonClick()));
+    connect(ui->ModeParametre, SIGNAL(clicked()), this, SLOT(onSettingsModeButtonClick()));
+    connect(ui->GenererAleatoire, SIGNAL(clicked()), this, SLOT(onGenerateButtonClick()));
+    connect(ui->Home, SIGNAL(clicked()), this, SLOT(onHomeButtonClick()));
+    connect(ui->Rejouer, SIGNAL(clicked()), this, SLOT(onPlayAgainButtonClick()));
+    connect(ui->Sauvegarder, SIGNAL(clicked()), this, SLOT(onSaveButtonClick()));
+    connect(ui->resetPlateau, SIGNAL(clicked()), this, SLOT(onResetButtonClick()));
+    connect(ui->Solution, SIGNAL(clicked()), this, SLOT(onSolveButtonClick()));
+    connect(ui->Histoire1, SIGNAL(clicked()), this, SLOT(onHistory1ButtonClick()));
 
     ui->radioButton->setChecked(true);
 
@@ -56,22 +77,22 @@ void MainWindow::handleMovement() {
     ui->label->setText(QString::number(board->mouvement));
 }
 
-void MainWindow::on_ModeJouer_clicked()
+void MainWindow::onPlayModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagejouer);
 }
-void MainWindow::on_ModeHistoire_clicked()
+void MainWindow::onHistoryModeButtonClick()
 {
     if(board->victoireHistoire>=2){
         ui->Histoire2->setStyleSheet("#Histoire2{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
     }
     ui->stackedWidget->setCurrentWidget(ui->pagehistoire);
 }
-void MainWindow::on_ModeEntrainement_clicked()
+void MainWindow::onTrainModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagetrain);
 }
-void MainWindow::on_AddObj_clicked()
+void MainWindow::onAddObjectivesButtonClick()
 {
     bool found = false;
     for (const auto& pair : board->objectives) {
@@ -86,12 +107,12 @@ void MainWindow::on_AddObj_clicked()
 
 }
 
-void MainWindow::on_ModeEdition_clicked()
+void MainWindow::onEditModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->edition);
 }
 
-void MainWindow::on_AddRbt_clicked()
+void MainWindow::onAddRobotButtonClick()
 {
     bool found = false;
     for (const auto& pair : board->robots_move) {
@@ -105,12 +126,12 @@ void MainWindow::on_AddRbt_clicked()
     }
 }
 
-void MainWindow::on_ModeCreer_clicked()
+void MainWindow::onCreateModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->choixplateau);
 }
 
-void MainWindow::on_Jouer_clicked()
+void MainWindow::onPlayButtonClick()
 {
     if (viewPlato == nullptr) {
         viewPlato = new viewPlateau(board);
@@ -130,7 +151,7 @@ void MainWindow::on_Jouer_clicked()
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
-void MainWindow::on_ModeLibre_clicked()
+void MainWindow::onFreeModeButtonClick()
 {
     if (viewBoard == nullptr) {
         viewBoard = new ViewBoard(board);
@@ -145,7 +166,7 @@ void MainWindow::on_ModeLibre_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
-void MainWindow::on_ModeOfficiel_clicked()
+void MainWindow::onOfficialModeButtonClick()
 {
     if (viewPlateauOfficiel == nullptr) {
         viewPlateauOfficiel = new ViewPlateauOfficiel(board);
@@ -155,7 +176,7 @@ void MainWindow::on_ModeOfficiel_clicked()
     ui->stackedWidget->setCurrentWidget(ui->plateauofficiel);
 }
 
-void MainWindow::on_JouerOfficiel_clicked()
+void MainWindow::onPlayOfficialButtonClick()
 {
     if (viewBoard == nullptr) {
         viewBoard = new ViewBoard(board);
@@ -170,7 +191,7 @@ void MainWindow::on_JouerOfficiel_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
-void MainWindow::on_GenererAleatoire_clicked()
+void MainWindow::onGenerateButtonClick()
 {
     if(ui->radioButton->isChecked()){
 
@@ -405,7 +426,7 @@ void MainWindow::on_GenererAleatoire_clicked()
     }
 }
 
-void MainWindow::on_Histoire1_clicked()
+void MainWindow::onHistory1ButtonClick()
 {
     solutionid=0;
     this->board->reset();
@@ -437,12 +458,12 @@ void MainWindow::on_Histoire1_clicked()
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
-void MainWindow::on_resetPlateau_clicked()
+void MainWindow::onResetButtonClick()
 {
     this->board->reset();
 }
 
-void MainWindow::on_Rejouer_clicked()
+void MainWindow::onPlayAgainButtonClick()
 {
     board->robots_move=board->robots_initial;
     solutionid=0;
@@ -460,7 +481,7 @@ void MainWindow::on_Rejouer_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
-void MainWindow::on_Solution_clicked()
+void MainWindow::onSolveButtonClick()
 {
     if(solutionid==0){
         board->robots_move=board->robots_initial;
@@ -613,7 +634,7 @@ void MainWindow::on_Solution_clicked()
     solutionid++;
 }
 
-void MainWindow::on_Sauvegarder_clicked()
+void MainWindow::onSaveButtonClick()
 {
     QFile file("board.txt");
     if(!file.open(QIODevice::Append)){
@@ -654,7 +675,7 @@ void MainWindow::on_Sauvegarder_clicked()
     }
 }
 
-void MainWindow::on_ModeCharger_clicked()
+void MainWindow::onLoadModeButtonClick()
 {
     QFile file("board.txt");
     if (!file.open(QIODevice::ReadOnly)) {
@@ -678,7 +699,7 @@ void MainWindow::on_ModeCharger_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pagecharger);
 }
 
-void MainWindow::on_BtnCharger_clicked()
+void MainWindow::onLoadButtonClick()
 {
     QString selectedTex = ui->stackedWidget->widget(9)->findChild<QListWidget*>()->currentItem()->text();
     QStringList part = selectedTex.split(" ");
@@ -739,13 +760,13 @@ void MainWindow::on_BtnCharger_clicked()
     }
 }
 
-void MainWindow::on_Home_clicked()
+void MainWindow::onHomeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 
 
-void MainWindow::on_ModeParametre_clicked()
+void MainWindow::onSettingsModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->utilisation);
 }
