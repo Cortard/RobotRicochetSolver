@@ -9,6 +9,9 @@
 #include "socketconnection.h"
 #include <QThread>
 #include <QFile>
+#include <iostream>
+
+using namespace std;
 
 #include <QFontDatabase>
 #include <iostream>
@@ -636,51 +639,50 @@ void MainWindow::onLoadModeButtonClick()
 
 void MainWindow::onLoadButtonClick()
 {
-    QString selectedTex = ui->stackedWidget->widget(9)->findChild<QListWidget*>()->currentItem()->text();
-    QStringList part = selectedTex.split(" ");
-    QString fichier = part[1];
-    qDebug() << fichier;
+    if(ui->stackedWidget->widget(9)->findChild<QListWidget*>()->currentItem()!=0){
+        QString selectedTex = ui->stackedWidget->widget(9)->findChild<QListWidget*>()->currentItem()->text();
+        QStringList part = selectedTex.split(" ");
+        QString fichier = part[1];
+        qDebug() << fichier;
+        QFile file("board.txt");
 
-    QFile file("board.txt");
-    if (!file.open(QIODevice::ReadOnly)) {
-        qCritical() << file.errorString();
-    } else {
-        QTextStream in(&file);
+        if (!file.open(QIODevice::ReadOnly)) {
+            qCritical() << file.errorString();
+        } else {        QTextStream in(&file);
+            while (!in.atEnd()) {
+                QString line = in.readLine();
+                QStringList parts = line.split(" ");
 
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            QStringList parts = line.split(" ");
+                if (part[1]==parts[1]){
 
-            if (part[1]==parts[1]){
-
-                board->reset();
-                for(int i=0;i<5;i++){
-                    board->robots_move.at(i)=parts[i + 2].toInt();
-                }
-                for(int i=0;i<17;i++){
-                    board->objectives.at(i)=parts[i + 7].toInt();
-                }
-                for(int i=0;i<256;i++){
-                    if(parts[i + 24].toInt()>=8){
-                        SET_WALL(board->cases[i-1],WEST);
+                    board->reset();
+                    for(int i=0;i<5;i++){
+                        board->robots_move.at(i)=parts[i + 2].toInt();
                     }
-                    if((parts[i + 24].toInt()>=4 && parts[i + 24].toInt()<=7) || parts[i + 24].toInt()>=12){
-                        SET_WALL(board->cases[i-1],SOUTH);
+                    for(int i=0;i<17;i++){
+                        board->objectives.at(i)=parts[i + 7].toInt();
                     }
-                    if(parts[i + 24].toInt()==2 || parts[i + 24].toInt()==3 || parts[i + 24].toInt()==6 || parts[i + 24].toInt()==7 || parts[i + 24].toInt()==10 || parts[i + 24].toInt()==11 || parts[i + 24].toInt()>=14){
-                        SET_WALL(board->cases[i-1],EAST);
+                    for(int i=0;i<256;i++){
+                        if(parts[i + 24].toInt()>=8){
+                            SET_WALL(board->cases[i-1],WEST);
+                        }
+                        if((parts[i + 24].toInt()>=4 && parts[i + 24].toInt()<=7) || parts[i + 24].toInt()>=12){
+                            SET_WALL(board->cases[i-1],SOUTH);
+                        }
+                        if(parts[i + 24].toInt()==2 || parts[i + 24].toInt()==3 || parts[i + 24].toInt()==6 || parts[i + 24].toInt()==7 || parts[i + 24].toInt()==10 || parts[i + 24].toInt()==11 || parts[i + 24].toInt()>=14){
+                            SET_WALL(board->cases[i-1],EAST);
+                        }
+                        if(parts[i + 24].toInt()%2==1){
+                            SET_WALL(board->cases[i-1],NORTH);
+                        }
                     }
-                    if(parts[i + 24].toInt()%2==1){
-                        SET_WALL(board->cases[i-1],NORTH);
-                    }
-                }
-                board->objJeu=parts[24].toInt();
+                    board->objJeu=parts[24].toInt();
 
                 this->changeWidget(1);
             }
-        }
 
-        file.close();
+            file.close();
+        }
     }
 }
 
