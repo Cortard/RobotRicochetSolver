@@ -1,5 +1,5 @@
 #include <iostream>
-#include "configue.h"
+#include "config.h"
 #include "sha256/sha256.h"
 
 #include <opencv2/opencv.hpp>

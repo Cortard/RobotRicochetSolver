@@ -11,7 +11,7 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="StdSocketsClient" targetName="StdSocketsClient" />
+      <config projectName="SocketClientExample" targetName="SocketClientExample" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -21,22 +21,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/CustomPacket/ConnectionTestRequestPacket.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/CustomPacket/DataPacket.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/CustomPacket/DataPacket.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/Packet.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/Packet.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/PacketDeserializer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Client/Client.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/sha256/sha256.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/sha256/sha256.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configue.h" beforeDir="false" afterPath="$PROJECT_DIR$/configue.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/StdSocketsClient.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/archive/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/configue.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/sha256/sha256.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/sha256/sha256.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +63,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "CMake Application.SocketClientExample.executor": "Run",
     "CMake Application.StdSocketsClient.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -75,7 +74,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "refactor/serveur",
-    "last_opened_file_path": "/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/StdSocketsClient",
+    "last_opened_file_path": "/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/SocketClientExample",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -86,7 +85,12 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="StdSocketsClient" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="StdSocketsClient" TARGET_NAME="StdSocketsClient" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="StdSocketsClient" RUN_TARGET_NAME="StdSocketsClient">
+    <configuration name="SocketClientExample" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SocketClientExample" TARGET_NAME="SocketClientExample" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SocketClientExample" RUN_TARGET_NAME="SocketClientExample">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -164,7 +168,8 @@
       <workItem from="1708540817191" duration="1036000" />
       <workItem from="1708693033830" duration="655000" />
       <workItem from="1708695502541" duration="633000" />
-      <workItem from="1708696172976" duration="4978000" />
+      <workItem from="1708696172976" duration="6105000" />
+      <workItem from="1708703147739" duration="114000" />
     </task>
     <servers />
   </component>
