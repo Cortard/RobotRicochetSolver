@@ -160,7 +160,7 @@ std::string Socket::toString() const {
 }
 
 int Socket::sendConnectionTest() const {
-    size_t size = 1024*1024;
+    size_t size = 16*1024*1024;
     char* buffer = new char[size];
     std::random_device random_device; // create object for seeding
     std::mt19937 engine{random_device()}; // create engine and seed it
