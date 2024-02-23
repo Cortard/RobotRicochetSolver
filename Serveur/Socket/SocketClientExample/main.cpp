@@ -16,6 +16,7 @@ int main() {
     auto* clientSocket = new Socket(IP, PORT);
 
     printf("Sent connection test result : %d\n", clientSocket->testConnection());
+
     auto* packet= reinterpret_cast<ConnectionTestRequestPacket*>(clientSocket->receive(Packet::Type::CONNECTION_TEST_REQUEST, true));
     if(packet== nullptr){
         printf("Error receiving connection test\n");

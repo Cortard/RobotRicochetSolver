@@ -49,7 +49,7 @@ public:
      * @brief Get the size of serialization of the packet
      * @return The size of serialization of the packet
      */
-    [[nodiscard]] virtual size_t getSerializedSize() const;
+    [[nodiscard]] virtual size_t getSerializationSize() const;
 
     /**
      * @brief Get the serialization of the header of the packet, this is the serialization of the packet without the data buffer
@@ -63,7 +63,7 @@ public:
      * @brief Get the size of the serialization of the header of the packet
      * @return The size of the serialization of the header of the packet
      */
-    [[nodiscard]] virtual size_t getSerializedHeaderSize() const;
+    [[nodiscard]] virtual size_t getSerializationHeaderSize() const;
 
     /**
      * @brief Deserialize the packet from the given serialization

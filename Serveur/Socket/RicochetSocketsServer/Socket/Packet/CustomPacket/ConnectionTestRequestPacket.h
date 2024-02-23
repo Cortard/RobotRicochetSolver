@@ -11,8 +11,9 @@ public:
     /**
      * @brief Constructor
      */
-    ConnectionTestRequestPacket(){
+    ConnectionTestRequestPacket() : Packet() {
         this->type = Packet::Type::CONNECTION_TEST_REQUEST;
+        this->result = 0;
     }
 
     /**
@@ -27,14 +28,6 @@ public:
     }
 
     /**
-     * @brief Set the result of the connection test
-     * @param result The result of the connection test
-     */
-    void setResult(int newResult){
-        this->result = newResult;
-    }
-
-    /**
      * @brief Get the result of the connection test
      * @return The result of the connection test
      */
@@ -42,8 +35,16 @@ public:
         return result;
     }
 
+    /**
+     * @brief Set the result of the connection test
+     * @param result The result of the connection test
+     */
+    void setResult(int newResult){
+        this->result = newResult;
+    }
+
 private:
-    int result=0;
+    int result;
 };
 
 #endif //RICOCHETSOCKETSSERVER_CONNECTION_TEST_REQUEST_PACKET_H

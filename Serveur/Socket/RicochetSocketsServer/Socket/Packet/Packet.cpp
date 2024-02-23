@@ -9,33 +9,33 @@ Packet::Type Packet::getType() const {
 }
 
 char* Packet::serialize() const{
-    size_t serializedPacketSize = getSerializedSize();
+    size_t serializedPacketSize = getSerializationSize();
     char* serializedHeader = serializeHeader();
 
     char* serialized = new char[serializedPacketSize];
-    memcpy(serialized, serializedHeader, getSerializedHeaderSize());
+    memcpy(serialized, serializedHeader, getSerializationHeaderSize());
     delete[] serializedHeader;
 
-    memcpy(serialized + getSerializedHeaderSize(), data, dataSize);
+    memcpy(serialized + getSerializationHeaderSize(), data, dataSize);
 
     return serialized;
 }
 
-size_t Packet::getSerializedSize() const{
-    return getSerializedHeaderSize() + dataSize;
+size_t Packet::getSerializationSize() const{
+    return getSerializationHeaderSize() + dataSize;
 }
 
 char* Packet::serializeHeader() const {
     size_t serializedPacketSize = sizeof(size_t) + sizeof(type);
     char* serialized = new char[serializedPacketSize];
     char* dest = serialized;
-    *reinterpret_cast<size_t*>(dest) = getSerializedSize();
+    *reinterpret_cast<size_t*>(dest) = getSerializationSize();
     dest += sizeof(size_t);
     *reinterpret_cast<Type*>(dest) = type;
     return serialized;
 }
 
-size_t Packet::getSerializedHeaderSize() const {
+size_t Packet::getSerializationHeaderSize() const {
     return sizeof(size_t) + sizeof(type);
 }
 
