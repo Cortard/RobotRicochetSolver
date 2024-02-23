@@ -63,5 +63,6 @@ private:
     bool pass = true;
     int wall=0;
 
+    void changeWidget(int id);
 };
 #endif // MAINWINDOW_H

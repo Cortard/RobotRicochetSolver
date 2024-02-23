@@ -11,6 +11,7 @@
 #include <QFile>
 
 #include <QFontDatabase>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
@@ -47,12 +48,6 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
     viewPlato = nullptr;
     viewPlateauOfficiel = nullptr;
 
-//    QFontDatabase db;
-//      for(int i=0; i<db.families().size(); i++)
-//      {
-//        qDebug() << db.families().at(i);
-//      }
-
     QFont font = QFont("Poppins", 20);
 
     ui->stackedWidget->setFont(font);
@@ -81,6 +76,7 @@ void MainWindow::onPlayModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagejouer);
 }
+
 void MainWindow::onHistoryModeButtonClick()
 {
     if(board->victoireHistoire>=2){
@@ -88,23 +84,20 @@ void MainWindow::onHistoryModeButtonClick()
     }
     ui->stackedWidget->setCurrentWidget(ui->pagehistoire);
 }
+
 void MainWindow::onTrainModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagetrain);
 }
+
 void MainWindow::onAddObjectivesButtonClick()
 {
-    bool found = false;
     for (const auto& pair : board->objectives) {
         if (pair.second == 135) {
-            found = true;
-            break;
+            return;
         }
     }
-    if (!found) {
-        ControllerAddObj(board).control();
-    }
-
+    ControllerAddObj(board).control();
 }
 
 void MainWindow::onEditModeButtonClick()
@@ -114,16 +107,12 @@ void MainWindow::onEditModeButtonClick()
 
 void MainWindow::onAddRobotButtonClick()
 {
-    bool found = false;
     for (const auto& pair : board->robots_move) {
         if (pair.second == 136) {
-            found = true;
-            break;
+            return;
         }
     }
-    if (!found) {
-        ControllerAddRobot(board).control();
-    }
+    ControllerAddRobot(board).control();
 }
 
 void MainWindow::onCreateModeButtonClick()
@@ -133,18 +122,10 @@ void MainWindow::onCreateModeButtonClick()
 
 void MainWindow::onPlayButtonClick()
 {
-    if (viewPlato == nullptr) {
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }else{
-        delete viewPlato;
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }
+    this->changeWidget(6);
+    connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+
+    //TODO asyncroneous
     solutionid=0;
     SocketConnection::getSolution(board);
     board->robots_initial=board->robots_move;
@@ -153,16 +134,7 @@ void MainWindow::onPlayButtonClick()
 
 void MainWindow::onFreeModeButtonClick()
 {
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }else{
-        delete viewBoard;
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
+    this->changeWidget(1);
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
@@ -178,19 +150,11 @@ void MainWindow::onOfficialModeButtonClick()
 
 void MainWindow::onPlayOfficialButtonClick()
 {
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }else{
-        delete viewBoard;
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
+    this->changeWidget(1);
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
+//TODO compatible generation
 void MainWindow::onGenerateButtonClick()
 {
     if(ui->radioButton->isChecked()){
@@ -410,18 +374,7 @@ void MainWindow::onGenerateButtonClick()
             break;
         }
 
-        if (viewPlato == nullptr) {
-            viewPlato = new viewPlateau(board);
-            ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-            viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-            connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-        }else{
-            delete viewPlato;
-            viewPlato = new viewPlateau(board);
-            ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-            viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-            connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-        }
+        this->changeWidget(6);
         ui->stackedWidget->setCurrentWidget(ui->plateau);
     }
 }
@@ -440,21 +393,11 @@ void MainWindow::onHistory1ButtonClick()
     this->board->addRobot(3,86);
     this->board->objJeu=0;
 
+    //TODO async
     SocketConnection::getSolution(board);
     this->board->robots_initial=this->board->robots_move;
 
-    if (viewPlato == nullptr) {
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }else{
-        delete viewPlato;
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }
+    this->changeWidget(6);
     ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
@@ -468,16 +411,8 @@ void MainWindow::onPlayAgainButtonClick()
     board->robots_move=board->robots_initial;
     solutionid=0;
     board->notifyObserver();
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }else{
-        delete viewBoard;
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
+
+    this->changeWidget(1);
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
@@ -741,18 +676,7 @@ void MainWindow::onLoadButtonClick()
                 }
                 board->objJeu=parts[24].toInt();
 
-                if(viewBoard==nullptr){
-                    viewBoard = new ViewBoard(board);
-                    ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-                    viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-                    ui->stackedWidget->setCurrentWidget(ui->pageplateau);
-                }else{
-                    delete viewBoard;
-                    viewBoard = new ViewBoard(board);
-                    ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-                    viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-                    ui->stackedWidget->setCurrentWidget(ui->pageplateau);
-                }
+                this->changeWidget(1);
             }
         }
 
@@ -765,9 +689,22 @@ void MainWindow::onHomeButtonClick()
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 
-
 void MainWindow::onSettingsModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->utilisation);
 }
 
+void MainWindow::changeWidget(int id) {
+    if(viewBoard==nullptr){
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(id)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(id)->findChild<QGraphicsView*>());
+        ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+    }else{
+        delete viewBoard;
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(id)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(id)->findChild<QGraphicsView*>());
+        ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+    }
+}
