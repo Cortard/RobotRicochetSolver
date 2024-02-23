@@ -1,4 +1,5 @@
 #include "Client.h"
+#include "../Socket/Packet/CustomPacket/ConnectionTestRequestPacket.h"
 
 Client::Client() : busy(false), socket(nullptr), id(0), shouldStop(false) {
 }
@@ -32,7 +33,16 @@ void Client::processLoop(){ //TODO: implement
         ++i;
     }
     if(shouldStop) Logs::write("Client process stopped id: "+std::to_string(id),LOG_LEVEL_WARNING);*/
-    socket->receive(nullptr);
+    Logs::write("Client id : "+std::to_string(id)+" process started",LOG_LEVEL_DETAILS);
+    auto* packet = reinterpret_cast<ConnectionTestRequestPacket*>(socket->receive(Packet::Type::CONNECTION_TEST_REQUEST, true));
+    if(packet == nullptr) {
+        Logs::write("Client id : "+std::to_string(id)+" process stopped",LOG_LEVEL_WARNING);
+        return;
+    }
+    Logs::write("Client id : "+std::to_string(id)+" received connection test result : "+std::to_string(packet->getResult()),LOG_LEVEL_VERBOSE);
+    delete packet;
+    Logs::write("Client id : "+std::to_string(id)+" sent connection test result : "+std::to_string(socket->testConnection()),LOG_LEVEL_VERBOSE);
+    Logs::write("Client id : "+std::to_string(id)+" process ended",LOG_LEVEL_DETAILS);
 }
 
 void Client::askStop() {

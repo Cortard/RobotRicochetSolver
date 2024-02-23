@@ -23,6 +23,8 @@
 #include <cstdlib>
 #include <stdexcept>
 
+#include "./Packet/Packet.h"
+
 /**
  * @brief This class is a wrapper for the socket system calls
  */
@@ -67,31 +69,26 @@ public:
     [[nodiscard]] Socket* accept() const;
 
     /**
-     * @brief Send an object of a given type, the return value should not be ignored
-     * @tparam T The type of the object to send
-     * @param data The object to send
+     * @brief Send a packet, the return value should not be ignored
+     * @param packet The packet to send
      * @return The number of bytes sent, 0 if the connection is closed and -1 if the system call send fails
      */
-    template<class T>
-    [[maybe_unused]] [[nodiscard]] ssize_t send(const T& data) const {
-        return send(reinterpret_cast<const char*>(&data), sizeof(T));
-    }
+    [[nodiscard]] ssize_t send(const Packet& packet) const;
 
     /**
-     * @brief Send a buffer of a given size, the return value should not be ignored
-     * @param buffer The buffer to send
-     * @param size The size of the buffer
-     * @return The number of bytes sent, 0 if the connection is closed and -1 if the system call send fails
+     * @brief Receive a packet, the return value should not be ignored
+     * @param acceptConnectionTest If the function should accept a connection test packet, default is false
+     * @return The received packet, nullptr if the connection is closed or if the system call recv fails
      */
-    [[nodiscard]] ssize_t send(const char* buffer, size_t size) const;
+    [[nodiscard]] Packet* receive(bool acceptConnectionTest = false) const;
 
     /**
-     * @brief Receive a buffer of a given length with flags, the return value should not be ignored
-     * @param buffer The buffer to receive
-     * @param waitAll If the system call recv should wait for all the data to be received, default is true
-     * @return The number of bytes received, 0 if the connection is closed and -1 if the system call recv fails
+     * @brief Receive a packet, the return value should not be ignored
+     * @param type The type of the packet to receive, if the received packet is not of the given type, it will be deleted and the function will return nullptr
+     * @param acceptConnectionTest If the function should accept a connection test packet, default is false
+     * @return The received packet, nullptr if the connection is closed or if the system call recv fails
      */
-    [[nodiscard]] ssize_t receive(char* buffer, bool waitAll=true) const;
+    [[nodiscard]] Packet* receive(Packet::Type type, bool acceptConnectionTest = false) const;
 
     /**
      * @brief Test the connection with the socket, the return value should not be ignored
@@ -134,53 +131,6 @@ private:
      * @brief if the socket is a server or a client
      */
     bool isServer;
-
-    /**
-     * @brief Header Flag sent as the first byte of the message
-     * @note The header flag is used to know the type of message who comes after the header and eventually the parameters of the message like the size of the message
-     */
-    enum class HeaderFlag : unsigned char {
-        HEADER_ONLY = 0,
-        RAW_DATA = 1,
-        CONNECTION_TEST = 2,
-    };
-
-    /**
-     * @brief Send a header with the given flag
-     * @param flag The type of message to send in the header
-     * @return The number of bytes sent, -1 if the system call send fails
-     */
-    [[nodiscard]] ssize_t sendHeader(HeaderFlag flag) const;
-    /**
-     * @brief Send a header with the given flag and size
-     * @param flag The type of message to send in the header
-     * @param size The size of the message who comes after the header if there is one
-     * @return The number of bytes sent, -1 if the system call send fails
-     */
-    [[nodiscard]] ssize_t sendHeader(HeaderFlag flag, size_t size) const;
-
-    /**
-     * @brief Receive the header flag
-     * @param flag The type of message received in the header
-     * @return The number of bytes received, -1 if the system call recv fails
-     */
-    [[nodiscard]] ssize_t receiveHeaderFlag(HeaderFlag& flag) const;
-
-    /**
-     * @brief Receive the size_t in a RAW_DATA header
-     * @param size The size of the message who comes after the header
-     * @return The number of bytes received, -1 if the system call recv fails
-     */
-    [[nodiscard]] ssize_t receiveDataSize(size_t& size) const;
-
-    /**
-     * @brief Receive the data in a RAW_DATA message
-     * @param buffer The buffer to receive the data
-     * @param size The size of the data to receive
-     * @param waitAll If the system call recv should wait for all the data to be received, default is true
-     * @return The number of bytes received, -1 if the system call recv fails
-     */
-    [[nodiscard]] ssize_t receiveData(char* buffer, size_t size, bool waitAll=true) const;
 
     /**
      * @brief test the connection to the socket

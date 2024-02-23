@@ -3,6 +3,8 @@
 #include "../config.h"
 #include "../sha256/sha256.h"
 #include "../Logs/Logs.h"
+#include "Packet/PacketDeserializer.h"
+#include "Packet/CustomPacket/ConnectionTestRequestPacket.h"
 
 bool Socket::isClassInit = false;
 int Socket::True = 1;
@@ -84,32 +86,58 @@ Socket *Socket::accept() const {
     return new Socket(clientSocket, clientAddressInternet, false);
 }
 
-ssize_t Socket::send(const char *buffer, size_t size) const {
-    if(sendHeader(HeaderFlag::RAW_DATA, size) != sizeof(HeaderFlag) + sizeof(size)) return -1;
-    return ::send(sock, buffer, size, 0);
+ssize_t Socket::send(const Packet &packet) const {
+    char* serializedHeader = packet.serializeHeader();
+    ssize_t res = ::send(sock, serializedHeader, packet.getSerializedHeaderSize(), 0);
+    delete[] serializedHeader;
+    if(res != packet.getSerializedHeaderSize()) return -1;
+
+    if(packet.getDataSize() == 0) return res;
+
+    res = ::send(sock, packet.getData(), packet.getDataSize(), 0);
+    if(res == SOCKET_ERROR) return -1;
+    return res + packet.getSerializedHeaderSize();
 }
 
-ssize_t Socket::receive(char* buffer, bool waitAll) const{
-    HeaderFlag flag;
-    ssize_t bytesReceived = receiveHeaderFlag(flag);
-    if(bytesReceived != sizeof(flag)) return -1;
-    switch (flag) {
-        case HeaderFlag::HEADER_ONLY:
-            return 1;
-        case HeaderFlag::RAW_DATA: {
-            size_t length;
-            bytesReceived = ::recv(sock, reinterpret_cast<char *>(&length), sizeof(length), waitAll?MSG_WAITALL:0);
-            if (bytesReceived != sizeof(length)) return bytesReceived;
-            return ::recv(sock, buffer, length, waitAll?MSG_WAITALL:0);
-        }
-        case HeaderFlag::CONNECTION_TEST: {
-            Logs::write("Connection test received by " + toString(), LOG_LEVEL_VERBOSE);
-            int result = testConnection(true);
-            Logs::write("Connection test result: " + std::to_string(result), LOG_LEVEL_VERBOSE);
-        }
-        default:
-            return -1;
+Packet* Socket::receive(bool acceptConnectionTest) const {
+    size_t size;
+    ssize_t received = ::recv(sock, reinterpret_cast<char*>(&size), sizeof(size), MSG_WAITALL);
+    if(received == 0 || received == SOCKET_ERROR) return nullptr;
+
+    char* serializedPacket = new char[size];
+    *reinterpret_cast<size_t*>(serializedPacket) = size;
+    received = ::recv(sock, serializedPacket+sizeof(size_t), size-sizeof(size_t), MSG_WAITALL);
+    if(received == 0 || received == SOCKET_ERROR) {
+        delete[] serializedPacket;
+        return nullptr;
     }
+
+    Packet* packet = PacketDeserializer::deserialize(serializedPacket);
+    delete[] serializedPacket;
+
+    if(acceptConnectionTest && packet && packet->getType() == Packet::Type::CONNECTION_TEST_REQUEST) {
+        ((ConnectionTestRequestPacket*)packet)->setResult(testConnection(true));
+        if(((ConnectionTestRequestPacket*)packet)->getResult() == -1) {
+            delete packet;
+            return nullptr;
+        }
+    }
+
+    return packet;
+}
+
+Packet* Socket::receive(Packet::Type type, bool acceptConnectionTest) const {
+    Packet* packet = receive(acceptConnectionTest);
+    if(packet == nullptr) return nullptr;
+    if(acceptConnectionTest && packet->getType() == Packet::Type::CONNECTION_TEST_REQUEST) {
+        return packet;
+    }
+    if(packet->getType() != type) {
+        delete packet;
+        return nullptr;
+    }
+
+    return packet;
 }
 
 int Socket::testConnection(bool proposed) const {
@@ -118,7 +146,8 @@ int Socket::testConnection(bool proposed) const {
         int result = sendConnectionTest();
         return result;
     } else {
-        if(sendHeader(HeaderFlag::CONNECTION_TEST) != sizeof(HeaderFlag)) return -1;
+        size_t requestSize = ConnectionTestRequestPacket().getSerializedSize();
+        if(send(ConnectionTestRequestPacket()) != requestSize) return -1;
         int result = sendConnectionTest();
         if(result == -1) return -1;
         if(receiveConnectionTest() == -1) return -1;
@@ -130,30 +159,9 @@ std::string Socket::toString() const {
     return std::string(inet_ntoa(sockAddrIn.sin_addr)) + ":" + std::to_string(ntohs(sockAddrIn.sin_port));
 }
 
-ssize_t Socket::sendHeader(Socket::HeaderFlag flag) const {
-    return ::send(sock, reinterpret_cast<const char*>(&flag), sizeof(flag), 0);
-}
-
-ssize_t Socket::sendHeader(Socket::HeaderFlag flag, size_t size) const {
-    ssize_t bytesSent = sendHeader(flag);
-    if(bytesSent != sizeof(flag)) return bytesSent;
-    return bytesSent + ::send(sock, reinterpret_cast<const char*>(&size), sizeof(size), 0);
-}
-
-ssize_t Socket::receiveHeaderFlag(Socket::HeaderFlag &flag) const {
-    return ::recv(sock, reinterpret_cast<char*>(&flag), sizeof(flag), MSG_WAITALL);
-}
-
-ssize_t Socket::receiveDataSize(size_t &size) const {
-    return ::recv(sock, reinterpret_cast<char*>(&size), sizeof(size), MSG_WAITALL);
-}
-
-ssize_t Socket::receiveData(char *buffer, size_t size, bool waitAll) const {
-    return ::recv(sock, buffer, size, waitAll?MSG_WAITALL:0);
-}
-
 int Socket::sendConnectionTest() const {
-    size_t size = 16*1024*1024;
+    //size_t size = 1024*1024;
+    size_t size = 10;
     char* buffer = new char[size];
     std::random_device random_device; // create object for seeding
     std::mt19937 engine{random_device()}; // create engine and seed it
@@ -161,41 +169,30 @@ int Socket::sendConnectionTest() const {
     for(size_t i = 0; i < size; ++i)
         buffer[i] = static_cast<char>(dist(engine));
 
-    if(send(buffer, size) == SOCKET_ERROR) return -1;
+    DataPacket packet(buffer, size, false);
+    if(send(packet) != packet.getSerializedSize()) return -1;
 
     SHA256 sha256;
-    auto checkSum = sha256(buffer, sizeof(buffer));
+    auto checkSum = sha256(buffer, size);
 
-    HeaderFlag flag;
-    if(receiveHeaderFlag(flag) != sizeof(flag)) return -1;
-    if(flag != HeaderFlag::RAW_DATA) return -1;
+    auto* response = dynamic_cast<DataPacket*>(receive(Packet::Type::DATA));
+    if(response == nullptr) return -1;
 
-    size_t responseSize;
-    if(receiveDataSize(responseSize) != sizeof(responseSize)) return -1;
-    if(responseSize != checkSum.size()) return -1;
-
-    char response[responseSize];
-    if(receiveData(response, responseSize, true) != responseSize) return -1;
-
-    if(checkSum != std::string(response, responseSize)) return 1;
+    if(checkSum != std::string(response->getData(), response->getDataSize())) return 1;
     return 2;
 }
 
 int Socket::receiveConnectionTest() const {
-    HeaderFlag flag;
-    if(receiveHeaderFlag(flag) != sizeof(flag)) return -1;
-    if(flag != HeaderFlag::RAW_DATA) return -1;
-
-    size_t size;
-    if(receiveDataSize(size) != sizeof(size)) return -1;
-
-    char* buffer = new char[size];
-    if(receiveData(buffer, size) != size) return -1;
+    auto* packet = dynamic_cast<DataPacket*>(receive(Packet::Type::DATA, false));
+    if(packet == nullptr) return -1;
 
     SHA256 sha256;
-    auto checkSum = sha256(buffer, sizeof(buffer));
+    auto checkSum = sha256(packet->getData(), packet->getDataSize());
 
-    if(send(checkSum.c_str(), checkSum.size()) == SOCKET_ERROR) return -1;
+    delete packet;
+
+    DataPacket response(checkSum.c_str(), checkSum.size(), false);
+    if(send(response) != response.getSerializedSize()) return -1;
 
     return 2;
 }

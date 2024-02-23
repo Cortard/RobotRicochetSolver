@@ -21,6 +21,12 @@ add_executable(StdSocketsClient main.cpp
         ../RicochetSocketsServer/Socket/Socket.cpp
         ../RicochetSocketsServer/Logs/Logs.h
         ../RicochetSocketsServer/Logs/Logs.cpp
+        ../RicochetSocketsServer/Socket/Packet/Packet.h
+        ../RicochetSocketsServer/Socket/Packet/Packet.cpp
+        ../RicochetSocketsServer/Socket/Packet/PacketDeserializer.h
+        ../RicochetSocketsServer/Socket/Packet/CustomPacket/DataPacket.h
+        ../RicochetSocketsServer/Socket/Packet/CustomPacket/DataPacket.cpp
+        ../RicochetSocketsServer/Socket/Packet/CustomPacket/ConnectionTestRequestPacket.h
 )
 
 target_link_libraries(StdSocketsClient ${OpenCV_LIBS})

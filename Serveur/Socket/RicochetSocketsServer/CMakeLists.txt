@@ -25,6 +25,12 @@ add_executable(RicochetSocketServer.exe main.cpp
         sha256/sha256.cpp
         Socket/Socket.h
         Socket/Socket.cpp
+        Socket/Packet/Packet.cpp
+        Socket/Packet/Packet.h
+        Socket/Packet/PacketDeserializer.h
+        Socket/Packet/CustomPacket/DataPacket.cpp
+        Socket/Packet/CustomPacket/DataPacket.h
+        Socket/Packet/CustomPacket/ConnectionTestRequestPacket.h
 )
 
 target_link_libraries(RicochetSocketServer.exe ${OpenCV_LIBS})
