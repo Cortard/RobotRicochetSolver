@@ -88,20 +88,21 @@ Socket *Socket::accept() const {
 
 ssize_t Socket::send(const Packet &packet) const {
     char* serializedHeader = packet.serializeHeader();
-    ssize_t res = ::send(sock, serializedHeader, packet.getSerializedHeaderSize(), 0);
+    ssize_t res = ::send(sock, serializedHeader, packet.getSerializationHeaderSize(), 0);
     delete[] serializedHeader;
-    if(res != packet.getSerializedHeaderSize()) return -1;
+    if(res != packet.getSerializationHeaderSize()) return -1;
 
     if(packet.getDataSize() == 0) return res;
 
     res = ::send(sock, packet.getData(), packet.getDataSize(), 0);
     if(res == SOCKET_ERROR) return -1;
-    return res + packet.getSerializedHeaderSize();
+    return res + packet.getSerializationHeaderSize();
 }
 
 Packet* Socket::receive(bool acceptConnectionTest) const {
     size_t size;
     ssize_t received = ::recv(sock, reinterpret_cast<char*>(&size), sizeof(size), MSG_WAITALL);
+    Logs::write("Received size : " + std::to_string(size), LOG_LEVEL_DEBUG);
     if(received == 0 || received == SOCKET_ERROR) return nullptr;
 
     char* serializedPacket = new char[size];
@@ -143,10 +144,9 @@ Packet* Socket::receive(Packet::Type type, bool acceptConnectionTest) const {
 int Socket::testConnection(bool proposed) const {
     if(proposed) {
         if(receiveConnectionTest() == -1) return -1;
-        int result = sendConnectionTest();
-        return result;
+        return sendConnectionTest();
     } else {
-        size_t requestSize = ConnectionTestRequestPacket().getSerializedSize();
+        size_t requestSize = ConnectionTestRequestPacket().getSerializationSize();
         if(send(ConnectionTestRequestPacket()) != requestSize) return -1;
         int result = sendConnectionTest();
         if(result == -1) return -1;
@@ -169,7 +169,7 @@ int Socket::sendConnectionTest() const {
         buffer[i] = static_cast<char>(dist(engine));
 
     DataPacket packet(buffer, size, false);
-    if(send(packet) != packet.getSerializedSize()) return -1;
+    if(send(packet) != packet.getSerializationSize()) return -1;
 
     SHA256 sha256;
     auto checkSum = sha256(buffer, size);
@@ -191,7 +191,7 @@ int Socket::receiveConnectionTest() const {
     delete packet;
 
     DataPacket response(checkSum.c_str(), checkSum.size(), false);
-    if(send(response) != response.getSerializedSize()) return -1;
+    if(send(response) != response.getSerializationSize()) return -1;
 
     return 2;
 }

@@ -21,20 +21,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b94ef535-d672-490d-b5b8-3aabb9387cdb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../JavaSocketClientExample/untitled/src/RicochetSocket/Packet/CustomPacket/ConnectionTestRequestPacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaSocketClientExample/untitled/src/RicochetSocket/Packet/CustomPacket/DataPacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaSocketClientExample/untitled/src/RicochetSocket/Packet/CustomPacket/PacketDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaSocketClientExample/untitled/src/RicochetSocket/Packet/Packet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaSocketClientExample/untitled/src/RicochetSocket/RicochetSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/CustomPacket/ConnectionTestRequestPacket.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/CustomPacket/ConnectionTestRequestPacket.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/Packet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/Packet.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/Packet.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Packet/Packet.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/Socket/Socket.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RicochetSocketsServer/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../RicochetSocketsServer/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/StdSocketsClient.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/archive/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/configue.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/sha256/sha256.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StdSocketsClient/sha256/sha256.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,36 +59,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "CMake Application.SocketClientExample.executor": "Run",
-    "CMake Application.StdSocketsClient.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "refactor/serveur",
-    "last_opened_file_path": "/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/SocketClientExample",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CMakeSettings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;CMake Application.SocketClientExample.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.StdSocketsClient.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;refactor/serveur&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/corto/Documents/GitHub/RobotRicochetSolver/Serveur/Socket/SocketClientExample&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="SocketClientExample" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SocketClientExample" TARGET_NAME="SocketClientExample" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SocketClientExample" RUN_TARGET_NAME="SocketClientExample">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -170,6 +163,7 @@
       <workItem from="1708695502541" duration="633000" />
       <workItem from="1708696172976" duration="6105000" />
       <workItem from="1708703147739" duration="114000" />
+      <workItem from="1708709631605" duration="1030000" />
     </task>
     <servers />
   </component>
@@ -180,21 +174,5 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>17</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>18</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
