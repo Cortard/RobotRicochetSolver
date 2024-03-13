@@ -14,6 +14,7 @@
 using namespace std;
 
 #include <QFontDatabase>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
@@ -50,12 +51,6 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
     viewPlato = nullptr;
     viewPlateauOfficiel = nullptr;
 
-//    QFontDatabase db;
-//      for(int i=0; i<db.families().size(); i++)
-//      {
-//        qDebug() << db.families().at(i);
-//      }
-
     QFont font = QFont("Poppins", 20);
 
     ui->stackedWidget->setFont(font);
@@ -84,6 +79,7 @@ void MainWindow::onPlayModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagejouer);
 }
+
 void MainWindow::onHistoryModeButtonClick()
 {
     if(board->victoireHistoire>=2){
@@ -91,27 +87,20 @@ void MainWindow::onHistoryModeButtonClick()
     }
     ui->stackedWidget->setCurrentWidget(ui->pagehistoire);
 }
+
 void MainWindow::onTrainModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagetrain);
 }
+
 void MainWindow::onAddObjectivesButtonClick()
 {
-    if (board->objectives.find(16) != board->objectives.end() && board->objectives[16] != -1) {
-        return;
-    }
-
-    bool found = false;
     for (const auto& pair : board->objectives) {
         if (pair.second == 135) {
-            found = true;
-            break;
+            return;
         }
     }
-    if (!found) {
-        ControllerAddObj(board).control();
-    }
-
+    ControllerAddObj(board).control();
 }
 
 void MainWindow::onEditModeButtonClick()
@@ -121,21 +110,13 @@ void MainWindow::onEditModeButtonClick()
 
 void MainWindow::onAddRobotButtonClick()
 {
-    if (board->robots_move.find(4) != board->robots_move.end() && board->robots_move[4] != -1) {
-        return;
-    }
-
-    bool found = false;
     for (const auto& pair : board->robots_move) {
         std::cout << "Robot ID : " << pair.first << ", Position : " << pair.second << std::endl;
         if (pair.second == 136) {
-            found = true;
-            break;
+            return;
         }
     }
-    if (!found) {
-        ControllerAddRobot(board).control();
-    }
+    ControllerAddRobot(board).control();
 }
 
 void MainWindow::onCreateModeButtonClick()
@@ -174,6 +155,7 @@ void MainWindow::onPlayOfficialButtonClick()
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
+//TODO compatible generation
 void MainWindow::onGenerateButtonClick()
 {
     if(ui->radioButton->isChecked()){
@@ -418,6 +400,7 @@ void MainWindow::onHistory1ButtonClick()
     this->board->objJeu=0;
     std::cout<<"4"<<std::endl;
 
+    //TODO async
     SocketConnection::getSolution(board);
     this->board->robots_initial=this->board->robots_move;
 
@@ -712,7 +695,6 @@ void MainWindow::onHomeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
-
 
 void MainWindow::onSettingsModeButtonClick()
 {
