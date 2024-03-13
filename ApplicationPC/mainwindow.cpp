@@ -20,6 +20,15 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
 {
     ui->setupUi(this);
 
+    connect(ui->ModeJouer, SIGNAL(clicked()), this, SLOT(onPlayModeButtonClick()));
+    connect(ui->ModeHistoire, SIGNAL(clicked()), this, SLOT(onHistoryModeButtonClick()));
+    connect(ui->ModeEntrainement, SIGNAL(clicked()), this, SLOT(onHistoryModeButtonClick()));
+    connect(ui->AddObj, SIGNAL(clicked()), this, SLOT(onAddObjectiveButtonClick()));
+    connect(ui->ModeEdition, SIGNAL(clicked()), this, SLOT(onEditModeButtonClick()));
+    connect(ui->AddRbt, SIGNAL(clicked()), this, SLOT(onAddRobotButtonClick()));
+    connect(ui->ModeCreer, SIGNAL(clicked()), this, SLOT(onCreateModeButtonClick()));
+    connect(ui->Jouer, SIGNAL(clicked()), this, SLOT(onPlayButtonClick()));
+
     ui->radioButton->setChecked(true);
 
     viewBoard = nullptr;
@@ -56,23 +65,22 @@ void MainWindow::handleMovement() {
     ui->label->setText(QString::number(board->mouvement));
 }
 
-void MainWindow::on_ModeJouer_clicked()
-{
+void MainWindow::onPlayModeButtonClick() {
     ui->stackedWidget->setCurrentWidget(ui->pagejouer);
 }
-void MainWindow::on_ModeHistoire_clicked()
-{
+
+void MainWindow::onHistoryModeButtonClick() {
     if(board->victoireHistoire>=2){
         ui->Histoire2->setStyleSheet("#Histoire2{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
     }
     ui->stackedWidget->setCurrentWidget(ui->pagehistoire);
 }
-void MainWindow::on_ModeEntrainement_clicked()
-{
+
+void MainWindow::onTrainModeButtonClick() {
     ui->stackedWidget->setCurrentWidget(ui->pagetrain);
 }
-void MainWindow::on_AddObj_clicked()
-{
+
+void MainWindow::onAddObjectiveButtonClick() {
     bool found = false;
     for (const auto& pair : board->objectives) {
         if (pair.second == 135) {
@@ -83,16 +91,13 @@ void MainWindow::on_AddObj_clicked()
     if (!found) {
         ControllerAddObj(board).control();
     }
-
 }
 
-void MainWindow::on_ModeEdition_clicked()
-{
+void MainWindow::onEditModeButtonClick() {
     ui->stackedWidget->setCurrentWidget(ui->edition);
 }
 
-void MainWindow::on_AddRbt_clicked()
-{
+void MainWindow::onAddRobotButtonClick() {
     bool found = false;
     for (const auto& pair : board->robots_move) {
         if (pair.second == 136) {
@@ -105,13 +110,11 @@ void MainWindow::on_AddRbt_clicked()
     }
 }
 
-void MainWindow::on_ModeCreer_clicked()
-{
+void MainWindow::onCreateModeButtonClick() {
     ui->stackedWidget->setCurrentWidget(ui->choixplateau);
 }
 
-void MainWindow::on_Jouer_clicked()
-{
+void MainWindow::onPlayButtonClick() {
     if (viewPlato == nullptr) {
         viewPlato = new viewPlateau(board);
         ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
