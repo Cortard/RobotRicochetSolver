@@ -97,6 +97,10 @@ void MainWindow::onTrainModeButtonClick()
 }
 void MainWindow::onAddObjectivesButtonClick()
 {
+    if (board->objectives.find(16) != board->objectives.end() && board->objectives[16] != -1) {
+        return;
+    }
+
     bool found = false;
     for (const auto& pair : board->objectives) {
         if (pair.second == 135) {
@@ -117,8 +121,13 @@ void MainWindow::onEditModeButtonClick()
 
 void MainWindow::onAddRobotButtonClick()
 {
+    if (board->robots_move.find(4) != board->robots_move.end() && board->robots_move[4] != -1) {
+        return;
+    }
+
     bool found = false;
     for (const auto& pair : board->robots_move) {
+        std::cout << "Robot ID : " << pair.first << ", Position : " << pair.second << std::endl;
         if (pair.second == 136) {
             found = true;
             break;
@@ -136,18 +145,7 @@ void MainWindow::onCreateModeButtonClick()
 
 void MainWindow::onPlayButtonClick()
 {
-    if (viewPlato == nullptr) {
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }else{
-        delete viewPlato;
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }
+    createViewPlato(6);
     solutionid=0;
     SocketConnection::getSolution(board);
     board->robots_initial=board->robots_move;
@@ -156,16 +154,7 @@ void MainWindow::onPlayButtonClick()
 
 void MainWindow::onFreeModeButtonClick()
 {
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }else{
-        delete viewBoard;
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
+    createViewBoard(1);
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
@@ -181,16 +170,7 @@ void MainWindow::onOfficialModeButtonClick()
 
 void MainWindow::onPlayOfficialButtonClick()
 {
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }else{
-        delete viewBoard;
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
+    createViewBoard(1);
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
@@ -413,52 +393,38 @@ void MainWindow::onGenerateButtonClick()
             break;
         }
 
-        if (viewPlato == nullptr) {
-            viewPlato = new viewPlateau(board);
-            ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-            viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-            connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-        }else{
-            delete viewPlato;
-            viewPlato = new viewPlateau(board);
-            ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-            viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-            connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-        }
+        createViewPlato(6);
         ui->stackedWidget->setCurrentWidget(ui->plateau);
     }
 }
 
 void MainWindow::onHistory1ButtonClick()
 {
+
+    std::cout<<"1"<<std::endl;
     solutionid=0;
+    std::cout<<"1.5"<<std::endl;
     this->board->reset();
+    std::cout<<"2"<<std::endl;
     board->constructPart13(this->board, 0);
     board->constructPart15(this->board, 1);
     board->constructPart2(this->board, 2);
     board->constructPart3(this->board, 3);
+    std::cout<<"3"<<std::endl;
     this->board->addRobot(0,2);
     this->board->addRobot(1,250);
     this->board->addRobot(2,55);
     this->board->addRobot(3,86);
     this->board->objJeu=0;
+    std::cout<<"4"<<std::endl;
 
     SocketConnection::getSolution(board);
     this->board->robots_initial=this->board->robots_move;
 
-    if (viewPlato == nullptr) {
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }else{
-        delete viewPlato;
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }
+    std::cout<<"5"<<std::endl;
+    createViewPlato(6);
     ui->stackedWidget->setCurrentWidget(ui->plateau);
+    std::cout<<"6"<<std::endl;
 }
 
 void MainWindow::onResetButtonClick()
@@ -471,16 +437,7 @@ void MainWindow::onPlayAgainButtonClick()
     board->robots_move=board->robots_initial;
     solutionid=0;
     board->notifyObserver();
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }else{
-        delete viewBoard;
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
+    createViewBoard(1);
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
@@ -742,19 +699,7 @@ void MainWindow::onLoadButtonClick()
                         }
                     }
                     board->objJeu=parts[24].toInt();
-
-                    if(viewBoard==nullptr){
-                        viewBoard = new ViewBoard(board);
-                        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-                        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-                        ui->stackedWidget->setCurrentWidget(ui->pageplateau);
-                    }else{
-                        delete viewBoard;
-                        viewBoard = new ViewBoard(board);
-                        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-                        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-                        ui->stackedWidget->setCurrentWidget(ui->pageplateau);
-                    }
+                    createViewBoard(1);
                 }
             }
 
@@ -774,3 +719,35 @@ void MainWindow::onSettingsModeButtonClick()
     ui->stackedWidget->setCurrentWidget(ui->utilisation);
 }
 
+
+
+
+void MainWindow::createViewPlato(int widget) {
+    if (viewPlato == nullptr) {
+        viewPlato = new viewPlateau(board);
+        ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>()->setScene(viewPlato);
+        viewPlato->setParent(ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>());
+        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+    }else{
+        delete viewPlato;
+        viewPlato = new viewPlateau(board);
+        ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>()->setScene(viewPlato);
+        viewPlato->setParent(ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>());
+        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+    }
+}
+
+void MainWindow::createViewBoard(int widget) {
+    if(viewBoard==nullptr){
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>());
+        ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+    }else{
+        delete viewBoard;
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>());
+        ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+    }
+}

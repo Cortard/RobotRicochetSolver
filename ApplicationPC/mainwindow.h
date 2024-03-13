@@ -54,6 +54,9 @@ private:
     viewPlateau *viewPlato;
     ViewPlateauOfficiel *viewPlateauOfficiel;
 
+    void createViewPlato(int widget);
+    void createViewBoard(int widget);
+
     QLabel *selectedLabel;
 
     int solutionid=0;
