@@ -95,6 +95,9 @@ void MainWindow::onTrainModeButtonClick()
 
 void MainWindow::onAddObjectivesButtonClick()
 {
+    if (board->objectives.find(16) != board->objectives.end() && board->objectives[16] != -1) {
+        return;
+    }
     for (const auto& pair : board->objectives) {
         if (pair.second == 135) {
             return;
@@ -110,6 +113,9 @@ void MainWindow::onEditModeButtonClick()
 
 void MainWindow::onAddRobotButtonClick()
 {
+    if (board->robots_move.find(4) != board->robots_move.end() && board->robots_move[4] != -1) {
+        return;
+    }
     for (const auto& pair : board->robots_move) {
         std::cout << "Robot ID : " << pair.first << ", Position : " << pair.second << std::endl;
         if (pair.second == 136) {
