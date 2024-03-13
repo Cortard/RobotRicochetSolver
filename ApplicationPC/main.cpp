@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 
     Board* bd = new Board;
     MainWindow w(nullptr, bd);
+    w.setWindowTitle("Ricochet Robot Solver");
     w.show();
     return a.exec();
 }

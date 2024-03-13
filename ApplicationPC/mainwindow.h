@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+s#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -18,6 +18,35 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+public:
+    MainWindow(QWidget *parent = nullptr, Board* = nullptr);
+    ~MainWindow();
+
+private slots:
+    void onAddObjectivesButtonClick();
+    void onAddRobotButtonClick();
+    void onLoadButtonClick();
+    void onLoadModeButtonClick();
+    void onCreateModeButtonClick();
+    void onEditModeButtonClick();
+    void onTrainModeButtonClick();
+    void onHistoryModeButtonClick();
+    void onPlayModeButtonClick();
+    void onPlayButtonClick();
+    void onPlayOfficialButtonClick();
+    void onOfficialModeButtonClick();
+    void onFreeModeButtonClick();
+    void onSettingsModeButtonClick();
+    void onGenerateButtonClick();
+    void onHomeButtonClick();
+    void onPlayAgainButtonClick();
+    void onSaveButtonClick();
+    void onResetButtonClick();
+    void onSolveButtonClick();
+    void onHistory1ButtonClick();
+
+    void handleMovement();
+
 private:
     Ui::MainWindow *ui;
     Board* board;
@@ -34,48 +63,6 @@ private:
     bool pass = true;
     int wall=0;
 
-public:
-    MainWindow(QWidget *parent = nullptr, Board* = nullptr);
-    ~MainWindow();
-
-private slots:  
-    void handleMovement();
-
-    // void onResetButtonClick();
-    // void onSaveButtonClick();
-    // void onHomeButtonClick();
-    // void onOfficialModeButtonClick();
-    // void onFreeModeButtonClick();
-    // void onLoadModeButtonClick();
-    void onCreateModeButtonClick();
-    void onPlayModeButtonClick();
-    void onEditModeButtonClick();
-    // void onLoadButtonClick();
-    // void onPlayOfficialButtonClick();
-    // void onSolutionButtonClick();
-    // void onPlayAgainButtonClick();
-    void onHistoryModeButtonClick();
-    void onTrainModeButtonClick();
-    // void onRandomButtonClcik();
-    void onAddObjectiveButtonClick();
-    void onAddRobotButtonClick();
-    void onPlayButtonClick();
-    // void onSettingsButtonClick();
-    // void onHistoryLevel1ButtonClick();
-
-    void on_resetPlateau_clicked();
-    void on_Sauvegarder_clicked();
-    void on_Home_clicked();
-    void on_ModeOfficiel_clicked();
-    void on_ModeLibre_clicked();
-    void on_ModeCharger_clicked();
-    void on_BtnCharger_clicked();
-    void on_JouerOfficiel_clicked();
-    void on_Solution_clicked();
-    void on_Rejouer_clicked();
-    void on_GenererAleatoire_clicked();
-    void on_ModeParametre_clicked();
-    void on_Histoire1_clicked();
-
+    void changeWidget(int id);
 };
 #endif // MAINWINDOW_H
