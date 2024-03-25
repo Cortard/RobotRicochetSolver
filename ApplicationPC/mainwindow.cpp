@@ -132,11 +132,15 @@ void MainWindow::onCreateModeButtonClick()
 
 void MainWindow::onPlayButtonClick()
 {
-    createViewPlato(6);
-    solutionid=0;
-    SocketConnection::getSolution(board);
-    board->robots_initial=board->robots_move;
-    ui->stackedWidget->setCurrentWidget(ui->plateau);
+    if(board->objJeu!=-1){
+        createViewPlato(6);
+        solutionid=0;
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        board->robots_initial=board->robots_move;
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
 }
 
 void MainWindow::onFreeModeButtonClick()
@@ -147,6 +151,8 @@ void MainWindow::onFreeModeButtonClick()
 
 void MainWindow::onOfficialModeButtonClick()
 {
+    board->reset();
+    viewPlateauOfficiel = nullptr;
     if (viewPlateauOfficiel == nullptr) {
         viewPlateauOfficiel = new ViewPlateauOfficiel(board);
         ui->stackedWidget->widget(8)->findChild<QGraphicsView*>()->setScene(viewPlateauOfficiel);
@@ -407,7 +413,9 @@ void MainWindow::onHistory1ButtonClick()
     std::cout<<"4"<<std::endl;
 
     //TODO async
-    SocketConnection::getSolution(board);
+    if(SocketConnection::getSolution(board)==1){
+        flagRecu = 1;
+    }
     this->board->robots_initial=this->board->robots_move;
 
     std::cout<<"5"<<std::endl;
@@ -432,6 +440,10 @@ void MainWindow::onPlayAgainButtonClick()
 
 void MainWindow::onSolveButtonClick()
 {
+    if(flagRecu == 1){
+        return;
+    }
+
     if(solutionid==0){
         board->robots_move=board->robots_initial;
         board->notifyObserver();
