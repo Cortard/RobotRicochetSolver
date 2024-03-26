@@ -44,6 +44,13 @@ private slots:
     void onResetButtonClick();
     void onSolveButtonClick();
     void onHistory1ButtonClick();
+    void onHistory2ButtonClick();
+    void onHistory3ButtonClick();
+    void onHistory4ButtonClick();
+    void onHistory5ButtonClick();
+    void onHistory6ButtonClick();
+    void onHistory7ButtonClick();
+    void onHistory8ButtonClick();
 
     void handleMovement();
 

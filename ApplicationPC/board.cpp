@@ -171,6 +171,7 @@ void Board::moveRobot(int id, int pos) {
 }
 
 void Board::reset(){
+    std::cout<<"1.0"<<std::endl;
     mouvement=0;
     objJeu=-1;
 
@@ -188,6 +189,7 @@ void Board::reset(){
         SET_WALL(cases[i*16+15], EAST);
     }
 
+    std::cout<<"2.0"<<std::endl;
     SET_WALL(cases[151],NORTH);
     SET_WALL(cases[152],NORTH);
     SET_WALL(cases[103],SOUTH);
@@ -197,6 +199,7 @@ void Board::reset(){
     SET_WALL(cases[121],WEST);
     SET_WALL(cases[137],WEST);
 
+    std::cout<<"3.0"<<std::endl;
     for(int i=0;i<17;i++){
         this->objectives.at(i)=-1;
     }
@@ -205,5 +208,6 @@ void Board::reset(){
         this->robots_move.at(i)=-1;
     }
 
+    std::cout<<"4.0"<<std::endl;
     notifyObserver();
 }

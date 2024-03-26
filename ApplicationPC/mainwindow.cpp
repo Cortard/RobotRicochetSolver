@@ -44,6 +44,13 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
     connect(ui->resetPlateau, SIGNAL(clicked()), this, SLOT(onResetButtonClick()));
     connect(ui->Solution, SIGNAL(clicked()), this, SLOT(onSolveButtonClick()));
     connect(ui->Histoire1, SIGNAL(clicked()), this, SLOT(onHistory1ButtonClick()));
+    connect(ui->Histoire2, SIGNAL(clicked()), this, SLOT(onHistory2ButtonClick()));
+    connect(ui->Histoire3, SIGNAL(clicked()), this, SLOT(onHistory3ButtonClick()));
+    connect(ui->Histoire4, SIGNAL(clicked()), this, SLOT(onHistory4ButtonClick()));
+    connect(ui->Histoire5, SIGNAL(clicked()), this, SLOT(onHistory5ButtonClick()));
+    connect(ui->Histoire6, SIGNAL(clicked()), this, SLOT(onHistory6ButtonClick()));
+    connect(ui->Histoire7, SIGNAL(clicked()), this, SLOT(onHistory7ButtonClick()));
+    connect(ui->Histoire8, SIGNAL(clicked()), this, SLOT(onHistory8ButtonClick()));
 
     ui->radioButton->setChecked(true);
 
@@ -84,6 +91,24 @@ void MainWindow::onHistoryModeButtonClick()
 {
     if(board->victoireHistoire>=2){
         ui->Histoire2->setStyleSheet("#Histoire2{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=3){
+        ui->Histoire3->setStyleSheet("#Histoire3{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=4){
+        ui->Histoire4->setStyleSheet("#Histoire4{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=5){
+        ui->Histoire4->setStyleSheet("#Histoire5{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=6){
+        ui->Histoire4->setStyleSheet("#Histoire6{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=7){
+        ui->Histoire4->setStyleSheet("#Histoire7{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=8){
+        ui->Histoire4->setStyleSheet("#Histoire8{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
     }
     ui->stackedWidget->setCurrentWidget(ui->pagehistoire);
 }
@@ -424,6 +449,181 @@ void MainWindow::onHistory1ButtonClick()
     std::cout<<"6"<<std::endl;
 }
 
+void MainWindow::onHistory2ButtonClick()
+{
+    if(board->victoireHistoire>=2){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory3ButtonClick()
+{
+    if(board->victoireHistoire>=3){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory4ButtonClick()
+{
+    if(board->victoireHistoire>=4){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory5ButtonClick()
+{
+    if(board->victoireHistoire>=5){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory6ButtonClick()
+{
+    if(board->victoireHistoire>=6){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory7ButtonClick()
+{
+    if(board->victoireHistoire>=7){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory8ButtonClick()
+{
+    if(board->victoireHistoire>=6){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
 void MainWindow::onResetButtonClick()
 {
     this->board->reset();
@@ -718,9 +918,6 @@ void MainWindow::onSettingsModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->utilisation);
 }
-
-
-
 
 void MainWindow::createViewPlato(int widget) {
     if (viewPlato == nullptr) {
