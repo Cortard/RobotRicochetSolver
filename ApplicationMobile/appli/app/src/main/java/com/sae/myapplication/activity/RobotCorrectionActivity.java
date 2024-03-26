@@ -12,9 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sae.myapplication.model.Grid;
 import com.sae.myapplication.R;
-import com.sae.myapplication.SpinnerAdapter;
+import com.sae.myapplication.model.Grid;
+import com.sae.myapplication.model.SpinnerAdapter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -94,9 +94,10 @@ public class RobotCorrectionActivity extends AppCompatActivity {
 
         states = Arrays.asList("objectifr1", "objectifr2", "objectifr3", "objectifr4", "objectifb1", "objectifb2", "objectifb3", "objectifb4", "objectifj1", "objectifj2", "objectifj3", "objectifj4", "objectifv1", "objectifv2", "objectifv3", "objectifv4", "objectif");
         spinner = findViewById(R.id.spinner);
-        // Our custom Adapter class that we created
+
         SpinnerAdapter adapter = new SpinnerAdapter(getApplicationContext(), states);
         adapter.setDropDownViewResource(R.layout.my_dropdown_item);
+
 
         spinner.setAdapter(adapter);
 

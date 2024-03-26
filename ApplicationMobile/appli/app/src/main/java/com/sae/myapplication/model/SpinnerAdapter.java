@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * ArrayAdapter personnalisé pour afficher une liste déroulante avec du texte et des images.
  */
-class SpinnerAdapter extends ArrayAdapter<String> {
+public class SpinnerAdapter extends ArrayAdapter<String> {
 
     private Context context;
     private List<String> statesList;
@@ -75,17 +75,14 @@ class SpinnerAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.my_dropdown_item, parent, false);
 
-        // Image et TextViews
         TextView state = row.findViewById(R.id.text);
         ImageView flag = row.findViewById(R.id.img);
 
-        // Obtenir l'image du drapeau depuis le dossier drawables
         Resources res = context.getResources();
         String drawableName = statesList.get(position).toLowerCase();
         int resId = res.getIdentifier(drawableName, "drawable", context.getPackageName());
         Drawable drawable = res.getDrawable(resId);
 
-        // Définir l'abréviation de l'État et le drapeau de l'État
         state.setText(statesList.get(position));
         flag.setImageDrawable(drawable);
 

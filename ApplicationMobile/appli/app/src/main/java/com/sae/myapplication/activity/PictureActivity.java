@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -151,6 +152,8 @@ public class PictureActivity extends AppCompatActivity {
             Toast.makeText(this, "Photo Valide", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, PictureVerifyActivity.class);
             intent.setData(image_uri);
+
+
             int[] tab = getIntent().getIntArrayExtra("tabPos");
             intent.putExtra("tabPos", tab);
             startActivity(intent);

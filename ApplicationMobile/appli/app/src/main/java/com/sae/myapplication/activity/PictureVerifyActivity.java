@@ -1,6 +1,7 @@
 package com.sae.myapplication.activity;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -80,6 +81,8 @@ public class PictureVerifyActivity extends AppCompatActivity {
         image_uri = getIntent().getData();
         if (image_uri != null) {
             imageView.setImageURI(image_uri);
+            Log.d("bug", "dddd : " + image_uri);
+
             filePath = getRealPathFromURI(image_uri);
         }
 
@@ -106,20 +109,20 @@ public class PictureVerifyActivity extends AppCompatActivity {
 
         bVld.setOnClickListener(v -> {
 
-            try {
-                if (ActivityCompat.checkSelfPermission(PictureVerifyActivity.this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(PictureVerifyActivity.this, new String[]{Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE_FOLDER);
-                } else {
-                    sendImage(MainActivity.ip, 9090, filePath, this);
-                    imageView.setVisibility(View.INVISIBLE);
-                    bCancel.setVisibility(View.INVISIBLE);
-                    bVld.setVisibility(View.INVISIBLE);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_DENIED ||
+                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+
+                String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                requestPermissions(permissions, PERMISSION_CODE_FOLDER);
+            } else {
+                sendImage(MainActivity.ip, 9090, filePath, this);
+                imageView.setVisibility(View.INVISIBLE);
+                bCancel.setVisibility(View.INVISIBLE);
+                bVld.setVisibility(View.INVISIBLE);
             }
 
         });
+
 
 
     }
@@ -141,7 +144,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 bCancel.setVisibility(View.INVISIBLE);
                 bVld.setVisibility(View.INVISIBLE);
             } else {
-                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -153,15 +156,19 @@ public class PictureVerifyActivity extends AppCompatActivity {
      * @return Chemin réel de l'image.
      */
     public String getRealPathFromURI(Uri contentUri) {
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        assert cursor != null;
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String filePath = cursor.getString(column_index);
-        cursor.close();
+        String filePath = null;
+        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        ContentResolver contentResolver = this.getContentResolver();
+        Cursor cursor = contentResolver.query(contentUri, filePathColumn, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            filePath = cursor.getString(columnIndex);
+            cursor.close();
+        }
         return filePath;
     }
+
 
     /**
      * Méthode pour envoyer l'image au serveur pour correction.
@@ -182,19 +189,22 @@ public class PictureVerifyActivity extends AppCompatActivity {
             int width;
             int height;
 
+            Log.d("bug", "1 : " + filePath);
+
+
             try {
                 socket = new Socket();
                 socket.connect(new InetSocketAddress(serverIp, serverPort), TIMEOUT);
                 fileInputStream = new FileInputStream(filePath);
                 bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
                 DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
-
+                Log.d("bug", "2");
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
-
+                Log.d("bug", "3");
                 Bitmap bitmap = BitmapFactory.decodeFile(filePath);
                 BitmapFactory.decodeFile(filePath, options);
-
+                Log.d("bug", "4");
                 width = options.outWidth;
                 height = options.outHeight;
 
@@ -202,13 +212,13 @@ public class PictureVerifyActivity extends AppCompatActivity {
                 // Envoie du FLAG au serveur : 1
                 dataOutputStream.writeByte(1);
                 dataOutputStream.flush();
-
+                Log.d("bug", "5");
                 byte[] byteTab = new byte[4];
 
                 // Attente de la réponse du serveur avec timeouts
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 dataInputStream.read(byteTab);
-
+                Log.d("bug", "6");
                 if(byteTab[0] == 1) {
                     Log.d("bug", width + " " + height);
 
@@ -235,15 +245,12 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 for (int j = 0; j < width; ++j) {
                                     int pixel = bitmap.getPixel(j, i);
 
-                                    // Extraire les composantes RVB
-                                    int red = Color.red(pixel);
-                                    int green = Color.green(pixel);
-                                    int blue = Color.blue(pixel);
+                                    char red = (char)Color.red(pixel);
+                                    char green = (char)Color.green(pixel);
+                                    char blue = (char)Color.blue(pixel);
 
-                                    // Envoyer les composantes RVB
-                                    dataOutputStream.writeByte(blue);
-                                    dataOutputStream.writeByte(green);
-                                    dataOutputStream.writeByte(red);
+                                    dataOutputStream.writeBytes(String.valueOf(red+green+blue));
+
 
                                     cpt++;
                                     progressBar.setProgress(cpt);
