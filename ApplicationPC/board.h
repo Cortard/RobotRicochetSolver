@@ -37,7 +37,7 @@ public:
     void removeRobot(int pos);
     void removeObj(int pos);
 
-    // premier int : id , deuxieme int : position du tableau
+    // premier int : id , (deuxieme) int : position du tableau
     std::map<int, int> objectives;
     std::map<int, int> robots_move;
     std::map<int, int> robots_initial;

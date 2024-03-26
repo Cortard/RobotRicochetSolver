@@ -199,219 +199,93 @@ void MainWindow::onGenerateButtonClick()
 
         board->reset();
 
-        int rand1 = rand() % 16;
+        int rand1 = rand() % 8;
         srand(QTime::currentTime().msec()+rand1);
-        int rand2 = rand() % 16;
-        srand(QTime::currentTime().msec()+rand2);
-        int rand3 = rand() % 16;
-        srand(QTime::currentTime().msec()+rand3);
-        int rand4 = rand() % 16;
-        srand(QTime::currentTime().msec()+rand4);
+
+        int randrb1 = rand() % 255;
+        srand(QTime::currentTime().msec()+randrb1);
+        while(randrb1==119 || randrb1==120 || randrb1==136 || randrb1==135){
+            randrb1 = rand() % 255;
+            srand(QTime::currentTime().msec()+randrb1);
+        }
+        int randrb2 = rand() % 255;
+        srand(QTime::currentTime().msec()+randrb2);
+        while(randrb2==119 || randrb2==120 || randrb2==136 || randrb2==135){
+            randrb2 = rand() % 255;
+            srand(QTime::currentTime().msec()+randrb2);
+        }
+        int randrb3 = rand() % 255;
+        srand(QTime::currentTime().msec()+randrb3);
+        while(randrb3==119 || randrb3==120 || randrb3==136 || randrb3==135){
+            randrb3 = rand() % 255;
+            srand(QTime::currentTime().msec()+randrb3);
+        }
+        int randrb4 = rand() % 255;
+        srand(QTime::currentTime().msec()+randrb4);
+        while(randrb4==119 || randrb4==120 || randrb4==136 || randrb4==135){
+            randrb4 = rand() % 255;
+            srand(QTime::currentTime().msec()+randrb4);
+        }
+
+        int randobj = rand() % 16;
+        srand(QTime::currentTime().msec()+randobj);
+        board->objJeu=randobj;
+
+        board->robots_move.at(0)=randrb1;
+        board->robots_move.at(1)=randrb2;
+        board->robots_move.at(2)=randrb3;
+        board->robots_move.at(3)=randrb4;
 
         switch (rand1) {
         case 0:
             board->constructPart1(this->board, 0);
-            break;
-        case 1:
-            board->constructPart5(this->board, 0);
-            break;
-        case 2:
-            board->constructPart9(this->board, 0);
-            break;
-        case 3:
-            board->constructPart13(this->board, 0);
-            break;
-        case 4:
-            board->constructPart2(this->board, 0);
-            break;
-        case 5:
-            board->constructPart6(this->board, 0);
-            break;
-        case 6:
-            board->constructPart10(this->board, 0);
-            break;
-        case 7:
-            board->constructPart14(this->board, 0);
-            break;
-        case 8:
-            board->constructPart3(this->board, 0);
-            break;
-        case 9:
-            board->constructPart7(this->board, 0);
-            break;
-        case 10:
-            board->constructPart11(this->board, 0);
-            break;
-        case 11:
-            board->constructPart15(this->board, 0);
-            break;
-        case 12:
-            board->constructPart4(this->board, 0);
-            break;
-        case 13:
-            board->constructPart8(this->board, 0);
-            break;
-        case 14:
-            board->constructPart12(this->board, 0);
-            break;
-        case 15:
-            board->constructPart16(this->board, 0);
-            break;
-        }
-
-        switch (rand2) {
-        case 0:
-            board->constructPart1(this->board, 1);
-            break;
-        case 1:
-            board->constructPart5(this->board, 1);
-            break;
-        case 2:
-            board->constructPart9(this->board, 1);
-            break;
-        case 3:
-            board->constructPart13(this->board, 1);
-            break;
-        case 4:
             board->constructPart2(this->board, 1);
-            break;
-        case 5:
-            board->constructPart6(this->board, 1);
-            break;
-        case 6:
-            board->constructPart10(this->board, 1);
-            break;
-        case 7:
-            board->constructPart14(this->board, 1);
-            break;
-        case 8:
-            board->constructPart3(this->board, 1);
-            break;
-        case 9:
-            board->constructPart7(this->board, 1);
-            break;
-        case 10:
-            board->constructPart11(this->board, 1);
-            break;
-        case 11:
-            board->constructPart15(this->board, 1);
-            break;
-        case 12:
-            board->constructPart4(this->board, 1);
-            break;
-        case 13:
-            board->constructPart8(this->board, 1);
-            break;
-        case 14:
-            board->constructPart12(this->board, 1);
-            break;
-        case 15:
-            board->constructPart16(this->board, 1);
-            break;
-        }
-
-        switch (rand3) {
-        case 0:
-            board->constructPart1(this->board, 2);
-            break;
-        case 1:
-            board->constructPart5(this->board, 2);
-            break;
-        case 2:
-            board->constructPart9(this->board, 2);
-            break;
-        case 3:
-            board->constructPart13(this->board, 2);
-            break;
-        case 4:
-            board->constructPart2(this->board, 2);
-            break;
-        case 5:
-            board->constructPart6(this->board, 2);
-            break;
-        case 6:
-            board->constructPart10(this->board, 2);
-            break;
-        case 7:
-            board->constructPart14(this->board, 2);
-            break;
-        case 8:
-            board->constructPart3(this->board, 2);
-            break;
-        case 9:
-            board->constructPart7(this->board, 2);
-            break;
-        case 10:
-            board->constructPart11(this->board, 2);
-            break;
-        case 11:
-            board->constructPart15(this->board, 2);
-            break;
-        case 12:
             board->constructPart4(this->board, 2);
-            break;
-        case 13:
-            board->constructPart8(this->board, 2);
-            break;
-        case 14:
-            board->constructPart12(this->board, 2);
-            break;
-        case 15:
-            board->constructPart16(this->board, 2);
-            break;
-        }
-
-        switch (rand4) {
-        case 0:
-            board->constructPart1(this->board, 3);
-            break;
-        case 1:
-            board->constructPart5(this->board, 3);
-            break;
-        case 2:
             board->constructPart9(this->board, 3);
             break;
-        case 3:
-            board->constructPart13(this->board, 3);
+        case 1:
+            board->constructPart16(this->board, 0);
+            board->constructPart8(this->board, 1);
+            board->constructPart6(this->board, 2);
+            board->constructPart1(this->board, 3);
             break;
-        case 4:
-            board->constructPart2(this->board, 3);
-            break;
-        case 5:
-            board->constructPart6(this->board, 3);
-            break;
-        case 6:
-            board->constructPart10(this->board, 3);
-            break;
-        case 7:
-            board->constructPart14(this->board, 3);
-            break;
-        case 8:
-            board->constructPart3(this->board, 3);
-            break;
-        case 9:
+        case 2:
+            board->constructPart10(this->board, 0);
+            board->constructPart11(this->board, 1);
+            board->constructPart12(this->board, 2);
             board->constructPart7(this->board, 3);
             break;
-        case 10:
-            board->constructPart11(this->board, 3);
+        case 3:
+            board->constructPart14(this->board, 0);
+            board->constructPart11(this->board, 1);
+            board->constructPart13(this->board, 2);
+            board->constructPart1(this->board, 3);
             break;
-        case 11:
+        case 4:
+            board->constructPart14(this->board, 0);
+            board->constructPart3(this->board, 1);
+            board->constructPart4(this->board, 2);
             board->constructPart15(this->board, 3);
             break;
-        case 12:
-            board->constructPart4(this->board, 3);
+        case 5:
+            board->constructPart9(this->board, 0);
+            board->constructPart8(this->board, 1);
+            board->constructPart6(this->board, 2);
+            board->constructPart7(this->board, 3);
             break;
-        case 13:
-            board->constructPart8(this->board, 3);
+        case 6:
+            board->constructPart2(this->board, 0);
+            board->constructPart11(this->board, 1);
+            board->constructPart3(this->board, 2);
+            board->constructPart13(this->board, 3);
             break;
-        case 14:
-            board->constructPart12(this->board, 3);
-            break;
-        case 15:
+        case 7:
+            board->constructPart2(this->board, 0);
+            board->constructPart7(this->board, 1);
+            board->constructPart10(this->board, 2);
             board->constructPart16(this->board, 3);
             break;
         }
-
         createViewPlato(6);
         ui->stackedWidget->setCurrentWidget(ui->plateau);
     }
