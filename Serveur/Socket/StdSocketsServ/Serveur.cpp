@@ -331,12 +331,22 @@ bool Serveur::getClientPicture(Client *slot) {
 
     int percent=size[0]/100;
     if(percent==0) percent=1;
+
+    // Picture data reception
     for(int i=0;i<size[0];++i){
         for(int j=0;j<size[1];++j){
-            for(int k=0;k<3;++k){
-                int result = recv(slot->socket, (char*)slot->output+(i*size[1]*3+j*3+k), sizeof(char), 0);
-                if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
+            char* buff = NULL;
+            int result = recv(slot->socket, buff, 3*sizeof(char), 0);
+            if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
+            for (int k = 0; k < 3; ++k) {
+                memset((char*)slot->output + (i * size[1] * 3 + j * 3 + k), buff[k], 1);
             }
+            delete[] buff;
+            Logs::write("Data recived" + std::to_string(buff[0]) + " " + std::to_string(buff[1]) + " " + std::to_string(buff[2]), LOG_LEVEL_DEBUG);
+            //for(int k=0;k<3;++k){
+                //int result = recv(slot->socket, (char*)slot->output+(i*size[1]*3+j*3+k), sizeof(char), 0);
+                //if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
+            //}
         }
         if(i%percent==0){
             Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received " + std::to_string(i) + "/" + std::to_string(size[0]) + "(" + std::to_string(i*100/size[0]) + "%)",LOG_LEVEL_DEBUG);
