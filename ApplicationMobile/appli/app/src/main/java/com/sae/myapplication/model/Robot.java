@@ -1,4 +1,4 @@
-package com.sae.myapplication;
+package com.sae.myapplication.model;
 
 /**
  * Classe représentant un robot dans la grille de correction.

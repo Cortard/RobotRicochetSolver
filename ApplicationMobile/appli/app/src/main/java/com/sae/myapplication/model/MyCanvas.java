@@ -1,4 +1,4 @@
-package com.sae.myapplication;
+package com.sae.myapplication.model;
 
 import android.content.Context;
 import android.graphics.Canvas;

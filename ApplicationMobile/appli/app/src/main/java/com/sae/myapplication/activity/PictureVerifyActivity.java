@@ -1,4 +1,4 @@
-package com.sae.myapplication;
+package com.sae.myapplication.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -24,6 +24,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.sae.myapplication.R;
 
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;

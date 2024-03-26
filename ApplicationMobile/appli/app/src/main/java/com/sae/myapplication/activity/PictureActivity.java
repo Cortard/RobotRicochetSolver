@@ -1,4 +1,4 @@
-package com.sae.myapplication;
+package com.sae.myapplication.activity;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.sae.myapplication.R;
 
 /**
  * Activité permettant à l'utilisateur de choisir ou de prendre une photo.

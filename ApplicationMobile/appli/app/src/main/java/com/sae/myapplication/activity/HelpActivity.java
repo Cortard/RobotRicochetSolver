@@ -1,10 +1,12 @@
-package com.sae.myapplication;
+package com.sae.myapplication.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.sae.myapplication.R;
 
 /**
  * Activité d'aide fournissant des informations sur le fonctionnement de l'application.

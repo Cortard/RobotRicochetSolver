@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bluebBg"
-    tools:context=".PictureAnswerActivity">
+    tools:context=".activity.PictureAnswerActivity">
 
 
     <ScrollView
@@ -37,13 +37,13 @@
                     android:layout_margin="50dp"
                     android:src="@drawable/round" />
 
-                <com.sae.myapplication.MyCanvas
+                <com.sae.myapplication.model.MyCanvas
                     android:id="@+id/canva"
                     android:layout_width="320dp"
                     android:layout_height="320dp"
                     android:layout_gravity="center">
 
-                </com.sae.myapplication.MyCanvas>
+                </com.sae.myapplication.model.MyCanvas>
             </FrameLayout>
 
             <Button
