@@ -333,6 +333,7 @@ bool Serveur::getClientPicture(Client *slot) {
     if(percent==0) percent=1;
 
     // Picture data reception
+    const char* EOF_marker = "EOF";
     const int BUFFER_SIZE = 1024;
     char buffer[BUFFER_SIZE] = { 0 };
     auto* picturePath = new std::string();
@@ -343,7 +344,11 @@ bool Serveur::getClientPicture(Client *slot) {
         Logs::write("Slot " + std::to_string(slot->slotNum) + " error opening file", LOG_LEVEL_ERROR);
     }
     int bytes_recived;
-    while ((bytes_recived = recv(slot->socket, buffer, BUFFER_SIZE, 0))) {
+    while ((bytes_recived = recv(slot->socket, buffer, BUFFER_SIZE, 0) > 0)) {
+        if (strcmp(buffer, EOF_marker, strlen(EOF_marker)) == 0) {
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " EOF received", LOG_LEVEL_DEBUG);
+            break;
+        }
         outfile.write(buffer, bytes_recived);
     }
     if (bytes_recived == 0) {
