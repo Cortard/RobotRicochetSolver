@@ -347,9 +347,9 @@ bool Serveur::getClientPicture(Client *slot) {
     recv(slot->socket, &totalFileSize, sizeof(int), 0);
     int receivedFileSize = 0;
     while (receivedFileSize < totalFileSize) {
-        recv(slot->socket, buffer, BUFFER_SIZE, 0) > 0)
+        recv(slot->socket, buffer, BUFFER_SIZE, 0);
         outfile.write(buffer, bytes_received);
-        receivedFileSize += bytes_received
+        receivedFileSize += bytes_received;
     }
     if (bytes_received == -1) {
         Logs::write("Slot " + std::to_string(slot->slotNum) + " error during reception", LOG_LEVEL_ERROR);
