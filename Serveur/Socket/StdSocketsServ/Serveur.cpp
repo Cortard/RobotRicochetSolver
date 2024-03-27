@@ -359,7 +359,7 @@ bool Serveur::getClientPicture(Client *slot) {
     char buffer[BUFFER_SIZE] = { 0 };
     auto* picturePath = new std::string();
     *picturePath = PICTURE_PATH;
-    *picturePath += "slot" + std::to_string(slot->slotNum) + ".png";
+    *picturePath += "slot" + std::to_string(slot->slotNum) + ".jpg";
     std::ofstream outfile(*picturePath, std::ios::binary);
     if (!outfile) {
         Logs::write("Slot " + std::to_string(slot->slotNum) + " error opening file", LOG_LEVEL_ERROR);
