@@ -333,7 +333,7 @@ bool Serveur::getClientPicture(Client *slot) {
     if(percent==0) percent=1;
 
     // Picture data reception
-    for(int i=0;i<size[0];++i){
+    /*for(int i=0;i<size[0];++i){
         for(int j=0;j<size[1];++j){
             char* buff = NULL;
             int result = recv(slot->socket, buff, 3*sizeof(char), 0);
@@ -343,22 +343,43 @@ bool Serveur::getClientPicture(Client *slot) {
             }
             delete[] buff;
             Logs::write("Data recived" + std::to_string(buff[0]) + " " + std::to_string(buff[1]) + " " + std::to_string(buff[2]), LOG_LEVEL_DEBUG);
-            //for(int k=0;k<3;++k){
-                //int result = recv(slot->socket, (char*)slot->output+(i*size[1]*3+j*3+k), sizeof(char), 0);
-                //if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
-            //}
+
+            for(int k=0;k<3;++k){
+                int result = recv(slot->socket, (char*)slot->output+(i*size[1]*3+j*3+k), sizeof(char), 0);
+                if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
+            }
         }
         if(i%percent==0){
             Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received " + std::to_string(i) + "/" + std::to_string(size[0]) + "(" + std::to_string(i*100/size[0]) + "%)",LOG_LEVEL_DEBUG);
         }
-    }
-    Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received",LOG_LEVEL_DEBUG);
+    }*/
+    //Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received",LOG_LEVEL_DEBUG);
 
+    const int BUFFER_SIZE = 1024;
+    char buffer[BUFFER_SIZE] = { 0 };
     auto* picturePath = new std::string();
+    *picturePath = PICTURE_PATH;
+    *picturePath += "slot" + std::to_string(slot->slotNum) + ".png";
+    std::ofstream outfile(*picturePath, std::ios::binary);
+    if (!outfile) {
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " error opening file", LOG_LEVEL_ERROR);
+    }
+    SSIZE_T bytes_recived;
+    while ((bytes_recived = recv(slot->socket, buffer, BUFFER_SIZE, 0)) > 0) {
+        outfile.write(buffer, BUFFER_SIZE);
+    }
+    if (bytes_recived == 0) {
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " file recived successfully", LOG_LEVEL_DEBUG);
+    }
+    else if (bytes_recived == -1) {
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " error opening file", LOG_LEVEL_ERROR);
+    }
+
+    /*auto* picturePath = new std::string();
     *picturePath=PICTURE_PATH;
     *picturePath+="slot"+std::to_string(slot->slotNum)+".png";
     JPEGBuilder::build((char*)slot->output,(int)(size[0]),(int)(size[1]),*picturePath);
-    Logs::write("Slot " + std::to_string(slot->slotNum) + " picture saved at " + *picturePath,LOG_LEVEL_DEBUG);
+    Logs::write("Slot " + std::to_string(slot->slotNum) + " picture saved at " + *picturePath,LOG_LEVEL_DEBUG);*/
 
     delete[] size;
     delete[] static_cast<char*>(slot->output);
