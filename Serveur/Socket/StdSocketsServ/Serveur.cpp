@@ -333,7 +333,6 @@ bool Serveur::getClientPicture(Client *slot) {
     if(percent==0) percent=1;
 
     // Picture data reception
-    const char* EOF_marker = "EOF";
     const int BUFFER_SIZE = 1024;
     char buffer[BUFFER_SIZE] = { 0 };
     auto* picturePath = new std::string();
@@ -343,19 +342,20 @@ bool Serveur::getClientPicture(Client *slot) {
     if (!outfile) {
         Logs::write("Slot " + std::to_string(slot->slotNum) + " error opening file", LOG_LEVEL_ERROR);
     }
-    int bytes_recived;
-    while ((bytes_recived = recv(slot->socket, buffer, BUFFER_SIZE, 0) > 0)) {
-        if (strncmp(buffer, EOF_marker, strlen(EOF_marker)) == 0) {
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " EOF received", LOG_LEVEL_DEBUG);
-            break;
-        }
-        outfile.write(buffer, bytes_recived);
+    int bytes_received;
+    int totalFileSize;
+    recv(slot->socket, &totalFileSize, sizeof(int), 0);
+    int receivedFileSize = 0;
+    while (receivedFileSize < totalFileSize) {
+        recv(slot->socket, buffer, BUFFER_SIZE, 0) > 0)
+        outfile.write(buffer, bytes_received);
+        receivedFileSize += bytes_received
     }
-    if (bytes_recived == 0) {
-        Logs::write("Slot " + std::to_string(slot->slotNum) + " file recived successfully", LOG_LEVEL_DEBUG);
-    }
-    else if (bytes_recived == -1) {
+    if (bytes_received == -1) {
         Logs::write("Slot " + std::to_string(slot->slotNum) + " error during reception", LOG_LEVEL_ERROR);
+    }
+    else {
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " file received successfully", LOG_LEVEL_DEBUG);
     }
 
     delete[] size;
