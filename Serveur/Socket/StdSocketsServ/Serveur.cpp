@@ -345,7 +345,7 @@ bool Serveur::getClientPicture(Client *slot) {
     }
     int bytes_recived;
     while ((bytes_recived = recv(slot->socket, buffer, BUFFER_SIZE, 0) > 0)) {
-        if (strcmp(buffer, EOF_marker, strlen(EOF_marker)) == 0) {
+        if (strncmp(buffer, EOF_marker, strlen(EOF_marker)) == 0) {
             Logs::write("Slot " + std::to_string(slot->slotNum) + " EOF received", LOG_LEVEL_DEBUG);
             break;
         }
