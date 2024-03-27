@@ -347,7 +347,7 @@ bool Serveur::getClientPicture(Client *slot) {
     recv(slot->socket, &totalFileSize, sizeof(int), 0);
     int receivedFileSize = 0;
     while (receivedFileSize < totalFileSize) {
-        recv(slot->socket, buffer, BUFFER_SIZE, 0);
+        bytes_received = recv(slot->socket, buffer, BUFFER_SIZE, 0);
         outfile.write(buffer, bytes_received);
         receivedFileSize += bytes_received;
     }
