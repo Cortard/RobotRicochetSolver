@@ -366,13 +366,13 @@ bool Serveur::getClientPicture(Client *slot) {
     }
     int bytes_recived;
     while ((bytes_recived = recv(slot->socket, buffer, BUFFER_SIZE, 0)) > 0) {
-        outfile.write(buffer, BUFFER_SIZE);
+        outfile.write(buffer, bytes_recived);
     }
     if (bytes_recived == 0) {
         Logs::write("Slot " + std::to_string(slot->slotNum) + " file recived successfully", LOG_LEVEL_DEBUG);
     }
     else if (bytes_recived == -1) {
-        Logs::write("Slot " + std::to_string(slot->slotNum) + " error opening file", LOG_LEVEL_ERROR);
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " error during reception", LOG_LEVEL_ERROR);
     }
 
     /*auto* picturePath = new std::string();
