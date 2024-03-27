@@ -364,7 +364,7 @@ bool Serveur::getClientPicture(Client *slot) {
     if (!outfile) {
         Logs::write("Slot " + std::to_string(slot->slotNum) + " error opening file", LOG_LEVEL_ERROR);
     }
-    SSIZE_T bytes_recived;
+    int bytes_recived;
     while ((bytes_recived = recv(slot->socket, buffer, BUFFER_SIZE, 0)) > 0) {
         outfile.write(buffer, BUFFER_SIZE);
     }
