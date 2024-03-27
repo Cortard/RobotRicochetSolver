@@ -343,7 +343,7 @@ bool Serveur::getClientPicture(Client *slot) {
         Logs::write("Slot " + std::to_string(slot->slotNum) + " error opening file", LOG_LEVEL_ERROR);
     }
     int bytes_received;
-    while ((bytes_received = recv(slot->socket, buffer, BUFFER_SIZE, 0)) < 0) {
+    while ((bytes_received = recv(slot->socket, buffer, BUFFER_SIZE, 0)) > 0) {
         if (bytes_received == 4) {
             Logs::write("Slot " + std::to_string(slot->slotNum) + " 4 bytes received", LOG_LEVEL_DEBUG);
             break;
