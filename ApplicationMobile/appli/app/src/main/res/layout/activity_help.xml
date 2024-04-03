@@ -8,42 +8,6 @@
     tools:context=".activity.HelpActivity">
 
 
-    <FrameLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/header2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/header" />
-
-        <TextView
-            android:id="@+id/titreHelp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeMinTextSize="24sp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:padding="10sp"
-            android:text="@string/titreHelp"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/fontColor"
-            android:textStyle="bold" />
-
-    </FrameLayout>
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -56,8 +20,11 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:paddingTop="60dp"
+            android:paddingBottom="60dp">
 
             <ImageView
                 android:id="@+id/surfaceView5"
@@ -118,6 +85,41 @@
             android:background="#00FFFFFF"
             android:contentDescription="@string/boutonExit"
             android:src="@drawable/_52473_return_icon" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/header2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/header" />
+
+        <TextView
+            android:id="@+id/titreHelp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="24sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:padding="10sp"
+            android:text="@string/titreHelp"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/fontColor"
+            android:textStyle="bold" />
 
     </FrameLayout>
 

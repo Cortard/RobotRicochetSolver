@@ -24,15 +24,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/surfaceView"
-                    android:layout_width="338dp"
-                    android:layout_height="392dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="30dp"
-                    android:src="@drawable/round" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp">
 
                 <ImageView
                     android:id="@+id/imageVerif"
