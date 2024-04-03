@@ -31,6 +31,7 @@ import com.sae.myapplication.R;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -241,7 +242,22 @@ public class PictureVerifyActivity extends AppCompatActivity {
                         int cpt=0;
 
                         try {
-                            for (int i = 0; i < height; ++i) {
+                            int BUFFER_SIZE = 1024;
+                            byte[] buffer = new byte[BUFFER_SIZE];
+                            File file = new File(filePath);
+                            FileInputStream fis = new FileInputStream(file);
+                            progressBar.setMax((int) file.length());
+                            int read_size = 0;
+                            while(read_size != -1) {
+                                read_size = fis.read(buffer);
+                                Log.d("bug", String.valueOf(read_size));
+                                dataOutputStream.write(buffer);
+                                dataOutputStream.flush();
+                                cpt+=read_size;
+                                progressBar.setProgress(cpt);
+                            }
+
+                            /*for (int i = 0; i < height; ++i) {
                                 for (int j = 0; j < width; ++j) {
                                     int pixel = bitmap.getPixel(j, i);
 
@@ -256,7 +272,7 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                     progressBar.setProgress(cpt);
                                     dataOutputStream.flush();
                                 }
-                            }
+                            }*/
 
                         } catch (IOException e) {
                             fileInputStream.close();
