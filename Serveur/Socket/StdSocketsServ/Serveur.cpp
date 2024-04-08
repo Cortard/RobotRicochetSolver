@@ -344,6 +344,9 @@ bool Serveur::getClientPicture(Client *slot) {
     }
     int bytes_received;
     while ((bytes_received = recv(slot->socket, buffer, BUFFER_SIZE, 0)) > 0) {
+        std::string tmp_string;
+        tmp_string.assign(&(buffer[0]), bytes_received);
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " received to string : " + tmp_string, LOG_LEVEL_DEBUG);
         Logs::write("Slot " + std::to_string(slot->slotNum) + " received " + std::to_string(bytes_received), LOG_LEVEL_DEBUG);
         outfile.write(buffer, bytes_received);
     }
