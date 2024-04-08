@@ -344,10 +344,7 @@ bool Serveur::getClientPicture(Client *slot) {
     }
     int bytes_received;
     while ((bytes_received = recv(slot->socket, buffer, BUFFER_SIZE, 0)) > 0) {
-        if (bytes_received == 28) {
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " received 28", LOG_LEVEL_DEBUG);
-            break;
-        }
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " received " + bytes_received, LOG_LEVEL_DEBUG);
         outfile.write(buffer, bytes_received);
     }
     if (bytes_received == -1) {
