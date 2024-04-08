@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.sae.myapplication.R;
 
@@ -235,8 +233,6 @@ public class PictureVerifyActivity extends AppCompatActivity {
                     if (width * height * 3 > 0) {
 
                         //Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-
-                        Log.d("bug", bitmap.toString());
 
                         progressBar.setMax(width * height);
                         int cpt=0;
