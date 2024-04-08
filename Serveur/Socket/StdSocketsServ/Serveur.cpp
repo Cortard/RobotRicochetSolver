@@ -347,7 +347,7 @@ bool Serveur::getClientPicture(Client *slot) {
         if (bytes_received == sizeof(char)) {
             char str[bytes_received + 1];
             memcpy(str, buffer, bytes_received);
-            str[bytes_received] = 0
+            str[bytes_received] = 0;
             Logs::write("Slot " + std::to_string(slot->slotNum) + " received to char : " + str[0], LOG_LEVEL_DEBUG);
         }
         Logs::write("Slot " + std::to_string(slot->slotNum) + " received " + std::to_string(bytes_received), LOG_LEVEL_DEBUG);
