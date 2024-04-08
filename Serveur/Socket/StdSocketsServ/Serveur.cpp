@@ -344,6 +344,13 @@ bool Serveur::getClientPicture(Client *slot) {
     }
     int bytes_received;
     while ((bytes_received = recv(slot->socket, buffer, BUFFER_SIZE, 0)) > 0) {
+        std::string str(buffer, size);
+        size_t found = str.find("EOF");
+        if (found != std::string::npos) {
+            Logs::write("Slot " + std::to_string(slot->slotNum) + " EOF finded", LOG_LEVEL_DEBUG);
+            break;
+        }
+
         Logs::write("Slot " + std::to_string(slot->slotNum) + " received " + std::to_string(bytes_received), LOG_LEVEL_DEBUG);
         outfile.write(buffer, bytes_received);
     }
