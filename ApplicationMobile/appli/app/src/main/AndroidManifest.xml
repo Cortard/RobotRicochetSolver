@@ -21,7 +21,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
@@ -38,8 +38,9 @@
 
 
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".activity.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,31 +49,43 @@
         </activity>
 
         <activity
-            android:name=".PictureActivity"
-            android:exported="true">
+            android:name=".activity.PictureActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
 
         </activity>
 
         <activity
-            android:name=".PictureVerifyActivity"
-            android:exported="true">
+            android:name=".activity.PictureVerifyActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name=".PictureAnswerActivity"
-            android:exported="true">
-
-        </activity>
-
-        <activity
-            android:name=".RobotCorrectionActivity"
-            android:exported="true">
+            android:name=".activity.PictureAnswerActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
 
         </activity>
 
         <activity
-            android:name=".HelpActivity"
-            android:exported="true">
+            android:name=".activity.RobotCorrectionActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".activity.PickRobotActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".activity.HelpActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
 
         </activity>
 
