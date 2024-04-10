@@ -10,7 +10,9 @@ class ViewBoard : public QGraphicsScene, public Observer
 {
     Q_OBJECT
 private:
+    // Taille d'une case
     int CellSize =25;
+
     int TailleBoard = 16;
     QVector<QGraphicsItem*> selected;
     QVector<QGraphicsItem*> tools;

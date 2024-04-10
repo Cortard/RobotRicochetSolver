@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QWidget>
-#include <iostream>
 
 #include <QGuiApplication>
 #include <QScreen>
@@ -10,8 +9,12 @@
 #include "socketconnection.h"
 #include <QThread>
 #include <QFile>
+#include <iostream>
+
+using namespace std;
 
 #include <QFontDatabase>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent, Board* bd)
     : QMainWindow(parent),
@@ -20,17 +23,40 @@ MainWindow::MainWindow(QWidget *parent, Board* bd)
 {
     ui->setupUi(this);
 
+    connect(ui->AddObj, SIGNAL(clicked()), this, SLOT(onAddObjectivesButtonClick()));
+    connect(ui->AddRbt, SIGNAL(clicked()), this, SLOT(onAddRobotButtonClick()));
+    connect(ui->BtnCharger, SIGNAL(clicked()), this, SLOT(onLoadButtonClick()));
+    connect(ui->ModeCharger, SIGNAL(clicked()), this, SLOT(onLoadModeButtonClick()));
+    connect(ui->ModeCreer, SIGNAL(clicked()), this, SLOT(onCreateModeButtonClick()));
+    connect(ui->ModeEdition, SIGNAL(clicked()), this, SLOT(onEditModeButtonClick()));
+    connect(ui->ModeEntrainement, SIGNAL(clicked()), this, SLOT(onTrainModeButtonClick()));
+    connect(ui->ModeHistoire, SIGNAL(clicked()), this, SLOT(onHistoryModeButtonClick()));
+    connect(ui->ModeJouer, SIGNAL(clicked()), this, SLOT(onPlayModeButtonClick()));
+    connect(ui->Jouer, SIGNAL(clicked()), this, SLOT(onPlayButtonClick()));
+    connect(ui->JouerOfficiel, SIGNAL(clicked()), this, SLOT(onPlayOfficialButtonClick()));
+    connect(ui->ModeOfficiel, SIGNAL(clicked()), this, SLOT(onOfficialModeButtonClick()));
+    connect(ui->ModeLibre, SIGNAL(clicked()), this, SLOT(onFreeModeButtonClick()));
+    connect(ui->ModeParametre, SIGNAL(clicked()), this, SLOT(onSettingsModeButtonClick()));
+    connect(ui->GenererAleatoire, SIGNAL(clicked()), this, SLOT(onGenerateButtonClick()));
+    connect(ui->Home, SIGNAL(clicked()), this, SLOT(onHomeButtonClick()));
+    connect(ui->Rejouer, SIGNAL(clicked()), this, SLOT(onPlayAgainButtonClick()));
+    connect(ui->Sauvegarder, SIGNAL(clicked()), this, SLOT(onSaveButtonClick()));
+    connect(ui->resetPlateau, SIGNAL(clicked()), this, SLOT(onResetButtonClick()));
+    connect(ui->Solution, SIGNAL(clicked()), this, SLOT(onSolveButtonClick()));
+    connect(ui->Histoire1, SIGNAL(clicked()), this, SLOT(onHistory1ButtonClick()));
+    connect(ui->Histoire2, SIGNAL(clicked()), this, SLOT(onHistory2ButtonClick()));
+    connect(ui->Histoire3, SIGNAL(clicked()), this, SLOT(onHistory3ButtonClick()));
+    connect(ui->Histoire4, SIGNAL(clicked()), this, SLOT(onHistory4ButtonClick()));
+    connect(ui->Histoire5, SIGNAL(clicked()), this, SLOT(onHistory5ButtonClick()));
+    connect(ui->Histoire6, SIGNAL(clicked()), this, SLOT(onHistory6ButtonClick()));
+    connect(ui->Histoire7, SIGNAL(clicked()), this, SLOT(onHistory7ButtonClick()));
+    connect(ui->Histoire8, SIGNAL(clicked()), this, SLOT(onHistory8ButtonClick()));
+
     ui->radioButton->setChecked(true);
 
     viewBoard = nullptr;
     viewPlato = nullptr;
     viewPlateauOfficiel = nullptr;
-
-//    QFontDatabase db;
-//      for(int i=0; i<db.families().size(); i++)
-//      {
-//        qDebug() << db.families().at(i);
-//      }
 
     QFont font = QFont("Poppins", 20);
 
@@ -56,97 +82,102 @@ void MainWindow::handleMovement() {
     ui->label->setText(QString::number(board->mouvement));
 }
 
-void MainWindow::on_ModeJouer_clicked()
+void MainWindow::onPlayModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagejouer);
 }
-void MainWindow::on_ModeHistoire_clicked()
+
+void MainWindow::onHistoryModeButtonClick()
 {
     if(board->victoireHistoire>=2){
         ui->Histoire2->setStyleSheet("#Histoire2{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
     }
+    if(board->victoireHistoire>=3){
+        ui->Histoire3->setStyleSheet("#Histoire3{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=4){
+        ui->Histoire4->setStyleSheet("#Histoire4{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=5){
+        ui->Histoire4->setStyleSheet("#Histoire5{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=6){
+        ui->Histoire4->setStyleSheet("#Histoire6{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=7){
+        ui->Histoire4->setStyleSheet("#Histoire7{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
+    if(board->victoireHistoire>=8){
+        ui->Histoire4->setStyleSheet("#Histoire8{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 	rgba(255, 255, 255, 107));border: 1px solid rgb(255, 255, 255);border-radius: 40px;padding:10px;color : rgb(255, 255, 255);}#Histoire2:hover {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.606178 rgba(255, 255, 255, 150));}#Histoire2:pressed {background-color: #9c2579;}");
+    }
     ui->stackedWidget->setCurrentWidget(ui->pagehistoire);
 }
-void MainWindow::on_ModeEntrainement_clicked()
+
+void MainWindow::onTrainModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->pagetrain);
 }
-void MainWindow::on_AddObj_clicked()
+
+void MainWindow::onAddObjectivesButtonClick()
 {
-    bool found = false;
+    if (board->objectives.find(16) != board->objectives.end() && board->objectives[16] != -1) {
+        return;
+    }
     for (const auto& pair : board->objectives) {
         if (pair.second == 135) {
-            found = true;
-            break;
+            return;
         }
     }
-    if (!found) {
-        ControllerAddObj(board).control();
-    }
-
+    ControllerAddObj(board).control();
 }
 
-void MainWindow::on_ModeEdition_clicked()
+void MainWindow::onEditModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->edition);
 }
 
-void MainWindow::on_AddRbt_clicked()
+void MainWindow::onAddRobotButtonClick()
 {
-    bool found = false;
-    for (const auto& pair : board->robots) {
+    if (board->robots_move.find(4) != board->robots_move.end() && board->robots_move[4] != -1) {
+        return;
+    }
+    for (const auto& pair : board->robots_move) {
+        std::cout << "Robot ID : " << pair.first << ", Position : " << pair.second << std::endl;
         if (pair.second == 136) {
-            found = true;
-            break;
+            return;
         }
     }
-    if (!found) {
-        ControllerAddRobot(board).control();
-    }
+    ControllerAddRobot(board).control();
 }
 
-void MainWindow::on_ModeCreer_clicked()
+void MainWindow::onCreateModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->choixplateau);
 }
 
-void MainWindow::on_Jouer_clicked()
+void MainWindow::onPlayButtonClick()
 {
-    if (viewPlato == nullptr) {
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }else{
-        delete viewPlato;
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+    if(board->objJeu!=-1){
+        createViewPlato(6);
+        solutionid=0;
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        board->robots_initial=board->robots_move;
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
     }
-    solutionid=0;
-    SocketConnection::getSolution(board);
-    board->robots2=board->robots;
-    ui->stackedWidget->setCurrentWidget(ui->plateau);
 }
 
-void MainWindow::on_ModeLibre_clicked()
+void MainWindow::onFreeModeButtonClick()
 {
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }else{
-        delete viewBoard;
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
+    createViewBoard(1);
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
-void MainWindow::on_ModeOfficiel_clicked()
+void MainWindow::onOfficialModeButtonClick()
 {
+    board->reset();
+    viewPlateauOfficiel = nullptr;
     if (viewPlateauOfficiel == nullptr) {
         viewPlateauOfficiel = new ViewPlateauOfficiel(board);
         ui->stackedWidget->widget(8)->findChild<QGraphicsView*>()->setScene(viewPlateauOfficiel);
@@ -155,315 +186,340 @@ void MainWindow::on_ModeOfficiel_clicked()
     ui->stackedWidget->setCurrentWidget(ui->plateauofficiel);
 }
 
-void MainWindow::on_JouerOfficiel_clicked()
+void MainWindow::onPlayOfficialButtonClick()
 {
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }else{
-        delete viewBoard;
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
+    createViewBoard(1);
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
-void MainWindow::on_GenererAleatoire_clicked()
+//TODO compatible generation
+void MainWindow::onGenerateButtonClick()
 {
     if(ui->radioButton->isChecked()){
 
         board->reset();
 
-        int rand1 = rand() % 16;
+        int rand1 = rand() % 8;
         srand(QTime::currentTime().msec()+rand1);
-        int rand2 = rand() % 16;
-        srand(QTime::currentTime().msec()+rand2);
-        int rand3 = rand() % 16;
-        srand(QTime::currentTime().msec()+rand3);
-        int rand4 = rand() % 16;
-        srand(QTime::currentTime().msec()+rand4);
+
+        int randrb1 = rand() % 255;
+        srand(QTime::currentTime().msec()+randrb1);
+        while(randrb1==119 || randrb1==120 || randrb1==136 || randrb1==135){
+            randrb1 = rand() % 255;
+            srand(QTime::currentTime().msec()+randrb1);
+        }
+        int randrb2 = rand() % 255;
+        srand(QTime::currentTime().msec()+randrb2);
+        while(randrb2==119 || randrb2==120 || randrb2==136 || randrb2==135){
+            randrb2 = rand() % 255;
+            srand(QTime::currentTime().msec()+randrb2);
+        }
+        int randrb3 = rand() % 255;
+        srand(QTime::currentTime().msec()+randrb3);
+        while(randrb3==119 || randrb3==120 || randrb3==136 || randrb3==135){
+            randrb3 = rand() % 255;
+            srand(QTime::currentTime().msec()+randrb3);
+        }
+        int randrb4 = rand() % 255;
+        srand(QTime::currentTime().msec()+randrb4);
+        while(randrb4==119 || randrb4==120 || randrb4==136 || randrb4==135){
+            randrb4 = rand() % 255;
+            srand(QTime::currentTime().msec()+randrb4);
+        }
+
+        int randobj = rand() % 16;
+        srand(QTime::currentTime().msec()+randobj);
+        board->objJeu=randobj;
+
+        board->robots_move.at(0)=randrb1;
+        board->robots_move.at(1)=randrb2;
+        board->robots_move.at(2)=randrb3;
+        board->robots_move.at(3)=randrb4;
 
         switch (rand1) {
         case 0:
             board->constructPart1(this->board, 0);
-            break;
-        case 1:
-            board->constructPart5(this->board, 0);
-            break;
-        case 2:
-            board->constructPart9(this->board, 0);
-            break;
-        case 3:
-            board->constructPart13(this->board, 0);
-            break;
-        case 4:
-            board->constructPart2(this->board, 0);
-            break;
-        case 5:
-            board->constructPart6(this->board, 0);
-            break;
-        case 6:
-            board->constructPart10(this->board, 0);
-            break;
-        case 7:
-            board->constructPart14(this->board, 0);
-            break;
-        case 8:
-            board->constructPart3(this->board, 0);
-            break;
-        case 9:
-            board->constructPart7(this->board, 0);
-            break;
-        case 10:
-            board->constructPart11(this->board, 0);
-            break;
-        case 11:
-            board->constructPart15(this->board, 0);
-            break;
-        case 12:
-            board->constructPart4(this->board, 0);
-            break;
-        case 13:
-            board->constructPart8(this->board, 0);
-            break;
-        case 14:
-            board->constructPart12(this->board, 0);
-            break;
-        case 15:
-            board->constructPart16(this->board, 0);
-            break;
-        }
-
-        switch (rand2) {
-        case 0:
-            board->constructPart1(this->board, 1);
-            break;
-        case 1:
-            board->constructPart5(this->board, 1);
-            break;
-        case 2:
-            board->constructPart9(this->board, 1);
-            break;
-        case 3:
-            board->constructPart13(this->board, 1);
-            break;
-        case 4:
             board->constructPart2(this->board, 1);
-            break;
-        case 5:
-            board->constructPart6(this->board, 1);
-            break;
-        case 6:
-            board->constructPart10(this->board, 1);
-            break;
-        case 7:
-            board->constructPart14(this->board, 1);
-            break;
-        case 8:
-            board->constructPart3(this->board, 1);
-            break;
-        case 9:
-            board->constructPart7(this->board, 1);
-            break;
-        case 10:
-            board->constructPart11(this->board, 1);
-            break;
-        case 11:
-            board->constructPart15(this->board, 1);
-            break;
-        case 12:
-            board->constructPart4(this->board, 1);
-            break;
-        case 13:
-            board->constructPart8(this->board, 1);
-            break;
-        case 14:
-            board->constructPart12(this->board, 1);
-            break;
-        case 15:
-            board->constructPart16(this->board, 1);
-            break;
-        }
-
-        switch (rand3) {
-        case 0:
-            board->constructPart1(this->board, 2);
-            break;
-        case 1:
-            board->constructPart5(this->board, 2);
-            break;
-        case 2:
-            board->constructPart9(this->board, 2);
-            break;
-        case 3:
-            board->constructPart13(this->board, 2);
-            break;
-        case 4:
-            board->constructPart2(this->board, 2);
-            break;
-        case 5:
-            board->constructPart6(this->board, 2);
-            break;
-        case 6:
-            board->constructPart10(this->board, 2);
-            break;
-        case 7:
-            board->constructPart14(this->board, 2);
-            break;
-        case 8:
-            board->constructPart3(this->board, 2);
-            break;
-        case 9:
-            board->constructPart7(this->board, 2);
-            break;
-        case 10:
-            board->constructPart11(this->board, 2);
-            break;
-        case 11:
-            board->constructPart15(this->board, 2);
-            break;
-        case 12:
             board->constructPart4(this->board, 2);
-            break;
-        case 13:
-            board->constructPart8(this->board, 2);
-            break;
-        case 14:
-            board->constructPart12(this->board, 2);
-            break;
-        case 15:
-            board->constructPart16(this->board, 2);
-            break;
-        }
-
-        switch (rand4) {
-        case 0:
-            board->constructPart1(this->board, 3);
-            break;
-        case 1:
-            board->constructPart5(this->board, 3);
-            break;
-        case 2:
             board->constructPart9(this->board, 3);
             break;
-        case 3:
-            board->constructPart13(this->board, 3);
+        case 1:
+            board->constructPart16(this->board, 0);
+            board->constructPart8(this->board, 1);
+            board->constructPart6(this->board, 2);
+            board->constructPart1(this->board, 3);
             break;
-        case 4:
-            board->constructPart2(this->board, 3);
-            break;
-        case 5:
-            board->constructPart6(this->board, 3);
-            break;
-        case 6:
-            board->constructPart10(this->board, 3);
-            break;
-        case 7:
-            board->constructPart14(this->board, 3);
-            break;
-        case 8:
-            board->constructPart3(this->board, 3);
-            break;
-        case 9:
+        case 2:
+            board->constructPart10(this->board, 0);
+            board->constructPart11(this->board, 1);
+            board->constructPart12(this->board, 2);
             board->constructPart7(this->board, 3);
             break;
-        case 10:
-            board->constructPart11(this->board, 3);
+        case 3:
+            board->constructPart14(this->board, 0);
+            board->constructPart11(this->board, 1);
+            board->constructPart13(this->board, 2);
+            board->constructPart1(this->board, 3);
             break;
-        case 11:
+        case 4:
+            board->constructPart14(this->board, 0);
+            board->constructPart3(this->board, 1);
+            board->constructPart4(this->board, 2);
             board->constructPart15(this->board, 3);
             break;
-        case 12:
-            board->constructPart4(this->board, 3);
+        case 5:
+            board->constructPart9(this->board, 0);
+            board->constructPart8(this->board, 1);
+            board->constructPart6(this->board, 2);
+            board->constructPart7(this->board, 3);
             break;
-        case 13:
-            board->constructPart8(this->board, 3);
+        case 6:
+            board->constructPart2(this->board, 0);
+            board->constructPart11(this->board, 1);
+            board->constructPart3(this->board, 2);
+            board->constructPart13(this->board, 3);
             break;
-        case 14:
-            board->constructPart12(this->board, 3);
-            break;
-        case 15:
+        case 7:
+            board->constructPart2(this->board, 0);
+            board->constructPart7(this->board, 1);
+            board->constructPart10(this->board, 2);
             board->constructPart16(this->board, 3);
             break;
         }
-
-        if (viewPlato == nullptr) {
-            viewPlato = new viewPlateau(board);
-            ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-            viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-            connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-        }else{
-            delete viewPlato;
-            viewPlato = new viewPlateau(board);
-            ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-            viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-            connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-        }
+        createViewPlato(6);
         ui->stackedWidget->setCurrentWidget(ui->plateau);
     }
 }
 
-void MainWindow::on_Histoire1_clicked()
+void MainWindow::onHistory1ButtonClick()
 {
+
+    std::cout<<"1"<<std::endl;
     solutionid=0;
+    std::cout<<"1.5"<<std::endl;
     this->board->reset();
+    std::cout<<"2"<<std::endl;
     board->constructPart13(this->board, 0);
     board->constructPart15(this->board, 1);
     board->constructPart2(this->board, 2);
     board->constructPart3(this->board, 3);
+    std::cout<<"3"<<std::endl;
     this->board->addRobot(0,2);
     this->board->addRobot(1,250);
     this->board->addRobot(2,55);
     this->board->addRobot(3,86);
     this->board->objJeu=0;
+    std::cout<<"4"<<std::endl;
 
-    SocketConnection::getSolution(board);
-    this->board->robots2=this->board->robots;
-
-    if (viewPlato == nullptr) {
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
-    }else{
-        delete viewPlato;
-        viewPlato = new viewPlateau(board);
-        ui->stackedWidget->widget(6)->findChild<QGraphicsView*>()->setScene(viewPlato);
-        viewPlato->setParent(ui->stackedWidget->widget(6)->findChild<QGraphicsView*>());
-        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+    //TODO async
+    if(SocketConnection::getSolution(board)==1){
+        flagRecu = 1;
     }
+    this->board->robots_initial=this->board->robots_move;
+
+    std::cout<<"5"<<std::endl;
+    createViewPlato(6);
     ui->stackedWidget->setCurrentWidget(ui->plateau);
+    std::cout<<"6"<<std::endl;
 }
 
-void MainWindow::on_resetPlateau_clicked()
+void MainWindow::onHistory2ButtonClick()
+{
+    if(board->victoireHistoire>=2){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory3ButtonClick()
+{
+    if(board->victoireHistoire>=3){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory4ButtonClick()
+{
+    if(board->victoireHistoire>=4){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory5ButtonClick()
+{
+    if(board->victoireHistoire>=5){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory6ButtonClick()
+{
+    if(board->victoireHistoire>=6){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory7ButtonClick()
+{
+    if(board->victoireHistoire>=7){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onHistory8ButtonClick()
+{
+    if(board->victoireHistoire>=6){
+        solutionid=0;
+        this->board->reset();
+        board->constructPart13(this->board, 0);
+        board->constructPart15(this->board, 1);
+        board->constructPart2(this->board, 2);
+        board->constructPart3(this->board, 3);
+        this->board->addRobot(0,2);
+        this->board->addRobot(1,250);
+        this->board->addRobot(2,55);
+        this->board->addRobot(3,86);
+        this->board->objJeu=0;
+
+        if(SocketConnection::getSolution(board)==1){
+            flagRecu = 1;
+        }
+        this->board->robots_initial=this->board->robots_move;
+
+        createViewPlato(6);
+        ui->stackedWidget->setCurrentWidget(ui->plateau);
+    }
+}
+
+void MainWindow::onResetButtonClick()
 {
     this->board->reset();
 }
 
-void MainWindow::on_Rejouer_clicked()
+void MainWindow::onPlayAgainButtonClick()
 {
-    board->robots=board->robots2;
+    board->robots_move=board->robots_initial;
     solutionid=0;
     board->notifyObserver();
-    if (viewBoard == nullptr) {
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }else{
-        delete viewBoard;
-        viewBoard = new ViewBoard(board);
-        ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-        viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-    }
+    createViewBoard(1);
     ui->stackedWidget->setCurrentWidget(ui->pageplateau);
 }
 
-void MainWindow::on_Solution_clicked()
+void MainWindow::onSolveButtonClick()
 {
+    if(flagRecu == 1){
+        return;
+    }
+
     if(solutionid==0){
-        board->robots=board->robots2;
+        board->robots_move=board->robots_initial;
         board->notifyObserver();
     }
 
@@ -487,8 +543,8 @@ void MainWindow::on_Solution_clicked()
         rbt=3;
     }
 
-    int col = board->robots.at(rbt) % 16;
-    int row = board->robots.at(rbt) / 16;
+    int col = board->robots_move.at(rbt) % 16;
+    int row = board->robots_move.at(rbt) / 16;
 
     int compPos=-1;
 
@@ -506,9 +562,9 @@ void MainWindow::on_Solution_clicked()
 
         for (int i = 0; i < row ; i++){
             int pos = col + i * 16;
-            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
-            if (it != board->robots.end()){
+            if (it != board->robots_move.end()){
                 targetRow = i;
             }
         }
@@ -533,9 +589,9 @@ void MainWindow::on_Solution_clicked()
         for (int i = col+1 ; i <= 16 ; i++){
             int pos = i + row * 16;
 
-            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
-            if (it != board->robots.end()){
+            if (it != board->robots_move.end()){
                 targetCol = i;
                 break;
             }
@@ -562,9 +618,9 @@ void MainWindow::on_Solution_clicked()
 
         for (int i = row+1 ; i <= 16 ; i++){
             int pos = col + i * 16;
-            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
-            if (it != board->robots.end()){
+            if (it != board->robots_move.end()){
                 targetRow = i;
                 break;
             }
@@ -591,9 +647,9 @@ void MainWindow::on_Solution_clicked()
 
         for (int i = col-1 ; i >= 0 ; i--){
             int pos = i + row * 16;
-            auto it = std::find_if(board->robots.begin(), board->robots.end(),
+            auto it = std::find_if(board->robots_move.begin(), board->robots_move.end(),
                                    [pos](const auto& pair) { return pair.second == pos; });
-            if (it != board->robots.end()){
+            if (it != board->robots_move.end()){
                 targetCol = i;
                 break;
             }
@@ -613,7 +669,7 @@ void MainWindow::on_Solution_clicked()
     solutionid++;
 }
 
-void MainWindow::on_Sauvegarder_clicked()
+void MainWindow::onSaveButtonClick()
 {
     QFile file("board.txt");
     if(!file.open(QIODevice::Append)){
@@ -625,7 +681,7 @@ void MainWindow::on_Sauvegarder_clicked()
         stream<< "plateau "<<fichier << " ";
 
         for(int i=0;i<5;i++){
-            stream<<board->robots2.at(i) << " ";
+            stream<<board->robots_initial.at(i) << " ";
         }
         for(int i=0;i<17;i++){
             stream<<board->objectives.at(i) << " " ;
@@ -654,7 +710,7 @@ void MainWindow::on_Sauvegarder_clicked()
     }
 }
 
-void MainWindow::on_ModeCharger_clicked()
+void MainWindow::onLoadModeButtonClick()
 {
     QFile file("board.txt");
     if (!file.open(QIODevice::ReadOnly)) {
@@ -678,75 +734,91 @@ void MainWindow::on_ModeCharger_clicked()
     ui->stackedWidget->setCurrentWidget(ui->pagecharger);
 }
 
-void MainWindow::on_BtnCharger_clicked()
+void MainWindow::onLoadButtonClick()
 {
-    QString selectedTex = ui->stackedWidget->widget(9)->findChild<QListWidget*>()->currentItem()->text();
-    QStringList part = selectedTex.split(" ");
-    QString fichier = part[1];
-    qDebug() << fichier;
+    if(ui->stackedWidget->widget(9)->findChild<QListWidget*>()->currentItem()!=0){
+        QString selectedTex = ui->stackedWidget->widget(9)->findChild<QListWidget*>()->currentItem()->text();
+        QStringList part = selectedTex.split(" ");
+        QString fichier = part[1];
+        qDebug() << fichier;
+        QFile file("board.txt");
 
-    QFile file("board.txt");
-    if (!file.open(QIODevice::ReadOnly)) {
-        qCritical() << file.errorString();
-    } else {
-        QTextStream in(&file);
+        if (!file.open(QIODevice::ReadOnly)) {
+            qCritical() << file.errorString();
+        } else {        QTextStream in(&file);
+            while (!in.atEnd()) {
+                QString line = in.readLine();
+                QStringList parts = line.split(" ");
 
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            QStringList parts = line.split(" ");
+                if (part[1]==parts[1]){
 
-            if (part[1]==parts[1]){
-
-                board->reset();
-                for(int i=0;i<5;i++){
-                    board->robots.at(i)=parts[i + 2].toInt();
-                }
-                for(int i=0;i<17;i++){
-                    board->objectives.at(i)=parts[i + 7].toInt();
-                }
-                for(int i=0;i<256;i++){
-                    if(parts[i + 24].toInt()>=8){
-                        SET_WALL(board->cases[i-1],WEST);
+                    board->reset();
+                    for(int i=0;i<5;i++){
+                        board->robots_move.at(i)=parts[i + 2].toInt();
                     }
-                    if((parts[i + 24].toInt()>=4 && parts[i + 24].toInt()<=7) || parts[i + 24].toInt()>=12){
-                        SET_WALL(board->cases[i-1],SOUTH);
+                    for(int i=0;i<17;i++){
+                        board->objectives.at(i)=parts[i + 7].toInt();
                     }
-                    if(parts[i + 24].toInt()==2 || parts[i + 24].toInt()==3 || parts[i + 24].toInt()==6 || parts[i + 24].toInt()==7 || parts[i + 24].toInt()==10 || parts[i + 24].toInt()==11 || parts[i + 24].toInt()>=14){
-                        SET_WALL(board->cases[i-1],EAST);
+                    for(int i=0;i<256;i++){
+                        if(parts[i + 24].toInt()>=8){
+                            SET_WALL(board->cases[i-1],WEST);
+                        }
+                        if((parts[i + 24].toInt()>=4 && parts[i + 24].toInt()<=7) || parts[i + 24].toInt()>=12){
+                            SET_WALL(board->cases[i-1],SOUTH);
+                        }
+                        if(parts[i + 24].toInt()==2 || parts[i + 24].toInt()==3 || parts[i + 24].toInt()==6 || parts[i + 24].toInt()==7 || parts[i + 24].toInt()==10 || parts[i + 24].toInt()==11 || parts[i + 24].toInt()>=14){
+                            SET_WALL(board->cases[i-1],EAST);
+                        }
+                        if(parts[i + 24].toInt()%2==1){
+                            SET_WALL(board->cases[i-1],NORTH);
+                        }
                     }
-                    if(parts[i + 24].toInt()%2==1){
-                        SET_WALL(board->cases[i-1],NORTH);
-                    }
-                }
-                board->objJeu=parts[24].toInt();
-
-                if(viewBoard==nullptr){
-                    viewBoard = new ViewBoard(board);
-                    ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-                    viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-                    ui->stackedWidget->setCurrentWidget(ui->pageplateau);
-                }else{
-                    delete viewBoard;
-                    viewBoard = new ViewBoard(board);
-                    ui->stackedWidget->widget(1)->findChild<QGraphicsView*>()->setScene(viewBoard);
-                    viewBoard->setParent(ui->stackedWidget->widget(1)->findChild<QGraphicsView*>());
-                    ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+                    board->objJeu=parts[24].toInt();
+                    createViewBoard(1);
                 }
             }
-        }
 
-        file.close();
+            file.close();
+        }
     }
 }
 
-void MainWindow::on_Home_clicked()
+void MainWindow::onHomeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainmenuwindow);
 }
 
-
-void MainWindow::on_ModeParametre_clicked()
+void MainWindow::onSettingsModeButtonClick()
 {
     ui->stackedWidget->setCurrentWidget(ui->utilisation);
 }
 
+void MainWindow::createViewPlato(int widget) {
+    if (viewPlato == nullptr) {
+        viewPlato = new viewPlateau(board);
+        ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>()->setScene(viewPlato);
+        viewPlato->setParent(ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>());
+        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+    }else{
+        delete viewPlato;
+        viewPlato = new viewPlateau(board);
+        ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>()->setScene(viewPlato);
+        viewPlato->setParent(ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>());
+        connect(viewPlato, &viewPlateau::movementOccurred, this, &MainWindow::handleMovement);
+    }
+}
+
+void MainWindow::createViewBoard(int widget) {
+    if(viewBoard==nullptr){
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>());
+        ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+    }else{
+        delete viewBoard;
+        viewBoard = new ViewBoard(board);
+        ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>()->setScene(viewBoard);
+        viewBoard->setParent(ui->stackedWidget->widget(widget)->findChild<QGraphicsView*>());
+        ui->stackedWidget->setCurrentWidget(ui->pageplateau);
+    }
+}

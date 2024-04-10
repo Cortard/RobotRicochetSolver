@@ -98,7 +98,7 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
                 QPixmap pixmap(it->second);
                 QGraphicsPixmapItem* item = new QGraphicsPixmapItem(pixmap);
                 if(secondClickPos.x()<730 && secondClickPos.y()<210 && secondClickPos.y()>10 && secondClickPos.x()>530){
-                    deleteTopLeft(this->board);
+                    //deleteTopLeft(this->board);
                     item->setScale(0.65);
                     QPointF origin = item->transformOriginPoint();
                     item->setTransformOriginPoint(item->boundingRect().center());
@@ -124,7 +124,7 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
                     position = 0;
                     addItem(item);
                 }else if(secondClickPos.x()<930 && secondClickPos.y()<210 && secondClickPos.y()>10 && secondClickPos.x()>730){
-                    deleteTopRight(this->board);
+                    //deleteTopRight(this->board);
                     item->setScale(0.65);
                     QPointF origin = item->transformOriginPoint();
                     item->setTransformOriginPoint(item->boundingRect().center());
@@ -149,7 +149,7 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
                     addItem(item);
                     position = 1;
                 }else if(secondClickPos.x()<730 && secondClickPos.y()<410 && secondClickPos.y()>210 && secondClickPos.x()>530){
-                    deleteBotLeft(this->board);
+                    //deleteBotLeft(this->board);
                     item->setScale(0.65);
                     QPointF origin = item->transformOriginPoint();
                     item->setTransformOriginPoint(item->boundingRect().center());
@@ -174,7 +174,7 @@ void ViewPlateauOfficiel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) 
                     addItem(item);
                     position = 2;
                 }else if(secondClickPos.x()<930 && secondClickPos.y()<410 && secondClickPos.y()>210 && secondClickPos.x()>730){
-                    deleteBotRight(this->board);
+                    //deleteBotRight(this->board);
                     item->setScale(0.65);
                     QPointF origin = item->transformOriginPoint();
                     item->setTransformOriginPoint(item->boundingRect().center());

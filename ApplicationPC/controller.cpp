@@ -51,7 +51,7 @@ void ControllerAddRobot::control(){
     if (board == nullptr) return;
 
     for(int i=0;i<17;i++){
-        if(board->robots.at(i)==-1){
+        if(board->robots_move.at(i)==-1){
             board->addRobot(i, 136);
             return ;
         }

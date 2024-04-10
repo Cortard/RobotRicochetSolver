@@ -2107,4 +2107,4 @@ inline void constructPart16(Board* board, int pos) {
     }
 }
 
-#endif CONSTRUCT_H
+#endif // CONSTRUCT_H
