@@ -252,37 +252,24 @@ public class PictureVerifyActivity extends AppCompatActivity {
                                 cpt+=read_size;
                                 progressBar.setProgress(cpt);
                             }
-
-                            /*for (int i = 0; i < height; ++i) {
-                                for (int j = 0; j < width; ++j) {
-                                    int pixel = bitmap.getPixel(j, i);
-
-                                    char red = (char)Color.red(pixel);
-                                    char green = (char)Color.green(pixel);
-                                    char blue = (char)Color.blue(pixel);
-
-                                    dataOutputStream.writeBytes(String.valueOf(red+green+blue));
-
-
-                                    cpt++;
-                                    progressBar.setProgress(cpt);
-                                    dataOutputStream.flush();
-                                }
-                            }*/
-
+                            String a = "EOF";
+                            Log.d("bug", "File ended send EOF of size");
+                            dataOutputStream.write(a.getBytes());
+                            dataOutputStream.flush();
                         } catch (IOException e) {
                             fileInputStream.close();
                             bufferedOutputStream.close();
                             socket.close();
                             e.printStackTrace();
                         }
-
+                        // Empty read buffer
+                        dataInputStream.read();
 
                         // Attente de la confirmation de la réception
                         Thread.sleep(TIMEOUT);
                         byte[] byteTab2 = new byte[4];
                         dataInputStream.read(byteTab2);
-
+                        Log.d("bug", "Confirmation received : " + byteTab2[0]);
 
 
                         // Envoie du FLAG au serveur : 1
