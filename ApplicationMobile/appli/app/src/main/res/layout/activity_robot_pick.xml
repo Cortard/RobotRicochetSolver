@@ -68,12 +68,6 @@
                     android:textStyle="bold"
                     android:typeface="normal" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="129dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
-
             </FrameLayout>
 
         </LinearLayout>
