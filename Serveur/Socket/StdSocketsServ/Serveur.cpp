@@ -331,24 +331,28 @@ bool Serveur::getClientPicture(Client *slot) {
 
     int percent=size[0]/100;
     if(percent==0) percent=1;
-    for(int i=0;i<size[0];++i){
-        for(int j=0;j<size[1];++j){
-            for(int k=0;k<3;++k){
-                int result = recv(slot->socket, (char*)slot->output+(i*size[1]*3+j*3+k), sizeof(char), 0);
-                if(verifySocketOutput<char>(slot,false,result)==EXIT_FAILURE) return false;
-            }
-        }
-        if(i%percent==0){
-            Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received " + std::to_string(i) + "/" + std::to_string(size[0]) + "(" + std::to_string(i*100/size[0]) + "%)",LOG_LEVEL_DEBUG);
-        }
-    }
-    Logs::write("Slot " + std::to_string(slot->slotNum) + " picture received",LOG_LEVEL_DEBUG);
 
+    // Picture data reception
+    const int BUFFER_SIZE = 1024;
+    char buffer[BUFFER_SIZE] = { 0 };
     auto* picturePath = new std::string();
-    *picturePath=PICTURE_PATH;
-    *picturePath+="slot"+std::to_string(slot->slotNum)+".png";
-    JPEGBuilder::build((char*)slot->output,(int)(size[0]),(int)(size[1]),*picturePath);
-    Logs::write("Slot " + std::to_string(slot->slotNum) + " picture saved at " + *picturePath,LOG_LEVEL_DEBUG);
+    *picturePath = PICTURE_PATH;
+    *picturePath += "slot" + std::to_string(slot->slotNum) + ".jpg";
+    std::ofstream outfile(*picturePath, std::ios::binary);
+    if (!outfile) {
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " error opening file", LOG_LEVEL_ERROR);
+    }
+    int bytes_received;
+    while ((bytes_received = recv(slot->socket, buffer, BUFFER_SIZE, 0)) > 0) {
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " received " + std::to_string(bytes_received), LOG_LEVEL_DEBUG);
+        outfile.write(buffer, bytes_received);
+    }
+    if (bytes_received == -1) {
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " error during reception", LOG_LEVEL_ERROR);
+    }
+    else {
+        Logs::write("Slot " + std::to_string(slot->slotNum) + " file received successfully", LOG_LEVEL_DEBUG);
+    }
 
     delete[] size;
     delete[] static_cast<char*>(slot->output);

@@ -6,3 +6,6 @@ build*
 # Serveur/
 Serveur/Algo/traductionCpp/cmake-build-debug/*
 Serveur/Algo/traductionCpp/.idea/*
+/Serveur/Socket/StdSocketsServ/.vs/StdSocketsServ
+/Serveur/Socket/StdSocketsServ/.vs
+/Serveur/Socket/StdSocketsServ/out/build/x64-Debug
