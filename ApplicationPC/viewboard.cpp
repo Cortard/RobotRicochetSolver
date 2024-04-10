@@ -39,19 +39,24 @@ ViewBoard::ViewBoard(Board* board) : QGraphicsScene(), Observer()
 
 void ViewBoard::updateModel()
 {
+    // Efface la scène
     clear();
 
+    // Dessine les objectifs
     for(int i=0;i<17;i++){
         if(board->objectives.at(i)!=-1){
             drawObjectives(board->objectives.at(i), objImg[i], i);
         }
     }
+
+    // Dessine les robots
     for(int i=0;i<5;i++){
         if(board->robots_move.at(i)!=-1){
             drawRobot(board->robots_move.at(i), robotImg[i], i);
         }
     }
 
+    // Dessine l'objectif du jeu s'il existe
     if(board->objJeu!=-1){
         drawObjectives(120, objImg[board->objJeu], board->objJeu);
     }
@@ -69,7 +74,7 @@ void ViewBoard::drawWall()
     for (int row = 0; row < rowCount; ++row) {
         for (int col = 0; col < colCount; ++col) {
             if (row >= 7 && row < 9 && col >= 7  && col < 9) {
-                continue;
+                continue; // Ignore les cases du centre
             }
 
             int x = col * CellSize;

@@ -15,13 +15,13 @@ private:
     std::map<QPointF, QString>::iterator it;
     QPointF secondClickPos;
     int col=-1;
-
     int position=-1;
 
 public:
     ViewPlateauOfficiel(Board* = nullptr);
     void updateModel();
 
+    // Supprime des parties du plateau
     void deleteTopRight(Board* board);
     void deleteTopLeft(Board* board);
     void deleteBotRight(Board* board);

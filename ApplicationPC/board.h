@@ -1,15 +1,18 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+// Directions possibles pour les murs
 #define NORTH 0x01
 #define EAST 0x02
 #define SOUTH 0x04
 #define WEST 0x08
 
+// Vérifier si un mur est présent, le définir ou le supprimer
 #define HAS_WALL(x,wall)(x & wall)
 #define SET_WALL(x,wall)(x |= wall)
 #define DEL_WALL(x,wall)(x &= ~wall)
 
+// Récupérer la direction et l'id du robot
 #define GET_DIRECTION(x) (x&0x0f)
 #define GET_ROBOT(x) ((x>>4)&0x0f)
 
@@ -42,13 +45,14 @@ public:
     std::map<int, int> robots_move;
     std::map<int, int> robots_initial;
     unsigned int cases[256];
+
+    // Variables pour le suivi du mouvement et de l'objectif actuel
     int mouvement=0;
     int objJeu=-1;
 
     int victoireHistoire=1;
 
-    //unsigned char path[32] = {1, 2, 4, 17, 18, 40, 33, 8, 1, 2, 1, 2, 56, 49, 56, 49, 50, 49, 8, 4, 63};
-
+    // Tableau pour stocker la solution
     unsigned char path[32];
 
     void reset();

@@ -466,6 +466,7 @@ void viewPlateau::clearSelectionSquares()
     selectionSquares.clear();
 }
 
+// Afficher la victoire
 void viewPlateau::victoire(){
     QGraphicsTextItem* textItem = new QGraphicsTextItem();
     textItem->setPlainText(QString("Victoire"));
